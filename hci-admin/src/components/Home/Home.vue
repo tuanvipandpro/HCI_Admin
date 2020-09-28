@@ -46,18 +46,32 @@ export default {
   },
   methods: {
     doLogout () {
-      const loading = this.$loading({
+      const loader = this.getLoader()
+
+      setTimeout(() => {
+        // Todo
+        sessionStorage.clear()
+        this.transitTo('Login', undefined)
+        this.closeLoader(loader)
+      }, 2000)
+    },
+    /**
+     * Show Loader
+     */
+    getLoader () {
+      return this.$loading({
         lock: true,
         spinner: 'el-icon-loading',
         text: 'Loading',
         background: 'rgba(0, 0, 0, 0.7)'
       })
-
-      setTimeout(() => {
-        // Todo
-        this.transitTo('Login', undefined)
-        loading.close()
-      }, 2000)
+    },
+    /**
+     * Close Loader
+     * @param loader
+     */
+    closeLoader (loader) {
+      loader.close()
     },
     /**
      * Transit to another component

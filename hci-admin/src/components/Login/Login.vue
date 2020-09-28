@@ -10,7 +10,7 @@
                     <el-input type="password" v-model="formData.password" placeholder="Password"/>
                 </el-form-item>
                 <el-form-item>
-                    <el-button type="primary" @click="showForm">Login</el-button>
+                    <el-button type="primary" @click="handleForm">Login</el-button>
                 </el-form-item>
             </el-form>
         </el-card>
@@ -28,18 +28,16 @@ export default {
     }
   },
   methods: {
-    showForm () {
-      const loading = this.$loading({
-        lock: true,
-        spinner: 'el-icon-loading',
-        text: 'Loading',
-        background: 'rgba(0, 0, 0, 0.7)'
-      })
+    /**
+     * Handle Login Form
+     */    
+    handleForm () {
+      const loader = this.getLoader()
 
       setTimeout(() => {
         // Todo
         this.checkLogin()
-        loading.close()
+        this.closeLoader(loader)
       }, 2000)
     },
     /**
@@ -52,6 +50,24 @@ export default {
       } else {
         this.showMessage('Sorry, username or password is incorrect !', 'warning')
       }
+    },
+    /**
+     * Show Loader
+     */
+    getLoader () {
+      return this.$loading({
+        lock: true,
+        spinner: 'el-icon-loading',
+        text: 'Loading',
+        background: 'rgba(0, 0, 0, 0.7)'
+      })
+    },
+    /**
+     * Close Loader
+     * @param loader
+     */
+    closeLoader (loader) {
+      loader.close()
     },
     /**
      * Transit to another component
