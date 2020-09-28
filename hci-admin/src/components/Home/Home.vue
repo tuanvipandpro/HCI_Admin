@@ -2,7 +2,7 @@
   <div id="home">
     <el-row>
       <el-col :span='5' style="text-align: left">
-        <hci-menu :activeIndex='1' />
+        <hci-menu :activeIndex='"1"' />
       </el-col>
       <el-col :span="19">
           <h1>User Management</h1>
@@ -68,7 +68,7 @@ export default {
      */
     checkAuthen () {
       if (sessionStorage.getItem('username')) {
-        this.showMessage('Welcome back, ' + sessionStorage.getItem('username'), 'success')
+        // this.showMessage('Welcome back, ' + sessionStorage.getItem('username'), 'success')
       } else {
         this.transitTo('Login', undefined)
       }
