@@ -30,7 +30,7 @@ export default {
   methods: {
     /**
      * Handle Login Form
-     */    
+     */
     handleForm () {
       const loader = this.getLoader()
 

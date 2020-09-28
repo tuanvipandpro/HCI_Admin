@@ -4,6 +4,7 @@ import Router from 'vue-router'
 // Vue Component
 import Login from '@/components/Login/Login'
 import Home from '@/components/Home/Home'
+import ChangePassword from '@/components/ChangePassword/ChangePassword'
 
 Vue.use(Router)
 
@@ -18,6 +19,11 @@ export default new Router({
       path: '/home',
       name: 'Home',
       component: Home
+    },
+    {
+      path: '/change-password',
+      name: 'ChangePassword',
+      component: ChangePassword
     }
   ]
 })
