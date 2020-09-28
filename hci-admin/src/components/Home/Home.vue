@@ -9,25 +9,29 @@
            class="el-menu-vertical-demo"
            style="min-height: 100vh;"
         >
-          <el-submenu index="1">
+          <el-menu-item index="1">
+            <i class="el-icon-s-custom"></i>
+            <span>User Management</span>
+          </el-menu-item>
+          <el-submenu index="2">
             <template slot="title">
-              <i class="el-icon-s-custom"></i>
-              <span>User Managerment</span>
+              <i class="el-icon-football"></i>
+              <span>Pitch Management</span>
             </template>
-            <el-menu-item index="1-1">Active User</el-menu-item>
-            <el-menu-item index="1-2">Ban User</el-menu-item>
+            <el-menu-item index="2-1">New Pitch</el-menu-item>
+            <el-menu-item index="2-2">Update User</el-menu-item>
           </el-submenu>
-          <el-menu-item index="2">
+          <el-menu-item index="3">
             <i class="el-icon-s-order"></i>
             <span>New Notification</span>
           </el-menu-item>
-          <el-submenu index="3">
+          <el-submenu index="4">
             <template slot="title">
               <i class="el-icon-setting"></i>
               <span>Setting</span>
             </template>
-            <el-menu-item index="3-1">Change Password</el-menu-item>
-            <el-menu-item index="3-2" @click="doLogout">Logout</el-menu-item>
+            <el-menu-item index="4-1">Change Password</el-menu-item>
+            <el-menu-item index="4-2" @click="doLogout">Logout</el-menu-item>
           </el-submenu>
         </el-menu>
       </el-col>

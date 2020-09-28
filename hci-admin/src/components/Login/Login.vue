@@ -24,9 +24,7 @@ export default {
       formData: {
         username: '',
         password: ''
-      },
-      fullscreenLoading: false,
-      btnLabel: 'Logins'
+      }
     }
   },
   methods: {
@@ -98,6 +96,6 @@ export default {
     #login-form {
         margin-top: 25vh;
         width: 22vw;
-        height: 35vh;
+        height: 45vh;
     }
 </style>
