@@ -49,20 +49,22 @@ export default {
      */
     checkLogin () {
       if (this.formData.username === 'leminhtuan' && this.formData.password === '1') {
-        this.transitTo('/home', {username: this.formData.username})
+        this.transitTo('Home', {username: this.formData.username})
       } else {
         this.showMessage('Sorry, username or password is incorrect !', 'warning')
       }
     },
     /**
      * Transit to another component
-     * @param path
+     * @param name
      * @param data
      */
-    transitTo (path, data) {
+    transitTo (name, data) {
       const param = {
-        path: path,
-        query: data
+        // path: path,
+        // query: data
+        name: name,
+        params: data
       }
       this.$router.push(param)
     },

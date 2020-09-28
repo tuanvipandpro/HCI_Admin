@@ -38,9 +38,10 @@
 <script>
 export default {
   mounted () {
+    console.log(this.$route)
     this.$message({
       showClose: true,
-      message: 'Welcome back, ' + this.$route.query.username,
+      message: 'Welcome back, ' + this.$route.params.username,
       type: 'success'
     })
   },
@@ -55,19 +56,19 @@ export default {
 
       setTimeout(() => {
         // Todo
-        this.transitTo('/', undefined)
+        this.transitTo('Login', undefined)
         loading.close()
       }, 2000)
     },
     /**
      * Transit to another component
-     * @param path
+     * @param name
      * @param data
      */
-    transitTo (path, data) {
+    transitTo (name, data) {
       const param = {
-        path: path,
-        query: data
+        name: name,
+        params: data
       }
       this.$router.push(param)
     },
