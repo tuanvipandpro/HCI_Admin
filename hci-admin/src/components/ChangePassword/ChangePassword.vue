@@ -81,7 +81,7 @@ export default {
         } else {
           return false
         }
-      })  
+      })
     },
     resetForm () {
       this.$refs['forgetForm'].resetFields()
