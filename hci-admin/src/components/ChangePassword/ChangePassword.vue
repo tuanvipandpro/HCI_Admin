@@ -1,11 +1,13 @@
 !<template>
-  <div id="home">
+  <div id="change-password">
     <el-row>
+      <!-- Menu -->
       <el-col :span='5' style="text-align: left">
         <hci-menu :activeIndex='1' />
       </el-col>
+      <!-- Content -->
       <el-col :span="19">
-          <h1>User Management</h1>
+          <h1>ABC</h1>
       </el-col>
     </el-row>
   </div>
@@ -68,7 +70,7 @@ export default {
      */
     checkAuthen () {
       if (sessionStorage.getItem('username')) {
-        this.showMessage('Welcome back, ' + sessionStorage.getItem('username'), 'success')
+        // this.showMessage('Welcome back, ' + this.$route.params.username, 'success')
       } else {
         this.transitTo('Login', undefined)
       }
