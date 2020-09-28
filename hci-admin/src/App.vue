@@ -20,9 +20,9 @@ export default {
   color: #2c3e50;
   margin: 0;
   padding: 0;
-  text-align: center;
+  /* text-align: center;
   display: flex;
-  justify-content: center;
+  justify-content: center; */
 }
 
 body{
