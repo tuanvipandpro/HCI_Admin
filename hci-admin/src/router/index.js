@@ -4,6 +4,7 @@ import Router from 'vue-router'
 // Vue Component
 import Login from '@/components/Login/Login'
 import Home from '@/components/Home/Home'
+import Notification from '@/components/Notification/Notification'
 import ChangePassword from '@/components/ChangePassword/ChangePassword'
 
 Vue.use(Router)
@@ -24,6 +25,11 @@ export default new Router({
       path: '/change-password',
       name: 'ChangePassword',
       component: ChangePassword
+    },
+    {
+      path: '/new-notification',
+      name: 'Notification',
+      component: Notification
     }
   ]
 })

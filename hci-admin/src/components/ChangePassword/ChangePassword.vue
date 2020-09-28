@@ -76,8 +76,17 @@ export default {
     submitForm () {
       this.$refs['forgetForm'].validate((valid) => {
         if (valid) {
-          // TODO API
-          this.showMessage('Your password is changed !!!', 'success')
+          this.$confirm('Your password will be change. Continue?', 'Warning', {
+            confirmButtonText: 'OK',
+            cancelButtonText: 'Cancel',
+            type: 'warning'
+          }).then(() => {
+            const loader = this.getLoader()
+            setTimeout(() => {
+              this.showMessage('Your password is changed !!!', 'success')
+              this.closeLoader(loader)
+            }, 1000)
+          })
         } else {
           return false
         }
