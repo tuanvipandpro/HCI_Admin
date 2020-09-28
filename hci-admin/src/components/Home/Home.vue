@@ -38,12 +38,7 @@
 <script>
 export default {
   mounted () {
-    console.log(this.$route)
-    this.$message({
-      showClose: true,
-      message: 'Welcome back, ' + this.$route.params.username,
-      type: 'success'
-    })
+    this.checkAuthen()
   },
   methods: {
     doLogout () {
@@ -82,6 +77,16 @@ export default {
         message: message,
         type: type
       })
+    },
+    /**
+     * Check Authen
+     */
+    checkAuthen () {
+      if (sessionStorage.getItem('username')) {
+        this.showMessage('Welcome back, ' + this.$route.params.username, 'success')
+      } else {
+        this.transitTo('Login', undefined)
+      }
     }
   }
 }

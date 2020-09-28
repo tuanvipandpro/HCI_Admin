@@ -49,6 +49,7 @@ export default {
      */
     checkLogin () {
       if (this.formData.username === 'leminhtuan' && this.formData.password === '1') {
+        sessionStorage.setItem('username', this.formData.username)
         this.transitTo('Home', {username: this.formData.username})
       } else {
         this.showMessage('Sorry, username or password is incorrect !', 'warning')
