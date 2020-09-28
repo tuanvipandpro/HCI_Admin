@@ -41,7 +41,7 @@
 <script>
 export default {
   props: {
-    activeIndex: Number
+    activeIndex: String
   },
   methods: {
     doHome () {

@@ -1,13 +1,32 @@
 !<template>
   <div id="change-password">
-    <el-row>
+    <el-row style="text-align: left">
       <!-- Menu -->
-      <el-col :span='5' style="text-align: left">
-        <hci-menu :activeIndex='1' />
+      <el-col :span='5'>
+        <hci-menu :activeIndex='"4-1"' />
       </el-col>
       <!-- Content -->
       <el-col :span="19">
-          <h1>ABC</h1>
+        <div id="forget-form">
+          <el-form
+            ref="forgetForm"
+            status-icon
+            :model="forgetForm"
+            :rules="rules"
+          >
+            <h2>Change Password</h2>
+            <el-form-item label="New Password" prop="newPassword">
+              <el-input type="password" v-model="forgetForm.newPassword" style="width: 50%; margin-left: 2%"/>
+            </el-form-item>
+            <el-form-item label="Confirm Password" prop="confirmPassword">
+              <el-input type="password" v-model="forgetForm.confirmPassword" style="width: 50%"/>
+            </el-form-item>
+            <el-form-item>
+              <el-button type="primary" @click="submitForm">Submit</el-button>
+              <el-button @click="resetForm">Reset</el-button>
+            </el-form-item>
+          </el-form>
+        </div>
       </el-col>
     </el-row>
   </div>
@@ -20,10 +39,53 @@ export default {
   components: {
     'hci-menu': Menu
   },
+  data () {
+    const validateNewPass = (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error('Please input new password !!!'))
+      // } else if (value !== this.forgetForm.confirmPassword) {
+      //   callback(new Error('New password and confirm password isn\'t match !!!'))
+      } else {
+        callback()
+      }
+    }
+    const validateConfirmPass = (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error('Please input confirm password !!!'))
+      } else if (value !== this.forgetForm.newPassword) {
+        callback(new Error('New password and confirm password isn\'t match !!!'))
+      } else {
+        callback()
+      }
+    }
+    return {
+      forgetForm: {
+        newPassword: '',
+        confirmPassword: ''
+      },
+      rules: {
+        newPassword: [{validator: validateNewPass, trigger: 'blur'}],
+        confirmPassword: [{validator: validateConfirmPass, trigger: 'blur'}]
+      }
+    }
+  },
   mounted () {
     this.checkAuthen()
   },
   methods: {
+    submitForm () {
+      this.$refs['forgetForm'].validate((valid) => {
+        if (valid) {
+          // TODO API
+          this.showMessage('Your password is changed !!!', 'success')
+        } else {
+          return false
+        }
+      })  
+    },
+    resetForm () {
+      this.$refs['forgetForm'].resetFields()
+    },
     /**
      * Show Loader
      */
@@ -80,4 +142,7 @@ export default {
 </script>
 
 <style>
+  #forget-form{
+    margin-left: 1% ;
+  }
 </style>
