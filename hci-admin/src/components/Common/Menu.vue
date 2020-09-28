@@ -20,7 +20,7 @@
         <el-menu-item index="2-1">New Pitch</el-menu-item>
         <el-menu-item index="2-2">Update User</el-menu-item>
       </el-submenu>
-      <el-menu-item index="3">
+      <el-menu-item index="3" @click="doNotification">
         <i class="el-icon-s-order"></i>
         <span>New Notification</span>
       </el-menu-item>
@@ -46,6 +46,9 @@ export default {
   methods: {
     doHome () {
       this.transitTo('Home', undefined)
+    },
+    doNotification () {
+      this.transitTo('Notification', undefined)
     },
     doChangePassword () {
       this.transitTo('ChangePassword', undefined)
