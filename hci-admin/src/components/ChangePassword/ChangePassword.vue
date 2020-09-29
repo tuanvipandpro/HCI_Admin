@@ -40,6 +40,9 @@ export default {
     'hci-menu': Menu
   },
   data () {
+    /**
+     * Validate New Password
+     */
     const validateNewPass = (rule, value, callback) => {
       if (value === '') {
         callback(new Error('Please input new password !!!'))
@@ -49,6 +52,9 @@ export default {
         callback()
       }
     }
+    /**
+     * Validate Confirm Password
+     */
     const validateConfirmPass = (rule, value, callback) => {
       if (value === '') {
         callback(new Error('Please input confirm password !!!'))
@@ -73,6 +79,9 @@ export default {
     this.checkAuthen()
   },
   methods: {
+    /**
+     * Validate and Submit Form
+     */
     submitForm () {
       this.$refs['forgetForm'].validate((valid) => {
         if (valid) {
@@ -92,6 +101,9 @@ export default {
         }
       })
     },
+    /**
+     * Reset Form to empty
+     */
     resetForm () {
       this.$refs['forgetForm'].resetFields()
     },
@@ -140,9 +152,7 @@ export default {
      * Check Authen
      */
     checkAuthen () {
-      if (sessionStorage.getItem('username')) {
-        // this.showMessage('Welcome back, ' + this.$route.params.username, 'success')
-      } else {
+      if (!sessionStorage.getItem('username')) {
         this.transitTo('Login', undefined)
       }
     }

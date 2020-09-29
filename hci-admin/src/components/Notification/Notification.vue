@@ -67,9 +67,7 @@ export default {
      * Check Authen
      */
     checkAuthen () {
-      if (sessionStorage.getItem('username')) {
-        // this.showMessage('Welcome back, ' + sessionStorage.getItem('username'), 'success')
-      } else {
+      if (!sessionStorage.getItem('username')) {
         this.transitTo('Login', undefined)
       }
     }
