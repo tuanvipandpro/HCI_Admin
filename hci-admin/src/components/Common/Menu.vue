@@ -44,15 +44,27 @@ export default {
     activeIndex: String
   },
   methods: {
+    /**
+     * Go to home page
+     */
     doHome () {
       this.transitTo('Home', undefined)
     },
+    /**
+     * Go to new notification page
+     */
     doNotification () {
       this.transitTo('Notification', undefined)
     },
+    /**
+     * Go to new change password page
+     */
     doChangePassword () {
       this.transitTo('ChangePassword', undefined)
     },
+    /**
+     * Logout
+     */
     doLogout () {
       const loader = this.getLoader()
 
