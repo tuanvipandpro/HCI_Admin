@@ -3,7 +3,7 @@ import Router from 'vue-router'
 
 // Vue Component
 import Login from '@/components/Login/Login'
-import Home from '@/components/Home/Home'
+import UserManagement from '@/components/UserManagement/UserManagement'
 import Notification from '@/components/Notification/Notification'
 import ChangePassword from '@/components/ChangePassword/ChangePassword'
 import NewPitch from '@/components/Pitch/NewPitch'
@@ -18,9 +18,9 @@ export default new Router({
       component: Login
     },
     {
-      path: '/home',
-      name: 'Home',
-      component: Home
+      path: '/userManagement',
+      name: 'UserManagement',
+      component: UserManagement
     },
     {
       path: '/change-password',

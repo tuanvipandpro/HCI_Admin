@@ -45,11 +45,12 @@ export default {
      */
     checkLogin () {
       const accountList = [
-        {username: 'leminhtuan', password: '1'}
+        {username: 'leminhtuan', password: '1'},
+        {username: 'dunggla', password: '1'}
       ]
       if (accountList.some(account => account.username === this.formData.username && account.password === this.formData.password)) {
         sessionStorage.setItem('username', this.formData.username)
-        this.transitTo('Home', {username: this.formData.username})
+        this.transitTo('UserManagement', {username: this.formData.username})
       } else {
         this.showMessage('Sorry, username or password is incorrect !', 'warning')
       }

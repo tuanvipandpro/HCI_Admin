@@ -48,7 +48,7 @@ export default {
      * Go to home page 1
      */
     doHome () {
-      this.transitTo('Home', undefined)
+      this.transitTo('UserManagement', undefined)
     },
     /**
      * Go to new pitch page 2-1
