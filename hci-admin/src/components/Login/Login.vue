@@ -44,7 +44,10 @@ export default {
      * Check Login
      */
     checkLogin () {
-      if (this.formData.username === 'leminhtuan' && this.formData.password === '1') {
+      const accountList = [
+        {username: 'leminhtuan', password: '1'}
+      ]
+      if (accountList.some(account => account.username === this.formData.username && account.password === this.formData.password)) {
         sessionStorage.setItem('username', this.formData.username)
         this.transitTo('Home', {username: this.formData.username})
       } else {

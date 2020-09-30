@@ -66,14 +66,18 @@ export default {
      * Logout
      */
     doLogout () {
-      const loader = this.getLoader()
-
-      setTimeout(() => {
-        // Todo
-        sessionStorage.clear()
-        this.transitTo('Login', undefined)
-        this.closeLoader(loader)
-      }, 2000)
+      this.$confirm('Do you want to logout?', 'Warning', {
+        confirmButtonText: 'OK',
+        cancelButtonText: 'Cancel',
+        type: 'warning'
+      }).then(() => {
+        const loader = this.getLoader()
+        setTimeout(() => {
+          sessionStorage.clear()
+          this.transitTo('Login', undefined)
+          this.closeLoader(loader)
+        }, 1000)
+      })
     },
     /**
      * Show Loader

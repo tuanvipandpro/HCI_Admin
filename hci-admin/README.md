@@ -18,4 +18,7 @@ npm run build
 npm run build --report
 ```
 
+*** Thêm component mới, phải thêm vào router/index.js và thêm mới hàm di chuyển vào menu
+
+
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).

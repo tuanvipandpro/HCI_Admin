@@ -41,18 +41,6 @@ export default {
   },
   data () {
     /**
-     * Validate New Password
-     */
-    const validateNewPass = (rule, value, callback) => {
-      if (value === '') {
-        callback(new Error('Please input new password !!!'))
-      // } else if (value !== this.forgetForm.confirmPassword) {
-      //   callback(new Error('New password and confirm password isn\'t match !!!'))
-      } else {
-        callback()
-      }
-    }
-    /**
      * Validate Confirm Password
      */
     const validateConfirmPass = (rule, value, callback) => {
@@ -70,8 +58,12 @@ export default {
         confirmPassword: ''
       },
       rules: {
-        newPassword: [{validator: validateNewPass, trigger: 'blur'}],
-        confirmPassword: [{validator: validateConfirmPass, trigger: 'blur'}]
+        newPassword: [
+          {required: true, message: 'Please input new password !!!', trigger: 'blur'}
+        ],
+        confirmPassword: [
+          {required: true, validator: validateConfirmPass, trigger: 'blur'}
+        ]
       }
     }
   },
@@ -162,6 +154,6 @@ export default {
 
 <style>
   #forget-form{
-    margin-left: 1% ;
+    margin-left: 2% ;
   }
 </style>
