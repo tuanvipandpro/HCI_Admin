@@ -26,8 +26,8 @@
               </el-select>
             </el-form-item>
             <el-form-item label="Price (VND)" prop="price">
-              <el-input type="number" v-model="pitchForm.price" class="txt-price" min="0"/>
-              <!-- <el-input-number v-model="pitchForm.price" :min="0" /> -->
+              <!-- <el-input type="number" v-model="pitchForm.price" class="txt-price" min="0"/> -->
+              <el-input-number v-model="pitchForm.price" :min="0" />
             </el-form-item>
             <el-form-item>
               <el-button type="primary" @click="submitForm">Submit</el-button>
@@ -54,6 +54,7 @@ export default {
         category: '',
         price: ''
       },
+      tempForm: {},
       rules: {
         name: [
           {required: true, message: 'Please input title of notification !!!', trigger: 'blur'}
@@ -76,6 +77,7 @@ export default {
      * Validate and Submit Form
      */
     submitForm () {
+      this.tempForm = {...this.pitchForm}
       this.$refs['pitchForm'].validate((valid) => {
         if (valid) {
           this.$confirm('Create this notification?. Continue?', 'Warning', {
@@ -83,7 +85,6 @@ export default {
             cancelButtonText: 'Cancel',
             type: 'warning'
           }).then(() => {
-            console.log(this.pitchForm)
             const loader = this.getLoader()
             setTimeout(() => {
               this.resetForm()

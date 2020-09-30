@@ -49,6 +49,7 @@ export default {
         short: '',
         content: ''
       },
+      tempForm: {},
       rules: {
         title: [
           {required: true, message: 'Please input title of notification !!!', trigger: 'blur'}
@@ -74,6 +75,7 @@ export default {
      * Validate and Submit Form
      */
     submitForm () {
+      this.tempForm = {...this.notifyForm}
       this.$refs['notifyForm'].validate((valid) => {
         if (valid) {
           this.$confirm('Create this notification?. Continue?', 'Warning', {
@@ -83,9 +85,9 @@ export default {
           }).then(() => {
             const loader = this.getLoader()
             setTimeout(() => {
-              this.resetForm()
               this.showMessage('Create Notification Successful !!!', 'success')
               this.closeLoader(loader)
+              this.resetForm()
             }, 1000)
           })
         } else {

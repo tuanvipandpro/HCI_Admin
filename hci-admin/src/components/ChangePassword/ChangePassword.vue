@@ -57,6 +57,7 @@ export default {
         newPassword: '',
         confirmPassword: ''
       },
+      formTemp: {},
       rules: {
         newPassword: [
           {required: true, message: 'Please input new password !!!', trigger: 'blur'}
@@ -75,6 +76,7 @@ export default {
      * Validate and Submit Form
      */
     submitForm () {
+      this.formTemp = {...this.forgetForm}
       this.$refs['forgetForm'].validate((valid) => {
         if (valid) {
           this.$confirm('Your password will be change. Continue?', 'Warning', {
@@ -86,6 +88,7 @@ export default {
             setTimeout(() => {
               this.showMessage('Your password is changed !!!', 'success')
               this.closeLoader(loader)
+              this.resetForm()
             }, 1000)
           })
         } else {
