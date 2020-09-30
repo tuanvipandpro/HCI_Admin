@@ -17,8 +17,8 @@
           <i class="el-icon-football"></i>
           <span>Pitch Management</span>
         </template>
-        <el-menu-item index="2-1">New Pitch</el-menu-item>
-        <el-menu-item index="2-2">Update User</el-menu-item>
+        <el-menu-item index="2-1" @click="doNewPitch">New Pitch</el-menu-item>
+        <el-menu-item index="2-2">Update Pitch</el-menu-item>
       </el-submenu>
       <el-menu-item index="3" @click="doNotification">
         <i class="el-icon-s-order"></i>
@@ -45,25 +45,31 @@ export default {
   },
   methods: {
     /**
-     * Go to home page
+     * Go to home page 1
      */
     doHome () {
       this.transitTo('Home', undefined)
     },
     /**
-     * Go to new notification page
+     * Go to new pitch page 2-1
+     */
+    doNewPitch () {
+      this.transitTo('NewPitch', undefined)
+    },
+    /**
+     * Go to new notification page 3
      */
     doNotification () {
       this.transitTo('Notification', undefined)
     },
     /**
-     * Go to new change password page
+     * Go to new change password page 4-1
      */
     doChangePassword () {
       this.transitTo('ChangePassword', undefined)
     },
     /**
-     * Logout
+     * Logout 4-2
      */
     doLogout () {
       this.$confirm('Do you want to logout?', 'Warning', {

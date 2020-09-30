@@ -6,6 +6,7 @@ import Login from '@/components/Login/Login'
 import Home from '@/components/Home/Home'
 import Notification from '@/components/Notification/Notification'
 import ChangePassword from '@/components/ChangePassword/ChangePassword'
+import NewPitch from '@/components/Pitch/NewPitch'
 
 Vue.use(Router)
 
@@ -30,6 +31,11 @@ export default new Router({
       path: '/new-notification',
       name: 'Notification',
       component: Notification
+    },
+    {
+      path: '/new-pitch',
+      name: 'NewPitch',
+      component: NewPitch
     }
   ]
 })
