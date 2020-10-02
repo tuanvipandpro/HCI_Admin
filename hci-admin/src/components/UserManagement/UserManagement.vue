@@ -25,17 +25,16 @@
           </el-table-column>
           <el-table-column
             align="right">
-            <template slot="header">
+            <template slot="header" slot-scope="scope">
               <el-input
                 v-model="search"
                 size="mini"
-                :change="changeTextSearch"
                 placeholder="Type to search"/>
             </template>
             <template slot-scope="scope">
               <el-button
                 size="mini"
-                style="background-color: #82FA58"
+                style="background-color: #82FA58;"
                 :disabled="scope.row.status === 'Active'"
                 @click="handleClicked(scope.$index, scope.row, 'Active')">Active</el-button>
               <el-button
@@ -75,58 +74,160 @@ export default {
       accountData: [{
         username: 'Tom@123',
         fullname: 'Tom',
-        address: 'No. 189, Grove St, Los Angeles',
+        address: 'No. 100, Grove St, Los Angeles',
         status: 'Active'
       }, {
         username: 'John@abc',
         fullname: 'John',
-        address: 'No. 189, Grove St, Los Angeles',
+        address: 'No. 101, Grove St, Los Angeles',
         status: 'Inactive'
       }, {
         username: 'Morgan@xyz',
         fullname: 'Morgan',
-        address: 'No. 189, Grove St, Los Angeles',
+        address: 'No. 102, Grove St, Los Angeles',
         status: 'Inactive'
       }, {
         username: 'Jessy@hihi',
         fullname: 'Jessy',
-        address: 'No. 189, Grove St, Los Angeles',
+        address: 'No. 103, Grove St, Los Angeles',
         status: 'Active'
       }, {
         username: 'Jerry@ccc',
         fullname: 'Jerry',
-        address: 'No. 189, Grove St, Los Angeles',
+        address: 'No. 104, Grove St, Los Angeles',
         status: 'Active'
       }, {
         username: 'Suri@sri',
         fullname: 'Suri',
-        address: 'No. 189, Grove St, Los Angeles',
+        address: 'No. 105, Grove St, Los Angeles',
         status: 'Active'
       }, {
         username: 'Mama@ma',
         fullname: 'Mama',
-        address: 'No. 189, Grove St, Los Angeles',
+        address: 'No. 106, Grove St, Los Angeles',
         status: 'Inactive'
       }, {
         username: 'Mimi@mi',
         fullname: 'Mimi',
-        address: 'No. 189, Grove St, Los Angeles',
+        address: 'No. 107, Grove St, Los Angeles',
         status: 'Inactive'
       }, {
         username: 'Chichi@chi',
         fullname: 'Chichi',
-        address: 'No. 189, Grove St, Los Angeles',
+        address: 'No. 108, Grove St, Los Angeles',
         status: 'Active'
       }, {
         username: 'Siro@sr',
         fullname: 'Siro',
-        address: 'No. 189, Grove St, Los Angeles',
+        address: 'No. 109, Grove St, Los Angeles',
         status: 'Active'
       },
       {
         username: 'Siro@sr',
         fullname: 'Siro',
-        address: 'No. 189, Grove St, Los Angeles',
+        address: 'No. 110, Grove St, Los Angeles',
+        status: 'Active'
+      }, {
+        username: 'John@abc',
+        fullname: 'John',
+        address: 'No. 111, Grove St, Los Angeles',
+        status: 'Inactive'
+      }, {
+        username: 'Morgan@xyz',
+        fullname: 'Morgan',
+        address: 'No. 112, Grove St, Los Angeles',
+        status: 'Inactive'
+      }, {
+        username: 'Jessy@hihi',
+        fullname: 'Jessy',
+        address: 'No. 113, Grove St, Los Angeles',
+        status: 'Active'
+      }, {
+        username: 'Jerry@ccc',
+        fullname: 'Jerry',
+        address: 'No. 114, Grove St, Los Angeles',
+        status: 'Active'
+      }, {
+        username: 'Suri@sri',
+        fullname: 'Suri',
+        address: 'No. 115, Grove St, Los Angeles',
+        status: 'Active'
+      }, {
+        username: 'Mama@ma',
+        fullname: 'Mama',
+        address: 'No. 116, Grove St, Los Angeles',
+        status: 'Inactive'
+      }, {
+        username: 'Mimi@mi',
+        fullname: 'Mimi',
+        address: 'No. 117, Grove St, Los Angeles',
+        status: 'Inactive'
+      }, {
+        username: 'Chichi@chi',
+        fullname: 'Chichi',
+        address: 'No. 118, Grove St, Los Angeles',
+        status: 'Active'
+      }, {
+        username: 'Siro@sr',
+        fullname: 'Siro',
+        address: 'No. 119, Grove St, Los Angeles',
+        status: 'Active'
+      },
+      {
+        username: 'Siro@sr',
+        fullname: 'Siro',
+        address: 'No. 120, Grove St, Los Angeles',
+        status: 'Active'
+      }, {
+        username: 'John@abc',
+        fullname: 'John',
+        address: 'No. 121, Grove St, Los Angeles',
+        status: 'Inactive'
+      }, {
+        username: 'Morgan@xyz',
+        fullname: 'Morgan',
+        address: 'No. 122, Grove St, Los Angeles',
+        status: 'Inactive'
+      }, {
+        username: 'Jessy@hihi',
+        fullname: 'Jessy',
+        address: 'No. 123, Grove St, Los Angeles',
+        status: 'Active'
+      }, {
+        username: 'Jerry@ccc',
+        fullname: 'Jerry',
+        address: 'No. 124, Grove St, Los Angeles',
+        status: 'Active'
+      }, {
+        username: 'Suri@sri',
+        fullname: 'Suri',
+        address: 'No. 125, Grove St, Los Angeles',
+        status: 'Active'
+      }, {
+        username: 'Mama@ma',
+        fullname: 'Mama',
+        address: 'No. 126, Grove St, Los Angeles',
+        status: 'Inactive'
+      }, {
+        username: 'Mimi@mi',
+        fullname: 'Mimi',
+        address: 'No. 127, Grove St, Los Angeles',
+        status: 'Inactive'
+      }, {
+        username: 'Chichi@chi',
+        fullname: 'Chichi',
+        address: 'No. 128, Grove St, Los Angeles',
+        status: 'Active'
+      }, {
+        username: 'Siro@sr',
+        fullname: 'Siro',
+        address: 'No. 129, Grove St, Los Angeles',
+        status: 'Active'
+      },
+      {
+        username: 'Sirom@srm',
+        fullname: 'Sirom',
+        address: 'No. 130, Grove St, Los Angeles',
         status: 'Active'
       }
       ],
@@ -136,9 +237,25 @@ export default {
   components: {
     'hci-menu': Menu
   },
+  watch: {
+    search () {
+      this.searchList = this.accountData.filter(data => !this.search || data.fullname.toLowerCase().includes(this.search.toLowerCase()))
+      if (this.search.length > 0) {
+        this.currentPage = 1
+        this.numOfPage = this.searchList.length / this.pageSize
+      } else {
+        this.numOfPage = this.accountData.length / this.pageSize
+      }
+      let firstIndex = (this.currentPage - 1) * this.pageSize
+      let lastIndex = (this.currentPage * this.pageSize - 1)
+      this.subAccountData = this.searchList.filter((item, index) => {
+        return index >= firstIndex && index <= lastIndex
+      })
+    }
+  },
   mounted () {
     this.checkAuthen()
-    this.numOfPage = this.accountData.length % 10 + 1
+    this.numOfPage = this.accountData.length / this.pageSize
     this.changePage()
   },
   methods: {
@@ -169,17 +286,15 @@ export default {
     changePage () {
       let firstIndex = (this.currentPage - 1) * this.pageSize
       let lastIndex = (this.currentPage * this.pageSize - 1)
-      this.subAccountData = this.accountData.filter((item, index) => {
-        return index >= firstIndex && index <= lastIndex
-      })
-    },
-    changeTextSearch () {
-      this.searchList = this.accountData.filter(data => !this.search || data.fullname.toLowerCase().includes(this.search.toLowerCase()))
-      let firstIndex = (this.currentPage - 1) * this.pageSize
-      let lastIndex = (this.currentPage * this.pageSize - 1)
-      this.subAccountData = this.searchList.filter((item, index) => {
-        return index >= firstIndex && index <= lastIndex
-      })
+      if (this.searchList.length > 0) {
+        this.subAccountData = this.searchList.filter((item, index) => {
+          return index >= firstIndex && index <= lastIndex
+        })
+      } else {
+        this.subAccountData = this.accountData.filter((item, index) => {
+          return index >= firstIndex && index <= lastIndex
+        })
+      }
     },
     /**
      * Close Loader
