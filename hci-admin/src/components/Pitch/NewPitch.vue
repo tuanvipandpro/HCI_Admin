@@ -57,11 +57,14 @@ export default {
       tempForm: {},
       rules: {
         name: [
-          {required: true, message: 'Please input title of notification !!!', trigger: 'blur'}
+          {required: true, message: 'Please input name of pitch !!!', trigger: 'blur'}
         ],
         category: [
-          {required: true, message: 'Please input short description of notification !!!', trigger: 'blur'}
-        ]
+          {required: true, message: 'Please input category of pitch !!!', trigger: 'blur'}
+        ],
+        price: [
+          {required: true, message: 'Please input price of pitch !!!', trigger: 'blur'}
+        ]        
       }
     }
   },
