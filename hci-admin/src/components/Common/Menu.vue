@@ -15,10 +15,11 @@
       <el-submenu index="2">
         <template slot="title">
           <i class="el-icon-football"></i>
-          <span>Pitch Management</span>
+          <span>Pitch</span>
         </template>
         <el-menu-item index="2-1" @click="doNewPitch">New Pitch</el-menu-item>
         <el-menu-item index="2-2">Update Pitch</el-menu-item>
+        <el-menu-item index="2-3"  @click="managePitch">Pitch Management</el-menu-item>
       </el-submenu>
       <el-menu-item index="3" @click="doNotification">
         <i class="el-icon-s-order"></i>
@@ -55,6 +56,9 @@ export default {
      */
     doNewPitch () {
       this.transitTo('NewPitch', undefined)
+    },
+    managePitch () {
+      this.transitTo('PitchManagement', undefined)
     },
     /**
      * Go to new notification page 3
