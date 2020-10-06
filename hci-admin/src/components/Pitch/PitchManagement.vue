@@ -5,36 +5,63 @@
         <hci-menu :activeIndex='"2-3"' />
       </el-col>
       <el-col :span="19">
-        <div id="new-pitch-form">
-          <el-form
-            ref="pitchForm"
-            status-icon
-            :model="pitchForm"
-            :rules="rules"
-            label-width="130px"
-            label-position="left"
-          >
-            <h2>Pitch Management</h2>
-            <el-form-item label="Name" prop="name">
-              <el-input type="text" v-model="pitchForm.name" style="width: 50%"/>
-            </el-form-item>
-            <el-form-item label="Category" prop="category">
-              <el-select v-model="pitchForm.category" placeholder="Select category of pitch" style="width: 50%">
-                  <el-option label="Mini pitch (5)" value="1"></el-option>
-                  <el-option label="Medium pitch (7)" value="2"></el-option>
-                  <el-option label="Large pitch (11)" value="3"></el-option>
-              </el-select>
-            </el-form-item>
-            <el-form-item label="Price (VND)" prop="price">
-              <el-input-number v-model="pitchForm.price" :min="0" />
-            </el-form-item>
-            <el-form-item>
-              <el-button type="primary" @click="submitForm">Submit</el-button>
-              <el-button @click="resetForm">Reset</el-button>
-            </el-form-item>
-          </el-form>
+        <h1 style="text-align: center">Pitch Management</h1>
+        <div style="float: right; margin-right: 10px">
+          <el-date-picker
+            v-model="value1"
+            type="date"
+            placeholder="Pick a day">
+          </el-date-picker>
+          <el-time-select
+            placeholder="Start time"
+            v-model="startTime"
+            :picker-options="{
+              start: '08:30',
+              step: '00:15',
+              end: '18:30'
+            }">
+          </el-time-select>
+          <el-time-select
+            placeholder="End time"
+            v-model="endTime"
+            :picker-options="{
+              start: '08:30',
+              step: '00:15',
+              end: '18:30',
+              minTime: startTime
+            }">
+          </el-time-select>
         </div>
-        <line-chart :data="chartData" :options="options"/>
+        <div>
+          <el-table
+            :data="tableData"
+            stripe
+            style="width: 100%">
+            <el-table-column type="expand">
+              <template slot-scope="props">
+                <p>Customer: {{ props.row.name }}</p>
+                <p>Address: {{ props.row.address }}</p>
+                <p>Phone number: {{ props.row.phone }}</p>
+              </template>
+            </el-table-column>
+            <el-table-column
+              label="Date"
+              prop="date">
+            </el-table-column>
+            <el-table-column
+              label="Pitch"
+              prop="pitch">
+            </el-table-column>
+            <el-table-column
+              label="Start time"
+              prop="startTime">
+            </el-table-column>
+            <el-table-column
+              label="End time"
+              prop="endTime">
+            </el-table-column>
+          </el-table>
+        </div>
       </el-col>
     </el-row>
   </div>
@@ -42,67 +69,103 @@
 
 <script>
 import Menu from '../Common/Menu'
-import LineChart from '../Common/Chart/LineChart'
 
 export default {
   components: {
-    'hci-menu': Menu,
-    'line-chart': LineChart
+    'hci-menu': Menu
   },
   data () {
     return {
-      // Start Chart
-      chartData: {
-        labels: [1975, 1980, 1985, 1990, 1995, 2000, 2005, 2010, 2015, 2020],
-        datasets: [{
-          data: [70, 95, 100, 120, 257, 271, 300, 321, 383, 450],
-          label: 'Cây lương thực',
-          borderColor: '#3e95cd'
-        }, {
-          data: [70, 80, 111, 129, 135, 209, 247, 372, 400, 426],
-          label: 'Cây công nghiệp',
-          borderColor: '#8e5ea2'
-        }, {
-          data: [70, 78, 128, 150, 203, 276, 300, 317, 375, 434],
-          label: 'Rau đậu',
-          borderColor: '#3cba9f'
-        }, {
-          data: [70, 107, 170, 200, 254, 293, 314, 337, 268, 384],
-          label: 'Cây ăn quả',
-          borderColor: '#e8c3b9'
-        }, {
-          data: [70, 100, 135, 157, 187, 201, 222, 272, 312, 433],
-          label: 'Cây khác',
-          borderColor: '#c45850'
-        }
-        ]
-      },
-      options: {
-        title: {
-          display: true,
-          text: 'Đồ thị tăng trưởng giá trị sản xuất các nhóm cây trồng'
-        },
-        responsive: true,
-        maintainAspectRatio: false
-      },
-      // End Chart
-      pitchForm: {
-        name: '',
-        category: '',
-        price: ''
-      },
-      tempForm: {},
-      rules: {
-        name: [
-          {required: true, message: 'Please input name of pitch !!!', trigger: 'blur'}
-        ],
-        category: [
-          {required: true, message: 'Please input category of pitch !!!', trigger: 'blur'}
-        ],
-        price: [
-          {required: true, message: 'Please input price of pitch !!!', trigger: 'blur'}
-        ]
-      }
+      tableData: [{
+        date: '2016-05-03',
+        startTime: '6:00',
+        endTime: '7:30',
+        name: 'Tom',
+        pitch: 'Pitch 1',
+        address: 'No. 189, Grove St, Los Angeles',
+        phone: '0123456789'
+      }, {
+        date: '2016-05-02',
+        startTime: '14:30',
+        endTime: '15:30',
+        name: 'Tom',
+        pitch: 'Pitch 2',
+        address: 'No. 189, Grove St, Los Angeles',
+        zip: 'CA 90036'
+      }, {
+        date: '2016-05-04',
+        startTime: '15:00',
+        endTime: '17:00',
+        name: 'Tom',
+        pitch: 'Pitch 3',
+        address: 'No. 189, Grove St, Los Angeles',
+        zip: 'CA 90036'
+      }, {
+        date: '2016-05-01',
+        startTime: '17:15',
+        endTime: '18:45',
+        name: 'Tom',
+        pitch: 'Pitch 1',
+        address: 'No. 189, Grove St, Los Angeles',
+        zip: 'CA 90036'
+      }, {
+        date: '2016-05-08',
+        startTime: '18:00',
+        endTime: '20:00',
+        name: 'Tom',
+        pitch: 'Pitch 2',
+        address: 'No. 189, Grove St, Los Angeles',
+        zip: 'CA 90036'
+      }, {
+        date: '2016-05-06',
+        startTime: '19:00',
+        endTime: '20:00',
+        name: 'Tom',
+        pitch: 'Pitch 3',
+        address: 'No. 189, Grove St, Los Angeles',
+        zip: 'CA 90036'
+      }, {
+        date: '2016-05-07',
+        startTime: '19:00',
+        endTime: '20:30',
+        name: 'Tom',
+        pitch: 'Pitch 2',
+        address: 'No. 189, Grove St, Los Angeles',
+        zip: 'CA 90036'
+      }],
+      startTime: '',
+      endTime: '',
+      // pickerOptions: {
+      //   disabledDate(time) {
+      //     return time.getTime() > Date.now();
+      //   },
+      //   shortcuts: [{
+      //     text: 'Today',
+      //     onClick(picker) {
+      //       picker.$emit('pick', new Date());
+      //     }
+      //   }, {
+      //     text: 'Yesterday',
+      //     onClick(picker) {
+      //       const date = new Date();
+      //       date.setTime(date.getTime() - 3600 * 1000 * 24);
+      //       picker.$emit('pick', date);
+      //     }
+      //   }, {
+      //     text: 'A week ago',
+      //     onClick(picker) {
+      //       const date = new Date();
+      //       date.setTime(date.getTime() - 3600 * 1000 * 24 * 7);
+      //       picker.$emit('pick', date);
+      //     }
+      //   }]
+      // },
+      value1: '',
+      value2: ''
+    }
+  },
+  watch: {
+    search () {
     }
   },
   mounted () {
