@@ -1,16 +1,16 @@
 !<template>
     <div id="login-container">
         <el-card id="login-form">
-            <h1>Login</h1>
+            <h1>Đăng nhập</h1>
             <el-form>
                 <el-form-item>
-                    <el-input v-model="formData.username" placeholder="Username"/>
+                    <el-input v-model="formData.username" placeholder="Tài khoản"/>
                 </el-form-item>
                 <el-form-item>
-                    <el-input type="password" v-model="formData.password" placeholder="Password"/>
+                    <el-input type="password" v-model="formData.password" placeholder="Mật khẩu"/>
                 </el-form-item>
                 <el-form-item>
-                    <el-button type="primary" @click="handleForm">Login</el-button>
+                    <el-button type="primary" @click="handleForm">Đăng nhập</el-button>
                 </el-form-item>
             </el-form>
         </el-card>
