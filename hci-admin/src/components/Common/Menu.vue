@@ -10,30 +10,28 @@
     >
       <el-menu-item index="1" @click="doHome">
         <i class="el-icon-s-custom"></i>
-        <span>User Management</span>
+        <span>Quản lý người dùng</span>
       </el-menu-item>
       <el-submenu index="2">
         <template slot="title">
           <i class="el-icon-football"></i>
-          <span>Pitch</span>
+          <span>Sân</span>
         </template>
-        <el-menu-item index="2-1" @click="doNewPitch">New Pitch</el-menu-item>
-        <el-menu-item index="2-2">Update Pitch</el-menu-item>
-        <el-menu-item index="2-3"  @click="managePitch">Pitch Management</el-menu-item>
+        <el-menu-item index="2-1" @click="doNewPitch">Thêm mới sân</el-menu-item>
+        <!-- <el-menu-item index="2-2">Update Pitch</el-menu-item> -->
+        <el-menu-item index="2-3"  @click="managePitch">Quản lý sân</el-menu-item>
       </el-submenu>
       <el-menu-item index="3" @click="doNotification">
         <i class="el-icon-s-order"></i>
-        <span>New Notification</span>
+        <span>Thêm mới thông báo</span>
       </el-menu-item>
       <el-submenu index="4">
         <template slot="title">
           <i class="el-icon-setting"></i>
-          <span>Setting</span>
+          <span>Cài đặt</span>
         </template>
-        <el-menu-item index="4-1" @click="doChangePassword"
-          >Change Password</el-menu-item
-        >
-        <el-menu-item index="4-2" @click="doLogout">Logout</el-menu-item>
+        <el-menu-item index="4-1" @click="doChangePassword">Đổi mặt khẩu</el-menu-item>
+        <el-menu-item index="4-2" @click="doLogout">Đăng xuất</el-menu-item>
       </el-submenu>
     </el-menu>
   </div>
@@ -57,6 +55,9 @@ export default {
     doNewPitch () {
       this.transitTo('NewPitch', undefined)
     },
+    /**
+     * Go to manage pitch pitch page 2-2
+     */
     managePitch () {
       this.transitTo('PitchManagement', undefined)
     },
@@ -76,9 +77,9 @@ export default {
      * Logout 4-2
      */
     doLogout () {
-      this.$confirm('Do you want to logout?', 'Warning', {
-        confirmButtonText: 'OK',
-        cancelButtonText: 'Cancel',
+      this.$confirm('Bạn có muốn đăng xuất?', 'Warning', {
+        confirmButtonText: 'Đồng ý',
+        cancelButtonText: 'Hủy Bỏ',
         type: 'warning'
       }).then(() => {
         const loader = this.getLoader()

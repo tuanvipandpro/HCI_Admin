@@ -14,16 +14,16 @@
             :model="forgetForm"
             :rules="rules"
           >
-            <h2>Change Password</h2>
-            <el-form-item label="New Password" prop="newPassword">
+            <h2>Đổi mật khẩu</h2>
+            <el-form-item label="Mật khẩu mới" prop="newPassword">
               <el-input type="password" v-model="forgetForm.newPassword" style="width: 50%; margin-left: 2%"/>
             </el-form-item>
-            <el-form-item label="Confirm Password" prop="confirmPassword">
+            <el-form-item label="Mật khẩu xác nhận" prop="confirmPassword">
               <el-input type="password" v-model="forgetForm.confirmPassword" style="width: 50%"/>
             </el-form-item>
             <el-form-item>
-              <el-button type="primary" @click="submitForm">Submit</el-button>
-              <el-button @click="resetForm">Reset</el-button>
+              <el-button type="primary" @click="submitForm">Xác nhận</el-button>
+              <el-button @click="resetForm">Làm mới</el-button>
             </el-form-item>
           </el-form>
         </div>
@@ -45,9 +45,9 @@ export default {
      */
     const validateConfirmPass = (rule, value, callback) => {
       if (value === '') {
-        callback(new Error('Please input confirm password !!!'))
+        callback(new Error('Vui lòng xác nhận lại mật khẩu mới !!!'))
       } else if (value !== this.forgetForm.newPassword) {
-        callback(new Error('New password and confirm password isn\'t match !!!'))
+        callback(new Error('Mật khẩu xác nhận không trùng khớp, vui lòng nhập lại !!!'))
       } else {
         callback()
       }
@@ -60,7 +60,7 @@ export default {
       formTemp: {},
       rules: {
         newPassword: [
-          {required: true, message: 'Please input new password !!!', trigger: 'blur'}
+          {required: true, message: 'Vui lòng nhập mật khẩu mới !', trigger: 'blur'}
         ],
         confirmPassword: [
           {required: true, validator: validateConfirmPass, trigger: 'blur'}
@@ -79,14 +79,14 @@ export default {
       this.formTemp = {...this.forgetForm}
       this.$refs['forgetForm'].validate((valid) => {
         if (valid) {
-          this.$confirm('Your password will be change. Continue?', 'Warning', {
-            confirmButtonText: 'OK',
-            cancelButtonText: 'Cancel',
+          this.$confirm('Bạn có chắc chắn muốn thay đổi mật khẩu ?', 'Warning', {
+            confirmButtonText: 'Đồng ý',
+            cancelButtonText: 'Hủy bỏ',
             type: 'warning'
           }).then(() => {
             const loader = this.getLoader()
             setTimeout(() => {
-              this.showMessage('Your password is changed !!!', 'success')
+              this.showMessage('Mật khẩu đã được thay đổi !!!', 'success')
               this.closeLoader(loader)
               this.resetForm()
             }, 1000)

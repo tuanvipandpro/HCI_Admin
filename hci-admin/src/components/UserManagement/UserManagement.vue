@@ -5,22 +5,22 @@
         <hci-menu :activeIndex='"1"' />
       </el-col>
       <el-col :span="19">
-          <h1>User Management</h1>
+          <h1>Quản lý người dùng</h1>
           <el-table
             stripe
             :data="subAccountData"
             style="width: 95%; margin-left: 2.5%"
             empty-text="No Data">
           <el-table-column
-            label="Username"
+            label="Tài Khoản"
             prop="username">
           </el-table-column>
           <el-table-column
-            label="Fullname"
+            label="Họ tên"
             prop="fullname">
           </el-table-column>
           <el-table-column
-            label="Address"
+            label="Địa chỉ"
             prop="address">
           </el-table-column>
           <el-table-column

@@ -14,19 +14,19 @@
             label-width="130px"
             label-position="left"
           >
-            <h2>New Notification</h2>
-            <el-form-item label="Title" prop="title">
+            <h2>Thêm mới tin tức</h2>
+            <el-form-item label="Tiêu đề" prop="title">
               <el-input type="text" v-model="notifyForm.title" style="width: 50%"/>
             </el-form-item>
-            <el-form-item label="Short Content" prop="short">
+            <el-form-item label="Tóm tắt" prop="short">
               <el-input type="text" v-model="notifyForm.short" style="width: 50%"/>
             </el-form-item>
-            <el-form-item label="Content" prop="content">
+            <el-form-item label="Nội dung" prop="content">
               <el-input type="textarea" v-model="notifyForm.content" class="txt-content"/>
             </el-form-item>
             <el-form-item>
-              <el-button type="primary" @click="submitForm">Submit</el-button>
-              <el-button @click="resetForm">Reset</el-button>
+              <el-button type="primary" @click="submitForm">Xác nhận</el-button>
+              <el-button @click="resetForm">Làm mới</el-button>
             </el-form-item>
           </el-form>
         </div>
@@ -52,13 +52,13 @@ export default {
       tempForm: {},
       rules: {
         title: [
-          {required: true, message: 'Please input title of notification !!!', trigger: 'blur'}
+          {required: true, message: 'Tiêu đề đang trống !!!', trigger: 'blur'}
         ],
         short: [
-          {required: true, message: 'Please input short description of notification !!!', trigger: 'blur'}
+          {required: true, message: 'Tóm tắt đang trống !!!', trigger: 'blur'}
         ],
         content: [
-          {required: true, message: 'Please input content of notification !!!', trigger: 'blur'}
+          {required: true, message: 'Nội dung đang trống !!!', trigger: 'blur'}
         ]
       }
     }
@@ -78,14 +78,14 @@ export default {
       this.tempForm = {...this.notifyForm}
       this.$refs['notifyForm'].validate((valid) => {
         if (valid) {
-          this.$confirm('Create this notification?. Continue?', 'Warning', {
-            confirmButtonText: 'OK',
-            cancelButtonText: 'Cancel',
+          this.$confirm('Bạn có muốn tạo mới thông báo này ?', 'Warning', {
+            confirmButtonText: 'Đồng ý',
+            cancelButtonText: 'Hủy bỏ',
             type: 'warning'
           }).then(() => {
             const loader = this.getLoader()
             setTimeout(() => {
-              this.showMessage('Create Notification Successful !!!', 'success')
+              this.showMessage('Tạo mới thông báo thành công ?', 'success')
               this.closeLoader(loader)
               this.resetForm()
             }, 1000)

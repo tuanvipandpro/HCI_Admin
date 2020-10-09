@@ -1,16 +1,16 @@
-!<template>
+<template>
     <div id="login-container">
         <el-card id="login-form">
-            <h1>Login</h1>
+            <h1>Đăng nhập</h1>
             <el-form>
                 <el-form-item>
-                    <el-input v-model="formData.username" placeholder="Username"/>
+                    <el-input v-model="formData.username" placeholder="Tài khoản"/>
                 </el-form-item>
                 <el-form-item>
-                    <el-input type="password" v-model="formData.password" placeholder="Password"/>
+                    <el-input type="password" v-model="formData.password" placeholder="Mật khẩu"/>
                 </el-form-item>
                 <el-form-item>
-                    <el-button type="primary" @click="handleForm">Login</el-button>
+                    <el-button type="primary" @click="handleForm">Đăng nhập</el-button>
                 </el-form-item>
             </el-form>
         </el-card>
@@ -38,7 +38,7 @@ export default {
         // Todo
         this.checkLogin()
         this.closeLoader(loader)
-      }, 2000)
+      }, 1000)
     },
     /**
      * Check Login
@@ -52,7 +52,7 @@ export default {
         sessionStorage.setItem('username', this.formData.username)
         this.transitTo('UserManagement', {username: this.formData.username})
       } else {
-        this.showMessage('Sorry, username or password is incorrect !', 'warning')
+        this.showMessage('Tài khoản hoặc mật khẩu không chính xác !', 'warning')
       }
     },
     /**
@@ -107,10 +107,8 @@ export default {
       height: 100vh;
       background-color: azure;
       position: relative;
-      /* center */
       display: flex;
       justify-content: center;
-      /* align-items: center; */
     }
 
     #login-form {
