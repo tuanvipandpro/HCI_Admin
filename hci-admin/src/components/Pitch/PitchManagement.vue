@@ -5,7 +5,7 @@
         <hci-menu :activeIndex='"2-3"' />
       </el-col>
       <el-col :span="19">
-        <h1 style="text-align: center">Pitch Management</h1>
+        <h1 style="text-align: center">Quản lý sân</h1>
         <div style="float: right; margin-right: 10px">
           <el-date-picker
             v-model="dateSearch"
@@ -40,25 +40,30 @@
             style="width: 100%">
             <el-table-column type="expand">
               <template slot-scope="props">
-                <p>Customer: {{ props.row.name }}</p>
-                <p>Address: {{ props.row.address }}</p>
-                <p>Phone number: {{ props.row.phone }}</p>
+                <p>* Thông tin người đặt: </p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;- Tên người đặt: {{ props.row.name }}</p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;- Địa chỉ: {{ props.row.address }}</p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;- Số điện thoại: {{ props.row.phone }}</p>
               </template>
             </el-table-column>
             <el-table-column
-              label="Date"
+              label="Ngày"
               prop="date">
             </el-table-column>
             <el-table-column
-              label="Pitch"
+              label="Sân"
               prop="pitch">
             </el-table-column>
             <el-table-column
-              label="Start time"
+              label="Địa chỉ"
+              prop="addressPitch">
+            </el-table-column>
+            <el-table-column
+              label="Thời gian bắt đầu"
               prop="startTime">
             </el-table-column>
             <el-table-column
-              label="End time"
+              label="Thời gian kết thúc"
               prop="endTime">
             </el-table-column>
           </el-table>
@@ -79,60 +84,67 @@ export default {
     return {
       subDataTable: [],
       tableData: [{
-        date: '2016-05-03',
+        date: '2020-10-20',
         startTime: '6:00',
         endTime: '7:30',
         name: 'Tom',
-        pitch: 'Pitch 1',
+        pitch: 'Sân 1',
         address: 'No. 189, Grove St, Los Angeles',
+        addressPitch: 'PG, BD, VN',
         phone: '0123456789'
       }, {
-        date: '2016-05-02',
+        date: '2020-10-20',
         startTime: '14:30',
         endTime: '15:30',
         name: 'Tom',
-        pitch: 'Pitch 2',
+        pitch: 'Sân 2',
         address: 'No. 189, Grove St, Los Angeles',
+        addressPitch: 'BB, BD, VN',
         phone: '0123456789'
       }, {
-        date: '2016-05-04',
+        date: '2020-10-20',
         startTime: '15:00',
         endTime: '17:00',
         name: 'Tom',
-        pitch: 'Pitch 3',
+        pitch: 'Sân 3',
         address: 'No. 189, Grove St, Los Angeles',
+        addressPitch: 'BC, BD, VN',
         phone: '0123456789'
       }, {
-        date: '2016-05-01',
+        date: '2020-10-20',
         startTime: '17:15',
         endTime: '18:45',
         name: 'Tom',
-        pitch: 'Pitch 1',
+        pitch: 'Sân 1',
         address: 'No. 189, Grove St, Los Angeles',
+        addressPitch: 'DT, BD, VN',
         phone: '0123456789'
       }, {
-        date: '2016-05-08',
+        date: '2020-10-18',
         startTime: '18:00',
         endTime: '20:00',
         name: 'Tom',
-        pitch: 'Pitch 2',
+        pitch: 'Sân 2',
         address: 'No. 189, Grove St, Los Angeles',
+        addressPitch: 'TA, BD, VN',
         phone: '0123456789'
       }, {
-        date: '2016-10-08',
+        date: '2020-10-20',
         startTime: '19:00',
         endTime: '20:00',
         name: 'Tom',
-        pitch: 'Pitch 3',
+        pitch: 'Sân 3',
         address: 'No. 189, Grove St, Los Angeles',
+        addressPitch: 'DA, BD, VN',
         phone: '0123456789'
       }, {
-        date: '2020-10-07',
+        date: '2020-10-19',
         startTime: '19:00',
         endTime: '20:30',
         name: 'Tom',
-        pitch: 'Pitch 2',
+        pitch: 'Sân 2',
         address: 'No. 189, Grove St, Los Angeles',
+        addressPitch: 'TDM, BD, VN',
         phone: '0123456789'
       }],
       startTime: '',
@@ -150,10 +162,17 @@ export default {
   },
   watch: {
     dateSearch () {
-      debugger
       let date = new Date()
-      date.setDate(this.dateSearch)
-      this.subDataTable = this.tableData.filter(data => !this.dateSearch || data.date === date)
+      date = this.dateSearch
+      let day = date.getDate()
+      let month = date.getMonth()
+      let year = date.getFullYear()
+      this.tableData.forEach(item => {
+        debugger
+        let x = year + '-' + month + '-' + day
+        let a = item.date === x
+      });
+      this.subDataTable = this.tableData.filter(data => !this.dateSearch || data.date === year + '-' + month + '-' + day)
     }
   },
   mounted () {
