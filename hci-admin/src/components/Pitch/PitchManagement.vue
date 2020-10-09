@@ -8,8 +8,9 @@
         <h1 style="text-align: center">Pitch Management</h1>
         <div style="float: right; margin-right: 10px">
           <el-date-picker
-            v-model="value1"
+            v-model="dateSearch"
             type="date"
+            :picker-options="pickerOptions"
             placeholder="Pick a day">
           </el-date-picker>
           <el-time-select
@@ -34,7 +35,7 @@
         </div>
         <div>
           <el-table
-            :data="tableData"
+            :data="subDataTable"
             stripe
             style="width: 100%">
             <el-table-column type="expand">
@@ -76,6 +77,7 @@ export default {
   },
   data () {
     return {
+      subDataTable: [],
       tableData: [{
         date: '2016-05-03',
         startTime: '6:00',
@@ -91,7 +93,7 @@ export default {
         name: 'Tom',
         pitch: 'Pitch 2',
         address: 'No. 189, Grove St, Los Angeles',
-        zip: 'CA 90036'
+        phone: '0123456789'
       }, {
         date: '2016-05-04',
         startTime: '15:00',
@@ -99,7 +101,7 @@ export default {
         name: 'Tom',
         pitch: 'Pitch 3',
         address: 'No. 189, Grove St, Los Angeles',
-        zip: 'CA 90036'
+        phone: '0123456789'
       }, {
         date: '2016-05-01',
         startTime: '17:15',
@@ -107,7 +109,7 @@ export default {
         name: 'Tom',
         pitch: 'Pitch 1',
         address: 'No. 189, Grove St, Los Angeles',
-        zip: 'CA 90036'
+        phone: '0123456789'
       }, {
         date: '2016-05-08',
         startTime: '18:00',
@@ -115,57 +117,43 @@ export default {
         name: 'Tom',
         pitch: 'Pitch 2',
         address: 'No. 189, Grove St, Los Angeles',
-        zip: 'CA 90036'
+        phone: '0123456789'
       }, {
-        date: '2016-05-06',
+        date: '2016-10-08',
         startTime: '19:00',
         endTime: '20:00',
         name: 'Tom',
         pitch: 'Pitch 3',
         address: 'No. 189, Grove St, Los Angeles',
-        zip: 'CA 90036'
+        phone: '0123456789'
       }, {
-        date: '2016-05-07',
+        date: '2020-10-07',
         startTime: '19:00',
         endTime: '20:30',
         name: 'Tom',
         pitch: 'Pitch 2',
         address: 'No. 189, Grove St, Los Angeles',
-        zip: 'CA 90036'
+        phone: '0123456789'
       }],
       startTime: '',
       endTime: '',
-      // pickerOptions: {
-      //   disabledDate(time) {
-      //     return time.getTime() > Date.now();
-      //   },
-      //   shortcuts: [{
-      //     text: 'Today',
-      //     onClick(picker) {
-      //       picker.$emit('pick', new Date());
-      //     }
-      //   }, {
-      //     text: 'Yesterday',
-      //     onClick(picker) {
-      //       const date = new Date();
-      //       date.setTime(date.getTime() - 3600 * 1000 * 24);
-      //       picker.$emit('pick', date);
-      //     }
-      //   }, {
-      //     text: 'A week ago',
-      //     onClick(picker) {
-      //       const date = new Date();
-      //       date.setTime(date.getTime() - 3600 * 1000 * 24 * 7);
-      //       picker.$emit('pick', date);
-      //     }
-      //   }]
-      // },
-      value1: '',
+      pickerOptions: {
+        disabledDate (time) {
+          let yesterday = new Date()
+          yesterday.setDate(yesterday.getDate() - 1)
+          return time.getTime() <= yesterday
+        }
+      },
+      dateSearch: '',
       value2: ''
     }
   },
   watch: {
-    search () {
+    dateSearch () {
+      debugger
+      let date = new Date()
+      date.setDate(this.dateSearch)
+      this.subDataTable = this.tableData.filter(data => !this.dateSearch || data.date === date)
     }
   },
   mounted () {
@@ -174,6 +162,7 @@ export default {
      * If false => redirect to login page
      */
     this.checkAuthen()
+    this.subDataTable = this.tableData
   },
   methods: {
     /**
