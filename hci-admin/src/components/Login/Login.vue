@@ -1,4 +1,4 @@
-!<template>
+<template>
     <div id="login-container">
         <el-card id="login-form">
             <h1>Đăng nhập</h1>
@@ -38,7 +38,7 @@ export default {
         // Todo
         this.checkLogin()
         this.closeLoader(loader)
-      }, 2000)
+      }, 1000)
     },
     /**
      * Check Login
@@ -52,7 +52,7 @@ export default {
         sessionStorage.setItem('username', this.formData.username)
         this.transitTo('UserManagement', {username: this.formData.username})
       } else {
-        this.showMessage('Sorry, username or password is incorrect !', 'warning')
+        this.showMessage('Tài khoản hoặc mật khẩu không chính xác !', 'warning')
       }
     },
     /**
@@ -107,10 +107,8 @@ export default {
       height: 100vh;
       background-color: azure;
       position: relative;
-      /* center */
       display: flex;
       justify-content: center;
-      /* align-items: center; */
     }
 
     #login-form {

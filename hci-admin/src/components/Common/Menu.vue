@@ -55,6 +55,9 @@ export default {
     doNewPitch () {
       this.transitTo('NewPitch', undefined)
     },
+    /**
+     * Go to manage pitch pitch page 2-2
+     */
     managePitch () {
       this.transitTo('PitchManagement', undefined)
     },
@@ -75,8 +78,8 @@ export default {
      */
     doLogout () {
       this.$confirm('Bạn có muốn đăng xuất?', 'Warning', {
-        confirmButtonText: 'OK',
-        cancelButtonText: 'Cancel',
+        confirmButtonText: 'Đồng ý',
+        cancelButtonText: 'Hủy Bỏ',
         type: 'warning'
       }).then(() => {
         const loader = this.getLoader()
