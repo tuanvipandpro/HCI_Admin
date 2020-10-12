@@ -1,12 +1,12 @@
 import Vuex from 'vuex'
 import Vue from 'vue'
 
-// import welcome from './welcome'
+import login from './Login/Login'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   modules: {
-    // welcome: welcome,
+    login: login
   }
 })

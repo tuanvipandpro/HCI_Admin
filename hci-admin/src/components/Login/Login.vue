@@ -18,6 +18,7 @@
 </template>
 
 <script>
+import { mapState, mapMutations, mapActions } from 'vuex'
 export default {
   data () {
     return {
@@ -27,7 +28,18 @@ export default {
       }
     }
   },
+  computed: {
+    ...mapState('login', [
+      '_formData'
+    ])
+  },
   methods: {
+    ...mapMutations('login', [
+      '_setFormData'
+    ]),
+    ...mapActions('login', [
+      '_checkLogin'
+    ]),
     /**
      * Handle Login Form
      */
@@ -44,16 +56,13 @@ export default {
      * Check Login
      */
     checkLogin () {
-      const accountList = [
-        {username: 'leminhtuan', password: '1'},
-        {username: 'dunggla', password: '1'}
-      ]
-      if (accountList.some(account => account.username === this.formData.username && account.password === this.formData.password)) {
+      this._setFormData(this.formData)
+      this._checkLogin().then((res) => {
         sessionStorage.setItem('username', this.formData.username)
         this.transitTo('UserManagement', {username: this.formData.username})
-      } else {
+      }).catch(() => {
         this.showMessage('Tài khoản hoặc mật khẩu không chính xác !', 'warning')
-      }
+      })
     },
     /**
      * Show Loader
