@@ -25,7 +25,8 @@ export default {
       formData: {
         username: '',
         password: ''
-      }
+      },
+      loader: {}
     }
   },
   computed: {
@@ -44,13 +45,9 @@ export default {
      * Handle Login Form
      */
     handleForm () {
-      const loader = this.getLoader()
+      this.loader = this.getLoader()
 
-      setTimeout(() => {
-        // Todo
-        this.checkLogin()
-        this.closeLoader(loader)
-      }, 1000)
+      this.checkLogin()
     },
     /**
      * Check Login
@@ -58,9 +55,11 @@ export default {
     checkLogin () {
       this._setFormData(this.formData)
       this._checkLogin().then((res) => {
+        this.closeLoader(this.loader)
         sessionStorage.setItem('username', this.formData.username)
         this.transitTo('UserManagement', {username: this.formData.username})
       }).catch(() => {
+        this.closeLoader(this.loader)
         this.showMessage('Tài khoản hoặc mật khẩu không chính xác !', 'warning')
       })
     },
