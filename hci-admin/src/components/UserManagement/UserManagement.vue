@@ -10,7 +10,7 @@
             stripe
             :data="subAccountData"
             style="width: 95%; margin-left: 2.5%"
-            empty-text="No Data">
+            empty-text="Không có dữ liệu">
           <el-table-column
             label="Tài Khoản"
             prop="username">
@@ -29,7 +29,7 @@
               <el-input
                 v-model="search"
                 size="mini"
-                placeholder="Type to search"/>
+                placeholder="Tìm tên"/>
             </template>
             <template slot-scope="scope">
               <el-button
@@ -337,6 +337,11 @@ export default {
   }
 }
 </script>
-
 <style>
+  .el-button.is-disabled, .el-button.is-disabled:focus, .el-button.is-disabled:hover {
+    color: white;
+  }
+  .el-button {
+    color: black;
+  }
 </style>
