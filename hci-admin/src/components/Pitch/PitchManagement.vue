@@ -4,7 +4,7 @@
       <el-col :span='5'>
         <hci-menu :activeIndex='"2-3"' />
       </el-col>
-      <el-col :span="19">
+      <el-col :offset="5" :span="19">
         <h1 style="text-align: center">Quản lý sân</h1>
         <div style="float: right; margin-right: 10px">
           <el-date-picker

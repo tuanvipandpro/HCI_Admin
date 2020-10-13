@@ -123,3 +123,11 @@ export default {
   }
 }
 </script>
+<style>
+  #hci-menu{
+    position: fixed;
+    left: 0;
+    z-index: 1;
+    width: 21%;
+  }
+</style>
