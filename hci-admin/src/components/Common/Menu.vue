@@ -8,36 +8,53 @@
       class="el-menu-vertical-demo"
       style="min-height: 100vh"
     >
-      <el-menu-item index="1" @click="doHome">
-        <i class="el-icon-s-custom"></i>
-        <span>Quản lý người dùng</span>
-      </el-menu-item>
+      <el-submenu index="1">
+        <template slot="title">
+          <i class="el-icon-s-custom"></i>
+          <span>Quản lý nhân viên</span>
+        </template>
+        <el-menu-item index="1-1" @click="doHome">Tất cả nhân viên</el-menu-item>
+        <el-menu-item index="1-2"  @click="managePitch">ABC Nhân viên</el-menu-item>
+      </el-submenu>
       <el-submenu index="2">
         <template slot="title">
-          <i class="el-icon-football"></i>
-          <span>Sân</span>
+          <i class="el-icon-s-cooperation"></i>
+          <span>Quản lý tài khoản</span>
         </template>
-        <el-menu-item index="2-1" @click="doNewPitch">Thêm mới sân</el-menu-item>
-        <!-- <el-menu-item index="2-2">Update Pitch</el-menu-item> -->
-        <el-menu-item index="2-3"  @click="managePitch">Quản lý sân</el-menu-item>
+        <el-menu-item index="2-1" @click="doNewPitch">Tất cả tài khoản</el-menu-item>
+        <el-menu-item index="2-3" @click="managePitch">ABC tài khoản</el-menu-item>
       </el-submenu>
-      <el-menu-item index="3" @click="doNotification">
-        <i class="el-icon-s-order"></i>
-        <span>Thêm mới thông báo</span>
-      </el-menu-item>
+      <el-submenu index="3">
+        <template slot="title">
+          <i class="el-icon-edit-outline"></i>
+          <span>Quản lý tin tức</span>
+        </template>
+        <el-menu-item index="3-1" >Tất cả tin tức</el-menu-item>
+        <el-menu-item index="3-2" @click="doNotification">Thêm mới tin tức</el-menu-item>
+      </el-submenu>
       <el-submenu index="4">
+        <template slot="title">
+          <i class="el-icon-date"></i>
+          <span>Quản lý ca</span>
+        </template>
+        <el-menu-item index="4-1" >Tất cả ca làm việc</el-menu-item>
+        <el-menu-item index="4-2" >Ca làm đề xuất</el-menu-item>
+        <el-menu-item index="4-2" >Phân công</el-menu-item>
+      </el-submenu>
+      <el-submenu index="5">
         <template slot="title">
           <i class="el-icon-setting"></i>
           <span>Cài đặt</span>
         </template>
-        <el-menu-item index="4-1" @click="doChangePassword">Đổi mặt khẩu</el-menu-item>
-        <el-menu-item index="4-2" @click="doLogout">Đăng xuất</el-menu-item>
+        <el-menu-item index="5-1" @click="doChangePassword">Đổi mặt khẩu</el-menu-item>
+        <el-menu-item index="5-2" @click="doLogout">Đăng xuất</el-menu-item>
       </el-submenu>
     </el-menu>
   </div>
 </template>
 
 <script>
+
 export default {
   props: {
     activeIndex: String
@@ -123,3 +140,5 @@ export default {
   }
 }
 </script>
+<style>
+</style>

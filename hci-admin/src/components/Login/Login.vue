@@ -56,7 +56,11 @@ export default {
       this._setFormData(this.formData)
       this._checkLogin().then((res) => {
         this.closeLoader(this.loader)
+
         sessionStorage.setItem('username', this.formData.username)
+        sessionStorage.setItem('employeeId', res.data.employeeId)
+        sessionStorage.setItem('token', res.data.token)
+
         this.transitTo('UserManagement', {username: this.formData.username})
       }).catch(() => {
         this.closeLoader(this.loader)

@@ -2,7 +2,7 @@
   <div id="new-pitch">
     <el-row style="text-align: left">
       <el-col :span='5'>
-        <hci-menu :activeIndex='"2-1"' />
+        <hci-menu :activeIndex='"3-1"' />
       </el-col>
       <el-col :span="19">
         <div id="new-pitch-form">

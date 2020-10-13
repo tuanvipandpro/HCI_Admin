@@ -2,7 +2,7 @@
   <div id="userManagement">
     <el-row>
       <el-col :span='5' style="text-align: left">
-        <hci-menu :activeIndex='"1"' />
+        <hci-menu :activeIndex='"1-1"' />
       </el-col>
       <el-col :span="19">
           <h1>Quản lý người dùng</h1>

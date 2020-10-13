@@ -3,7 +3,7 @@
     <el-row style="text-align: left">
       <!-- Menu -->
       <el-col :span='5'>
-        <hci-menu :activeIndex='"4-1"' />
+        <hci-menu :activeIndex='"5-1"' />
       </el-col>
       <!-- Content -->
       <el-col :span="19">
