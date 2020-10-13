@@ -4,7 +4,7 @@
       <el-col :span='5' style="text-align: left">
         <hci-menu :activeIndex='"3-1"' />
       </el-col>
-      <el-col :span="19">
+      <el-col :offset="5" :span="19">
           <h1>Quản lý tin tức</h1>
           <el-table
             stripe
@@ -13,15 +13,15 @@
             empty-text="Không có dữ liệu">
           <el-table-column
             label="Ngày tạo"
-            prop="username">
+            prop="createDate">
           </el-table-column>
           <el-table-column
             label="Tiêu đề"
-            prop="fullname">
+            prop="title">
           </el-table-column>
           <el-table-column
             label="Tóm tắt"
-            prop="address">
+            prop="shortContent">
           </el-table-column>
           <el-table-column
             align="right">
@@ -35,12 +35,12 @@
               <el-button
                 style="background-color: #82FA58;"
                 icon="el-icon-edit"
-                @click="handleClicked(scope.$index, scope.row, 'Active')"
+                @click="onClickEditBtn(scope.row)"
                 circle></el-button>
               <el-button
                 type="danger"
                 icon="el-icon-delete"
-                @click="handleClicked(scope.$index, scope.row, 'Inactive')"
+                @click="onClickDeleteBtn(scope.row)"
                 circle></el-button>
             </template>
           </el-table-column>
@@ -62,184 +62,35 @@
 
 <script>
 import Menu from '../Common/Menu'
-
+import { mapState, mapMutations, mapActions } from 'vuex'
 export default {
   data () {
     return {
+      loader: {},
       numOfPage: 0,
       currentPage: 1,
       pageSize: 10,
       subNotificationData: [],
       searchList: [],
-      notificationData: [{
-        username: 'Tom@123',
-        fullname: 'Tom',
-        address: 'No. 100, Grove St, Los Angeles',
-        status: 'Active'
-      }, {
-        username: 'John@abc',
-        fullname: 'John',
-        address: 'No. 101, Grove St, Los Angeles',
-        status: 'Inactive'
-      }, {
-        username: 'Morgan@xyz',
-        fullname: 'Morgan',
-        address: 'No. 102, Grove St, Los Angeles',
-        status: 'Inactive'
-      }, {
-        username: 'Jessy@hihi',
-        fullname: 'Jessy',
-        address: 'No. 103, Grove St, Los Angeles',
-        status: 'Active'
-      }, {
-        username: 'Jerry@ccc',
-        fullname: 'Jerry',
-        address: 'No. 104, Grove St, Los Angeles',
-        status: 'Active'
-      }, {
-        username: 'Suri@sri',
-        fullname: 'Suri',
-        address: 'No. 105, Grove St, Los Angeles',
-        status: 'Active'
-      }, {
-        username: 'Mama@ma',
-        fullname: 'Mama',
-        address: 'No. 106, Grove St, Los Angeles',
-        status: 'Inactive'
-      }, {
-        username: 'Mimi@mi',
-        fullname: 'Mimi',
-        address: 'No. 107, Grove St, Los Angeles',
-        status: 'Inactive'
-      }, {
-        username: 'Chichi@chi',
-        fullname: 'Chichi',
-        address: 'No. 108, Grove St, Los Angeles',
-        status: 'Active'
-      }, {
-        username: 'Siro@sr',
-        fullname: 'Siro',
-        address: 'No. 109, Grove St, Los Angeles',
-        status: 'Active'
-      },
-      {
-        username: 'Siro@sr',
-        fullname: 'Siro',
-        address: 'No. 110, Grove St, Los Angeles',
-        status: 'Active'
-      }, {
-        username: 'John@abc',
-        fullname: 'John',
-        address: 'No. 111, Grove St, Los Angeles',
-        status: 'Inactive'
-      }, {
-        username: 'Morgan@xyz',
-        fullname: 'Morgan',
-        address: 'No. 112, Grove St, Los Angeles',
-        status: 'Inactive'
-      }, {
-        username: 'Jessy@hihi',
-        fullname: 'Jessy',
-        address: 'No. 113, Grove St, Los Angeles',
-        status: 'Active'
-      }, {
-        username: 'Jerry@ccc',
-        fullname: 'Jerry',
-        address: 'No. 114, Grove St, Los Angeles',
-        status: 'Active'
-      }, {
-        username: 'Suri@sri',
-        fullname: 'Suri',
-        address: 'No. 115, Grove St, Los Angeles',
-        status: 'Active'
-      }, {
-        username: 'Mama@ma',
-        fullname: 'Mama',
-        address: 'No. 116, Grove St, Los Angeles',
-        status: 'Inactive'
-      }, {
-        username: 'Mimi@mi',
-        fullname: 'Mimi',
-        address: 'No. 117, Grove St, Los Angeles',
-        status: 'Inactive'
-      }, {
-        username: 'Chichi@chi',
-        fullname: 'Chichi',
-        address: 'No. 118, Grove St, Los Angeles',
-        status: 'Active'
-      }, {
-        username: 'Siro@sr',
-        fullname: 'Siro',
-        address: 'No. 119, Grove St, Los Angeles',
-        status: 'Active'
-      },
-      {
-        username: 'Siro@sr',
-        fullname: 'Siro',
-        address: 'No. 120, Grove St, Los Angeles',
-        status: 'Active'
-      }, {
-        username: 'John@abc',
-        fullname: 'John',
-        address: 'No. 121, Grove St, Los Angeles',
-        status: 'Inactive'
-      }, {
-        username: 'Morgan@xyz',
-        fullname: 'Morgan',
-        address: 'No. 122, Grove St, Los Angeles',
-        status: 'Inactive'
-      }, {
-        username: 'Jessy@hihi',
-        fullname: 'Jessy',
-        address: 'No. 123, Grove St, Los Angeles',
-        status: 'Active'
-      }, {
-        username: 'Jerry@ccc',
-        fullname: 'Jerry',
-        address: 'No. 124, Grove St, Los Angeles',
-        status: 'Active'
-      }, {
-        username: 'Suri@sri',
-        fullname: 'Suri',
-        address: 'No. 125, Grove St, Los Angeles',
-        status: 'Active'
-      }, {
-        username: 'Mama@ma',
-        fullname: 'Mama',
-        address: 'No. 126, Grove St, Los Angeles',
-        status: 'Inactive'
-      }, {
-        username: 'Mimi@mi',
-        fullname: 'Mimi',
-        address: 'No. 127, Grove St, Los Angeles',
-        status: 'Inactive'
-      }, {
-        username: 'Chichi@chi',
-        fullname: 'Chichi',
-        address: 'No. 128, Grove St, Los Angeles',
-        status: 'Active'
-      }, {
-        username: 'Siro@sr',
-        fullname: 'Siro',
-        address: 'No. 129, Grove St, Los Angeles',
-        status: 'Active'
-      },
-      {
-        username: 'Sirom@srm',
-        fullname: 'Sirom',
-        address: 'No. 130, Grove St, Los Angeles',
-        status: 'Active'
-      }
-      ],
+      notificationData: [],
       search: ''
     }
+  },
+  computed: {
+    ...mapState('notification', [
+      '_articleID',
+      '_notificationData'
+    ])
   },
   components: {
     'hci-menu': Menu
   },
   watch: {
+    /**
+     * Load list data
+     */
     search () {
-      this.searchList = this.notificationData.filter(data => !this.search || data.fullname.toLowerCase().includes(this.search.toLowerCase()))
+      this.searchList = this.notificationData.filter(data => !this.search || data.title.toLowerCase().includes(this.search.toLowerCase()))
       if (this.search.length > 0) {
         this.currentPage = 1
         this.numOfPage = this.searchList.length / this.pageSize
@@ -257,35 +108,54 @@ export default {
     this.initPage()
   },
   methods: {
+    ...mapMutations('notification', [
+      '_setArticleID',
+      '_setNotificationData'
+    ]),
+    ...mapActions('notification', [
+      '_getAllNotifications',
+      '_deleteNotificationByID'
+    ]),
     /**
      * Run when page initialization
      */
     initPage () {
+      this.loader = this.getLoader()
       this.checkAuthen()
-      this.numOfPage = this.notificationData.length / this.pageSize
-      this.changePage()
+      this._getAllNotifications().then(() => {
+        this.closeLoader(this.loader)
+        console.log(this._notificationData)
+        this.notificationData = this._notificationData
+        this.numOfPage = this.notificationData.length / this.pageSize
+        this.changePage()
+      })
     },
     /**
-     * Show Loader
+     * on click button edit
      */
-    getLoader () {
-      return this.$loading({
-        lock: true,
-        spinner: 'el-icon-loading',
-        text: 'Loading',
-        background: 'rgba(0, 0, 0, 0.7)'
-      })
+    onClickEditBtn (row) {
+      this.transitTo('EditNotification', {articleID: row.id})
     },
-    handleClicked (index, row, typeButton) {
-      this.$confirm('Do you want to ' + String(typeButton).toLowerCase() + ' ' + row.fullname + ' ?', 'Warning', {
-        confirmButtonText: 'Yes',
-        cancelButtonText: 'No',
+    /**
+     * on click button delete
+     */
+    onClickDeleteBtn (row) {
+      this.$confirm('Bạn có muốn xóa thông báo này không ?', 'Warning', {
+        confirmButtonText: 'Đồng ý',
+        cancelButtonText: 'Hủy bỏ',
         type: 'warning'
       }).then(() => {
-        row.status = typeButton
-        this.showMessage(typeButton + ' user Successful !!!', 'success')
+        this.loader = this.getLoader()
+        this._setArticleID(row.id)
+        return this._deleteNotificationByID()
+      }).then(() => {
+        this.closeLoader(this.loader)
+        this.showMessage('Xóa thông báo thành công !!!', 'success')
       })
     },
+    /**
+     * change page function
+     */
     changePage () {
       let firstIndex = (this.currentPage - 1) * this.pageSize
       let lastIndex = (this.currentPage * this.pageSize - 1)
@@ -298,6 +168,17 @@ export default {
           return index >= firstIndex && index <= lastIndex
         })
       }
+    },
+    /**
+     * Show Loader
+     */
+    getLoader () {
+      return this.$loading({
+        lock: true,
+        spinner: 'el-icon-loading',
+        text: 'Loading',
+        background: 'rgba(0, 0, 0, 0.7)'
+      })
     },
     /**
      * Close Loader

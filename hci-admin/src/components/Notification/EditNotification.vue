@@ -1,8 +1,8 @@
 !<template>
-  <div id="new-notification">
+  <div id="edit-notification">
     <el-row style="text-align: left">
       <el-col :span='5'>
-        <hci-menu :activeIndex='"3-2"' />
+        <hci-menu :activeIndex='"3-1"' />
       </el-col>
       <el-col :offset="5" :span="19">
         <div id="new-notification-form">
@@ -14,7 +14,7 @@
             label-width="130px"
             label-position="left"
           >
-            <h2>Thêm mới tin tức</h2>
+            <h2>Chi tiết tin tức</h2>
             <el-form-item label="Tiêu đề" prop="title">
               <el-input type="text" v-model="notifyForm.title" style="width: 50%"/>
             </el-form-item>
@@ -46,6 +46,7 @@ export default {
     return {
       loader: {},
       employeeID: '',
+      articleID: '',
       notifyForm: {
         title: '',
         shortContent: '',
@@ -66,7 +67,7 @@ export default {
     }
   },
   computed: {
-    ...mapState('createNotification', [
+    ...mapState('editNotification', [
       '_articleID',
       '_employeeID',
       '_notificationFormData'
@@ -76,20 +77,28 @@ export default {
     this.initPage()
   },
   methods: {
-    ...mapMutations('createNotification', [
+    ...mapMutations('editNotification', [
       '_setArticleID',
       '_setEmployeeID',
       '_setNotificationFormData'
     ]),
-    ...mapActions('createNotification', [
-      '_createNotification'
+    ...mapActions('editNotification', [
+      '_getNotificationByID',
+      '_updateNotificationByID'
     ]),
     /**
      * Run when page initialization
      */
     initPage () {
+      this.loader = this.getLoader()
       this.checkAuthen()
       this.employeeID = sessionStorage.getItem('employeeId')
+      this.articleID = this.$route.params.articleID
+      this._setArticleID(this.articleID)
+      this._getNotificationByID().then(() => {
+        this.notifyForm = this._notificationFormData
+        this.closeLoader(this.loader)
+      })
     },
     /**
      * Validate and Submit Form
@@ -98,18 +107,17 @@ export default {
       this.tempForm = {...this.notifyForm}
       this.$refs['notifyForm'].validate((valid) => {
         if (valid) {
-          this.$confirm('Bạn có muốn tạo mới thông báo này ?', 'Warning', {
+          this.$confirm('Bạn có muốn cập nhật thông báo này không ?', 'Warning', {
             confirmButtonText: 'Đồng ý',
             cancelButtonText: 'Hủy bỏ',
             type: 'warning'
           }).then(() => {
             this.loader = this.getLoader()
             this._setEmployeeID(this.employeeID)
-            this._setNotificationFormData(this.notifyForm)
-            return this._createNotification()
+            return this._updateNotificationByID()
           }).then(() => {
             this.closeLoader(this.loader)
-            this.showMessage('Tạo mới thông báo thành công !!!', 'success')
+            this.showMessage('Cập nhật thông báo thành công !!!', 'success')
           })
         } else {
           return false
