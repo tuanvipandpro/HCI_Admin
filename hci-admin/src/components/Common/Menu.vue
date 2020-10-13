@@ -37,7 +37,7 @@
           <i class="el-icon-date"></i>
           <span>Quản lý ca</span>
         </template>
-        <el-menu-item index="4-1" >Tất cả ca làm việc</el-menu-item>
+        <el-menu-item index="4-1" @click="doWork">Tất cả ca làm việc</el-menu-item>
         <el-menu-item index="4-2" >Ca làm đề xuất</el-menu-item>
         <el-menu-item index="4-2" >Phân công</el-menu-item>
       </el-submenu>
@@ -91,13 +91,19 @@ export default {
       this.transitTo('Notification', undefined)
     },
     /**
-     * Go to new change password page 4-1
+     * Go to work page 4-1
+     */
+    doWork () {
+      this.transitTo('Work', undefined)
+    },
+    /**
+     * Go to new change password page 5-1
      */
     doChangePassword () {
       this.transitTo('ChangePassword', undefined)
     },
     /**
-     * Logout 4-2
+     * Logout 5-2
      */
     doLogout () {
       this.$confirm('Bạn có muốn đăng xuất?', 'Warning', {

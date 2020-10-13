@@ -2,9 +2,9 @@
   <div id="userManagement">
     <el-row>
       <el-col :span='5' style="text-align: left">
-        <hci-menu :activeIndex='"1-1"' />
+        <hci-menu :activeIndex='"1"' />
       </el-col>
-      <el-col offset="5" :span="19">
+      <el-col :offset="5" :span="19">
           <h1>Quản lý người dùng</h1>
           <el-table
             stripe
