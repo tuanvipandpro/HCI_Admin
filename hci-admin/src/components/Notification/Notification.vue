@@ -2,7 +2,7 @@
   <div id="new-notification">
     <el-row style="text-align: left">
       <el-col :span='5'>
-        <hci-menu :activeIndex='"3"' />
+        <hci-menu :activeIndex='"3-2"' />
       </el-col>
       <el-col offset="5" :span="19">
         <div id="new-notification-form">

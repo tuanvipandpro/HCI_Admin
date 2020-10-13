@@ -29,7 +29,7 @@
           <i class="el-icon-edit-outline"></i>
           <span>Quản lý tin tức</span>
         </template>
-        <el-menu-item index="3-1" >Tất cả tin tức</el-menu-item>
+        <el-menu-item index="3-1" @click="getNotifications">Tất cả tin tức</el-menu-item>
         <el-menu-item index="3-2" @click="doNotification">Thêm mới tin tức</el-menu-item>
       </el-submenu>
       <el-submenu index="4">
@@ -77,6 +77,12 @@ export default {
      */
     managePitch () {
       this.transitTo('PitchManagement', undefined)
+    },
+    /**
+     * Go to new notification page 3
+     */
+    getNotifications () {
+      this.transitTo('NotificationManagement', undefined)
     },
     /**
      * Go to new notification page 3

@@ -8,6 +8,7 @@ import Notification from '@/components/Notification/Notification'
 import ChangePassword from '@/components/ChangePassword/ChangePassword'
 import NewPitch from '@/components/Pitch/NewPitch'
 import PitchManagement from '@/components/Pitch/PitchManagement'
+import NotificationManagement from '@/components/Notification/NotificationManagement'
 
 Vue.use(Router)
 
@@ -27,6 +28,11 @@ export default new Router({
       path: '/change-password',
       name: 'ChangePassword',
       component: ChangePassword
+    },
+    {
+      path: '/get-notification',
+      name: 'NotificationManagement',
+      component: NotificationManagement
     },
     {
       path: '/new-notification',
