@@ -11,27 +11,9 @@
             v-model="dateSearch"
             type="date"
             :picker-options="pickerOptions"
-            placeholder="Pick a day">
+            style="margin-right: 20px"
+            placeholder="Chọn ngày">
           </el-date-picker>
-          <el-time-select
-            placeholder="Start time"
-            v-model="startTime"
-            :picker-options="{
-              start: '08:30',
-              step: '00:15',
-              end: '18:30'
-            }">
-          </el-time-select>
-          <el-time-select
-            placeholder="End time"
-            v-model="endTime"
-            :picker-options="{
-              start: '08:30',
-              step: '00:15',
-              end: '18:30',
-              minTime: startTime
-            }">
-          </el-time-select>
         </div>
         <div>
           <el-table
@@ -164,15 +146,14 @@ export default {
     dateSearch () {
       let date = new Date()
       date = this.dateSearch
-      let day = date.getDate()
-      let month = date.getMonth()
-      let year = date.getFullYear()
-      this.tableData.forEach(item => {
-        debugger
-        let x = year + '-' + month + '-' + day
-        let a = item.date === x
-      });
-      this.subDataTable = this.tableData.filter(data => !this.dateSearch || data.date === year + '-' + month + '-' + day)
+      if (date) {
+        let day = date.getDate()
+        let month = date.getMonth()
+        let year = date.getFullYear()
+        this.subDataTable = this.tableData.filter(data => !this.dateSearch || data.date === year + '-' + (month + 1) + '-' + day)
+      } else {
+        this.subDataTable = this.tableData
+      }
     }
   },
   mounted () {
