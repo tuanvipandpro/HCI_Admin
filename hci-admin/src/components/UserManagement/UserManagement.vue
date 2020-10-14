@@ -53,7 +53,7 @@
           layout="prev, pager, next"
           :hide-on-single-page="true"
           @current-change="changePage()"
-          :total="numOfPage * 10">
+          :total="searchList.length === 0 ? accountData.length : searchList.length">
         </el-pagination>
       </el-col>
     </el-row>
@@ -255,7 +255,7 @@ export default {
   },
   mounted () {
     this.checkAuthen()
-    this.numOfPage = this.accountData.length / this.pageSize
+    this.numOfPage = Math.ceil(this.accountData.length / this.pageSize)
     this.changePage()
   },
   methods: {
