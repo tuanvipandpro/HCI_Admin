@@ -50,7 +50,8 @@ export default {
       notifyForm: {
         title: '',
         shortContent: '',
-        content: ''
+        content: '',
+        active: true
       },
       tempForm: {},
       rules: {

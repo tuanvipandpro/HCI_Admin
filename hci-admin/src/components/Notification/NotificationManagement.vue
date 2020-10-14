@@ -35,12 +35,20 @@
               <el-button
                 style="background-color: #82FA58;"
                 icon="el-icon-edit"
+                :disabled="!scope.row.active"
                 @click="onClickEditBtn(scope.row)"
                 circle></el-button>
               <el-button
+                v-if="scope.row.active"
                 type="danger"
                 icon="el-icon-delete"
                 @click="onClickDeleteBtn(scope.row)"
+                circle></el-button>
+              <el-button
+                v-if="!scope.row.active"
+                style="background-color: #82FA58;"
+                icon="el-icon-check"
+                @click="onClickActiveBtn(scope.row)"
                 circle></el-button>
             </template>
           </el-table-column>
@@ -124,7 +132,6 @@ export default {
       this.checkAuthen()
       this._getAllNotifications().then(() => {
         this.closeLoader(this.loader)
-        console.log(this._notificationData)
         this.notificationData = this._notificationData
         this.numOfPage = this.notificationData.length / this.pageSize
         this.changePage()
@@ -150,8 +157,21 @@ export default {
         return this._deleteNotificationByID()
       }).then(() => {
         this.closeLoader(this.loader)
+        this.loader = this.getLoader()
+        return this._getAllNotifications()
+      }).then(() => {
+        this.closeLoader(this.loader)
+        this.notificationData = this._notificationData
+        this.numOfPage = this.notificationData.length / this.pageSize
+        this.changePage()
         this.showMessage('Xóa thông báo thành công !!!', 'success')
       })
+    },
+    /**
+     * on click button active
+     */
+    onClickActiveBtn (row) {
+
     },
     /**
      * change page function
