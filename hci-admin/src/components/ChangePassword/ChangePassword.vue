@@ -6,7 +6,7 @@
         <hci-menu :activeIndex='"5-1"' />
       </el-col>
       <!-- Content -->
-      <el-col offset="5" :span="19">
+      <el-col :offset="5" :span="19">
         <div id="forget-form">
           <el-form
             ref="forgetForm"

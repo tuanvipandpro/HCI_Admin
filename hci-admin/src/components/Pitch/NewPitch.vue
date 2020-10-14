@@ -4,7 +4,7 @@
       <el-col :span='5'>
         <hci-menu :activeIndex='"3-1"' />
       </el-col>
-      <el-col offset="5" :span="19">
+      <el-col :offset="5" :span="19">
         <div id="new-pitch-form">
           <el-form
             ref="pitchForm"
