@@ -157,6 +157,6 @@ export default {
       position: fixed;
       left: 0;
       z-index: 1;
-      width: 21%;
+      width: 20.83333%;
   }
 </style>

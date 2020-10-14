@@ -3,34 +3,30 @@ import axios from 'axios'
 const work = {
   namespaced: true,
   state: {
-    _formData: {
-      username: '',
-      password: ''
-    }
+    _workList: []
   },
   getters: {
 
   },
   mutations: {
-    _setFormData (state, _formData) {
-      state._formData = _formData
+    _setWorkList (state, _workList) {
+      state._workList = _workList
     }
   },
   actions: {
-    _checkLogin (context) {
-      let url = 'https://tuanlm-hr.herokuapp.com/api/authenticate/login'
+    /**
+     * Get worklist for management
+     * @param context
+     * @param params
+     */
+    _getWorksList (context, params) {
+      let url = 'https://tuanlm-hr.herokuapp.com/api/api/work/get-work-management'
       return new Promise((resolve, reject) => {
-        axios.post(url, {
-          username: context.state._formData.username,
-          password: context.state._formData.password
-        })
-          .then((res) => {
-            resolve(res)
-          })
-          .catch((e) => {
-            console.error('dat')
-            reject(e)
-          })
+        axios.get(url, {params}).then(res => {
+          console.log(res)
+          // context.commit('_setWorkList', res.data)
+          resolve(res)
+        }).catch(e => reject(e))
       })
     }
   }

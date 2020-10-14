@@ -4,60 +4,42 @@
       <el-col :span='5' style="text-align: left">
         <hci-menu :activeIndex='"4-1"' />
       </el-col>
-      <el-col offset="5" :span="19">
+      <el-col :offset="5" :span="19">
           <h1>Quản lý ca</h1>
-          <el-table
-            stripe
-            :data="subAccountData"
-            style="width: 95%; margin-left: 2.5%"
-            empty-text="Không có dữ liệu"
-          >
-                <el-table-column label="Mã ca" prop="username"/>
-                <el-table-column label="Nhân viên" prop="fullname"/>
-                <el-table-column label="Giờ bắt đầu" prop="start"/>
-                <el-table-column label="Giờ kết thúc" prop="end"/>
-                <el-table-column label="Giờ kết thúc" prop="end"/>
-                <el-table-column label="Giờ kết thúc" prop="end"/>
-                <el-table-column label="Giờ kết thúc" prop="end"/>
-                <!-- <el-table-column label="Điểm danh" prop="present"/> -->
-                <!-- <el-table-column fixed="right" label="Xử lý" >
-                    <template slot-scope="scope">
-                        <el-button
-                            size="mini"
-                            style="background-color: #82FA58;"
-                            :disabled="scope.row.status === 'Active'"
-                            @click="handleClicked(scope.$index, scope.row, 'Active')">
-                                Active
-                        </el-button>
-                        <el-button
-                            size="mini"
-                            type="danger"
-                            :disabled="scope.row.status === 'Inactive'"
-                            @click="handleClicked(scope.$index, scope.row, 'Inactive')">
-                                Inactive
-                        </el-button>
-                    </template>
-                </el-table-column> -->
-                    <el-table-column
-                        fixed="right"
-                        label="Operations"
-                        width="120">
-                        <template slot-scope="scope">
-                            <el-button @click="handleClick" type="text" size="small">Detail</el-button>
-                            <el-button type="text" size="small">Edit</el-button>
-                        </template>
-                    </el-table-column>
-            </el-table>
-            <el-pagination
-                background
-                :page-size="pageSize"
-                :current-page.sync="currentPage"
-                style="margin-top: 10px"
-                layout="prev, pager, next"
-                :hide-on-single-page="true"
-                @current-change="changePage()"
-                :total="numOfPage * 10"
-            />
+          <el-table :data="tableData" stripe>
+            <el-table-column label="Mã Ca" fixed prop="workId" align="center"/>
+            <el-table-column label="Nhân viên" align="center">
+              <template slot-scope="scope">
+                <el-popover trigger="hover" placement="top">
+                  <p>Mã Nhân Viên: 1</p>
+                  <p>Tên: Lê Minh Tuấn</p>
+                  <div slot="reference">
+                    <el-tag size="medium">{{ scope.row.employeeNm }}</el-tag>
+                  </div>
+                </el-popover>
+              </template>
+            </el-table-column>
+            <el-table-column label="Tên ca" prop="workNm" align="center"/>
+            <el-table-column label="Giờ bắt đầu" prop="start" align="center"/>
+            <el-table-column label="Giờ kết thúc" prop="end" align="center"/>
+            <el-table-column label="Điểm danh" prop="present" align="center"/>
+            <el-table-column label="Thao tác" fixed="right" align="center">
+              <template slot-scope="scope">
+                  <el-button type="text" size="small">Edit</el-button>
+                  <el-button type="text" size="small">Delete</el-button>
+              </template>
+            </el-table-column>
+          </el-table>
+          <el-pagination
+            background
+            layout="prev, pager, next"
+            style="margin-top: 10px"
+            :hide-on-single-page="true"
+            :current-page.sync="currentPage"
+            :page-size="pageSize"
+            :total="rootData.length"
+            @current-change="changePage()">
+          </el-pagination>
       </el-col>
     </el-row>
   </div>
@@ -69,47 +51,90 @@ import Menu from '../Common/Menu'
 export default {
   data () {
     return {
-      numOfPage: 0,
       currentPage: 1,
-      pageSize: 10,
-      subAccountData: [],
-      searchList: [],
-      accountData: [ {
-        username: '1',
-        fullname: 'TuanLM',
-        start: '2020-10-01 08:00:00',
-        end: '2020-10-01 08:00:00',
-        present: 'Có',
-        status: 'Inactive'
-      } ],
-      search: ''
+      pageSize: 5,
+      rootData:
+      [
+        {
+          workId: '1',
+          employeeNm: 'Lê Minh Tuấn',
+          workNm: 'Ca Sáng',
+          start: '2020-10-01 08:00:00',
+          end: '2020-10-01 08:00:00',
+          present: 'Có',
+          active: true
+        },
+        {
+          workId: '2',
+          employeeNm: 'TuanLM',
+          workNm: 'Ca Sáng',
+          start: '2020-10-01 08:00:00',
+          end: '2020-10-01 08:00:00',
+          present: 'Có',
+          active: true
+        },
+        {
+          workId: '3',
+          employeeNm: 'TuanLM',
+          workNm: 'Ca Sáng',
+          start: '2020-10-01 08:00:00',
+          end: '2020-10-01 08:00:00',
+          present: 'Có',
+          active: true
+        },
+        {
+          workId: '4',
+          employeeNm: 'TuanLM',
+          workNm: 'Ca Sáng',
+          start: '2020-10-01 08:00:00',
+          end: '2020-10-01 08:00:00',
+          present: 'Có',
+          active: true
+        },
+        {
+          workId: '5',
+          employeeNm: 'TuanLM',
+          workNm: 'Ca Sáng',
+          start: '2020-10-01 08:00:00',
+          end: '2020-10-01 08:00:00',
+          present: 'Có',
+          active: true
+        },
+        {
+          workId: '6',
+          employeeNm: 'TuanLM',
+          workNm: 'Ca Sáng',
+          start: '2020-10-01 08:00:00',
+          end: '2020-10-01 08:00:00',
+          present: 'Có',
+          active: true
+        },
+        {
+          workId: '7',
+          employeeNm: 'TuanLM',
+          workNm: 'Ca Sáng',
+          start: '2020-10-01 08:00:00',
+          end: '2020-10-01 08:00:00',
+          present: 'Có',
+          active: true
+        }
+      ],
+      tableData: []
     }
   },
   components: {
     'hci-menu': Menu
   },
-  watch: {
-    search () {
-      this.searchList = this.accountData.filter(data => !this.search || data.fullname.toLowerCase().includes(this.search.toLowerCase()))
-      if (this.search.length > 0) {
-        this.currentPage = 1
-        this.numOfPage = this.searchList.length / this.pageSize
-      } else {
-        this.numOfPage = this.accountData.length / this.pageSize
-      }
-      let firstIndex = (this.currentPage - 1) * this.pageSize
-      let lastIndex = (this.currentPage * this.pageSize - 1)
-      this.subAccountData = this.searchList.filter((item, index) => {
-        return index >= firstIndex && index <= lastIndex
-      })
-    }
-  },
   mounted () {
     this.checkAuthen()
-    this.numOfPage = this.accountData.length / this.pageSize
     this.changePage()
   },
   methods: {
+    changePage () {
+      let firstIndex = (this.currentPage - 1) * this.pageSize
+      let lastIndex = (this.currentPage * this.pageSize - 1)
+      this.tableData = this.rootData.filter((item, index) => index >= firstIndex && index <= lastIndex)
+    },
     /**
      * Show Loader
      */
@@ -120,32 +145,6 @@ export default {
         text: 'Loading',
         background: 'rgba(0, 0, 0, 0.7)'
       })
-    },
-    handleClicked (index, row, typeButton) {
-      this.$confirm('Do you want to ' + String(typeButton).toLowerCase() + ' ' + row.fullname + ' ?', 'Warning', {
-        confirmButtonText: 'Yes',
-        cancelButtonText: 'No',
-        type: 'warning'
-      }).then(() => {
-        row.status = typeButton
-        this.showMessage(typeButton + ' user Successful !!!', 'success')
-      })
-    },
-    handleInactiveClicked (index, row) {
-      row.status = 'Inactive'
-    },
-    changePage () {
-      let firstIndex = (this.currentPage - 1) * this.pageSize
-      let lastIndex = (this.currentPage * this.pageSize - 1)
-      if (this.searchList.length > 0) {
-        this.subAccountData = this.searchList.filter((item, index) => {
-          return index >= firstIndex && index <= lastIndex
-        })
-      } else {
-        this.subAccountData = this.accountData.filter((item, index) => {
-          return index >= firstIndex && index <= lastIndex
-        })
-      }
     },
     /**
      * Close Loader
