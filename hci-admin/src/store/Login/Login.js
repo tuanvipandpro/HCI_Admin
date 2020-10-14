@@ -28,7 +28,6 @@ const login = {
             resolve(res)
           })
           .catch((e) => {
-            console.error('dat')
             reject(e)
           })
       })
