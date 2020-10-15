@@ -20,10 +20,9 @@ const workEdit = {
      * @param params
      */
     _getWorkById (context, params) {
-      // let url = 'https://tuanlm-hr.herokuapp.com/api/work/get-work-management'
-      let url = 'http://localhost:8084/api/work/get-work-managementsss'
+      let url = 'http://localhost:8084/api/work/get-work-by-id/' + params
       return new Promise((resolve, reject) => {
-        axios.get(url, {params}).then(res => {
+        axios.get(url).then(res => {
           context.commit('_setWorkObj', res.data)
           resolve(res)
         }).catch(e => reject(e))

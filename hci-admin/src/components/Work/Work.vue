@@ -45,7 +45,7 @@
             <el-table-column label="Điểm danh" prop="present" align="center"/>
             <el-table-column label="Thao tác" fixed="right" align="center">
               <template slot-scope="scope">
-                  <el-button type="text" size="small" @click="editWork(scope)">Chỉnh sửa</el-button>
+                  <!-- <el-button type="text" size="small" @click="editWork(scope)">Chỉnh sửa</el-button> -->
                   <el-button v-if="scope.row.active" type="text" size="small" @click="updateActiveWork(scope, 0)">Hủy ca</el-button>
                   <el-button v-else type="text" size="small" @click="updateActiveWork(scope, 1)">Mở ca</el-button>
               </template>
@@ -124,7 +124,7 @@ export default {
      * Go to edit work
      */
     editWork (scope) {
-      this.transitTo('EditWork', scope.id)
+      this.transitTo('EditWork', {id: scope.row.id})
     },
     /**
      * Delete Work
