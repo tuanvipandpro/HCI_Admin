@@ -122,7 +122,8 @@ export default {
     ]),
     ...mapActions('notification', [
       '_getAllNotifications',
-      '_deleteNotificationByID'
+      '_deleteNotificationByID',
+      '_activeNotificationByID'
     ]),
     /**
      * Run when page initialization
@@ -171,7 +172,25 @@ export default {
      * on click button active
      */
     onClickActiveBtn (row) {
-
+      this.$confirm('Bạn có muốn kích hoạt thông báo này không ?', 'Warning', {
+        confirmButtonText: 'Đồng ý',
+        cancelButtonText: 'Hủy bỏ',
+        type: 'warning'
+      }).then(() => {
+        this.loader = this.getLoader()
+        this._setArticleID(row.id)
+        return this._activeNotificationByID()
+      }).then(() => {
+        this.closeLoader(this.loader)
+        this.loader = this.getLoader()
+        return this._getAllNotifications()
+      }).then(() => {
+        this.closeLoader(this.loader)
+        this.notificationData = this._notificationData
+        this.numOfPage = this.notificationData.length / this.pageSize
+        this.changePage()
+        this.showMessage('Kích hoạt thông báo thành công !!!', 'success')
+      })
     },
     /**
      * change page function

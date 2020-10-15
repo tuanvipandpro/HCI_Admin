@@ -46,10 +46,27 @@ const notification = {
      * delete a notification by id function
      */
     _deleteNotificationByID (context) {
-      let url = 'https://tuanlm-hr.herokuapp.com/api/article/delete-by-id/' + context.state._articleID
+      let url = 'https://tuanlm-hr.herokuapp.com/api/article/update-active-by-id/' + context.state._articleID + '/0'
       return new Promise((resolve, reject) => {
-        axios.delete(url, {
-          data: {}
+        axios.put(url, {
+
+        })
+          .then((res) => {
+            resolve(res)
+          })
+          .catch((e) => {
+            reject(e)
+          })
+      })
+    },
+    /**
+     * active a notification by id function
+     */
+    _activeNotificationByID (context) {
+      let url = 'https://tuanlm-hr.herokuapp.com/api/article/update-active-by-id/' + context.state._articleID + '/1'
+      return new Promise((resolve, reject) => {
+        axios.put(url, {
+
         })
           .then((res) => {
             resolve(res)
