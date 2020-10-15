@@ -10,6 +10,8 @@ import NewPitch from '@/components/Pitch/NewPitch'
 import PitchManagement from '@/components/Pitch/PitchManagement'
 import NotificationManagement from '@/components/Notification/NotificationManagement'
 import EditNotification from '@/components/Notification/EditNotification'
+import Work from '@/components/Work/Work'
+import EditWork from '@/components/Work/EditWork'
 
 Vue.use(Router)
 
@@ -54,6 +56,16 @@ export default new Router({
       path: '/pitch-management',
       name: 'PitchManagement',
       component: PitchManagement
+    },
+    {
+      path: '/work',
+      name: 'Work',
+      component: Work
+    },
+    {
+      path: '/edit-work',
+      name: 'EditWork',
+      component: EditWork
     }
   ]
 })
