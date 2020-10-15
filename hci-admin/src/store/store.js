@@ -3,6 +3,7 @@ import Vue from 'vue'
 
 import login from './Login/Login'
 import work from './Work/Work'
+import workEdit from './Work/WorkEdit'
 import notification from './Notification/Notification'
 import editNotification from './Notification/EditNotification'
 import createNotification from './Notification/CreateNotification'
@@ -15,6 +16,7 @@ export default new Vuex.Store({
     notification: notification,
     editNotification: editNotification,
     createNotification: createNotification,
-    work: work
+    work: work,
+    workEdit: workEdit
   }
 })

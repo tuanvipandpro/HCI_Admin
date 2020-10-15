@@ -7,26 +7,47 @@
       <el-col :offset="5" :span="19">
           <h1>Quản lý ca</h1>
           <el-table :data="tableData" stripe>
-            <el-table-column label="Mã Ca" fixed prop="workId" align="center"/>
+            <el-table-column label="Mã Ca" fixed prop="id" align="center"/>
             <el-table-column label="Nhân viên" align="center">
               <template slot-scope="scope">
                 <el-popover trigger="hover" placement="top">
-                  <p>Mã Nhân Viên: 1</p>
-                  <p>Tên: Lê Minh Tuấn</p>
+                  <p>Mã Nhân Viên: {{ scope.row.employeeId }}</p>
+                  <p>Tên: {{ scope.row.employeeNm }}</p>
                   <div slot="reference">
                     <el-tag size="medium">{{ scope.row.employeeNm }}</el-tag>
                   </div>
                 </el-popover>
               </template>
             </el-table-column>
-            <el-table-column label="Tên ca" prop="workNm" align="center"/>
-            <el-table-column label="Giờ bắt đầu" prop="start" align="center"/>
-            <el-table-column label="Giờ kết thúc" prop="end" align="center"/>
+            <el-table-column label="Tên ca" align="center">
+              <template slot-scope="scope">
+                <el-popover trigger="hover" placement="top">
+                  <p>Giờ bắt đầu: {{ scope.row.start }}</p>
+                  <p>Giờ kết thúc: {{ scope.row.end }}</p>
+                  <div slot="reference">
+                    <el-tag size="medium">{{ scope.row.shiftNm }}</el-tag>
+                  </div>
+                </el-popover>
+              </template>
+            </el-table-column>
+            <el-table-column label="Cửa hàng" align="center">
+              <template slot-scope="scope">
+                <el-popover trigger="hover" placement="top">
+                  <p>Mã cửa hàng: {{ scope.row.storeId }}</p>
+                  <p>Tên cửa hàng: {{ scope.row.storeNm }}</p>
+                  <div slot="reference">
+                    <el-tag size="medium">{{ scope.row.storeNm }}</el-tag>
+                  </div>
+                </el-popover>
+              </template>
+            </el-table-column>
+            <el-table-column label="Ngày làm việc" prop="date" align="center"/>
             <el-table-column label="Điểm danh" prop="present" align="center"/>
             <el-table-column label="Thao tác" fixed="right" align="center">
               <template slot-scope="scope">
-                  <el-button type="text" size="small">Edit</el-button>
-                  <el-button type="text" size="small">Delete</el-button>
+                  <el-button type="text" size="small" @click="editWork(scope)">Chỉnh sửa</el-button>
+                  <el-button v-if="scope.row.active" type="text" size="small" @click="updateActiveWork(scope, 0)">Hủy ca</el-button>
+                  <el-button v-else type="text" size="small" @click="updateActiveWork(scope, 1)">Mở ca</el-button>
               </template>
             </el-table-column>
           </el-table>
@@ -46,6 +67,7 @@
 </template>
 
 <script>
+import { mapActions, mapState } from 'vuex'
 import Menu from '../Common/Menu'
 
 export default {
@@ -56,67 +78,16 @@ export default {
       rootData:
       [
         {
-          workId: '1',
-          employeeNm: 'Lê Minh Tuấn',
-          workNm: 'Ca Sáng',
-          start: '2020-10-01 08:00:00',
-          end: '2020-10-01 08:00:00',
-          present: 'Có',
-          active: true
-        },
-        {
-          workId: '2',
-          employeeNm: 'TuanLM',
-          workNm: 'Ca Sáng',
-          start: '2020-10-01 08:00:00',
-          end: '2020-10-01 08:00:00',
-          present: 'Có',
-          active: true
-        },
-        {
-          workId: '3',
-          employeeNm: 'TuanLM',
-          workNm: 'Ca Sáng',
-          start: '2020-10-01 08:00:00',
-          end: '2020-10-01 08:00:00',
-          present: 'Có',
-          active: true
-        },
-        {
-          workId: '4',
-          employeeNm: 'TuanLM',
-          workNm: 'Ca Sáng',
-          start: '2020-10-01 08:00:00',
-          end: '2020-10-01 08:00:00',
-          present: 'Có',
-          active: true
-        },
-        {
-          workId: '5',
-          employeeNm: 'TuanLM',
-          workNm: 'Ca Sáng',
-          start: '2020-10-01 08:00:00',
-          end: '2020-10-01 08:00:00',
-          present: 'Có',
-          active: true
-        },
-        {
-          workId: '6',
-          employeeNm: 'TuanLM',
-          workNm: 'Ca Sáng',
-          start: '2020-10-01 08:00:00',
-          end: '2020-10-01 08:00:00',
-          present: 'Có',
-          active: true
-        },
-        {
-          workId: '7',
-          employeeNm: 'TuanLM',
-          workNm: 'Ca Sáng',
-          start: '2020-10-01 08:00:00',
-          end: '2020-10-01 08:00:00',
-          present: 'Có',
-          active: true
+          id: 0,
+          shiftNm: '',
+          active: true,
+          present: true,
+          start: '',
+          end: '',
+          storeId: 0,
+          storeNm: '',
+          employeeId: 0,
+          employeeNm: ''
         }
       ],
       tableData: []
@@ -125,11 +96,59 @@ export default {
   components: {
     'hci-menu': Menu
   },
+  computed: {
+    ...mapState('work', ['_workList'])
+  },
   mounted () {
-    this.checkAuthen()
-    this.changePage()
+    // Authenticate
+    if (!sessionStorage.getItem('username')) {
+      this.transitTo('Login', undefined)
+    } else {
+      const loader = this.getLoader()
+      // Get Worklist
+      this._getWorksList()
+        .then(res => {
+          this.closeLoader(loader)
+          this.rootData = this._workList
+          this.changePage()
+        })
+        .catch(e => {
+          this.closeLoader(loader)
+          console.error(e)
+        })
+    }
   },
   methods: {
+    ...mapActions('work', ['_getWorksList', '_updateActiveWork']),
+    /**
+     * Go to edit work
+     */
+    editWork (scope) {
+      this.transitTo('EditWork', scope.id)
+    },
+    /**
+     * Delete Work
+     */
+    updateActiveWork (scope, mode) {
+      let row = scope.row
+      const loader = this.getLoader()
+      let params = {
+        id: row.id,
+        mode: mode
+      }
+
+      this._updateActiveWork(params).then(res => {
+        this.closeLoader(loader)
+        row.active = !row.active
+      })
+        .catch(e => {
+          this.closeLoader(loader)
+          console.error(e)
+        })
+    },
+    /**
+     * Handle when paging
+     */
     changePage () {
       let firstIndex = (this.currentPage - 1) * this.pageSize
       let lastIndex = (this.currentPage * this.pageSize - 1)
@@ -175,14 +194,6 @@ export default {
         message: message,
         type: type
       })
-    },
-    /**
-     * Check Authen
-     */
-    checkAuthen () {
-      if (!sessionStorage.getItem('username')) {
-        this.transitTo('Login', undefined)
-      }
     }
   }
 }

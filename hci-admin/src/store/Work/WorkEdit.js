@@ -1,21 +1,16 @@
 import axios from 'axios'
 
-const work = {
+const workEdit = {
   namespaced: true,
   state: {
-    _workList: []
+    _workObj: {}
   },
   getters: {
 
   },
   mutations: {
-    _setWorkList (state, _workList) {
-      _workList = _workList.map(e => {
-        e.present = (e.present) ? 'Có mặt' : 'Chưa có mặt'
-        e.date = e.start.substring(0, 10)
-        return e
-      })
-      state._workList = _workList
+    _setWorkObj (state, _workObj) {
+      state._workObj = _workObj
     }
   },
   actions: {
@@ -24,12 +19,12 @@ const work = {
      * @param context
      * @param params
      */
-    _getWorksList (context, params) {
+    _getWorkById (context, params) {
       // let url = 'https://tuanlm-hr.herokuapp.com/api/work/get-work-management'
-      let url = 'http://localhost:8084/api/work/get-work-management'
+      let url = 'http://localhost:8084/api/work/get-work-managementsss'
       return new Promise((resolve, reject) => {
         axios.get(url, {params}).then(res => {
-          context.commit('_setWorkList', res.data)
+          context.commit('_setWorkObj', res.data)
           resolve(res)
         }).catch(e => reject(e))
       })
@@ -39,9 +34,9 @@ const work = {
      * @param context
      * @param params
      */
-    _updateActiveWork (context, params) {
+    _updateWork (context, params) {
       // let url = 'https://tuanlm-hr.herokuapp.com/api/work/active-work/' + params.id + '/' + params.mode
-      let url = 'http://localhost:8084/api/work/active-work/' + params.id + '/' + params.mode
+      let url = 'http://localhost:8084/api/work/active-workssss/' + params.id + '/' + params.mode
       return new Promise((resolve, reject) => {
         axios.put(url)
           .then(res => resolve(res))
@@ -51,4 +46,4 @@ const work = {
   }
 }
 
-export default work
+export default workEdit
