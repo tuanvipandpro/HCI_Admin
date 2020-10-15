@@ -67,9 +67,10 @@ const notification = {
     _activeNotificationByID (context) {
       let url = 'https://tuanlm-hr.herokuapp.com/api/article/update-active-by-id/' + context.state._articleID + '/1'
       return new Promise((resolve, reject) => {
-        axios.put(url, {
-
-        })
+        axios.put(url,
+          {},
+          {headers: {Authorization: sessionStorage.getItem('token')}}
+        )
           .then((res) => {
             resolve(res)
           })
