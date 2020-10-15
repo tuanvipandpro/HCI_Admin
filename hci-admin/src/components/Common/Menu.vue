@@ -37,7 +37,7 @@
           <span>Quản lý ca</span>
         </template>
         <el-menu-item index="4-1" @click="doWork">Tất cả ca làm việc</el-menu-item>
-        <el-menu-item index="4-2" >Ca làm đề xuất</el-menu-item>
+        <el-menu-item index="4-2" @click="doWorkRequest">Ca làm đề xuất</el-menu-item>
         <el-menu-item index="4-3" >Phân công</el-menu-item>
       </el-submenu>
       <el-submenu index="5">
@@ -94,6 +94,12 @@ export default {
      */
     doWork () {
       this.transitTo('Work', undefined)
+    },
+    /**
+     * Go to work page 4-2
+     */
+    doWorkRequest () {
+      this.transitTo('WorkRequest', undefined)
     },
     /**
      * Go to new change password page 5-1
