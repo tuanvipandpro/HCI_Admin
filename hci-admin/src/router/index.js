@@ -10,6 +10,7 @@ import NotificationManagement from '@/components/Notification/NotificationManage
 import EditNotification from '@/components/Notification/EditNotification'
 import Work from '@/components/Work/Work'
 import EditWork from '@/components/Work/EditWork'
+import WorkRequest from '@/components/Work/WorkRequest'
 
 Vue.use(Router)
 
@@ -54,6 +55,11 @@ export default new Router({
       path: '/edit-work',
       name: 'EditWork',
       component: EditWork
+    },
+    {
+      path: '/work-request',
+      name: 'WorkRequest',
+      component: WorkRequest
     }
   ]
 })
