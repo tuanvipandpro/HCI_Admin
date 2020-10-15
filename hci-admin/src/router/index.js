@@ -6,8 +6,6 @@ import Login from '@/components/Login/Login'
 import UserManagement from '@/components/UserManagement/UserManagement'
 import Notification from '@/components/Notification/Notification'
 import ChangePassword from '@/components/ChangePassword/ChangePassword'
-import NewPitch from '@/components/Pitch/NewPitch'
-import PitchManagement from '@/components/Pitch/PitchManagement'
 import NotificationManagement from '@/components/Notification/NotificationManagement'
 import EditNotification from '@/components/Notification/EditNotification'
 import Work from '@/components/Work/Work'
@@ -46,16 +44,6 @@ export default new Router({
       path: '/new-notification',
       name: 'Notification',
       component: Notification
-    },
-    {
-      path: '/new-pitch',
-      name: 'NewPitch',
-      component: NewPitch
-    },
-    {
-      path: '/pitch-management',
-      name: 'PitchManagement',
-      component: PitchManagement
     },
     {
       path: '/work',

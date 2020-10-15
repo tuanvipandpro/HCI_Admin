@@ -31,7 +31,15 @@ export default {
     if (!sessionStorage.getItem('username')) {
       this.transitTo('Login', undefined)
     } else {
-      // TODO
+      const loader = this.getLoader()
+      this._getWorkById(this.$route.params.id).then(res => {
+        this.closeLoader(loader)
+        console.log(this._workObj)
+      })
+        .catch(e => {
+          this.closeLoader(loader)
+          console.error(e)
+        })
     }
   },
   methods: {
