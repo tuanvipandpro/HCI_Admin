@@ -37,14 +37,17 @@ const createNotification = {
     _createNotification (context) {
       let url = 'https://tuanlm-hr.herokuapp.com/api/article/upsert-article'
       return new Promise((resolve, reject) => {
-        axios.put(url, {
-          mode: 2,
-          employeeId: context.state._employeeID,
-          articleId: context.state._articleID,
-          title: context.state._notificationFormData.title,
-          shortContent: context.state._notificationFormData.shortContent,
-          content: context.state._notificationFormData.content
-        })
+        axios.put(url,
+          {
+            mode: 2,
+            employeeId: context.state._employeeID,
+            articleId: context.state._articleID,
+            title: context.state._notificationFormData.title,
+            shortContent: context.state._notificationFormData.shortContent,
+            content: context.state._notificationFormData.content
+          },
+          {headers: {Authorization: sessionStorage.getItem('token')}}
+        )
           .then((res) => {
             resolve(res)
           })

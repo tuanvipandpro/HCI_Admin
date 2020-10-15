@@ -31,7 +31,8 @@ const notification = {
       let url = 'https://tuanlm-hr.herokuapp.com/api/article/0'
       return new Promise((resolve, reject) => {
         axios.get(url, {
-          params: {}
+          params: {},
+          headers: {Authorization: sessionStorage.getItem('token')}
         })
           .then((res) => {
             context.commit('_setNotificationData', res.data)
@@ -48,9 +49,10 @@ const notification = {
     _deleteNotificationByID (context) {
       let url = 'https://tuanlm-hr.herokuapp.com/api/article/update-active-by-id/' + context.state._articleID + '/0'
       return new Promise((resolve, reject) => {
-        axios.put(url, {
-
-        })
+        axios.put(url,
+          {},
+          {headers: {Authorization: sessionStorage.getItem('token')}}
+        )
           .then((res) => {
             resolve(res)
           })

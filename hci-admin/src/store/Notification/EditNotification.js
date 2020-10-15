@@ -38,7 +38,8 @@ const editNotification = {
       let url = 'https://tuanlm-hr.herokuapp.com/api/article/get-by-id/' + context.state._articleID
       return new Promise((resolve, reject) => {
         axios.get(url, {
-          params: {}
+          params: {},
+          headers: {Authorization: sessionStorage.getItem('token')}
         })
           .then((res) => {
             context.commit('_setNotificationFormData', res.data)
@@ -55,14 +56,17 @@ const editNotification = {
     _updateNotificationByID (context) {
       let url = 'https://tuanlm-hr.herokuapp.com/api/article/upsert-article'
       return new Promise((resolve, reject) => {
-        axios.put(url, {
-          mode: 1,
-          employeeId: context.state._employeeID,
-          articleId: context.state._articleID,
-          title: context.state._notificationFormData.title,
-          shortContent: context.state._notificationFormData.shortContent,
-          content: context.state._notificationFormData.content
-        })
+        axios.put(url,
+          {
+            mode: 1,
+            employeeId: context.state._employeeID,
+            articleId: context.state._articleID,
+            title: context.state._notificationFormData.title,
+            shortContent: context.state._notificationFormData.shortContent,
+            content: context.state._notificationFormData.content
+          },
+          {headers: {Authorization: sessionStorage.getItem('token')}}
+        )
           .then((res) => {
             resolve(res)
           })
