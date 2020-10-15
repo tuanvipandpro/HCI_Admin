@@ -14,15 +14,14 @@
           <span>Quản lý nhân viên</span>
         </template>
         <el-menu-item index="1-1" @click="doHome">Tất cả nhân viên</el-menu-item>
-        <el-menu-item index="1-2"  @click="managePitch">ABC Nhân viên</el-menu-item>
+        <el-menu-item index="1-2" >Thêm mới nhân viên</el-menu-item>
       </el-submenu>
       <el-submenu index="2">
         <template slot="title">
           <i class="el-icon-s-cooperation"></i>
           <span>Quản lý tài khoản</span>
         </template>
-        <el-menu-item index="2-1" @click="doNewPitch">Tất cả tài khoản</el-menu-item>
-        <el-menu-item index="2-3" @click="managePitch">ABC tài khoản</el-menu-item>
+        <el-menu-item index="2-1" @click="doNewPitch">Tạo mới tài khoản</el-menu-item>
       </el-submenu>
       <el-submenu index="3">
         <template slot="title">
@@ -39,7 +38,7 @@
         </template>
         <el-menu-item index="4-1" @click="doWork">Tất cả ca làm việc</el-menu-item>
         <el-menu-item index="4-2" >Ca làm đề xuất</el-menu-item>
-        <el-menu-item index="4-2" >Phân công</el-menu-item>
+        <el-menu-item index="4-3" >Phân công</el-menu-item>
       </el-submenu>
       <el-submenu index="5">
         <template slot="title">
