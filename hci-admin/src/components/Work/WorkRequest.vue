@@ -66,7 +66,7 @@ export default {
   data () {
     return {
       currentPage: 1,
-      pageSize: 1,
+      pageSize: 5,
       tableData: [],
       rootData: [
         {
@@ -99,8 +99,20 @@ export default {
     if (!sessionStorage.getItem('username')) {
       this.transitTo('Login', undefined)
     } else {
-      this.tableData = [...this.rootData]
-      this.changePage()
+      const loader = this.getLoader()
+      const now = new Date()
+      const nowString = now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate() + 'T' +
+                        now.getHours() + ':' + now.getMinutes() + ':' + now.getSeconds()
+
+      this._getRequestWorkList(nowString).then(res => {
+        this.closeLoader(loader)
+        this.rootData = [...this._workRequestList]
+        this.changePage()
+      })
+        .catch(e => {
+          this.closeLoader(loader)
+          console.error(e)
+        })
     }
   },
   methods: {
