@@ -5,6 +5,7 @@ import login from './Login/Login'
 import work from './Work/Work'
 import workEdit from './Work/WorkEdit'
 import workRequest from './Work/WorkRequest'
+import workAssign from './Work/WorkAssign'
 import notification from './Notification/Notification'
 import editNotification from './Notification/EditNotification'
 import createNotification from './Notification/CreateNotification'
@@ -23,6 +24,7 @@ export default new Vuex.Store({
     workEdit: workEdit,
     workRequest: workRequest,
     account: account,
-    createAccount: createAccount
+    createAccount: createAccount,
+    workAssign: workAssign
   }
 })
