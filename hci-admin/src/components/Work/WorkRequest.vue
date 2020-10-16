@@ -58,6 +58,7 @@
 <script>
 import Menu from '../Common/Menu'
 import { mapActions, mapState } from 'vuex'
+import moment from 'moment'
 
 export default {
   components: {
@@ -100,11 +101,8 @@ export default {
       this.transitTo('Login', undefined)
     } else {
       const loader = this.getLoader()
-      const now = new Date()
-      const nowString = now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate() + 'T' +
-                        now.getHours() + ':' + now.getMinutes() + ':' + now.getSeconds()
 
-      this._getRequestWorkList(nowString).then(res => {
+      this._getRequestWorkList(this.convertDateToDateTime()).then(res => {
         this.closeLoader(loader)
         this.rootData = [...this._workRequestList]
         this.changePage()
@@ -118,10 +116,29 @@ export default {
   methods: {
     ...mapActions('workRequest', ['_getRequestWorkList', '_acceptWork']),
     /**
+     * Convert Date to yyyy-MM-ddTHH:mm:ss
+     * @param now
+     */
+    convertDateToDateTime () {
+      const now = new Date()
+      return moment(now.toString()).format('yyyy-MM-DD') + 'T' + moment(now.toString()).format('HH:mm:ss')
+    },
+    /**
      * Accept Work
      */
     acceptWork (scope) {
-
+      const row = scope.row
+      const loader = this.getLoader()
+      this._acceptWork(row).then(res => {
+        // Thông báo update thành công
+        this.closeLoader(loader)
+        this.rootData = this.rootData.filter(item => item.id !== row.id)
+        this.changePage()
+      })
+        .catch(e => {
+          this.closeLoader(loader)
+          console.error(e)
+        })
     },
     /**
      * Handle when change page

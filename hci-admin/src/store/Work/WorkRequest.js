@@ -37,9 +37,9 @@ const workRequest = {
      * @param params
      */
     _acceptWork (context, params) {
-      let url = 'https://tuanlm-hr.herokuapp.com/api/work/active-worksss/' + params.id + '/' + params.mode
+      let url = 'https://tuanlm-hr.herokuapp.com/api/work-request/accept-work-request/' + params.id
       return new Promise((resolve, reject) => {
-        axios.put(url, {}, {headers: {Authorization: sessionStorage.getItem('token')}})
+        axios.put(url, params, {headers: {Authorization: sessionStorage.getItem('token')}})
           .then(res => resolve(res))
           .catch(e => reject(e))
       })
