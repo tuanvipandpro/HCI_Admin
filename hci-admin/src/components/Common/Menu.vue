@@ -21,7 +21,8 @@
           <i class="el-icon-s-cooperation"></i>
           <span>Quản lý tài khoản</span>
         </template>
-        <el-menu-item index="2-1" @click="doNewPitch">Tạo mới tài khoản</el-menu-item>
+        <el-menu-item index="2-1" @click="getAllAccounts">Tất cả tài khoản</el-menu-item>
+        <el-menu-item index="2-2" @click="doNewAccount">Tạo mới tài khoản</el-menu-item>
       </el-submenu>
       <el-submenu index="3">
         <template slot="title">
@@ -66,10 +67,16 @@ export default {
       this.transitTo('UserManagement', undefined)
     },
     /**
-     * Go to new pitch page 2-1
+     * Go to account management page 2-1
      */
-    doNewPitch () {
-      this.transitTo('NewPitch', undefined)
+    getAllAccounts () {
+      this.transitTo('AccountManagement', undefined)
+    },
+    /**
+     * Go to new account page 2-1
+     */
+    doNewAccount () {
+      this.transitTo('NewAccount', undefined)
     },
     /**
      * Go to manage pitch pitch page 2-2

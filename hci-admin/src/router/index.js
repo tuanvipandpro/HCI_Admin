@@ -11,6 +11,8 @@ import EditNotification from '@/components/Notification/EditNotification'
 import Work from '@/components/Work/Work'
 import EditWork from '@/components/Work/EditWork'
 import WorkRequest from '@/components/Work/WorkRequest'
+import AccountManagement from '@/components/AccountManagement/AccountManagement'
+import NewAccount from '@/components/AccountManagement/NewAccount'
 
 Vue.use(Router)
 
@@ -25,6 +27,16 @@ export default new Router({
       path: '/userManagement',
       name: 'UserManagement',
       component: UserManagement
+    },
+    {
+      path: '/accountManagement',
+      name: 'AccountManagement',
+      component: AccountManagement
+    },
+    {
+      path: '/newAccount',
+      name: 'NewAccount',
+      component: NewAccount
     },
     {
       path: '/change-password',

@@ -8,6 +8,7 @@ import workRequest from './Work/WorkRequest'
 import notification from './Notification/Notification'
 import editNotification from './Notification/EditNotification'
 import createNotification from './Notification/CreateNotification'
+import account from './Account/AccountManagement'
 
 Vue.use(Vuex)
 
@@ -19,6 +20,7 @@ export default new Vuex.Store({
     createNotification: createNotification,
     work: work,
     workEdit: workEdit,
-    workRequest: workRequest
+    workRequest: workRequest,
+    account: account
   }
 })
