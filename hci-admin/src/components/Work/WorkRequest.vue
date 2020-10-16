@@ -69,28 +69,7 @@ export default {
       currentPage: 1,
       pageSize: 5,
       tableData: [],
-      rootData: [
-        {
-          id: '1',
-          employeeId: '1',
-          employeeNm: 'TuanLM',
-          shiftId: '1',
-          shiftNm: 'Ca Sáng',
-          start: '2020-10-15 20:52:00',
-          end: '2020-10-15 20:52:00',
-          accept: false
-        },
-        {
-          id: '2',
-          employeeId: '1',
-          employeeNm: 'TuanLM',
-          shiftId: '1',
-          shiftNm: 'Ca Sáng',
-          start: '2020-10-15 20:52:00',
-          end: '2020-10-15 20:52:00',
-          accept: false
-        }
-      ]
+      rootData: []
     }
   },
   computed: {

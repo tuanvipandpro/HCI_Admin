@@ -11,6 +11,7 @@ import EditNotification from '@/components/Notification/EditNotification'
 import Work from '@/components/Work/Work'
 import EditWork from '@/components/Work/EditWork'
 import WorkRequest from '@/components/Work/WorkRequest'
+import WorkAssign from '@/components/Work/WorkAssign'
 import AccountManagement from '@/components/AccountManagement/AccountManagement'
 import NewAccount from '@/components/AccountManagement/NewAccount'
 
@@ -72,6 +73,11 @@ export default new Router({
       path: '/work-request',
       name: 'WorkRequest',
       component: WorkRequest
+    },
+    {
+      path: '/work-assign',
+      name: 'WorkAssign',
+      component: WorkAssign
     }
   ]
 })
