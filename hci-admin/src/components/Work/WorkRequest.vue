@@ -58,6 +58,7 @@
 <script>
 import Menu from '../Common/Menu'
 import { mapActions, mapState } from 'vuex'
+import moment from 'moment'
 
 export default {
   components: {
@@ -101,7 +102,7 @@ export default {
     } else {
       const loader = this.getLoader()
 
-      this._getRequestWorkList(this.convertDateToDateTime(new Date())).then(res => {
+      this._getRequestWorkList(this.convertDateToDateTime()).then(res => {
         this.closeLoader(loader)
         this.rootData = [...this._workRequestList]
         this.changePage()
@@ -118,21 +119,9 @@ export default {
      * Convert Date to yyyy-MM-ddTHH:mm:ss
      * @param now
      */
-    convertDateToDateTime (now) {
-      let year = now.getFullYear()
-      let month = now.getMonth() + 1
-      let day = now.getDate()
-      let hour = now.getHours()
-      let minute = now.getMinutes()
-      let second = now.getSeconds()
-
-      if (month < 10) month = '0' + month
-      if (day < 10) day = '0' + day
-      if (hour < 10) hour = '0' + hour
-      if (minute < 10) minute = '0' + minute
-      if (second < 10) second = '0' + second
-
-      return year + '-' + month + '-' + day + 'T' + hour + ':' + minute + ':' + second
+    convertDateToDateTime () {
+      const now = new Date()
+      return moment(now.toString()).format('yyyy-MM-DD') + 'T' + moment(now.toString()).format('HH:mm:ss')
     },
     /**
      * Accept Work
