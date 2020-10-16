@@ -110,6 +110,7 @@ export default {
           }).then(() => {
             this.closeLoader(this.loader)
             this.showMessage('Tạo mới thông báo thành công !!!', 'success')
+            this.$refs['notifyForm'].resetFields()
           })
         } else {
           return false

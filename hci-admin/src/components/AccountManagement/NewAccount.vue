@@ -7,22 +7,22 @@
       <el-col :offset="5" :span="19">
         <div id="new-notification-form">
           <el-form
-            ref="notifyForm"
+            ref="accountForm"
             status-icon
-            :model="notifyForm"
+            :model="accountForm"
             :rules="rules"
             label-width="130px"
             label-position="left"
           >
             <h2>Thêm mới tài khoản nhân viên</h2>
-            <el-form-item label="Tên tài khoản" prop="title">
-              <el-input type="text" v-model="notifyForm.title" style="width: 50%"/>
+            <el-form-item label="Tên tài khoản" prop="username">
+              <el-input type="text" v-model="accountForm.username" style="width: 50%"/>
             </el-form-item>
-            <el-form-item label="Mật khẩu" prop="shortContent">
-              <el-input type="text" v-model="notifyForm.shortContent" style="width: 50%"/>
+            <el-form-item label="Mật khẩu" prop="password">
+              <el-input type="text" v-model="accountForm.password" style="width: 50%"/>
             </el-form-item>
-            <el-form-item label="Mã nhân viên" prop="content">
-              <el-input type="text" v-model="notifyForm.content" class="txt-content"/>
+            <el-form-item label="Mã nhân viên" prop="employeeId">
+              <el-input type="text" v-model="accountForm.employeeId" class="txt-content"/>
             </el-form-item>
             <el-form-item>
               <el-button type="primary" @click="submitForm">Lưu</el-button>
@@ -46,66 +46,65 @@ export default {
     return {
       loader: {},
       employeeID: '',
-      notifyForm: {
-        title: '',
-        shortContent: '',
-        content: ''
+      accountForm: {
+        username: '',
+        password: '',
+        employeeId: ''
       },
       tempForm: {},
       rules: {
-        title: [
+        username: [
           {required: true, message: 'Tên tài khoản đang trống !!!', trigger: 'blur'}
         ],
-        shortContent: [
+        password: [
           {required: true, message: 'Mật khẩu đang trống !!!', trigger: 'blur'}
         ],
-        content: [
+        employeeId: [
           {required: true, message: 'Mã nhân viên đang trống !!!', trigger: 'blur'}
         ]
       }
     }
   },
   computed: {
-    ...mapState('createNotification', [
-
+    ...mapState('createAccount', [
+      '_accountFormData'
     ])
   },
   mounted () {
     this.initPage()
   },
   methods: {
-    ...mapMutations('createNotification', [
-
+    ...mapMutations('createAccount', [
+      '_setAccountFormData'
     ]),
-    ...mapActions('createNotification', [
-
+    ...mapActions('createAccount', [
+      '_createAccount'
     ]),
     /**
      * Run when page initialization
      */
     initPage () {
       this.checkAuthen()
-      this.employeeID = sessionStorage.getItem('employeeId')
     },
     /**
      * Validate and Submit Form
      */
     submitForm () {
-      this.tempForm = {...this.notifyForm}
-      this.$refs['notifyForm'].validate((valid) => {
+      this.tempForm = {...this.accountForm}
+      this.$refs['accountForm'].validate((valid) => {
         if (valid) {
-          this.$confirm('Bạn có muốn tạo mới thông báo này ?', 'Warning', {
+          this.$confirm('Bạn có muốn tạo mới tài khoản này ?', 'Warning', {
             confirmButtonText: 'Đồng ý',
             cancelButtonText: 'Hủy bỏ',
             type: 'warning'
           }).then(() => {
             this.loader = this.getLoader()
-            this._setEmployeeID(this.employeeID)
-            this._setNotificationFormData(this.notifyForm)
-            return this._createNotification()
+            this._setAccountFormData(this.accountForm)
+            return this._createAccount()
           }).then(() => {
             this.closeLoader(this.loader)
-            this.showMessage('Tạo mới thông báo thành công !!!', 'success')
+            this.showMessage('Tạo mới tài khoản thành công !!!', 'success')
+            this.$refs['accountForm'].resetFields()
           })
         } else {
           return false
@@ -116,7 +115,7 @@ export default {
      * Reset Form to empty
      */
     resetForm () {
-      this.$refs['notifyForm'].resetFields()
+      this.$refs['accountForm'].resetFields()
     },
     /**
      * Show Loader
