@@ -7,7 +7,7 @@
       <el-col :offset="5" :span="19">
           <h1>Quản lý ca</h1>
           <el-table :data="tableData" stripe>
-            <el-table-column label="Mã Ca" fixed prop="id" align="center"/>
+            <el-table-column label="Code" fixed prop="id" align="center"/>
             <el-table-column label="Nhân viên" align="center">
               <template slot-scope="scope">
                 <el-popover trigger="hover" placement="top">

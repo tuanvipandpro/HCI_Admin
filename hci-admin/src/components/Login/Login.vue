@@ -62,9 +62,17 @@ export default {
         sessionStorage.setItem('token', 'Bearer ' + res.data.token)
 
         this.transitTo('UserManagement', {username: this.formData.username})
-      }).catch(() => {
+
+        this.showMessage('Welcome back ' + this.formData.username + ' !', 'success')
+      }).catch(e => {
         this.closeLoader(this.loader)
-        this.showMessage('Tài khoản hoặc mật khẩu không chính xác !', 'warning')
+
+        // Check Error Status
+        if (e.toString().includes('Request failed with status code 401')) {
+          this.showMessage('Tài khoản của bạn không đủ quyền để đăng nhập vào trang này !', 'warning')
+        } else if (e.toString().includes('Request failed with status code 403')) {
+          this.showMessage('Tài khoản hoặc mật khẩu không chính xác !', 'warning')
+        }
       })
     },
     /**
