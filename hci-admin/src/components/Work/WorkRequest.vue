@@ -100,11 +100,8 @@ export default {
       this.transitTo('Login', undefined)
     } else {
       const loader = this.getLoader()
-      const now = new Date()
-      const nowString = now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate() + 'T' +
-                        now.getHours() + ':' + now.getMinutes() + ':' + now.getSeconds()
 
-      this._getRequestWorkList(nowString).then(res => {
+      this._getRequestWorkList(this.convertDateToDateTime(new Date())).then(res => {
         this.closeLoader(loader)
         this.rootData = [...this._workRequestList]
         this.changePage()
@@ -118,10 +115,41 @@ export default {
   methods: {
     ...mapActions('workRequest', ['_getRequestWorkList', '_acceptWork']),
     /**
+     * Convert Date to yyyy-MM-ddTHH:mm:ss
+     * @param now
+     */
+    convertDateToDateTime (now) {
+      let year = now.getFullYear()
+      let month = now.getMonth() + 1
+      let day = now.getDate()
+      let hour = now.getHours()
+      let minute = now.getMinutes()
+      let second = now.getSeconds()
+
+      if (month < 10) month = '0' + month
+      if (day < 10) day = '0' + day
+      if (hour < 10) hour = '0' + hour
+      if (minute < 10) minute = '0' + minute
+      if (second < 10) second = '0' + second
+
+      return year + '-' + month + '-' + day + 'T' + hour + ':' + minute + ':' + second
+    },
+    /**
      * Accept Work
      */
     acceptWork (scope) {
-
+      const row = scope.row
+      const loader = this.getLoader()
+      this._acceptWork(row).then(res => {
+        // Thông báo update thành công
+        this.closeLoader(loader)
+        this.rootData = this.rootData.filter(item => item.id !== row.id)
+        this.changePage()
+      })
+        .catch(e => {
+          this.closeLoader(loader)
+          console.error(e)
+        })
     },
     /**
      * Handle when change page
