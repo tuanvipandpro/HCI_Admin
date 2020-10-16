@@ -20,9 +20,12 @@ const workRequest = {
      * @param params
      */
     _getRequestWorkList (context, params) {
-      let url = 'https://tuanlm-hr.herokuapp.com/api/work/get-work-managements'
+      let url = 'https://tuanlm-hr.herokuapp.com/api/work-request/get-all'
       return new Promise((resolve, reject) => {
-        axios.get(url, {headers: {Authorization: sessionStorage.getItem('token')}}).then(res => {
+        axios.get(url, {
+          headers: {Authorization: sessionStorage.getItem('token')},
+          params: {now: params}
+        }).then(res => {
           context.commit('_setWorkRequestList', res.data)
           resolve(res)
         }).catch(e => reject(e))
@@ -34,7 +37,7 @@ const workRequest = {
      * @param params
      */
     _acceptWork (context, params) {
-      let url = 'https://tuanlm-hr.herokuapp.com/api/work/active-works/' + params.id + '/' + params.mode
+      let url = 'https://tuanlm-hr.herokuapp.com/api/work/active-worksss/' + params.id + '/' + params.mode
       return new Promise((resolve, reject) => {
         axios.put(url, {}, {headers: {Authorization: sessionStorage.getItem('token')}})
           .then(res => resolve(res))
