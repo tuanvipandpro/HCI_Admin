@@ -43,8 +43,7 @@ const workAssign = {
      * @param params
      */
     _getStoreList (context) {
-      // let url = 'https://tuanlm-hr.herokuapp.com/api/store/get-all'
-      let url = 'http://localhost:8084/api/store/get-all'
+      let url = 'https://tuanlm-hr.herokuapp.com/api/store/get-all'
       return new Promise((resolve, reject) => {
         axios.get(url, {
           headers: {Authorization: sessionStorage.getItem('token')}
@@ -60,8 +59,7 @@ const workAssign = {
      * @param params
      */
     _getShiftList (context, params) {
-      // let url = 'https://tuanlm-hr.herokuapp.com/api/shift/get-all' + params
-      let url = 'http://localhost:8084/api/shift/get-all/' + params
+      let url = 'https://tuanlm-hr.herokuapp.com/api/shift/get-all/' + params
       return new Promise((resolve, reject) => {
         axios.get(url, {
           headers: {Authorization: sessionStorage.getItem('token')}
@@ -77,13 +75,12 @@ const workAssign = {
      * @param params
      */
     _getEmployeeList (context, params) {
-      let url = 'https://tuanlm-hr.herokuapp.com/api/work-request/get-alls'
+      let url = 'https://tuanlm-hr.herokuapp.com/api/employee/get-all/' + params
       return new Promise((resolve, reject) => {
         axios.get(url, {
-          headers: {Authorization: sessionStorage.getItem('token')},
-          params: {now: params}
+          headers: {Authorization: sessionStorage.getItem('token')}
         }).then(res => {
-          context.commit('_setWorkRequestList', res.data)
+          context.commit('_setEmployeeList', res.data)
           resolve(res)
         }).catch(e => reject(e))
       })
@@ -94,9 +91,9 @@ const workAssign = {
      * @param params
      */
     _assignWork (context, params) {
-      let url = 'https://tuanlm-hr.herokuapp.com/api/work-request/accept-work-requests/' + params.id
+      let url = 'https://tuanlm-hr.herokuapp.com/api/work/assign-work'
       return new Promise((resolve, reject) => {
-        axios.put(url, params, {headers: {Authorization: sessionStorage.getItem('token')}})
+        axios.post(url, params, {headers: {Authorization: sessionStorage.getItem('token')}})
           .then(res => resolve(res))
           .catch(e => reject(e))
       })

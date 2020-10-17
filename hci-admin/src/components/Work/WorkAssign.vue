@@ -18,8 +18,7 @@
                       v-model="formData.date"
                       type="date"
                       placeholder="Chọn ngày cần giao ca"
-                      :picker-options="pickerOptions"
-                      @change="abc"/>
+                      :picker-options="pickerOptions"/>
                 </el-form-item>
                 <el-form-item label="Chọn cửa hàng" required prop="store">
                     <el-select
@@ -40,9 +39,8 @@
                     </el-select>
                 </el-form-item>
                 <el-form-item label="Chọn nhân viên" required prop="employee">
-                    <el-select style="width: 30%" v-model="formData.employee" placeholder="Chọn ca cần giao việc">
-                        <el-option label="Nhân viên 1" value="1"/>
-                        <el-option label="Nhân viên 2" value="2"/>
+                    <el-select style="width: 30%" v-model="formData.employee" placeholder="Chọn nhân viên cần giao việc">
+                        <el-option v-for="item in employeeList" :key="item.id" :label="item.name" :value="item.id"/>
                     </el-select>
                 </el-form-item>
                 <el-form-item>
@@ -107,9 +105,10 @@ export default {
       this.transitTo('Login', undefined)
     } else {
       const loader = this.getLoader()
-      this._getStoreList().then(res => {
+      Promise.all([this._getStoreList(), this._getEmployeeList(1)]).then(values => {
         this.closeLoader(loader)
         this.storeList = [...this._storeList]
+        this.employeeList = [...this._employeeList]
       }).catch(e => {
         this.closeLoader(loader)
         console.error(e)
@@ -118,9 +117,6 @@ export default {
   },
   methods: {
     ...mapActions('workAssign', ['_getStoreList', '_getShiftList', '_getEmployeeList', '_assignWork']),
-    abc () {
-      console.log(moment(this.formData.date).format('yyyy-MM-DD'))
-    },
     /**
      * Event when change store
      */
@@ -135,22 +131,20 @@ export default {
       })
     },
     /**
-     * Event when change shift
-     */
-    changeShift () {
-      const shift = this.shiftList.find(s => s.id === this.formData.shift)
-      console.log(shift)
-    },
-    /**
      * Submit Form
      */
     submitForm () {
       this.$refs['assignForm'].validate(res => {
         if (res) {
-          // alert('ok')
-          this.resetForm()
-        } else {
-          // alert('not ok')
+          const loader = this.getLoader()
+          this._assignWork(this.getParamsForAssign()).then(res => {
+            this.closeLoader(loader)
+            this.resetForm()
+          })
+            .catch(e => {
+              this.closeLoader(loader)
+              console.error(e)
+            })
         }
       })
     },
@@ -159,6 +153,19 @@ export default {
      */
     resetForm () {
       this.$refs['assignForm'].resetFields()
+    },
+    /**
+     * Get Params For Assign
+     */
+    getParamsForAssign () {
+      const shift = this.shiftList.find(s => s.id === this.formData.shift)
+      return {
+        storeId: this.formData.store,
+        shiftId: this.formData.shift,
+        employeeId: this.formData.employee,
+        startTime: moment(this.formData.date).format('yyyy-MM-DD') + ' ' + shift.start,
+        endTime: moment(this.formData.date).format('yyyy-MM-DD') + ' ' + shift.end
+      }
     },
     /**
      * Show Loader
