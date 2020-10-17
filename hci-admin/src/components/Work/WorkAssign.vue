@@ -12,22 +12,35 @@
             ref="assignForm"
             status-icon>
                 <h2>Phân công ca</h2>
+                <el-form-item label="Chọn ngày" required prop="date">
+                    <el-date-picker
+                      style="width: 30%; margin-left: 2.8%"
+                      v-model="formData.date"
+                      type="date"
+                      placeholder="Chọn ngày cần giao ca"
+                      :picker-options="pickerOptions"/>
+                </el-form-item>
                 <el-form-item label="Chọn cửa hàng" required prop="store">
-                    <el-select style="width: 30%; margin-left: 0.1%" v-model="formData.store" placeholder="Chọn cửa hàng cần phân công">
-                        <el-option label="Cửa hàng 1" value="1"/>
-                        <el-option label="Cửa hàng 2" value="2"/>
+                    <el-select
+                      style="width: 30%; margin-left: 0.1%"
+                      v-model="formData.store"
+                      placeholder="Chọn cửa hàng cần phân công"
+                      @change="changeStore">
+                        <el-option v-for="item in storeList" :key="item.id" :label="item.name" :value="item.id"/>
                     </el-select>
                 </el-form-item>
                 <el-form-item label="Chọn ca làm" required prop="shift">
-                    <el-select style="width: 30%; margin-left: 1.8%" v-model="formData.shift" placeholder="Chọn ca cần giao việc">
-                        <el-option label="Ca Sáng" value="1"/>
-                        <el-option label="Ca Chiều" value="2"/>
+                    <el-select
+                      style="width: 30%; margin-left: 1.8%"
+                      v-model="formData.shift"
+                      placeholder="Chọn ca cần giao việc"
+                      @change="changeShift">
+                        <el-option v-for="item in shiftList" :key="item.id" :label="item.name" :value="item.id"/>
                     </el-select>
                 </el-form-item>
                 <el-form-item label="Chọn nhân viên" required prop="employee">
-                    <el-select style="width: 30%" v-model="formData.employee" placeholder="Chọn ca cần giao việc">
-                        <el-option label="Nhân viên 1" value="1"/>
-                        <el-option label="Nhân viên 2" value="2"/>
+                    <el-select style="width: 30%" v-model="formData.employee" placeholder="Chọn nhân viên cần giao việc">
+                        <el-option v-for="item in employeeList" :key="item.id" :label="item.name" :value="item.id"/>
                     </el-select>
                 </el-form-item>
                 <el-form-item>
@@ -43,6 +56,7 @@
 <script>
 import Menu from '../Common/Menu'
 import { mapActions, mapState } from 'vuex'
+import moment from 'moment'
 
 export default {
   components: {
@@ -50,12 +64,19 @@ export default {
   },
   data () {
     return {
+      storeList: [],
+      shiftList: [],
+      employeeList: [],
       formData: {
+        date: '',
         store: '',
         shift: '',
         employee: ''
       },
       formRules: {
+        date: [
+          {required: true, message: 'Vui lòng chọn ngày cần giao ca', trigger: 'blur'}
+        ],
         store: [
           {required: true, message: 'Vui lòng chọn cửa hàng cần giao ca', trigger: 'blur'}
         ],
@@ -65,6 +86,13 @@ export default {
         employee: [
           {required: true, message: 'Vui lòng chọn nhân viên cần giao', trigger: 'blur'}
         ]
+      },
+      pickerOptions: {
+        disabledDate (time) {
+          let limit = new Date()
+          limit.setDate(limit.getDate() + 7)
+          return time.getTime() <= limit
+        }
       }
       // end
     }
@@ -75,21 +103,48 @@ export default {
   mounted () {
     if (!sessionStorage.getItem('username')) {
       this.transitTo('Login', undefined)
+    } else {
+      const loader = this.getLoader()
+      Promise.all([this._getStoreList(), this._getEmployeeList(1)]).then(values => {
+        this.closeLoader(loader)
+        this.storeList = [...this._storeList]
+        this.employeeList = [...this._employeeList]
+      }).catch(e => {
+        this.closeLoader(loader)
+        console.error(e)
+      })
     }
   },
   methods: {
     ...mapActions('workAssign', ['_getStoreList', '_getShiftList', '_getEmployeeList', '_assignWork']),
     /**
+     * Event when change store
+     */
+    changeStore () {
+      const loader = this.getLoader()
+      this._getShiftList(this.formData.store).then(res => {
+        this.closeLoader(loader)
+        this.shiftList = [...this._shiftList]
+      }).catch(e => {
+        this.closeLoader(loader)
+        console.error(e)
+      })
+    },
+    /**
      * Submit Form
      */
     submitForm () {
       this.$refs['assignForm'].validate(res => {
-        console.log(res)
         if (res) {
-          alert('ok')
-          this.resetForm()
-        } else {
-          alert('not ok')
+          const loader = this.getLoader()
+          this._assignWork(this.getParamsForAssign()).then(res => {
+            this.closeLoader(loader)
+            this.resetForm()
+          })
+            .catch(e => {
+              this.closeLoader(loader)
+              console.error(e)
+            })
         }
       })
     },
@@ -97,9 +152,20 @@ export default {
      * Reset Form
      */
     resetForm () {
-      this.formData.store = ''
-      this.formData.shift = ''
-      this.formData.employee = ''
+      this.$refs['assignForm'].resetFields()
+    },
+    /**
+     * Get Params For Assign
+     */
+    getParamsForAssign () {
+      const shift = this.shiftList.find(s => s.id === this.formData.shift)
+      return {
+        storeId: this.formData.store,
+        shiftId: this.formData.shift,
+        employeeId: this.formData.employee,
+        startTime: moment(this.formData.date).format('yyyy-MM-DD') + ' ' + shift.start,
+        endTime: moment(this.formData.date).format('yyyy-MM-DD') + ' ' + shift.end
+      }
     },
     /**
      * Show Loader
