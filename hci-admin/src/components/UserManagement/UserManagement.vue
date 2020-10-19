@@ -13,15 +13,25 @@
             empty-text="Không có dữ liệu">
           <el-table-column
             label="Tài Khoản"
-            prop="username">
+            prop="email">
           </el-table-column>
           <el-table-column
             label="Họ tên"
-            prop="fullname">
+            prop="name">
+          </el-table-column>
+          <el-table-column
+            label="Giới tính"
+            width="150px"
+            prop="gender">
           </el-table-column>
           <el-table-column
             label="Địa chỉ"
+            width="300px"
             prop="address">
+          </el-table-column>
+          <el-table-column
+            label="Số điện thoại"
+            prop="phone">
           </el-table-column>
           <el-table-column
             align="right">
@@ -53,7 +63,7 @@
           layout="prev, pager, next"
           :hide-on-single-page="true"
           @current-change="changePage()"
-          :total="numOfPage * 10">
+          :total="searchList.length === 0 ? accountData.length : searchList.length">
         </el-pagination>
       </el-col>
     </el-row>
@@ -72,162 +82,223 @@ export default {
       subAccountData: [],
       searchList: [],
       accountData: [{
-        username: 'Tom@123',
-        fullname: 'Tom',
+        email: 'Tom@123',
+        name: 'Tom',
         address: 'No. 100, Grove St, Los Angeles',
+        phone: '0123456789',
+        gender: 'Male',
         status: 'Active'
       }, {
-        username: 'John@abc',
-        fullname: 'John',
+        email: 'John@abc',
+        name: 'John',
         address: 'No. 101, Grove St, Los Angeles',
+        phone: '0123456789',
+        gender: 'Male',
         status: 'Inactive'
       }, {
-        username: 'Morgan@xyz',
-        fullname: 'Morgan',
+        email: 'Morgan@xyz',
+        name: 'Morgan',
         address: 'No. 102, Grove St, Los Angeles',
+        phone: '0123456789',
+        gender: 'Male',
         status: 'Inactive'
       }, {
-        username: 'Jessy@hihi',
-        fullname: 'Jessy',
+        email: 'Jessy@hihi',
+        name: 'Jessy',
         address: 'No. 103, Grove St, Los Angeles',
+        phone: '0123456789',
+        gender: 'Male',
         status: 'Active'
       }, {
-        username: 'Jerry@ccc',
-        fullname: 'Jerry',
+        email: 'Jerry@ccc',
+        name: 'Jerry',
         address: 'No. 104, Grove St, Los Angeles',
+        phone: '0123456789',
+        gender: 'Male',
         status: 'Active'
       }, {
-        username: 'Suri@sri',
-        fullname: 'Suri',
+        email: 'Suri@sri',
+        name: 'Suri',
         address: 'No. 105, Grove St, Los Angeles',
+        phone: '0123456789',
+        gender: 'Male',
         status: 'Active'
       }, {
-        username: 'Mama@ma',
-        fullname: 'Mama',
+        email: 'Mama@ma',
+        name: 'Mama',
         address: 'No. 106, Grove St, Los Angeles',
+        phone: '0123456789',
+        gender: 'Male',
         status: 'Inactive'
       }, {
-        username: 'Mimi@mi',
-        fullname: 'Mimi',
+        email: 'Mimi@mi',
+        name: 'Mimi',
         address: 'No. 107, Grove St, Los Angeles',
+        phone: '0123456789',
+        gender: 'Male',
         status: 'Inactive'
       }, {
-        username: 'Chichi@chi',
-        fullname: 'Chichi',
+        email: 'Chichi@chi',
+        name: 'Chichi',
         address: 'No. 108, Grove St, Los Angeles',
+        phone: '0123456789',
+        gender: 'Male',
         status: 'Active'
       }, {
-        username: 'Siro@sr',
-        fullname: 'Siro',
+        email: 'Siro@sr',
+        name: 'Siro',
         address: 'No. 109, Grove St, Los Angeles',
+        phone: '0123456789',
+        gender: 'Male',
         status: 'Active'
       },
       {
-        username: 'Siro@sr',
-        fullname: 'Siro',
+        email: 'Siro@sr',
+        name: 'Siro',
         address: 'No. 110, Grove St, Los Angeles',
+        phone: '0123456789',
+        gender: 'Male',
         status: 'Active'
       }, {
-        username: 'John@abc',
-        fullname: 'John',
+        email: 'John@abc',
+        name: 'John',
         address: 'No. 111, Grove St, Los Angeles',
+        phone: '0123456789',
+        gender: 'Male',
         status: 'Inactive'
       }, {
-        username: 'Morgan@xyz',
-        fullname: 'Morgan',
+        email: 'Morgan@xyz',
+        name: 'Morgan',
         address: 'No. 112, Grove St, Los Angeles',
+        phone: '0123456789',
+        gender: 'Male',
         status: 'Inactive'
       }, {
-        username: 'Jessy@hihi',
-        fullname: 'Jessy',
+        email: 'Jessy@hihi',
+        name: 'Jessy',
         address: 'No. 113, Grove St, Los Angeles',
+        phone: '0123456789',
+        gender: 'Male',
         status: 'Active'
       }, {
-        username: 'Jerry@ccc',
-        fullname: 'Jerry',
+        email: 'Jerry@ccc',
+        name: 'Jerry',
         address: 'No. 114, Grove St, Los Angeles',
+        phone: '0123456789',
+        gender: 'Male',
         status: 'Active'
       }, {
-        username: 'Suri@sri',
-        fullname: 'Suri',
+        email: 'Suri@sri',
+        name: 'Suri',
         address: 'No. 115, Grove St, Los Angeles',
+        phone: '0123456789',
+        gender: 'Male',
         status: 'Active'
       }, {
-        username: 'Mama@ma',
-        fullname: 'Mama',
+        email: 'Mama@ma',
+        name: 'Mama',
         address: 'No. 116, Grove St, Los Angeles',
+        phone: '0123456789',
+        gender: 'Male',
         status: 'Inactive'
       }, {
-        username: 'Mimi@mi',
-        fullname: 'Mimi',
+        email: 'Mimi@mi',
+        name: 'Mimi',
         address: 'No. 117, Grove St, Los Angeles',
+        phone: '0123456789',
+        gender: 'Male',
         status: 'Inactive'
       }, {
-        username: 'Chichi@chi',
-        fullname: 'Chichi',
+        email: 'Chichi@chi',
+        name: 'Chichi',
         address: 'No. 118, Grove St, Los Angeles',
+        phone: '0123456789',
+        gender: 'Male',
         status: 'Active'
       }, {
-        username: 'Siro@sr',
-        fullname: 'Siro',
+        email: 'Siro@sr',
+        name: 'Siro',
         address: 'No. 119, Grove St, Los Angeles',
+        phone: '0123456789',
+        gender: 'Male',
         status: 'Active'
       },
       {
-        username: 'Siro@sr',
-        fullname: 'Siro',
+        email: 'Siro@sr',
+        name: 'Siro',
         address: 'No. 120, Grove St, Los Angeles',
+        phone: '0123456789',
+        gender: 'Male',
         status: 'Active'
       }, {
-        username: 'John@abc',
-        fullname: 'John',
+        email: 'John@abc',
+        name: 'John',
         address: 'No. 121, Grove St, Los Angeles',
+        phone: '0123456789',
+        gender: 'Male',
         status: 'Inactive'
       }, {
-        username: 'Morgan@xyz',
-        fullname: 'Morgan',
+        email: 'Morgan@xyz',
+        name: 'Morgan',
         address: 'No. 122, Grove St, Los Angeles',
+        phone: '0123456789',
+        gender: 'Male',
         status: 'Inactive'
       }, {
-        username: 'Jessy@hihi',
-        fullname: 'Jessy',
+        email: 'Jessy@hihi',
+        name: 'Jessy',
         address: 'No. 123, Grove St, Los Angeles',
+        phone: '0123456789',
+        gender: 'Male',
         status: 'Active'
       }, {
-        username: 'Jerry@ccc',
-        fullname: 'Jerry',
+        email: 'Jerry@ccc',
+        name: 'Jerry',
         address: 'No. 124, Grove St, Los Angeles',
+        phone: '0123456789',
+        gender: 'Male',
         status: 'Active'
       }, {
-        username: 'Suri@sri',
-        fullname: 'Suri',
+        email: 'Suri@sri',
+        name: 'Suri',
         address: 'No. 125, Grove St, Los Angeles',
+        phone: '0123456789',
+        gender: 'Male',
         status: 'Active'
       }, {
-        username: 'Mama@ma',
-        fullname: 'Mama',
+        email: 'Mama@ma',
+        name: 'Mama',
         address: 'No. 126, Grove St, Los Angeles',
+        phone: '0123456789',
+        gender: 'Male',
         status: 'Inactive'
       }, {
-        username: 'Mimi@mi',
-        fullname: 'Mimi',
+        email: 'Mimi@mi',
+        name: 'Mimi',
         address: 'No. 127, Grove St, Los Angeles',
+        phone: '0123456789',
+        gender: 'Male',
         status: 'Inactive'
       }, {
-        username: 'Chichi@chi',
-        fullname: 'Chichi',
+        email: 'Chichi@chi',
+        name: 'Chichi',
         address: 'No. 128, Grove St, Los Angeles',
+        phone: '0123456789',
+        gender: 'Male',
         status: 'Active'
       }, {
-        username: 'Siro@sr',
-        fullname: 'Siro',
+        email: 'Siro@sr',
+        name: 'Siro',
         address: 'No. 129, Grove St, Los Angeles',
+        phone: '0123456789',
+        gender: 'Male',
         status: 'Active'
       },
       {
-        username: 'Sirom@srm',
-        fullname: 'Sirom',
+        email: 'Sirom@srm',
+        name: 'Sirom',
         address: 'No. 130, Grove St, Los Angeles',
+        phone: '0123456789',
         status: 'Active'
       }
       ],
@@ -239,7 +310,7 @@ export default {
   },
   watch: {
     search () {
-      this.searchList = this.accountData.filter(data => !this.search || data.fullname.toLowerCase().includes(this.search.toLowerCase()))
+      this.searchList = this.accountData.filter(data => !this.search || data.name.toLowerCase().includes(this.search.toLowerCase()))
       if (this.search.length > 0) {
         this.currentPage = 1
         this.numOfPage = this.searchList.length / this.pageSize
@@ -255,7 +326,7 @@ export default {
   },
   mounted () {
     this.checkAuthen()
-    this.numOfPage = this.accountData.length / this.pageSize
+    this.numOfPage = Math.ceil(this.accountData.length / this.pageSize)
     this.changePage()
   },
   methods: {
@@ -271,7 +342,7 @@ export default {
       })
     },
     handleClicked (index, row, typeButton) {
-      this.$confirm('Do you want to ' + String(typeButton).toLowerCase() + ' ' + row.fullname + ' ?', 'Warning', {
+      this.$confirm('Do you want to ' + String(typeButton).toLowerCase() + ' ' + row.name + ' ?', 'Warning', {
         confirmButtonText: 'Yes',
         cancelButtonText: 'No',
         type: 'warning'
