@@ -16,9 +16,6 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import tuanlm.hr.app.service.AccountService;
 import tuanlm.hr.app.utils.JwtUtils;
 
-
-
-// TODO: Auto-generated Javadoc
 /**
  * The Class AuthenticationFilter.
  */
@@ -48,6 +45,9 @@ public class AuthenticationFilter extends OncePerRequestFilter {
 		}
 		
 		SecurityContextHolder.getContext().setAuthentication(auth);
+		
+		response.setHeader("content-type", "application/json;charset=UTF-8");
+
 		filterChain.doFilter(request, response);
 	}
 
