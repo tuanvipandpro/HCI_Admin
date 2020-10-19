@@ -35,7 +35,7 @@ const editNotification = {
      * get notifications by ID function
      */
     _getNotificationByID (context) {
-      let url = 'https://tuanlm-hr.herokuapp.com/api/article/get-by-id/' + context.state._articleID
+      let url = '/api/article/get-by-id/' + context.state._articleID
       return new Promise((resolve, reject) => {
         axios.get(url, {
           params: {},
@@ -54,7 +54,7 @@ const editNotification = {
      * update a notification by id function
      */
     _updateNotificationByID (context) {
-      let url = 'https://tuanlm-hr.herokuapp.com/api/article/upsert-article'
+      let url = '/api/article/upsert-article'
       return new Promise((resolve, reject) => {
         axios.put(url,
           {

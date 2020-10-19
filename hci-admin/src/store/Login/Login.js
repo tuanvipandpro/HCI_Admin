@@ -18,7 +18,7 @@ const login = {
   },
   actions: {
     _checkLogin (context) {
-      let url = 'https://tuanlm-hr.herokuapp.com/api/authenticate/login'
+      let url = '/api/authenticate/login'
       return new Promise((resolve, reject) => {
         axios.post(url, {
           username: context.state._formData.username,

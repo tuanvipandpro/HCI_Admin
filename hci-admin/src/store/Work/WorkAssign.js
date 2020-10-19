@@ -43,7 +43,7 @@ const workAssign = {
      * @param params
      */
     _getStoreList (context) {
-      let url = 'https://tuanlm-hr.herokuapp.com/api/store/get-all'
+      let url = '/api/store/get-all'
       return new Promise((resolve, reject) => {
         axios.get(url, {
           headers: {Authorization: sessionStorage.getItem('token')}
@@ -59,7 +59,7 @@ const workAssign = {
      * @param params
      */
     _getShiftList (context, params) {
-      let url = 'https://tuanlm-hr.herokuapp.com/api/shift/get-all/' + params
+      let url = '/api/shift/get-all/' + params
       return new Promise((resolve, reject) => {
         axios.get(url, {
           headers: {Authorization: sessionStorage.getItem('token')}
@@ -75,7 +75,7 @@ const workAssign = {
      * @param params
      */
     _getEmployeeList (context, params) {
-      let url = 'https://tuanlm-hr.herokuapp.com/api/employee/get-all/' + params
+      let url = '/api/employee/get-all/' + params
       return new Promise((resolve, reject) => {
         axios.get(url, {
           headers: {Authorization: sessionStorage.getItem('token')}
@@ -91,7 +91,7 @@ const workAssign = {
      * @param params
      */
     _assignWork (context, params) {
-      let url = 'https://tuanlm-hr.herokuapp.com/api/work/assign-work'
+      let url = '/api/work/assign-work'
       return new Promise((resolve, reject) => {
         axios.post(url, params, {headers: {Authorization: sessionStorage.getItem('token')}})
           .then(res => resolve(res))

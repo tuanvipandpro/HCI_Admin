@@ -28,7 +28,7 @@ const notification = {
      * get all notifications function
      */
     _getAllNotifications (context) {
-      let url = 'https://tuanlm-hr.herokuapp.com/api/article/0'
+      let url = '/api/article/0'
       return new Promise((resolve, reject) => {
         axios.get(url, {
           params: {},
@@ -47,7 +47,7 @@ const notification = {
      * delete a notification by id function
      */
     _deleteNotificationByID (context) {
-      let url = 'https://tuanlm-hr.herokuapp.com/api/article/update-active-by-id/' + context.state._articleID + '/0'
+      let url = '/api/article/update-active-by-id/' + context.state._articleID + '/0'
       return new Promise((resolve, reject) => {
         axios.put(url,
           {},
@@ -65,7 +65,7 @@ const notification = {
      * active a notification by id function
      */
     _activeNotificationByID (context) {
-      let url = 'https://tuanlm-hr.herokuapp.com/api/article/update-active-by-id/' + context.state._articleID + '/1'
+      let url = '/api/article/update-active-by-id/' + context.state._articleID + '/1'
       return new Promise((resolve, reject) => {
         axios.put(url,
           {},

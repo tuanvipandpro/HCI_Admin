@@ -21,7 +21,7 @@ const createAccount = {
      * create a notification function
      */
     _createAccount (context) {
-      let url = 'https://tuanlm-hr.herokuapp.com/api/account/insert-account'
+      let url = '/api/account/insert-account'
       return new Promise((resolve, reject) => {
         axios.post(url,
           {

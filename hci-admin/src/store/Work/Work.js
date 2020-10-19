@@ -25,7 +25,7 @@ const work = {
      * @param params
      */
     _getWorksList (context, params) {
-      let url = 'https://tuanlm-hr.herokuapp.com/api/work/get-work-management'
+      let url = '/api/work/get-work-management'
       return new Promise((resolve, reject) => {
         axios.get(url, {headers: {Authorization: sessionStorage.getItem('token')}}).then(res => {
           context.commit('_setWorkList', res.data)
@@ -39,7 +39,7 @@ const work = {
      * @param params
      */
     _updateActiveWork (context, params) {
-      let url = 'https://tuanlm-hr.herokuapp.com/api/work/active-work/' + params.id + '/' + params.mode
+      let url = '/api/work/active-work/' + params.id + '/' + params.mode
       return new Promise((resolve, reject) => {
         axios.put(url, {}, {headers: {Authorization: sessionStorage.getItem('token')}})
           .then(res => resolve(res))
