@@ -35,7 +35,7 @@ const createNotification = {
      * create a notification function
      */
     _createNotification (context) {
-      let url = 'https://tuanlm-hr.herokuapp.com/api/article/upsert-article'
+      let url = '/api/article/upsert-article'
       return new Promise((resolve, reject) => {
         axios.put(url,
           {

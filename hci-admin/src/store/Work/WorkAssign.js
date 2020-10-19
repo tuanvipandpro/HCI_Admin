@@ -42,14 +42,13 @@ const workAssign = {
      * @param context
      * @param params
      */
-    _getStoreList (context, params) {
-      let url = 'https://tuanlm-hr.herokuapp.com/api/work-request/get-alls'
+    _getStoreList (context) {
+      let url = '/api/store/get-all'
       return new Promise((resolve, reject) => {
         axios.get(url, {
-          headers: {Authorization: sessionStorage.getItem('token')},
-          params: {now: params}
+          headers: {Authorization: sessionStorage.getItem('token')}
         }).then(res => {
-          context.commit('_setWorkRequestList', res.data)
+          context.commit('_setStoreList', res.data)
           resolve(res)
         }).catch(e => reject(e))
       })
@@ -60,13 +59,12 @@ const workAssign = {
      * @param params
      */
     _getShiftList (context, params) {
-      let url = 'https://tuanlm-hr.herokuapp.com/api/work-request/get-alls'
+      let url = '/api/shift/get-all/' + params
       return new Promise((resolve, reject) => {
         axios.get(url, {
-          headers: {Authorization: sessionStorage.getItem('token')},
-          params: {now: params}
+          headers: {Authorization: sessionStorage.getItem('token')}
         }).then(res => {
-          context.commit('_setWorkRequestList', res.data)
+          context.commit('_setShiftList', res.data)
           resolve(res)
         }).catch(e => reject(e))
       })
@@ -77,13 +75,12 @@ const workAssign = {
      * @param params
      */
     _getEmployeeList (context, params) {
-      let url = 'https://tuanlm-hr.herokuapp.com/api/work-request/get-alls'
+      let url = '/api/employee/get-all/' + params
       return new Promise((resolve, reject) => {
         axios.get(url, {
-          headers: {Authorization: sessionStorage.getItem('token')},
-          params: {now: params}
+          headers: {Authorization: sessionStorage.getItem('token')}
         }).then(res => {
-          context.commit('_setWorkRequestList', res.data)
+          context.commit('_setEmployeeList', res.data)
           resolve(res)
         }).catch(e => reject(e))
       })
@@ -94,9 +91,9 @@ const workAssign = {
      * @param params
      */
     _assignWork (context, params) {
-      let url = 'https://tuanlm-hr.herokuapp.com/api/work-request/accept-work-requests/' + params.id
+      let url = '/api/work/assign-work'
       return new Promise((resolve, reject) => {
-        axios.put(url, params, {headers: {Authorization: sessionStorage.getItem('token')}})
+        axios.post(url, params, {headers: {Authorization: sessionStorage.getItem('token')}})
           .then(res => resolve(res))
           .catch(e => reject(e))
       })

@@ -28,7 +28,7 @@ const account = {
      * get all accounts function
      */
     _getAllAccounts (context) {
-      let url = 'https://tuanlm-hr.herokuapp.com/api/account/get-all-account'
+      let url = '/api/account/get-all-account'
       return new Promise((resolve, reject) => {
         axios.get(url, {
           params: {},
@@ -47,7 +47,7 @@ const account = {
      * delete an account by username function
      */
     _deleteAccountByUsername (context) {
-      let url = 'https://tuanlm-hr.herokuapp.com/api/account/update-active-account/' + context.state._username + '/0'
+      let url = '/api/account/update-active-account/' + context.state._username + '/0'
       return new Promise((resolve, reject) => {
         axios.put(url,
           {},
@@ -65,7 +65,7 @@ const account = {
      * active an account by username function
      */
     _activeAccountByUsername (context) {
-      let url = 'https://tuanlm-hr.herokuapp.com/api/account/update-active-account/' + context.state._username + '/1'
+      let url = '/api/account/update-active-account/' + context.state._username + '/1'
       return new Promise((resolve, reject) => {
         axios.put(url,
           {},

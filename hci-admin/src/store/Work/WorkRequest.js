@@ -20,7 +20,7 @@ const workRequest = {
      * @param params
      */
     _getRequestWorkList (context, params) {
-      let url = 'https://tuanlm-hr.herokuapp.com/api/work-request/get-all'
+      let url = '/api/work-request/get-all'
       return new Promise((resolve, reject) => {
         axios.get(url, {
           headers: {Authorization: sessionStorage.getItem('token')},
@@ -37,7 +37,7 @@ const workRequest = {
      * @param params
      */
     _acceptWork (context, params) {
-      let url = 'https://tuanlm-hr.herokuapp.com/api/work-request/accept-work-request/' + params.id
+      let url = '/api/work-request/accept-work-request/' + params.id
       return new Promise((resolve, reject) => {
         axios.put(url, params, {headers: {Authorization: sessionStorage.getItem('token')}})
           .then(res => resolve(res))
