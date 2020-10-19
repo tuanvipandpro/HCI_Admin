@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import tuanlm.hr.app.filter.AuthenticationFilter;
 
@@ -78,10 +79,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.cors().and().csrf().disable();
 		
-//		http.authorizeRequests()
-//			.antMatchers("/api/login/**", "/", "/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
-//			.anyRequest().authenticated()
-//			.and()
-//			.addFilterBefore(getAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+		http.authorizeRequests()
+			//.antMatchers("/api/login/**", "/", "/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
+			.antMatchers("/api/authenticate/login").permitAll()
+			.antMatchers("/api/**").authenticated()
+			.anyRequest().permitAll()
+			.and()
+			.addFilterBefore(getAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
 	}
 }
