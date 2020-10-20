@@ -17,6 +17,7 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.AllArgsConstructor;
 import tuanlm.hr.app.models.model.Account;
 import tuanlm.hr.app.models.request.InsertAccountRequest;
+import tuanlm.hr.app.models.request.LoginRequest;
 import tuanlm.hr.app.service.AccountsService;
 
 @RestController
@@ -61,6 +62,19 @@ public class AccountController {
 	@Operation(description = "Update trạng thái của account (0: Xóa, 1: Active)", security = @SecurityRequirement(name = "bearerAuth"))
 	public ResponseEntity<Void> updateActiveAccount(@PathVariable String username, @PathVariable int mode) {
 		service.updateActiveAccount(username, mode);
+		return new ResponseEntity<Void>(HttpStatus.OK);
+	}
+	
+	/**
+	 * Change password.
+	 *
+	 * @param request the request
+	 * @return the response entity
+	 */
+	@PutMapping("/change-password")
+	@Operation(description = "Thay đổi mật khẩu", security = @SecurityRequirement(name = "bearerAuth"))	
+	public ResponseEntity<Void> changePassword(@RequestBody LoginRequest request) {
+		service.changePassword(request.getUsername(), request.getPassword());
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 }

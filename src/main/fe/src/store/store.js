@@ -11,6 +11,7 @@ import editNotification from './Notification/EditNotification'
 import createNotification from './Notification/CreateNotification'
 import account from './Account/AccountManagement'
 import createAccount from './Account/NewAccount'
+import changePassword from './ChangePassword/ChangePassword'
 
 Vue.use(Vuex)
 
@@ -25,6 +26,7 @@ export default new Vuex.Store({
     workRequest: workRequest,
     account: account,
     createAccount: createAccount,
-    workAssign: workAssign
+    workAssign: workAssign,
+    changePassword: changePassword
   }
 })

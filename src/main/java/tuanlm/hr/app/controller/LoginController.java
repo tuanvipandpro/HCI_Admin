@@ -25,13 +25,6 @@ import tuanlm.hr.app.utils.AppConstants;
  */
 @RestController
 @RequestMapping("/api/authenticate")
-
-/**
- * Instantiates a new login controller.
- *
- * @param authenticationManager the authentication manager
- * @param accountService the account service
- */
 @AllArgsConstructor
 public class LoginController {
 	

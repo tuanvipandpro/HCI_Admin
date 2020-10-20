@@ -58,6 +58,15 @@ public interface AccountMapper {
 			+ "		A.Username ")	
 	List<Account> getAllAccount();
 	
+	/**
+	 * Insert account.
+	 *
+	 * @param username the username
+	 * @param password the password
+	 * @param employeeId the employee id
+	 * @param roleId the role id
+	 * @param active the active
+	 */
 	@Insert(""
 			+ "INSERT INTO account(username, password, \"employeeId\", \"roleId\", active) "
 			+ "VALUES(#{username}, #{password}, #{employeeId}, #{roleId}, #{active}) "
@@ -83,4 +92,20 @@ public interface AccountMapper {
 			+ "		username = #{username} "
 			+ "</script>")
 	void updateActiveAccount(String username, int mode);
+	
+	/**
+	 * Change password account.
+	 *
+	 * @param username the username
+	 * @param password the password
+	 */
+	@Update(""
+			+ "UPDATE "
+			+ "		account "
+			+ "SET "
+			+ "		password = #{password} "		
+			+ "WHERE "
+			+ "		username = #{username} "
+			+ "")
+	void changePassword(String username, String password);
 }

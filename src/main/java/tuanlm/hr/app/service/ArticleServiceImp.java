@@ -16,7 +16,7 @@ import tuanlm.hr.app.models.request.UpsertArticleRequest;
 @Service
 @AllArgsConstructor
 public class ArticleServiceImp implements ArticleService {
-	private final int DEFAULT_ROW_NUM = 4;
+	private final int DEFAULT_ROW_NUM = 10;
 
 	/** The mapper. */
 	private ArticleMapper mapper;

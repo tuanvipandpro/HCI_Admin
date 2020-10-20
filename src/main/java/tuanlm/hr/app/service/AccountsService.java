@@ -5,6 +5,9 @@ import java.util.List;
 import tuanlm.hr.app.models.model.Account;
 import tuanlm.hr.app.models.request.InsertAccountRequest;
 
+/**
+ * The Interface AccountsService.
+ */
 public interface AccountsService {
 	
 	/**
@@ -29,4 +32,13 @@ public interface AccountsService {
 	 * @param mode the mode
 	 */
 	void updateActiveAccount(String username, int mode);
+	
+	
+	/**
+	 * Change password.
+	 *
+	 * @param username the username
+	 * @param password the password
+	 */
+	void changePassword(String username, String password);
 }

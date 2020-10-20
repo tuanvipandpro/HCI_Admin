@@ -70,7 +70,7 @@ export default {
         // Check Error Status
         if (e.toString().includes('Request failed with status code 401')) {
           this.showMessage('Tài khoản của bạn không đủ quyền để đăng nhập vào trang này !', 'warning')
-        } else if (e.toString().includes('Request failed with status code 403')) {
+        } else {
           this.showMessage('Tài khoản hoặc mật khẩu không chính xác !', 'warning')
         }
       })

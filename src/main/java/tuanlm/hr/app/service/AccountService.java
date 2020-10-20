@@ -110,4 +110,15 @@ public class AccountService implements UserDetailsService, AccountsService  {
 	public void updateActiveAccount(String username, int mode) {
 		mapper.updateActiveAccount(username, mode);
 	}
+
+	/**
+	 * Change password.
+	 *
+	 * @param username the username
+	 * @param password the password
+	 */
+	@Override
+	public void changePassword(String username, String password) {
+		mapper.changePassword(username, encoder.encode(password));
+	}
 }

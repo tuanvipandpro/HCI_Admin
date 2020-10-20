@@ -124,17 +124,15 @@ export default {
      * Logout 5-2
      */
     doLogout () {
-      this.$confirm('Bạn có muốn đăng xuất?', 'Warning', {
+      this.$confirm('Bạn có muốn đăng xuất?', 'Đăng xuất ?', {
         confirmButtonText: 'Đồng ý',
         cancelButtonText: 'Hủy Bỏ',
         type: 'warning'
       }).then(() => {
         const loader = this.getLoader()
-        setTimeout(() => {
-          sessionStorage.clear()
-          this.transitTo('Login', undefined)
-          this.closeLoader(loader)
-        }, 1000)
+        sessionStorage.clear()
+        this.transitTo('Login', undefined)
+        this.closeLoader(loader)
       })
     },
     /**

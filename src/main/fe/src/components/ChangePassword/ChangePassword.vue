@@ -34,6 +34,7 @@
 
 <script>
 import Menu from '../Common/Menu'
+import { mapActions } from 'vuex'
 
 export default {
   components: {
@@ -57,7 +58,6 @@ export default {
         newPassword: '',
         confirmPassword: ''
       },
-      formTemp: {},
       rules: {
         newPassword: [
           {required: true, message: 'Vui lòng nhập mật khẩu mới !', trigger: 'blur'}
@@ -72,24 +72,28 @@ export default {
     this.checkAuthen()
   },
   methods: {
+    ...mapActions('changePassword', ['_changePassword']),
     /**
      * Validate and Submit Form
      */
     submitForm () {
-      this.formTemp = {...this.forgetForm}
       this.$refs['forgetForm'].validate((valid) => {
         if (valid) {
-          this.$confirm('Bạn có chắc chắn muốn thay đổi mật khẩu ?', 'Warning', {
+          this.$confirm('Bạn có chắc chắn muốn thay đổi mật khẩu ?', 'Đổi mật khẩu ?', {
             confirmButtonText: 'Đồng ý',
             cancelButtonText: 'Hủy bỏ',
             type: 'warning'
           }).then(() => {
             const loader = this.getLoader()
-            setTimeout(() => {
-              this.showMessage('Mật khẩu đã được thay đổi !!!', 'success')
+            this._changePassword(this.forgetForm.newPassword).then(res => {
               this.closeLoader(loader)
+              this.showMessage('Mật khẩu đã được thay đổi !!!', 'success')
               this.resetForm()
-            }, 1000)
+            })
+              .catch(e => {
+                this.closeLoader(loader)
+                console.error(e)
+              })
           })
         } else {
           return false
