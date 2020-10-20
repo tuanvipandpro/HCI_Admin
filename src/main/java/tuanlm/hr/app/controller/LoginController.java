@@ -10,6 +10,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -43,13 +44,18 @@ public class LoginController {
 	@Operation(description = "Api Login User")
 	@PostMapping("/login")
 	public ResponseEntity<LoginResponse> login(
-			@RequestBody @Valid LoginRequest request, 
+			@RequestBody @Valid LoginRequest request,
+			@RequestHeader(name = "user-agent") String userAgent,
 			Device device) {
 		
 		SecurityContextHolder.getContext().setAuthentication(authenticationManager
 				.authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword())));
 		
-		int mode = (device.isNormal()) ? AppConstants.LOGIN_ADMIN : AppConstants.LOGIN_MEMBER;
+		// int mode = (device.isNormal()) ? AppConstants.LOGIN_ADMIN : AppConstants.LOGIN_MEMBER;
+		System.err.println(userAgent);
+		int mode = (userAgent.contains("Android") || userAgent.contains("iPhone")) ? 
+				AppConstants.LOGIN_MEMBER : 
+				AppConstants.LOGIN_ADMIN;
 		
 		LoginResponse response = accountService.getLoginResponse(request.getUsername(), mode);
 		
