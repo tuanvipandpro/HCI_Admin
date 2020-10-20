@@ -1,6 +1,5 @@
 package tuanlm.hr.app.mapper;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -54,7 +53,7 @@ public interface WorkMapper {
 	 * @param to the to
 	 * @return the total work by date
 	 */
-	@Select(""
+	@Select("<script> "
 			+ "SELECT "
 			+ "		W.id 						AS id, "
 			+ "		W.\"employeeId\" 			AS employeeId, "
@@ -69,12 +68,18 @@ public interface WorkMapper {
 			+ "		work AS W "
 			+ "WHERE "
 			+ "		W.\"employeeId\" = #{employeeId} "
-			+ "		AND W.start >= #{from} "
-			+ "		AND W.\"end\" <= #{to} "
 			+ "		AND W.active = true "
+			+ "<if test=\"from != null and to != null\"> "
+			+ "		AND W.start <![CDATA[>=]]> #{from} "
+			+ "</if> "
+			+ "		AND W.\"end\" <![CDATA[<=]]> #{to} "
 			+ "ORDER BY "
-			+ "		W.id DESC ")
-	List<Work> getTotalWorkByDate(int employeeId, LocalDate from, LocalDate to);
+			+ "		W.start DESC "
+			+ "<if test=\"from == null\"> "
+			+ "		LIMIT 10 "
+			+ "</if> "
+			+ "</script>")
+	List<Work> getTotalWorkByDate(int employeeId, LocalDateTime from, LocalDateTime to);
 	
 	/**
 	 * Gets the work now.

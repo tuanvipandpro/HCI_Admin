@@ -46,7 +46,9 @@ public class WorkServiceImp implements WorkService {
 	@Override
 	public TotalWorkReponse getTotalWorkByDate(int employeeId, String from, String to) {
 		Duration totalTime = Duration.ZERO;
-		List<Work> works = mapper.getTotalWorkByDate(employeeId, LocalDate.parse(from), LocalDate.parse(to).plusDays(1));
+		List<Work> works = (from != null && to != null) ? 
+				mapper.getTotalWorkByDate(employeeId, LocalDate.parse(from).atStartOfDay(), LocalDate.parse(to).atStartOfDay().plusDays(1)) : 
+				mapper.getTotalWorkByDate(employeeId, null, LocalDateTime.now());
 		
 		for (Work work : works) {
 			if (work.isPresent()) {
