@@ -4,13 +4,11 @@ import javax.validation.Valid;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.mobile.device.Device;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -41,24 +39,31 @@ public class LoginController {
 	 * @param request the request
 	 * @return the response entity
 	 */
-	@Operation(description = "Api Login User")
+	@Operation(description = "Api Login Admin (Web)")
 	@PostMapping("/login")
-	public ResponseEntity<LoginResponse> login(
-			@RequestBody @Valid LoginRequest request,
-			@RequestHeader(name = "user-agent") String userAgent,
-			Device device) {
+	public ResponseEntity<LoginResponse> login(@RequestBody @Valid LoginRequest request) {
 		
 		SecurityContextHolder.getContext().setAuthentication(authenticationManager
 				.authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword())));
 		
-		// int mode = (device.isNormal()) ? AppConstants.LOGIN_ADMIN : AppConstants.LOGIN_MEMBER;
-		System.err.println(userAgent);
-		int mode = (userAgent.contains("Android") || userAgent.contains("iPhone")) ? 
-				AppConstants.LOGIN_MEMBER : 
-				AppConstants.LOGIN_ADMIN;
-		
-		LoginResponse response = accountService.getLoginResponse(request.getUsername(), mode);
+		LoginResponse response = accountService.getLoginResponse(request.getUsername(), AppConstants.LOGIN_ADMIN);
 		
 		return (response == null) ? new ResponseEntity<LoginResponse>(HttpStatus.UNAUTHORIZED)  : new ResponseEntity<LoginResponse>(response, HttpStatus.OK);
+	}
+	
+	/**
+	 * Login for mobile.
+	 *
+	 * @param request the request
+	 * @return the response entity
+	 */
+	@Operation(description = "Api Login User (Mobile)")
+	@PostMapping("/login-for-mobile")	
+	public ResponseEntity<LoginResponse> loginForMobile(@RequestBody @Valid LoginRequest request) {
+		
+		SecurityContextHolder.getContext().setAuthentication(authenticationManager
+				.authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword())));
+
+		return new ResponseEntity<LoginResponse>(accountService.getLoginResponse(request.getUsername(), AppConstants.LOGIN_MEMBER), HttpStatus.OK);
 	}
 }

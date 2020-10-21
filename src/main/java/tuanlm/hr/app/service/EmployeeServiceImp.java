@@ -13,7 +13,6 @@ import tuanlm.hr.app.models.model.Employee;
  * The Class EmployeeServiceImp.
  */
 @Service
-
 @AllArgsConstructor
 public class EmployeeServiceImp implements EmployeeService{
 	
@@ -40,5 +39,16 @@ public class EmployeeServiceImp implements EmployeeService{
 	@Override
 	public List<Employee> getAllEmployee(int mode) {
 		return mapper.getAllEmployee(mode);
+	}
+
+	/**
+	 * Gets the by store.
+	 *
+	 * @param storeId the store id
+	 * @return the by store
+	 */
+	@Override
+	public List<Employee> getByStore(int storeId) {
+		return mapper.getEmployeeByStoreId(storeId);
 	}
 }
