@@ -35,7 +35,7 @@ public class AttendanceServiceImp implements AttendanceService {
 		
 		Work work = workMapper.getWorkNow(request.getEmployeeId(), request.getStoreId(), LocalDateTime.parse(request.getDatetime(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
 		
-		if (work != null && work.isPresent()) {
+		if (work != null && !work.isPresent()) {
 			workMapper.presentWork(work.getId());
 		}
 	}
