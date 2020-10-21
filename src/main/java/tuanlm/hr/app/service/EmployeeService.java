@@ -22,7 +22,16 @@ public interface EmployeeService {
 	/**
 	 * Gets the all employee.
 	 *
+	 * @param mode the mode
 	 * @return the all employee
 	 */
 	List<Employee> getAllEmployee(int mode);
+	
+	/**
+	 * Gets the by store.
+	 *
+	 * @param storeId the store id
+	 * @return the by store
+	 */
+	List<Employee> getByStore(int storeId);
 }

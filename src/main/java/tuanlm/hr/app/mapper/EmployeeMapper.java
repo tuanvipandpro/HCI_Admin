@@ -65,4 +65,32 @@ public interface EmployeeMapper {
 			+ "		E.id "
 			+ "</script> ")
 	List<Employee> getAllEmployee(int mode);
+	
+	/**
+	 * Gets the employee by store id.
+	 *
+	 * @param storeId the store id
+	 * @return the employee by store id
+	 */
+	@Select(""
+			+ "SELECT "
+			+ "		E.id 					AS id, "
+			+ "		E.name					AS name, "
+			+ "		E.address				AS address, "
+			+ "		E.gender				AS gender, "
+			+ "		E.phone					AS phone, "
+			+ "		E.\"storeId\"			AS storeId, "
+			+ "		E.\"bankNumber\"		AS bankNumber, "
+			+ "		E.email					AS email, "
+			+ "		E.salary				AS salary, "
+			+ "		E.active				AS active "
+			+ "FROM "
+			+ "		Employee AS E "
+			+ "WHERE "
+			+ "		E.active = true "
+			+ "		AND E.\"storeId\" = #{storeId} "
+			+ "ORDER BY "
+			+ "		E.id "
+			+ "")	
+	List<Employee> getEmployeeByStoreId(int storeId);
 }

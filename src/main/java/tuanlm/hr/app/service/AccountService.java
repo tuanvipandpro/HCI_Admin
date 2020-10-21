@@ -17,6 +17,7 @@ import tuanlm.hr.app.mapper.AccountMapper;
 import tuanlm.hr.app.models.model.Account;
 import tuanlm.hr.app.models.request.InsertAccountRequest;
 import tuanlm.hr.app.models.response.LoginResponse;
+import tuanlm.hr.app.utils.AppConstants;
 import tuanlm.hr.app.utils.JwtUtils;
 
 /**
@@ -71,7 +72,7 @@ public class AccountService implements UserDetailsService, AccountsService  {
 		if (account == null) {
 			return null;
 		}
-		else if (mode == 1){
+		else if (mode == AppConstants.LOGIN_ADMIN){
 			return (!account.getRole().equals("ROLE_ADMIN")) ? null : 
 				new LoginResponse(account.getEmployeeId(), JwtUtils.getJwt(account.getUsername()), true);
 		}

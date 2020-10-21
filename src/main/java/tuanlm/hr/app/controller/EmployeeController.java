@@ -49,4 +49,16 @@ public class EmployeeController {
 	public ResponseEntity<List<Employee>> getAllEmployee(@PathVariable int mode) {
 		return new ResponseEntity<List<Employee>>(service.getAllEmployee(mode), HttpStatus.OK);
 	}
+	
+	/**
+	 * Gets the employee by store.
+	 *
+	 * @param storeId the store id
+	 * @return the employee by store
+	 */
+	@Operation(description = "Lấy thông tin tất cả nhân viên theo. Mode (0: All, 1: Active)", security = @SecurityRequirement(name = "bearerAuth"))
+	@GetMapping("/get-by-store/{storeId}")	
+	public ResponseEntity<List<Employee>> getEmployeeByStore(@PathVariable int storeId) {
+		return new ResponseEntity<List<Employee>>(service.getByStore(storeId), HttpStatus.OK);
+	}
 }
