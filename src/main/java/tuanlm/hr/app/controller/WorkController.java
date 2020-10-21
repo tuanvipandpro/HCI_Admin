@@ -21,6 +21,7 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.AllArgsConstructor;
 import tuanlm.hr.app.models.model.Work;
 import tuanlm.hr.app.models.model.WorkManagement;
+import tuanlm.hr.app.models.model.WorkStore;
 import tuanlm.hr.app.models.request.AssignWorkRequest;
 import tuanlm.hr.app.models.request.ShiftWorkRequest;
 import tuanlm.hr.app.models.response.TotalWorkReponse;
@@ -81,6 +82,18 @@ public class WorkController {
 	}
 	
 	/**
+	 * Gets the work store.
+	 *
+	 * @param employeeId the employee id
+	 * @return the work store
+	 */
+	@Operation(description = "Lấy 10 ca làm gần nhất của nhân viên", security = @SecurityRequirement(name = "bearerAuth"))
+	@GetMapping("/get-work-by-employeeId/{employeeId}")	
+	public ResponseEntity<List<WorkStore>> getWorkStore(@PathVariable int employeeId) {
+		return new ResponseEntity<List<WorkStore>>(service.getWorkEmployee(employeeId), HttpStatus.OK);
+	}
+	
+	/**
 	 * Shift work.
 	 *
 	 * @param request the request
@@ -117,6 +130,12 @@ public class WorkController {
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 	
+	/**
+	 * Assign work.
+	 *
+	 * @param request the request
+	 * @return the response entity
+	 */
 	@Operation(description = "Giao ca làm việc cho nhân viên", security = @SecurityRequirement(name = "bearerAuth"))
 	@PostMapping("/assign-work")
 	public ResponseEntity<Boolean> assignWork(@RequestBody @Valid AssignWorkRequest request) {

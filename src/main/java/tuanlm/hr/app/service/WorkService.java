@@ -4,6 +4,7 @@ import java.util.List;
 
 import tuanlm.hr.app.models.model.Work;
 import tuanlm.hr.app.models.model.WorkManagement;
+import tuanlm.hr.app.models.model.WorkStore;
 import tuanlm.hr.app.models.request.AssignWorkRequest;
 import tuanlm.hr.app.models.response.TotalWorkReponse;
 
@@ -45,6 +46,14 @@ public interface WorkService {
 	 * @return the work management
 	 */
 	List<WorkManagement> getWorkManagement();
+	
+	/**
+	 * Gets the work store.
+	 *
+	 * @param employeeId the employee id
+	 * @return the work store
+	 */
+	List<WorkStore> getWorkEmployee(int employeeId);
 	
 	/**
 	 * Shift work.

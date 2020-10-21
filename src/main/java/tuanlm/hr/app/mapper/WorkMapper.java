@@ -10,6 +10,7 @@ import org.apache.ibatis.annotations.Update;
 
 import tuanlm.hr.app.models.model.Work;
 import tuanlm.hr.app.models.model.WorkManagement;
+import tuanlm.hr.app.models.model.WorkStore;
 
 /**
  * The Interface WorkMapper.
@@ -80,6 +81,40 @@ public interface WorkMapper {
 			+ "</if> "
 			+ "</script>")
 	List<Work> getTotalWorkByDate(int employeeId, LocalDateTime from, LocalDateTime to);
+	
+	/**
+	 * Gets the work by employee.
+	 *
+	 * @param employeeId the employee id
+	 * @param now the now
+	 * @return the work by employee
+	 */
+	@Select(""
+			+ "SELECT "
+			+ "		W.id 						AS id, "
+			+ "		W.\"employeeId\" 			AS employeeId, "
+			+ "		W.\"storeId\"	 			AS storeId, "
+			+ "		W.present		 			AS present, "
+			+ "		W.\"shiftId\"	 			AS shiftId, "
+			+ "		W.\"statusId\"	 			AS statusId, "
+			+ "		W.note 						AS note, "
+			+ "		W.start 					AS start, "
+			+ "		W.\"end\"	 				AS end, "
+			+ "		S.name						AS storeNm "			
+			+ "FROM "
+			+ "		work AS W,"
+			+ "		store AS S "
+			+ "WHERE "
+			+ "		W.\"employeeId\" = #{employeeId} "
+			+ "		AND W.\"storeId\" = S.id "
+			+ "		AND W.active = true "
+			+ "		AND W.\"end\" <= #{now} "
+			+ "ORDER BY "
+			+ "		W.start DESC "
+			+ "LIMIT "
+			+ "		10 "
+			+ "")
+	List<WorkStore> getWorkByEmployee(int employeeId, LocalDateTime now);
 	
 	/**
 	 * Gets the work now.

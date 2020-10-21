@@ -12,6 +12,7 @@ import lombok.AllArgsConstructor;
 import tuanlm.hr.app.mapper.WorkMapper;
 import tuanlm.hr.app.models.model.Work;
 import tuanlm.hr.app.models.model.WorkManagement;
+import tuanlm.hr.app.models.model.WorkStore;
 import tuanlm.hr.app.models.request.AssignWorkRequest;
 import tuanlm.hr.app.models.response.TotalWorkReponse;
 import tuanlm.hr.app.utils.DateTimeUtils;
@@ -124,5 +125,16 @@ public class WorkServiceImp implements WorkService {
 		
 		mapper.createWork(request.getEmployeeId(), request.getShiftId(), start, end, request.getStoreId());
 		return true;
+	}
+
+	/**
+	 * Gets the work employee.
+	 *
+	 * @param employeeId the employee id
+	 * @return the work employee
+	 */
+	@Override
+	public List<WorkStore> getWorkEmployee(int employeeId) {
+		return mapper.getWorkByEmployee(employeeId, LocalDateTime.now());
 	}
 }
