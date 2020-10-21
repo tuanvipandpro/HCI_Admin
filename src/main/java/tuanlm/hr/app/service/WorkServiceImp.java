@@ -49,7 +49,7 @@ public class WorkServiceImp implements WorkService {
 		Duration totalTime = Duration.ZERO;
 		List<Work> works = (from != null && to != null) ? 
 				mapper.getTotalWorkByDate(employeeId, LocalDate.parse(from).atStartOfDay(), LocalDate.parse(to).atStartOfDay().plusDays(1)) : 
-				mapper.getTotalWorkByDate(employeeId, null, LocalDateTime.now());
+				mapper.getTotalWorkByDate(employeeId, null, LocalDateTime.now().plusHours(4));
 		
 		for (Work work : works) {
 			if (work.isPresent()) {
