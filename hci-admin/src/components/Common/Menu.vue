@@ -21,10 +21,10 @@
         <!-- <el-menu-item index="2-2">Update Pitch</el-menu-item> -->
         <el-menu-item index="2-3"  @click="managePitch">Quản lý sân</el-menu-item>
       </el-submenu>
-      <el-menu-item index="3" @click="doNotification">
+      <!-- <el-menu-item index="3" @click="doNotification">
         <i class="el-icon-s-order"></i>
         <span>Thêm mới thông báo</span>
-      </el-menu-item>
+      </el-menu-item> -->
       <el-submenu index="4">
         <template slot="title">
           <i class="el-icon-setting"></i>
