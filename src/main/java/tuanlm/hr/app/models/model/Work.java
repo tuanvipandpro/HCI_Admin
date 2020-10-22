@@ -37,4 +37,7 @@ public class Work {
 	
 	/** The end. */
 	private LocalDateTime end;
+	
+	/** The present time. */
+	private LocalDateTime presentTime;
 }

@@ -30,6 +30,9 @@ public class WorkManagement {
 	/** The end. */
 	private String end;
 	
+	/** The present time. */
+	private String presentTime;
+	
 	/** The store id. */
 	private int storeId;
 	

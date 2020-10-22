@@ -35,7 +35,8 @@ public interface WorkMapper {
 			+ "		W.\"statusId\"	 			AS statusId, "
 			+ "		W.note 						AS note, "
 			+ "		W.start 					AS start, "
-			+ "		W.\"end\"	 				AS end "			
+			+ "		W.\"end\"	 				AS end, "
+			+ "		W.present_time				AS presentTime "			
 			+ "FROM "
 			+ "		work AS W "
 			+ "WHERE "
@@ -64,7 +65,8 @@ public interface WorkMapper {
 			+ "		W.\"statusId\"	 			AS statusId, "
 			+ "		W.note 						AS note, "
 			+ "		W.start 					AS start, "
-			+ "		W.\"end\"	 				AS end "			
+			+ "		W.\"end\"	 				AS end, "
+			+ "		W.present_time				AS presentTime "	
 			+ "FROM "
 			+ "		work AS W "
 			+ "WHERE "
@@ -100,6 +102,7 @@ public interface WorkMapper {
 			+ "		W.note 						AS note, "
 			+ "		W.start 					AS start, "
 			+ "		W.\"end\"	 				AS end, "
+			+ "		W.present_time				AS presentTime, "	
 			+ "		S.name						AS storeNm "			
 			+ "FROM "
 			+ "		work AS W,"
@@ -134,7 +137,8 @@ public interface WorkMapper {
 			+ "		W.\"statusId\"	 			AS statusId, "
 			+ "		W.note 						AS note, "
 			+ "		W.start 					AS start, "
-			+ "		W.\"end\"	 				AS end "			
+			+ "		W.\"end\"	 				AS end, "
+			+ "		W.present_time				AS presentTime "			
 			+ "FROM "
 			+ "		work AS W "
 			+ "WHERE "
@@ -145,6 +149,12 @@ public interface WorkMapper {
 			+ "		AND W.active = true ")
 	Work getWorkNow(int employeeId, int storeId, LocalDateTime datetime);
 	
+	/**
+	 * Gets the work by id.
+	 *
+	 * @param id the id
+	 * @return the work by id
+	 */
 	@Select(""
 			+ "SELECT "
 			+ "		W.id 						AS id, "
@@ -155,7 +165,8 @@ public interface WorkMapper {
 			+ "		W.\"statusId\"	 			AS statusId, "
 			+ "		W.note 						AS note, "
 			+ "		W.start 					AS start, "
-			+ "		W.\"end\"	 				AS end "			
+			+ "		W.\"end\"	 				AS end, "	
+			+ "		W.present_time				AS presentTime "				
 			+ "FROM "
 			+ "		work AS W "
 			+ "WHERE "
@@ -179,7 +190,8 @@ public interface WorkMapper {
 			+ "		W.present		 			AS present, "
 			+ "		S1.name			 			AS shiftNm, "
 			+ "		W.start 					AS start, "
-			+ "		W.\"end\"	 				AS end "			
+			+ "		W.\"end\"	 				AS end, "
+			+ "		W.present_time				AS presentTime "				
 			+ "FROM "
 			+ "		work AS W, "
 			+ "		employee AS E, "
@@ -201,9 +213,9 @@ public interface WorkMapper {
 	 */
 	@Update(""
 			+ "UPDATE work "
-			+ "SET present = true "
+			+ "SET present = true, present_time = #{presentTime} "
 			+ "WHERE id = #{workId} ")
-	void presentWork(int workId);
+	void presentWork(int workId, LocalDateTime presentTime );
 	
 	/**
 	 * Shift work.

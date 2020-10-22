@@ -1,7 +1,5 @@
 package tuanlm.hr.app.models.model;
 
-import java.time.LocalDateTime;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -36,8 +34,11 @@ public class WorkStore {
 	private String note;
 	
 	/** The start. */
-	private LocalDateTime start;
+	private String start;
 	
 	/** The end. */
-	private LocalDateTime end;
+	private String end;
+	
+	/** The present time. */
+	private String presentTime;
 }
