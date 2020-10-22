@@ -3,6 +3,7 @@ package tuanlm.hr.app.service;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
@@ -133,6 +134,6 @@ public class WorkServiceImp implements WorkService {
 	 */
 	@Override
 	public List<WorkStore> getWorkEmployee(int employeeId) {
-		return mapper.getWorkByEmployee(employeeId, LocalDateTime.now().plusHours(4));
+		return mapper.getWorkByEmployee(employeeId, LocalDateTime.now(ZoneId.of("Asia/Ho_Chi_Minh")).plusHours(4));
 	}
 }
