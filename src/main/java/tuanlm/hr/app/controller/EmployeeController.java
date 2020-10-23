@@ -33,7 +33,7 @@ public class EmployeeController {
 	 * @param id the id
 	 * @return the employee by id
 	 */
-	@Operation(description = "Lấy thông tin nhân viên theo id", security = @SecurityRequirement(name = "bearerAuth"))
+	@Operation(summary = "Lấy thông tin nhân viên theo id", security = @SecurityRequirement(name = "bearerAuth"))
 	@GetMapping("/{id}")
 	public ResponseEntity<Employee> getEmployeeById(@PathVariable @Parameter(description = "Id của nhân viên (employeeId)") int id) {
 		return new ResponseEntity<Employee>(service.getEmployeeById(id), HttpStatus.OK);
@@ -44,7 +44,7 @@ public class EmployeeController {
 	 *
 	 * @return the all employee
 	 */
-	@Operation(description = "Lấy thông tin tất cả nhân viên theo. Mode (0: All, 1: Active)", security = @SecurityRequirement(name = "bearerAuth"))
+	@Operation(summary = "Lấy thông tin tất cả nhân viên theo. Mode (0: All, 1: Active)", security = @SecurityRequirement(name = "bearerAuth"))
 	@GetMapping("/get-all/{mode}")
 	public ResponseEntity<List<Employee>> getAllEmployee(@PathVariable int mode) {
 		return new ResponseEntity<List<Employee>>(service.getAllEmployee(mode), HttpStatus.OK);
@@ -56,7 +56,7 @@ public class EmployeeController {
 	 * @param storeId the store id
 	 * @return the employee by store
 	 */
-	@Operation(description = "Lấy thông tin tất cả nhân viên theo. Mode (0: All, 1: Active)", security = @SecurityRequirement(name = "bearerAuth"))
+	@Operation(summary = "Lấy thông tin tất cả nhân viên theo. Mode (0: All, 1: Active)", security = @SecurityRequirement(name = "bearerAuth"))
 	@GetMapping("/get-by-store/{storeId}")	
 	public ResponseEntity<List<Employee>> getEmployeeByStore(@PathVariable int storeId) {
 		return new ResponseEntity<List<Employee>>(service.getByStore(storeId), HttpStatus.OK);

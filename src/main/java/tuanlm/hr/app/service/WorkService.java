@@ -48,6 +48,13 @@ public interface WorkService {
 	List<WorkManagement> getWorkManagement();
 	
 	/**
+	 * Gets the work by date.
+	 *
+	 * @return the work by date
+	 */
+	List<WorkStore> getWorkByDate(int employeeId, String date);
+	
+	/**
 	 * Gets the work store.
 	 *
 	 * @param employeeId the employee id

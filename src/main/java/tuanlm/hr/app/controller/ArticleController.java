@@ -38,7 +38,7 @@ public class ArticleController {
 	 * @param pageNo the page no
 	 * @return the article by paging
 	 */
-	@Operation(description = "Lấy tin tức theo trang (mặc định là 4 tin tức một trang). Nếu truyền pageNo là 0, sẽ lấy tất cả tin tức", 
+	@Operation(summary = "Lấy tin tức theo trang (mặc định là 4 tin tức một trang). Nếu truyền pageNo là 0, sẽ lấy tất cả tin tức", 
 			security = @SecurityRequirement(name = "bearerAuth"))
 	@GetMapping("/{pageNo}")
 	public ResponseEntity<List<Article>> getArticleByPaging(@PathVariable @Parameter(description = "Index của trang") int pageNo) {
@@ -52,7 +52,7 @@ public class ArticleController {
 	 * @param articleId the article id
 	 * @return the article by id
 	 */
-	@Operation(description = "Lấy thông tin của tin tức theo id. ", security = @SecurityRequirement(name = "bearerAuth"))
+	@Operation(summary = "Lấy thông tin của tin tức theo id. ", security = @SecurityRequirement(name = "bearerAuth"))
 	@GetMapping("get-by-id/{articleId}")
 	public ResponseEntity<Article> getArticleById(@PathVariable @Parameter(description = "Id của tin tức") int articleId) {
 		Article article = service.getById(articleId);
@@ -65,7 +65,7 @@ public class ArticleController {
 	 * @param articleId the article id
 	 * @return the response entity
 	 */
-	@Operation(description = "Xóa tin tức theo id. ", security = @SecurityRequirement(name = "bearerAuth"))
+	@Operation(summary = "Xóa tin tức theo id. ", security = @SecurityRequirement(name = "bearerAuth"))
 	@PutMapping("update-active-by-id/{articleId}/{mode}")
 	public ResponseEntity<Void> deleteArticleById(
 			@PathVariable @Parameter(description = "Id của tin tức") int articleId,
@@ -80,7 +80,7 @@ public class ArticleController {
 	 * @param request the request
 	 * @return the response entity
 	 */
-	@Operation(description = "Update hoặc tạo mới tin tức. Mode 1: Update, 2: Insert ", security = @SecurityRequirement(name = "bearerAuth"))
+	@Operation(summary = "Update hoặc tạo mới tin tức. Mode 1: Update, 2: Insert ", security = @SecurityRequirement(name = "bearerAuth"))
 	@PutMapping("/upsert-article")
 	public ResponseEntity<Void> upsertArticle(@RequestBody @Valid UpsertArticleRequest request) {
 		service.upsertArticle(request);

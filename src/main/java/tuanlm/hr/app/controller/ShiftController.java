@@ -28,7 +28,7 @@ public class ShiftController {
 	 *
 	 * @return the all shift
 	 */
-	@Operation(description = "Lấy thông tin các ca làm theo cửa hàng", security = @SecurityRequirement(name = "bearerAuth"))
+	@Operation(summary = "Lấy thông tin các ca làm theo cửa hàng", security = @SecurityRequirement(name = "bearerAuth"))
 	@GetMapping("/get-all/{storeId}")
 	public ResponseEntity<List<Shift>> getAllShiftByStoreId(@PathVariable int storeId) {
 		return new ResponseEntity<List<Shift>>(service.getAllByStoreId(storeId) ,HttpStatus.OK);

@@ -32,7 +32,7 @@ public class AttendanceController {
 	 * @param request the request
 	 * @return the response entity
 	 */
-	@Operation(description = "Điểm danh nhân viên (In Process)", security = @SecurityRequirement(name = "bearerAuth"))
+	@Operation(summary = "Điểm danh nhân viên (In Process)", security = @SecurityRequirement(name = "bearerAuth"))
 	@PostMapping("check-attendance")
 	public ResponseEntity<Void> checkAttendanceForEmployee(@RequestBody @Valid CheckAttendanceRequest request) {
 		service.checkAttendance(request);

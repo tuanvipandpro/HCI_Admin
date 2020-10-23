@@ -12,6 +12,7 @@ import tuanlm.hr.app.models.model.Work;
 import tuanlm.hr.app.models.model.WorkManagement;
 import tuanlm.hr.app.models.model.WorkStore;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Interface WorkMapper.
  */
@@ -120,6 +121,40 @@ public interface WorkMapper {
 	List<WorkStore> getWorkByEmployee(int employeeId, LocalDateTime now);
 	
 	/**
+	 * Gets the work by date.
+	 *
+	 * @param employeeId the employee id
+	 * @param now the now
+	 * @return the work by date
+	 */
+	@Select(""
+			+ "SELECT "
+			+ "		W.id 						AS id, "
+			+ "		W.\"employeeId\" 			AS employeeId, "
+			+ "		W.\"storeId\"	 			AS storeId, "
+			+ "		W.present		 			AS present, "
+			+ "		W.\"shiftId\"	 			AS shiftId, "
+			+ "		W.\"statusId\"	 			AS statusId, "
+			+ "		W.note 						AS note, "
+			+ "		W.start 					AS start, "
+			+ "		W.\"end\"	 				AS end, "
+			+ "		W.present_time				AS presentTime, "	
+			+ "		S.name						AS storeNm "			
+			+ "FROM "
+			+ "		work AS W,"
+			+ "		store AS S "
+			+ "WHERE "
+			+ "		W.\"employeeId\" = #{employeeId} "
+			+ "		AND W.\"storeId\" = S.id "
+			+ "		AND W.active = true "
+			+ "		AND W.start >= #{from}"
+			+ "		AND W.\"end\" < #{to} "
+			+ "ORDER BY "
+			+ "		W.start DESC "
+			+ "")
+	List<WorkStore> getWorkByDate(int employeeId, LocalDateTime from, LocalDateTime to);	
+	
+	/**
 	 * Gets the work now.
 	 *
 	 * @param employeeId the employee id
@@ -210,6 +245,7 @@ public interface WorkMapper {
 	 * Present work.
 	 *
 	 * @param workId the work id
+	 * @param presentTime the present time
 	 */
 	@Update(""
 			+ "UPDATE work "
@@ -251,7 +287,11 @@ public interface WorkMapper {
 	/**
 	 * Creates the work.
 	 *
-	 * @param request the request
+	 * @param employeeId the employee id
+	 * @param shiftId the shift id
+	 * @param start the start
+	 * @param end the end
+	 * @param storeId the store id
 	 */
 	@Insert(""
 			+ "INSERT INTO work(\"employeeId\", active, present, \"shiftId\", \"statusId\", start, \"end\", \"storeId\") "

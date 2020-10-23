@@ -39,7 +39,7 @@ public class LoginController {
 	 * @param request the request
 	 * @return the response entity
 	 */
-	@Operation(description = "Api Login Admin (Web)")
+	@Operation(summary = "Api Login Admin (Web)")
 	@PostMapping("/login")
 	public ResponseEntity<LoginResponse> login(@RequestBody @Valid LoginRequest request) {
 		
@@ -57,7 +57,7 @@ public class LoginController {
 	 * @param request the request
 	 * @return the response entity
 	 */
-	@Operation(description = "Api Login User (Mobile)")
+	@Operation(summary = "Api Login User (Mobile)")
 	@PostMapping("/login-for-mobile")	
 	public ResponseEntity<LoginResponse> loginForMobile(@RequestBody @Valid LoginRequest request) {
 		

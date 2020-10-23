@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -45,7 +46,7 @@ public class WorkController {
 	 * @param employeeId the employee id
 	 * @return the work next
 	 */
-	@Operation(description = "Lấy danh sách ca làm tiếp theo của nhân viên", security = @SecurityRequirement(name = "bearerAuth"))
+	@Operation(summary = "Lấy danh sách ca làm tiếp theo của nhân viên", security = @SecurityRequirement(name = "bearerAuth"))
 	@GetMapping("/get-next-work/{employeeId}")
 	public ResponseEntity<List<Work>> getWorkNext(@PathVariable int employeeId) {
 		return new ResponseEntity<List<Work>>(service.getListWorkNextAvailable(employeeId), HttpStatus.OK);
@@ -60,7 +61,7 @@ public class WorkController {
 	 * @param to the to
 	 * @return the total work by date
 	 */
-	@Operation(description = "Tổng hợp giờ công của nhân viên theo khoảng thời gian truyền vào", security = @SecurityRequirement(name = "bearerAuth"))
+	@Operation(summary = "Tổng hợp giờ công của nhân viên theo khoảng thời gian truyền vào", security = @SecurityRequirement(name = "bearerAuth"))
 	@GetMapping("/get-total-work/{employeeId}")
 	public ResponseEntity<TotalWorkReponse> getTotalWorkByDate(
 			@PathVariable int employeeId, 
@@ -70,12 +71,27 @@ public class WorkController {
 	}
 	
 	/**
+	 * Gets the work by date.
+	 *
+	 * @param employeeId the employee id
+	 * @param date the date
+	 * @return the work by date
+	 */
+	@Operation(summary = "Lấy ca làm việc của nhân viên theo ngày", security = @SecurityRequirement(name = "bearerAuth"))
+	@GetMapping("/get-work-by-date/{employeeId}")
+	public ResponseEntity<List<WorkStore>> getWorkByDate(
+			@PathVariable int employeeId, 
+			@NotBlank @Parameter(description = "Truyền theo format (yyyy-MM-dd)") @RequestParam String date) {
+		return new ResponseEntity<List<WorkStore>>(service.getWorkByDate(employeeId, date), HttpStatus.OK);
+	}
+	
+	/**
 	 * Gets the work by id.
 	 *
 	 * @param id the id
 	 * @return the work by id
 	 */
-	@Operation(description = "Lấy thông tin ca làm theo id", security = @SecurityRequirement(name = "bearerAuth"))
+	@Operation(summary = "Lấy thông tin ca làm theo id", security = @SecurityRequirement(name = "bearerAuth"))
 	@GetMapping("/get-work-by-id/{employeeId}")
 	public ResponseEntity<Work> getWorkById(@PathVariable int employeeId) {
 		return new ResponseEntity<Work>(service.getWorkById(employeeId), HttpStatus.OK);
@@ -87,7 +103,7 @@ public class WorkController {
 	 * @param employeeId the employee id
 	 * @return the work store
 	 */
-	@Operation(description = "Lấy 10 ca làm gần nhất của nhân viên", security = @SecurityRequirement(name = "bearerAuth"))
+	@Operation(summary = "Lấy 10 ca làm gần nhất của nhân viên", security = @SecurityRequirement(name = "bearerAuth"))
 	@GetMapping("/get-work-by-employeeId/{employeeId}")	
 	public ResponseEntity<List<WorkStore>> getWorkStore(@PathVariable int employeeId) {
 		return new ResponseEntity<List<WorkStore>>(service.getWorkEmployee(employeeId), HttpStatus.OK);
@@ -99,7 +115,7 @@ public class WorkController {
 	 * @param request the request
 	 * @return the response entity
 	 */
-	@Operation(description = "Thực hiện chuyển ca", security = @SecurityRequirement(name = "bearerAuth"))
+	@Operation(summary = "Thực hiện chuyển ca", security = @SecurityRequirement(name = "bearerAuth"))
 	@PutMapping("/shift-work")
 	public ResponseEntity<Void> shiftWork(@RequestBody @Valid ShiftWorkRequest request) {
 		service.shiftWork(request.getWorkId(), request.getShiftEmployeeId());
@@ -111,7 +127,7 @@ public class WorkController {
 	 *
 	 * @return the management works
 	 */
-	@Operation(description = "Lấy thông tin tất cả ca làm cho việc quản lý", security = @SecurityRequirement(name = "bearerAuth"))
+	@Operation(summary = "Lấy thông tin tất cả ca làm cho việc quản lý", security = @SecurityRequirement(name = "bearerAuth"))
 	@GetMapping("/get-work-management")
 	public ResponseEntity<List<WorkManagement>> getManagementWorks() {
 		return new ResponseEntity<List<WorkManagement>>(service.getWorkManagement(), HttpStatus.OK);
@@ -123,7 +139,7 @@ public class WorkController {
 	 * @param workId the work id
 	 * @return the response entity
 	 */
-	@Operation(description = "Update trạng thái ca làm theo id", security = @SecurityRequirement(name = "bearerAuth"))
+	@Operation(summary = "Update trạng thái ca làm theo id", security = @SecurityRequirement(name = "bearerAuth"))
 	@PutMapping("/active-work/{workId}/{mode}")
 	public ResponseEntity<Void> deleteWorkById(@PathVariable int workId, @PathVariable int mode) {
 		service.updateActiveWork(workId, mode);
@@ -136,7 +152,7 @@ public class WorkController {
 	 * @param request the request
 	 * @return the response entity
 	 */
-	@Operation(description = "Giao ca làm việc cho nhân viên", security = @SecurityRequirement(name = "bearerAuth"))
+	@Operation(summary = "Giao ca làm việc cho nhân viên", security = @SecurityRequirement(name = "bearerAuth"))
 	@PostMapping("/assign-work")
 	public ResponseEntity<Boolean> assignWork(@RequestBody @Valid AssignWorkRequest request) {
 		return (service.assginWork(request)) ?  new ResponseEntity<Boolean>(true, HttpStatus.OK) : new ResponseEntity<Boolean>(false, HttpStatus.CONFLICT);

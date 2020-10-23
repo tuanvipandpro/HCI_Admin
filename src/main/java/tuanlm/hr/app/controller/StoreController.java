@@ -27,7 +27,7 @@ public class StoreController {
 	 *
 	 * @return the all store
 	 */
-	@Operation(description = "Lấy tất cả các cửa hàng đang hoạt động", security = @SecurityRequirement(name = "bearerAuth"))
+	@Operation(summary = "Lấy tất cả các cửa hàng đang hoạt động", security = @SecurityRequirement(name = "bearerAuth"))
 	@GetMapping("/get-all")
 	public ResponseEntity<List<Store>> getAllStore() {
 		return new ResponseEntity<List<Store>>(service.getAllStore(), HttpStatus.OK);

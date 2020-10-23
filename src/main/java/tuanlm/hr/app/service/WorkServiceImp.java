@@ -136,4 +136,18 @@ public class WorkServiceImp implements WorkService {
 	public List<WorkStore> getWorkEmployee(int employeeId) {
 		return mapper.getWorkByEmployee(employeeId, LocalDateTime.now(ZoneId.of("Asia/Ho_Chi_Minh")).plusHours(4));
 	}
+
+	/**
+	 * Gets the work by date.
+	 *
+	 * @param employeeId the employee id
+	 * @param date the date
+	 * @return the work by date
+	 */
+	@Override
+	public List<WorkStore> getWorkByDate(int employeeId, String date) {
+		return mapper.getWorkByDate(employeeId, 
+				LocalDate.parse(date).atStartOfDay(),
+				LocalDate.parse(date).atStartOfDay().plusDays(1));
+	}
 }

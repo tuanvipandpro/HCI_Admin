@@ -34,7 +34,7 @@ public class AccountController {
 	 * @return the account
 	 */
 	@GetMapping("/get-all-account")
-	@Operation(description = "Lấy thông tin tất cả tài khoản trong hệ thống", security = @SecurityRequirement(name = "bearerAuth"))
+	@Operation(summary = "Lấy thông tin tất cả tài khoản trong hệ thống", security = @SecurityRequirement(name = "bearerAuth"))
 	public ResponseEntity<List<Account>> getAccount() {
 		return new ResponseEntity<List<Account>>(service.getAccounts(), HttpStatus.OK);
 	}
@@ -45,7 +45,7 @@ public class AccountController {
 	 * @param request the request
 	 */
 	@PostMapping("/insert-account")
-	@Operation(description = "Insert tài khoản trong hệ thống", security = @SecurityRequirement(name = "bearerAuth"))
+	@Operation(summary = "Insert tài khoản trong hệ thống", security = @SecurityRequirement(name = "bearerAuth"))
 	public ResponseEntity<Void> upsertAccount(@RequestBody InsertAccountRequest request) {
 		service.insertAccount(request);
 		return new ResponseEntity<Void>(HttpStatus.OK);
@@ -59,7 +59,7 @@ public class AccountController {
 	 * @return the response entity
 	 */
 	@PutMapping("/update-active-account/{username}/{mode}")
-	@Operation(description = "Update trạng thái của account (0: Xóa, 1: Active)", security = @SecurityRequirement(name = "bearerAuth"))
+	@Operation(summary = "Update trạng thái của account (0: Xóa, 1: Active)", security = @SecurityRequirement(name = "bearerAuth"))
 	public ResponseEntity<Void> updateActiveAccount(@PathVariable String username, @PathVariable int mode) {
 		service.updateActiveAccount(username, mode);
 		return new ResponseEntity<Void>(HttpStatus.OK);
@@ -72,7 +72,7 @@ public class AccountController {
 	 * @return the response entity
 	 */
 	@PutMapping("/change-password")
-	@Operation(description = "Thay đổi mật khẩu", security = @SecurityRequirement(name = "bearerAuth"))	
+	@Operation(summary = "Thay đổi mật khẩu", security = @SecurityRequirement(name = "bearerAuth"))	
 	public ResponseEntity<Void> changePassword(@RequestBody LoginRequest request) {
 		service.changePassword(request.getUsername(), request.getPassword());
 		return new ResponseEntity<Void>(HttpStatus.OK);

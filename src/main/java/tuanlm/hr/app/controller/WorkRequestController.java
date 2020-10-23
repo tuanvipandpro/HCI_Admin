@@ -34,7 +34,7 @@ public class WorkRequestController {
 	 * @param now the now
 	 * @return the all work request
 	 */
-	@Operation(description = "Lấy tất cả các ca làm được yêu cầu ", security = @SecurityRequirement(name = "bearerAuth"))
+	@Operation(summary = "Lấy tất cả các ca làm được yêu cầu ", security = @SecurityRequirement(name = "bearerAuth"))
 	@GetMapping("/get-all")
 	public ResponseEntity<List<WorkRequest>> getAllWorkRequest(
 			@RequestParam @Parameter(description = "Truyền về ngày giờ hiện tại. Format (yyyy-MM-ddTHH:mm:ss)") String now) {
@@ -48,7 +48,7 @@ public class WorkRequestController {
 	 * @param request the request
 	 * @return the response entity
 	 */
-	@Operation(description = "Duyệt ca làm việc ", security = @SecurityRequirement(name = "bearerAuth"))
+	@Operation(summary = "Duyệt ca làm việc ", security = @SecurityRequirement(name = "bearerAuth"))
 	@PutMapping("/accept-work-request/{id}")
 	public ResponseEntity<Void> acceptWorkRequest(@PathVariable int id, @RequestBody WorkRequest request) {
 		service.acceptWorkRequest(id, request);
