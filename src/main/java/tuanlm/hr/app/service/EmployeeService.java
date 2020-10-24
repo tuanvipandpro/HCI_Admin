@@ -3,6 +3,7 @@ package tuanlm.hr.app.service;
 import java.util.List;
 
 import tuanlm.hr.app.models.model.Employee;
+import tuanlm.hr.app.models.request.InsertEmployee;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -34,4 +35,12 @@ public interface EmployeeService {
 	 * @return the by store
 	 */
 	List<Employee> getByStore(int storeId);
+	
+	/**
+	 * Adds the new employee.
+	 *
+	 * @param employee the employee
+	 * @return the int
+	 */
+	int addNewEmployee(InsertEmployee employeeDataset);
 }

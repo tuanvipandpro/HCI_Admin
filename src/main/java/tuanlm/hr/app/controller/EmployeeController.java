@@ -6,6 +6,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,6 +16,7 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.AllArgsConstructor;
 import tuanlm.hr.app.models.model.Employee;
+import tuanlm.hr.app.models.request.InsertEmployee;
 import tuanlm.hr.app.service.EmployeeService;
 
 /**
@@ -60,5 +63,18 @@ public class EmployeeController {
 	@GetMapping("/get-by-store/{storeId}")	
 	public ResponseEntity<List<Employee>> getEmployeeByStore(@PathVariable int storeId) {
 		return new ResponseEntity<List<Employee>>(service.getByStore(storeId), HttpStatus.OK);
+	}
+	
+	/**
+	 * Adds the new employee.
+	 *  
+	 * @param employeeDataset the employee dataset
+	 */
+	@Operation(description = "Thêm mới nhân viên", security = @SecurityRequirement(name = "bearerAuth"))
+	@PostMapping(value = "/add-new-employee")
+	public int addNewEmployee(@RequestBody InsertEmployee employeeDataset) {
+		System.out.println(employeeDataset);
+		int res = service.addNewEmployee(employeeDataset);
+		return res;
 	}
 }

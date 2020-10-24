@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import lombok.AllArgsConstructor;
 import tuanlm.hr.app.mapper.EmployeeMapper;
 import tuanlm.hr.app.models.model.Employee;
+import tuanlm.hr.app.models.request.InsertEmployee;
 
 
 /**
@@ -50,5 +51,17 @@ public class EmployeeServiceImp implements EmployeeService{
 	@Override
 	public List<Employee> getByStore(int storeId) {
 		return mapper.getEmployeeByStoreId(storeId);
+	}
+	
+	/**
+	 * Adds the new employee.
+	 *
+	 * @param employeeDataset the employee dataset
+	 * @return the int
+	 */
+	@Override
+	public int addNewEmployee(InsertEmployee employeeDataset) {
+		System.out.println(employeeDataset);
+		return mapper.addNewEmployee(employeeDataset.getName(), employeeDataset.isGender(), employeeDataset.getAddress(), employeeDataset.getPhone(), employeeDataset.getStoreId(), employeeDataset.getBankNumber(), employeeDataset.getEmail(), employeeDataset.isActive(), employeeDataset.getSalary());
 	}
 }
