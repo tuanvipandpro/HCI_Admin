@@ -13,20 +13,25 @@
             empty-text="Không có dữ liệu">
           <el-table-column
             label="Tài Khoản"
+            width="230px"
             prop="email">
           </el-table-column>
           <el-table-column
             label="Họ tên"
+            width="200px"
             prop="name">
           </el-table-column>
           <el-table-column
             label="Giới tính"
-            width="150px"
-            prop="gender">
+            width="90px"
+          >
+            <template slot-scope="scope">
+              <span>{{ scope.row.gender ? 'Nam' : 'Nữ'}}</span>
+            </template>
           </el-table-column>
           <el-table-column
             label="Địa chỉ"
-            width="300px"
+            width="260px"
             prop="address">
           </el-table-column>
           <el-table-column
@@ -45,12 +50,12 @@
               <el-button
                 size="mini"
                 style="background-color: #82FA58;"
-                :disabled="scope.row.status === 'Active'"
+                :disabled="scope.row.active"
                 @click="handleClicked(scope.$index, scope.row, 'Active')">Active</el-button>
               <el-button
                 size="mini"
                 type="danger"
-                :disabled="scope.row.status === 'Inactive'"
+                :disabled="!scope.row.active"
                 @click="handleClicked(scope.$index, scope.row, 'Inactive')">Inactive</el-button>
             </template>
           </el-table-column>
@@ -72,236 +77,17 @@
 
 <script>
 import Menu from '../Common/Menu'
+import { mapActions, mapState } from 'vuex'
 
 export default {
   data () {
     return {
       numOfPage: 0,
       currentPage: 1,
-      pageSize: 10,
+      pageSize: 3,
       subAccountData: [],
       searchList: [],
-      accountData: [{
-        email: 'Tom@123',
-        name: 'Tom',
-        address: 'No. 100, Grove St, Los Angeles',
-        phone: '0123456789',
-        gender: 'Male',
-        status: 'Active'
-      }, {
-        email: 'John@abc',
-        name: 'John',
-        address: 'No. 101, Grove St, Los Angeles',
-        phone: '0123456789',
-        gender: 'Male',
-        status: 'Inactive'
-      }, {
-        email: 'Morgan@xyz',
-        name: 'Morgan',
-        address: 'No. 102, Grove St, Los Angeles',
-        phone: '0123456789',
-        gender: 'Male',
-        status: 'Inactive'
-      }, {
-        email: 'Jessy@hihi',
-        name: 'Jessy',
-        address: 'No. 103, Grove St, Los Angeles',
-        phone: '0123456789',
-        gender: 'Male',
-        status: 'Active'
-      }, {
-        email: 'Jerry@ccc',
-        name: 'Jerry',
-        address: 'No. 104, Grove St, Los Angeles',
-        phone: '0123456789',
-        gender: 'Male',
-        status: 'Active'
-      }, {
-        email: 'Suri@sri',
-        name: 'Suri',
-        address: 'No. 105, Grove St, Los Angeles',
-        phone: '0123456789',
-        gender: 'Male',
-        status: 'Active'
-      }, {
-        email: 'Mama@ma',
-        name: 'Mama',
-        address: 'No. 106, Grove St, Los Angeles',
-        phone: '0123456789',
-        gender: 'Male',
-        status: 'Inactive'
-      }, {
-        email: 'Mimi@mi',
-        name: 'Mimi',
-        address: 'No. 107, Grove St, Los Angeles',
-        phone: '0123456789',
-        gender: 'Male',
-        status: 'Inactive'
-      }, {
-        email: 'Chichi@chi',
-        name: 'Chichi',
-        address: 'No. 108, Grove St, Los Angeles',
-        phone: '0123456789',
-        gender: 'Male',
-        status: 'Active'
-      }, {
-        email: 'Siro@sr',
-        name: 'Siro',
-        address: 'No. 109, Grove St, Los Angeles',
-        phone: '0123456789',
-        gender: 'Male',
-        status: 'Active'
-      },
-      {
-        email: 'Siro@sr',
-        name: 'Siro',
-        address: 'No. 110, Grove St, Los Angeles',
-        phone: '0123456789',
-        gender: 'Male',
-        status: 'Active'
-      }, {
-        email: 'John@abc',
-        name: 'John',
-        address: 'No. 111, Grove St, Los Angeles',
-        phone: '0123456789',
-        gender: 'Male',
-        status: 'Inactive'
-      }, {
-        email: 'Morgan@xyz',
-        name: 'Morgan',
-        address: 'No. 112, Grove St, Los Angeles',
-        phone: '0123456789',
-        gender: 'Male',
-        status: 'Inactive'
-      }, {
-        email: 'Jessy@hihi',
-        name: 'Jessy',
-        address: 'No. 113, Grove St, Los Angeles',
-        phone: '0123456789',
-        gender: 'Male',
-        status: 'Active'
-      }, {
-        email: 'Jerry@ccc',
-        name: 'Jerry',
-        address: 'No. 114, Grove St, Los Angeles',
-        phone: '0123456789',
-        gender: 'Male',
-        status: 'Active'
-      }, {
-        email: 'Suri@sri',
-        name: 'Suri',
-        address: 'No. 115, Grove St, Los Angeles',
-        phone: '0123456789',
-        gender: 'Male',
-        status: 'Active'
-      }, {
-        email: 'Mama@ma',
-        name: 'Mama',
-        address: 'No. 116, Grove St, Los Angeles',
-        phone: '0123456789',
-        gender: 'Male',
-        status: 'Inactive'
-      }, {
-        email: 'Mimi@mi',
-        name: 'Mimi',
-        address: 'No. 117, Grove St, Los Angeles',
-        phone: '0123456789',
-        gender: 'Male',
-        status: 'Inactive'
-      }, {
-        email: 'Chichi@chi',
-        name: 'Chichi',
-        address: 'No. 118, Grove St, Los Angeles',
-        phone: '0123456789',
-        gender: 'Male',
-        status: 'Active'
-      }, {
-        email: 'Siro@sr',
-        name: 'Siro',
-        address: 'No. 119, Grove St, Los Angeles',
-        phone: '0123456789',
-        gender: 'Male',
-        status: 'Active'
-      },
-      {
-        email: 'Siro@sr',
-        name: 'Siro',
-        address: 'No. 120, Grove St, Los Angeles',
-        phone: '0123456789',
-        gender: 'Male',
-        status: 'Active'
-      }, {
-        email: 'John@abc',
-        name: 'John',
-        address: 'No. 121, Grove St, Los Angeles',
-        phone: '0123456789',
-        gender: 'Male',
-        status: 'Inactive'
-      }, {
-        email: 'Morgan@xyz',
-        name: 'Morgan',
-        address: 'No. 122, Grove St, Los Angeles',
-        phone: '0123456789',
-        gender: 'Male',
-        status: 'Inactive'
-      }, {
-        email: 'Jessy@hihi',
-        name: 'Jessy',
-        address: 'No. 123, Grove St, Los Angeles',
-        phone: '0123456789',
-        gender: 'Male',
-        status: 'Active'
-      }, {
-        email: 'Jerry@ccc',
-        name: 'Jerry',
-        address: 'No. 124, Grove St, Los Angeles',
-        phone: '0123456789',
-        gender: 'Male',
-        status: 'Active'
-      }, {
-        email: 'Suri@sri',
-        name: 'Suri',
-        address: 'No. 125, Grove St, Los Angeles',
-        phone: '0123456789',
-        gender: 'Male',
-        status: 'Active'
-      }, {
-        email: 'Mama@ma',
-        name: 'Mama',
-        address: 'No. 126, Grove St, Los Angeles',
-        phone: '0123456789',
-        gender: 'Male',
-        status: 'Inactive'
-      }, {
-        email: 'Mimi@mi',
-        name: 'Mimi',
-        address: 'No. 127, Grove St, Los Angeles',
-        phone: '0123456789',
-        gender: 'Male',
-        status: 'Inactive'
-      }, {
-        email: 'Chichi@chi',
-        name: 'Chichi',
-        address: 'No. 128, Grove St, Los Angeles',
-        phone: '0123456789',
-        gender: 'Male',
-        status: 'Active'
-      }, {
-        email: 'Siro@sr',
-        name: 'Siro',
-        address: 'No. 129, Grove St, Los Angeles',
-        phone: '0123456789',
-        gender: 'Male',
-        status: 'Active'
-      },
-      {
-        email: 'Sirom@srm',
-        name: 'Sirom',
-        address: 'No. 130, Grove St, Los Angeles',
-        phone: '0123456789',
-        status: 'Active'
-      }
-      ],
+      accountData: [],
       search: ''
     }
   },
@@ -326,10 +112,10 @@ export default {
   },
   mounted () {
     this.checkAuthen()
-    this.numOfPage = Math.ceil(this.accountData.length / this.pageSize)
-    this.changePage()
+    this.init()
   },
   methods: {
+    ...mapActions('workAssign', ['_getEmployeeList']),
     /**
      * Show Loader
      */
@@ -341,18 +127,29 @@ export default {
         background: 'rgba(0, 0, 0, 0.7)'
       })
     },
+    init () {
+      let _this = this
+      new Promise((resolve, reject) => {
+        resolve()
+      }).then(() => {
+        return _this._getEmployeeList(0)
+      }).then(res => {
+        if (res.data) {
+          _this.accountData = res.data
+        }
+        _this.numOfPage = Math.ceil(_this.accountData.length / _this.pageSize)
+        _this.changePage()
+      })
+    },
     handleClicked (index, row, typeButton) {
       this.$confirm('Do you want to ' + String(typeButton).toLowerCase() + ' ' + row.name + ' ?', 'Warning', {
         confirmButtonText: 'Yes',
         cancelButtonText: 'No',
         type: 'warning'
       }).then(() => {
-        row.status = typeButton
-        this.showMessage(typeButton + ' user Successful !!!', 'success')
+        row.active = typeButton === 'Active'
+        this.showMessage(typeButton + ' user successful !!!', 'success')
       })
-    },
-    handleInactiveClicked (index, row) {
-      row.status = 'Inactive'
     },
     changePage () {
       let firstIndex = (this.currentPage - 1) * this.pageSize
