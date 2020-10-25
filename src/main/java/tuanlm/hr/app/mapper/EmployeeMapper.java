@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import tuanlm.hr.app.models.model.Employee;
 
@@ -115,4 +116,13 @@ public interface EmployeeMapper {
 			+ "#{salary})")
 	int addNewEmployee(String name, boolean gender, String address, String phone, int storeId, String bankNumber, String email, boolean active, float salary);
 
+	/**
+	 * @param id
+	 * @param status
+	 * @return
+	 */
+	@Update("Update Employee "
+			+ "Set active = #{status} "
+			+ "Where id = #{id}")
+	int updateStatusEmployee(int id, boolean status);
 }

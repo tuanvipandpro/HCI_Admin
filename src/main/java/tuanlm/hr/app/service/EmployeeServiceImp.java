@@ -61,7 +61,16 @@ public class EmployeeServiceImp implements EmployeeService{
 	 */
 	@Override
 	public int addNewEmployee(InsertEmployee employeeDataset) {
-		System.out.println(employeeDataset);
 		return mapper.addNewEmployee(employeeDataset.getName(), employeeDataset.isGender(), employeeDataset.getAddress(), employeeDataset.getPhone(), employeeDataset.getStoreId(), employeeDataset.getBankNumber(), employeeDataset.getEmail(), employeeDataset.isActive(), employeeDataset.getSalary());
+	}
+
+	/**
+	 * Update status employee
+	 * @param employeeDataset the employee dataset
+	 * @return the int
+	 */
+	@Override
+	public int updateStatusEmployee(Employee employeeDataset) {
+		return mapper.updateStatusEmployee(employeeDataset.getId(), employeeDataset.isActive());
 	}
 }

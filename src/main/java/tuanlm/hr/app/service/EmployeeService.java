@@ -9,6 +9,10 @@ import tuanlm.hr.app.models.request.InsertEmployee;
 /**
  * The Interface EmployeeService.
  */
+/**
+ * @author PC
+ *
+ */
 public interface EmployeeService {
 	
 	/**
@@ -43,4 +47,10 @@ public interface EmployeeService {
 	 * @return the int
 	 */
 	int addNewEmployee(InsertEmployee employeeDataset);
+	
+	/**
+	 * @param employeeDataset
+	 * @return
+	 */
+	int updateStatusEmployee(Employee employeeDataset);
 }

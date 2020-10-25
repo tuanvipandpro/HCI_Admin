@@ -73,8 +73,18 @@ public class EmployeeController {
 	@Operation(description = "Thêm mới nhân viên", security = @SecurityRequirement(name = "bearerAuth"))
 	@PostMapping(value = "/add-new-employee")
 	public int addNewEmployee(@RequestBody InsertEmployee employeeDataset) {
-		System.out.println(employeeDataset);
 		int res = service.addNewEmployee(employeeDataset);
+		return res;
+	}
+
+	/**
+	 * @param employeeDataset
+	 * @return
+	 */
+	@Operation(description = "Cập nhật trạng thái hoạt động nhân viên", security = @SecurityRequirement(name = "bearerAuth"))
+	@PostMapping(value = "/change-status")
+	public int addNewEmployee(@RequestBody Employee employeeDataset) {
+		int res = service.updateStatusEmployee(employeeDataset);
 		return res;
 	}
 }
