@@ -2,8 +2,10 @@ package tuanlm.hr.app.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import tuanlm.hr.app.models.model.Employee;
 
@@ -93,4 +95,34 @@ public interface EmployeeMapper {
 			+ "		E.id "
 			+ "")	
 	List<Employee> getEmployeeByStoreId(int storeId);
+	
+	/**
+	 * Adds the new employee.
+	 *
+	 * @param employeeDataset the employee dataset
+	 * @return the int
+	 */
+	@Insert("Insert into "
+			+ "Employee(name, gender, address, phone, \"storeId\", \"bankNumber\", email, active, salary) "
+			+ "Values( "
+			+ "#{name}, "
+			+ "#{gender}, "
+			+ "#{address}, "
+			+ "#{phone}, "
+			+ "#{storeId}, "
+			+ "#{bankNumber}, "
+			+ "#{email}, "
+			+ "#{active}, "
+			+ "#{salary})")
+	int addNewEmployee(String name, boolean gender, String address, String phone, int storeId, String bankNumber, String email, boolean active, float salary);
+
+	/**
+	 * @param id
+	 * @param status
+	 * @return
+	 */
+	@Update("Update Employee "
+			+ "Set active = #{status} "
+			+ "Where id = #{id}")
+	int updateStatusEmployee(int id, boolean status);
 }

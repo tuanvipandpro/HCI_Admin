@@ -14,7 +14,7 @@
           <span>Quản lý nhân viên</span>
         </template>
         <el-menu-item index="1-1" @click="doHome">Tất cả nhân viên</el-menu-item>
-        <el-menu-item index="1-2" >Thêm mới nhân viên</el-menu-item>
+        <el-menu-item index="1-2" @click="insertEmployee">Thêm mới nhân viên</el-menu-item>
       </el-submenu>
       <el-submenu index="2">
         <template slot="title">
@@ -65,6 +65,12 @@ export default {
      */
     doHome () {
       this.transitTo('UserManagement', undefined)
+    },
+    /**
+     * Go to insert employee page 1-2
+     */
+    insertEmployee () {
+      this.transitTo('AddingEmployee', undefined)
     },
     /**
      * Go to account management page 2-1

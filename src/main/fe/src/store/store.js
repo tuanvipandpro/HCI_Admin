@@ -12,6 +12,7 @@ import createNotification from './Notification/CreateNotification'
 import account from './Account/AccountManagement'
 import createAccount from './Account/NewAccount'
 import changePassword from './ChangePassword/ChangePassword'
+import employee from './Employee/employee'
 
 Vue.use(Vuex)
 
@@ -27,6 +28,7 @@ export default new Vuex.Store({
     account: account,
     createAccount: createAccount,
     workAssign: workAssign,
-    changePassword: changePassword
+    changePassword: changePassword,
+    employee: employee
   }
 })

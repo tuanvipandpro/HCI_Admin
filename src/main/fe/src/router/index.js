@@ -14,6 +14,7 @@ import WorkRequest from '@/components/Work/WorkRequest'
 import WorkAssign from '@/components/Work/WorkAssign'
 import AccountManagement from '@/components/AccountManagement/AccountManagement'
 import NewAccount from '@/components/AccountManagement/NewAccount'
+import AddingEmployee from '@/components/UserManagement/AddingEmployee'
 
 Vue.use(Router)
 
@@ -78,6 +79,11 @@ export default new Router({
       path: '/work-assign',
       name: 'WorkAssign',
       component: WorkAssign
+    },
+    {
+      path: '/addNewEmployee',
+      name: 'AddingEmployee',
+      component: AddingEmployee
     }
   ]
 })
