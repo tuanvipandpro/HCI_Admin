@@ -83,7 +83,7 @@ public class EmployeeController {
 	 */
 	@Operation(description = "Cập nhật trạng thái hoạt động nhân viên", security = @SecurityRequirement(name = "bearerAuth"))
 	@PostMapping(value = "/change-status")
-	public int addNewEmployee(@RequestBody Employee employeeDataset) {
+	public int updateStatusEmployee(@RequestBody Employee employeeDataset) {
 		int res = service.updateStatusEmployee(employeeDataset);
 		return res;
 	}

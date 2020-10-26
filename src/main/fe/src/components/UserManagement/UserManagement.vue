@@ -118,6 +118,7 @@ export default {
   },
   methods: {
     ...mapActions('workAssign', ['_getEmployeeList']),
+    ...mapActions('employee', ['updateStatusEmployee']),
     /**
      * Show Loader
      */
@@ -150,8 +151,16 @@ export default {
         cancelButtonText: 'No',
         type: 'warning'
       }).then(() => {
-        row.active = typeButton === 'Active'
-        this.showMessage(typeButton + ' user successful !!!', 'success')
+        let empDataset = row
+        empDataset.active = typeButton === 'Active'
+        this.loader = this.getLoader()
+        return this.updateStatusEmployee(empDataset)
+      }).then(res => {
+        if (res) {
+          row.active = typeButton === 'Active'
+          this.showMessage(typeButton + ' user successful !!!', 'success')
+        }
+        this.closeLoader(this.loader)
       })
     },
     changePage () {

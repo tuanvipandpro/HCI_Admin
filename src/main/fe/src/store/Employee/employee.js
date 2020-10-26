@@ -90,6 +90,24 @@ const employee = {
             reject(e)
           })
       })
+    },
+    /**
+     * api create new employee
+     */
+    updateStatusEmployee (context, employeeDataset) {
+      let url = '/api/employee/change-status'
+      return new Promise((resolve, reject) => {
+        axios.post(url,
+          employeeDataset,
+          {headers: {Authorization: sessionStorage.getItem('token')}}
+        )
+          .then((res) => {
+            resolve(res.data)
+          })
+          .catch((e) => {
+            reject(e)
+          })
+      })
     }
   }
 }
