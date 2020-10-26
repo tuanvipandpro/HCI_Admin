@@ -2,7 +2,7 @@
   <div id="userManagement">
     <el-row>
       <el-col :span='5' style="text-align: left">
-        <hci-menu :activeIndex='"1"' />
+        <hci-menu :activeIndex='"1-1"' />
       </el-col>
       <el-col :offset="5" :span="19">
           <h1>Quản lý người dùng</h1>
@@ -77,7 +77,7 @@
 
 <script>
 import Menu from '../Common/Menu'
-import { mapActions, mapState } from 'vuex'
+import { mapActions } from 'vuex'
 
 export default {
   data () {
@@ -88,7 +88,8 @@ export default {
       subAccountData: [],
       searchList: [],
       accountData: [],
-      search: ''
+      search: '',
+      loader: {}
     }
   },
   components: {
@@ -112,6 +113,7 @@ export default {
   },
   mounted () {
     this.checkAuthen()
+    this.loader = this.getLoader()
     this.init()
   },
   methods: {
@@ -139,6 +141,7 @@ export default {
         }
         _this.numOfPage = Math.ceil(_this.accountData.length / _this.pageSize)
         _this.changePage()
+        _this.closeLoader(_this.loader)
       })
     },
     handleClicked (index, row, typeButton) {

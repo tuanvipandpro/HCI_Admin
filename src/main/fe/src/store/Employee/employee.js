@@ -7,8 +7,11 @@ const employee = {
     name: '',
     address: '',
     phone: '',
-    gender: '',
-    status: ''
+    gender: true,
+    storeId: '',
+    bankNumber: '',
+    salary: '',
+    active: true
   },
   getters: {
 
@@ -32,27 +35,61 @@ const employee = {
     setAddress (state, address) {
       state.address = address
     },
-      /**
+    /**
        * setter for phone
        */
     setPhone (state, phone) {
       state.phone = phone
     },
-      /**
+    /**
      * setter for gender
      */
     setGender (state, gender) {
       state.gender = gender
     },
-      /**
-       * setter for status
+    /**
+       * setter for active
        */
-    setStatus (state, status) {
-        state.status = status
+    setActive (state, active) {
+      state.active = active
+    },
+    /**
+       * setter for salary
+       */
+    setSalary (state, salary) {
+      state.salary = salary
+    },
+    /**
+       * setter for bankNumber
+       */
+    setBankNumber (state, bankNumber) {
+      state.bankNumber = bankNumber
+    },
+    /**
+       * setter for storeId
+       */
+    setStoreId (state, storeId) {
+      state.storeId = storeId
     }
   },
   actions: {
-    
+  /**
+     * api create new employee
+     */
+    createNewEmployee (context, employeeInfo) {
+      let url = '/api/employee/add-new-employee'
+      return new Promise((resolve, reject) => {
+        axios.post(url,
+          employeeInfo,
+          {headers: {Authorization: sessionStorage.getItem('token')}}
+        )
+          .then((res) => {
+            resolve(res)
+          })
+          .catch((e) => {
+            reject(e)
+          })
+      })
     }
   }
 }
