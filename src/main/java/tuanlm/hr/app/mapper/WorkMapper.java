@@ -154,6 +154,31 @@ public interface WorkMapper {
 			+ "")
 	List<WorkStore> getWorkByDate(int employeeId, LocalDateTime from, LocalDateTime to);	
 	
+	@Select(""
+			+ "SELECT "
+			+ "		W.id 						AS id, "
+			+ "		W.\"employeeId\" 			AS employeeId, "
+			+ "		W.\"storeId\"	 			AS storeId, "
+			+ "		W.present		 			AS present, "
+			+ "		W.\"shiftId\"	 			AS shiftId, "
+			+ "		W.\"statusId\"	 			AS statusId, "
+			+ "		W.note 						AS note, "
+			+ "		W.start 					AS start, "
+			+ "		W.\"end\"	 				AS end, "
+			+ "		W.present_time				AS presentTime, "	
+			+ "		S.name						AS storeNm "			
+			+ "FROM "
+			+ "		work AS W,"
+			+ "		store AS S "
+			+ "WHERE "
+			+ "		W.\"statusId\" = 3 "
+			+ "		AND W.active = true "
+			+ "		AND W.start > #{now}"
+			+ "ORDER BY "
+			+ "		W.start DESC "
+			+ "")
+	List<WorkStore> getPublicWork(LocalDateTime now);	
+	
 	/**
 	 * Gets the work now.
 	 *
@@ -264,6 +289,17 @@ public interface WorkMapper {
 			+ "SET \"employeeId\" = #{shiftEmployeeId}, \"statusId\" = 2, note = 'Chuyển Ca' "
 			+ "WHERE id = #{workId} ")
 	void shiftWork(int workId, int shiftEmployeeId);
+	
+	/**
+	 * Public work.
+	 *
+	 * @param workId the work id
+	 */
+	@Update(""
+			+ "UPDATE work "
+			+ "SET \"statusId\" = 3 "
+			+ "WHERE id = #{workId} ")
+	void publicWork(int workId);
 	
 	/**
 	 * Update work.
