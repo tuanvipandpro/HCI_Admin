@@ -30,7 +30,7 @@
           <i class="el-icon-setting"></i>
           <span>Thông tin chung</span>
         </template>
-        <el-menu-item index="4-0" >Hồ sơ</el-menu-item>
+        <el-menu-item index="4-0" @click="doProfile">Hồ sơ</el-menu-item>
         <el-menu-item index="4-1" @click="doChangePassword">Đổi mặt khẩu</el-menu-item>
         <el-menu-item index="4-2" @click="doLogout">Đăng xuất</el-menu-item>
       </el-submenu>
@@ -73,6 +73,12 @@ export default {
      */
     doNotification () {
       this.transitTo('Notification', undefined)
+    },
+    /**
+     * Go to new change password page 4-0
+     */
+    doProfile () {
+      this.transitTo('Profile', undefined)
     },
     /**
      * Go to new change password page 4-1

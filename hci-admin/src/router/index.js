@@ -9,6 +9,7 @@ import ChangePassword from '@/components/ChangePassword/ChangePassword'
 import NewPitch from '@/components/Pitch/NewPitch'
 import ManagePitch from '@/components/Pitch/ManagePitch'
 import HistoryPitch from '@/components/Pitch/HistoryPitch'
+import Profile from '@/components/ChangePassword/Profile'
 
 Vue.use(Router)
 
@@ -48,6 +49,11 @@ export default new Router({
       path: '/pitch-history',
       name: 'HistoryPitch',
       component: HistoryPitch
+    },
+    {
+      path: '/profile',
+      name: 'Profile',
+      component: Profile
     }
   ]
 })
