@@ -34,7 +34,10 @@ public class OpenApiConfig {
 	@Bean
 	public OpenAPI configOpenApi() {
 		return new OpenAPI()
-				.servers(Arrays.asList(new Server().url("http://localhost:8084"), new Server().url("https://tuanlm-hr.herokuapp.com")))
+				.servers(Arrays.asList(
+						new Server().url("http://localhost:8084"), 
+						new Server().url("https://tuanlm-hr.herokuapp.com"),
+						new Server().url("http://34.230.45.99:8084")))
 				.info(new Info()
 						.title("HR-App API")
 						.description("Api Document V1")
