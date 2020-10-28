@@ -7,7 +7,8 @@ import UserManagement from '@/components/UserManagement/UserManagement'
 import Notification from '@/components/Notification/Notification'
 import ChangePassword from '@/components/ChangePassword/ChangePassword'
 import NewPitch from '@/components/Pitch/NewPitch'
-import PitchManagement from '@/components/Pitch/PitchManagement'
+import ManagePitch from '@/components/Pitch/ManagePitch'
+import HistoryPitch from '@/components/Pitch/HistoryPitch'
 
 Vue.use(Router)
 
@@ -39,9 +40,14 @@ export default new Router({
       component: NewPitch
     },
     {
-      path: '/pitch-management',
-      name: 'PitchManagement',
-      component: PitchManagement
+      path: '/manage-pitch',
+      name: 'ManagePitch',
+      component: ManagePitch
+    },
+    {
+      path: '/pitch-history',
+      name: 'HistoryPitch',
+      component: HistoryPitch
     }
   ]
 })

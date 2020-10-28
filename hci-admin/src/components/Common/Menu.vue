@@ -18,8 +18,8 @@
           <span>Sân</span>
         </template>
         <el-menu-item index="2-1" @click="doNewPitch">Thêm mới sân</el-menu-item>
-        <!-- <el-menu-item index="2-2">Update Pitch</el-menu-item> -->
-        <el-menu-item index="2-3"  @click="managePitch">Quản lý sân</el-menu-item>
+        <el-menu-item index="2-2" @click="managePitch">Quản lý sân</el-menu-item>
+        <el-menu-item index="2-3" @click="historyPitch">Lịch sử</el-menu-item>
       </el-submenu>
       <!-- <el-menu-item index="3" @click="doNotification">
         <i class="el-icon-s-order"></i>
@@ -28,8 +28,9 @@
       <el-submenu index="4">
         <template slot="title">
           <i class="el-icon-setting"></i>
-          <span>Cài đặt</span>
+          <span>Thông tin chung</span>
         </template>
+        <el-menu-item index="4-0" >Hồ sơ</el-menu-item>
         <el-menu-item index="4-1" @click="doChangePassword">Đổi mặt khẩu</el-menu-item>
         <el-menu-item index="4-2" @click="doLogout">Đăng xuất</el-menu-item>
       </el-submenu>
@@ -59,7 +60,13 @@ export default {
      * Go to manage pitch pitch page 2-2
      */
     managePitch () {
-      this.transitTo('PitchManagement', undefined)
+      this.transitTo('ManagePitch', undefined)
+    },
+    /**
+     * Go to manage pitch pitch page 2-3
+     */
+    historyPitch () {
+      this.transitTo('HistoryPitch', undefined)
     },
     /**
      * Go to new notification page 3
@@ -128,6 +135,6 @@ export default {
     position: fixed;
     left: 0;
     z-index: 1;
-    width: 21%;
+    width: 20.8333%;
   }
 </style>
