@@ -78,7 +78,22 @@ export default {
      * Update Status
      */
     updateStatus (scope) {
-      scope.row.status = !scope.row.status
+      let message = (scope.row.status)
+        ? 'Bạn có chắc chắn muốn dừng hoạt động của sân này ?'
+        : 'Bạn có chắc chắn muốn mở lại của sân này ?'
+
+      this.$confirm(message, 'Warning', {
+        confirmButtonText: 'Đồng ý',
+        cancelButtonText: 'Hủy Bỏ',
+        type: 'warning'
+      }).then(() => {
+        const loader = this.getLoader()
+        setTimeout(() => {
+          this.closeLoader(loader)
+          this.showMessage('Thao tác thành công !', 'success')
+          scope.row.status = !scope.row.status
+        }, 1000)
+      })
     },
     /**
      * Show Loader

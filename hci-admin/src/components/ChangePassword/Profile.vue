@@ -11,50 +11,66 @@
           <el-card class="box-card" style="margin-top: 1%; width: 95%;">
             <div slot="header" class="clearfix">
               <span style="font-size: 20px; font-weight: bold;">Tài khoản</span>
-              <el-button style="float: right; padding: 3px 0" type="text"><i class="el-icon-edit"></i></el-button>
+              <el-button style="float: right; padding: 3px 0" type="text" @click="editCard(1)">
+                <i class="el-icon-edit"></i>
+              </el-button>
             </div>
             <div class="item">
               <i class="el-icon-user"></i>
-              Lê Minh Tuấn
+              {{cardFirst.name}}
             </div>
             <div class="item">
               <i class="el-icon-message"></i>
-              tuanlmse130138@fpt.edu.vn
+              {{cardFirst.email}}
             </div>
             <div class="item">
               <i class="el-icon-coordinate"></i>
-              Lô E2a-7, Đường D1 Khu Công nghệ cao, P. Long Thạnh Mỹ, Q. 9, TP. Hồ Chí Minh
+              {{cardFirst.address}}
             </div>
             <div class="item">
               <i class="el-icon-mobile-phone"></i>
-              0326 987 216
+              {{cardFirst.phone}}
             </div>
           </el-card>
           <el-card class="box-card" style="margin-top: 1%; width: 95%;">
             <div slot="header" class="clearfix">
               <span style="font-size: 20px; font-weight: bold;">Sân quản lý</span>
-              <el-button style="float: right; padding: 3px 0" type="text"><i class="el-icon-edit"></i></el-button>
+              <el-button style="float: right; padding: 3px 0" type="text" @click="editCard(2)">
+                <i class="el-icon-edit"></i>
+              </el-button>
             </div>
             <div class="item">
               <i class="el-icon-baseball"></i>
-              Sân Phúc Lộc
+              {{cardSecond.name}}
             </div>
             <div class="item">
               <i class="el-icon-message"></i>
-              phuclocfootball@gmail.com
+              {{cardSecond.email}}
             </div>
             <div class="item">
               <i class="el-icon-location-outline"></i>
-              Lô E2a-7, Đường D1 Khu Công nghệ cao, P. Long Thạnh Mỹ, Q. 9, TP. Hồ Chí Minh
+              {{cardSecond.address}}
             </div>
             <div class="item">
               <i class="el-icon-mobile-phone"></i>
-              0326 987 216
+              {{cardSecond.phone}}
             </div>
           </el-card>
         </div>
       </el-col>
     </el-row>
+    <el-dialog title="Chỉnh sửa" :visible.sync="visibleCard" style="text-align: left">
+        <el-form :model="formData">
+            <el-form-item ><el-input placeholder="Tên" v-model="formData.name"/></el-form-item>
+            <el-form-item ><el-input placeholder="Email" v-model="formData.email"/></el-form-item>
+            <el-form-item ><el-input placeholder="Địa chỉ" v-model="formData.address"/></el-form-item>
+            <el-form-item ><el-input placeholder="Số điện thoại" v-model="formData.phone"/></el-form-item>
+        </el-form>
+        <span slot="footer" class="dialog-footer">
+          <el-button @click="visibleCard = false">Hủy Bỏ</el-button>
+          <el-button type="primary" @click="visibleCard = false">Xác Nhận</el-button>
+        </span>
+    </el-dialog>
   </div>
 </template>
 
@@ -66,12 +82,41 @@ export default {
     'hci-menu': Menu
   },
   data () {
-    return {}
+    return {
+      visibleCard: false,
+      name: '',
+      cardFirst: {
+        name: 'Lê Minh Tuấn',
+        email: 'tuanlmse130138@fpt.edu.vn',
+        address: ' Lô E2a-7, Đường D1 Khu Công nghệ cao, P. Long Thạnh Mỹ, Q. 9, TP. Hồ Chí Minh',
+        phone: '0326 987 216'
+      },
+      cardSecond: {
+        name: 'Sân Phúc Lộc',
+        email: 'phuclocfootball@gmail.com',
+        address: ' Lô E2a-7, Đường D1 Khu Công nghệ cao, P. Long Thạnh Mỹ, Q. 9, TP. Hồ Chí Minh',
+        phone: '0326 987 216'
+      },
+      formData: {}
+    }
   },
   mounted () {
     this.checkAuthen()
   },
   methods: {
+    editCard (value) {
+      switch (value) {
+        case 1 : {
+          this.formData = this.cardFirst
+          break
+        }
+        case 2 : {
+          this.formData = this.cardSecond
+          break
+        }
+      }
+      this.visibleCard = !this.visibleCard
+    },
     /**
      * Show Loader
      */
@@ -144,6 +189,6 @@ export default {
   }
 
   i {
-    margin-right: 8px;  
+    margin-right: 8px;
   }
 </style>
