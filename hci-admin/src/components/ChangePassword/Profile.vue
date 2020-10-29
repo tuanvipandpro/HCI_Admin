@@ -1,5 +1,5 @@
 !<template>
-  <div id="change-password">
+  <div id="profile">
     <el-row style="text-align: left">
       <!-- Menu -->
       <el-col :span='5'>
@@ -7,7 +7,52 @@
       </el-col>
       <!-- Content -->
       <el-col :offset="5" :span="19">
-          <h1>Hồ sơ</h1>
+        <div id="profile-container">
+          <el-card class="box-card" style="margin-top: 1%; width: 95%;">
+            <div slot="header" class="clearfix">
+              <span style="font-size: 20px; font-weight: bold;">Tài khoản</span>
+              <el-button style="float: right; padding: 3px 0" type="text"><i class="el-icon-edit"></i></el-button>
+            </div>
+            <div class="item">
+              <i class="el-icon-user"></i>
+              Lê Minh Tuấn
+            </div>
+            <div class="item">
+              <i class="el-icon-message"></i>
+              tuanlmse130138@fpt.edu.vn
+            </div>
+            <div class="item">
+              <i class="el-icon-coordinate"></i>
+              Lô E2a-7, Đường D1 Khu Công nghệ cao, P. Long Thạnh Mỹ, Q. 9, TP. Hồ Chí Minh
+            </div>
+            <div class="item">
+              <i class="el-icon-mobile-phone"></i>
+              0326 987 216
+            </div>
+          </el-card>
+          <el-card class="box-card" style="margin-top: 1%; width: 95%;">
+            <div slot="header" class="clearfix">
+              <span style="font-size: 20px; font-weight: bold;">Sân quản lý</span>
+              <el-button style="float: right; padding: 3px 0" type="text"><i class="el-icon-edit"></i></el-button>
+            </div>
+            <div class="item">
+              <i class="el-icon-baseball"></i>
+              Sân Phúc Lộc
+            </div>
+            <div class="item">
+              <i class="el-icon-message"></i>
+              phuclocfootball@gmail.com
+            </div>
+            <div class="item">
+              <i class="el-icon-location-outline"></i>
+              Lô E2a-7, Đường D1 Khu Công nghệ cao, P. Long Thạnh Mỹ, Q. 9, TP. Hồ Chí Minh
+            </div>
+            <div class="item">
+              <i class="el-icon-mobile-phone"></i>
+              0326 987 216
+            </div>
+          </el-card>
+        </div>
       </el-col>
     </el-row>
   </div>
@@ -21,68 +66,12 @@ export default {
     'hci-menu': Menu
   },
   data () {
-    /**
-     * Validate Confirm Password
-     */
-    const validateConfirmPass = (rule, value, callback) => {
-      if (value === '') {
-        callback(new Error('Vui lòng xác nhận lại mật khẩu mới !!!'))
-      } else if (value !== this.forgetForm.newPassword) {
-        callback(new Error('Mật khẩu xác nhận không trùng khớp, vui lòng nhập lại !!!'))
-      } else {
-        callback()
-      }
-    }
-    return {
-      forgetForm: {
-        newPassword: '',
-        confirmPassword: ''
-      },
-      formTemp: {},
-      rules: {
-        newPassword: [
-          {required: true, message: 'Vui lòng nhập mật khẩu mới !', trigger: 'blur'}
-        ],
-        confirmPassword: [
-          {required: true, validator: validateConfirmPass, trigger: 'blur'}
-        ]
-      }
-    }
+    return {}
   },
   mounted () {
     this.checkAuthen()
   },
   methods: {
-    /**
-     * Validate and Submit Form
-     */
-    submitForm () {
-      this.formTemp = {...this.forgetForm}
-      this.$refs['forgetForm'].validate((valid) => {
-        if (valid) {
-          this.$confirm('Bạn có chắc chắn muốn thay đổi mật khẩu ?', 'Warning', {
-            confirmButtonText: 'Đồng ý',
-            cancelButtonText: 'Hủy bỏ',
-            type: 'warning'
-          }).then(() => {
-            const loader = this.getLoader()
-            setTimeout(() => {
-              this.showMessage('Mật khẩu đã được thay đổi !!!', 'success')
-              this.closeLoader(loader)
-              this.resetForm()
-            }, 1000)
-          })
-        } else {
-          return false
-        }
-      })
-    },
-    /**
-     * Reset Form to empty
-     */
-    resetForm () {
-      this.$refs['forgetForm'].resetFields()
-    },
     /**
      * Show Loader
      */
@@ -137,7 +126,24 @@ export default {
 </script>
 
 <style>
-  #forget-form{
+  #profile-container{
     margin-left: 2% ;
+  }
+
+  .clearfix:before,
+  .clearfix:after {
+    display: table;
+    content: "";
+  }
+  .clearfix:after {
+    clear: both
+  }
+
+  .item {
+    margin-bottom: 18px;
+  }
+
+  i {
+    margin-right: 8px;  
   }
 </style>
