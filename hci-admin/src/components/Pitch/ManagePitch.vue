@@ -58,7 +58,7 @@ export default {
         },
         {
           id: 4,
-          name: 'Sân 01',
+          name: 'Sân 04',
           type: 'Sân vừa (7)',
           status: false,
           price: 100000
