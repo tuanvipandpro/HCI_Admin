@@ -8,10 +8,14 @@
       class="el-menu-vertical-demo"
       style="min-height: 100vh"
     >
-      <el-menu-item index="1" @click="doHome">
-        <i class="el-icon-s-custom"></i>
-        <span>Quản lý người dùng</span>
-      </el-menu-item>
+      <el-submenu index="1">
+        <template slot="title">
+          <i class="el-icon-data-analysis"></i>
+          <span>Lịch sử</span>
+        </template>
+        <el-menu-item index="1-1" @click="doHome">Thống kê</el-menu-item>
+        <el-menu-item index="1-2" @click="historyPitch">Lịch sử</el-menu-item>
+      </el-submenu>
       <el-submenu index="2">
         <template slot="title">
           <i class="el-icon-football"></i>
@@ -19,7 +23,6 @@
         </template>
         <el-menu-item index="2-1" @click="doNewPitch">Thêm mới sân</el-menu-item>
         <el-menu-item index="2-2" @click="managePitch">Quản lý sân</el-menu-item>
-        <el-menu-item index="2-3" @click="historyPitch">Lịch sử</el-menu-item>
       </el-submenu>
       <!-- <el-menu-item index="3" @click="doNotification">
         <i class="el-icon-s-order"></i>
@@ -48,7 +51,7 @@ export default {
      * Go to home page 1
      */
     doHome () {
-      this.transitTo('UserManagement', undefined)
+      this.transitTo('Statistic', undefined)
     },
     /**
      * Go to new pitch page 2-1

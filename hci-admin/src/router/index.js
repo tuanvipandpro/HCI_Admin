@@ -10,6 +10,7 @@ import NewPitch from '@/components/Pitch/NewPitch'
 import ManagePitch from '@/components/Pitch/ManagePitch'
 import HistoryPitch from '@/components/Pitch/HistoryPitch'
 import Profile from '@/components/ChangePassword/Profile'
+import Statistic from '@/components/Statistic/Statistic'
 
 Vue.use(Router)
 
@@ -54,6 +55,11 @@ export default new Router({
       path: '/profile',
       name: 'Profile',
       component: Profile
+    },
+    {
+      path: '/statistic',
+      name: 'Statistic',
+      component: Statistic
     }
   ]
 })

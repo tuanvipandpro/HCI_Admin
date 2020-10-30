@@ -50,7 +50,7 @@ export default {
       ]
       if (accountList.some(account => account.username === this.formData.username && account.password === this.formData.password)) {
         sessionStorage.setItem('username', this.formData.username)
-        this.transitTo('UserManagement', {username: this.formData.username})
+        this.transitTo('Statistic', {username: this.formData.username})
       } else {
         this.showMessage('Tài khoản hoặc mật khẩu không chính xác !', 'warning')
       }
