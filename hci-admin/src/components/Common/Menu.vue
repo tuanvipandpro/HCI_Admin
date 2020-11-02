@@ -11,7 +11,7 @@
       <el-submenu index="1">
         <template slot="title">
           <i class="el-icon-data-analysis"></i>
-          <span>Lịch sử</span>
+          <span>Trang Chủ</span>
         </template>
         <el-menu-item index="1-1" @click="doHome">Thống kê</el-menu-item>
         <el-menu-item index="1-2" @click="historyPitch">Lịch sử</el-menu-item>
