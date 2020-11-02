@@ -8,28 +8,32 @@
       class="el-menu-vertical-demo"
       style="min-height: 100vh"
     >
-      <el-menu-item index="1" @click="doHome">
-        <i class="el-icon-s-custom"></i>
-        <span>Quản lý người dùng</span>
-      </el-menu-item>
+      <el-submenu index="1">
+        <template slot="title">
+          <i class="el-icon-data-analysis"></i>
+          <span>Trang Chủ</span>
+        </template>
+        <el-menu-item index="1-1" @click="doHome">Thống kê</el-menu-item>
+        <el-menu-item index="1-2" @click="historyPitch">Lịch sử</el-menu-item>
+      </el-submenu>
       <el-submenu index="2">
         <template slot="title">
           <i class="el-icon-football"></i>
           <span>Sân</span>
         </template>
         <el-menu-item index="2-1" @click="doNewPitch">Thêm mới sân</el-menu-item>
-        <!-- <el-menu-item index="2-2">Update Pitch</el-menu-item> -->
-        <el-menu-item index="2-3"  @click="managePitch">Quản lý sân</el-menu-item>
+        <el-menu-item index="2-2" @click="managePitch">Quản lý sân</el-menu-item>
       </el-submenu>
-      <el-menu-item index="3" @click="doNotification">
+      <!-- <el-menu-item index="3" @click="doNotification">
         <i class="el-icon-s-order"></i>
         <span>Thêm mới thông báo</span>
-      </el-menu-item>
+      </el-menu-item> -->
       <el-submenu index="4">
         <template slot="title">
           <i class="el-icon-setting"></i>
-          <span>Cài đặt</span>
+          <span>Thông tin chung</span>
         </template>
+        <el-menu-item index="4-0" @click="doProfile">Hồ sơ</el-menu-item>
         <el-menu-item index="4-1" @click="doChangePassword">Đổi mặt khẩu</el-menu-item>
         <el-menu-item index="4-2" @click="doLogout">Đăng xuất</el-menu-item>
       </el-submenu>
@@ -47,7 +51,7 @@ export default {
      * Go to home page 1
      */
     doHome () {
-      this.transitTo('UserManagement', undefined)
+      this.transitTo('Statistic', undefined)
     },
     /**
      * Go to new pitch page 2-1
@@ -59,13 +63,25 @@ export default {
      * Go to manage pitch pitch page 2-2
      */
     managePitch () {
-      this.transitTo('PitchManagement', undefined)
+      this.transitTo('ManagePitch', undefined)
+    },
+    /**
+     * Go to manage pitch pitch page 2-3
+     */
+    historyPitch () {
+      this.transitTo('HistoryPitch', undefined)
     },
     /**
      * Go to new notification page 3
      */
     doNotification () {
       this.transitTo('Notification', undefined)
+    },
+    /**
+     * Go to new change password page 4-0
+     */
+    doProfile () {
+      this.transitTo('Profile', undefined)
     },
     /**
      * Go to new change password page 4-1
@@ -123,3 +139,11 @@ export default {
   }
 }
 </script>
+<style>
+  #hci-menu{
+    position: fixed;
+    left: 0;
+    z-index: 1;
+    width: 20.8333%;
+  }
+</style>

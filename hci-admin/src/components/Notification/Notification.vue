@@ -4,7 +4,7 @@
       <el-col :span='5'>
         <hci-menu :activeIndex='"3"' />
       </el-col>
-      <el-col :span="19">
+      <el-col :offset="5" :span="19">
         <div id="new-notification-form">
           <el-form
             ref="notifyForm"
