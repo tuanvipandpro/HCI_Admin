@@ -1,5 +1,7 @@
 package tuanlm.hr.app.controller;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -156,5 +158,30 @@ public class WorkController {
 	@PostMapping("/assign-work")
 	public ResponseEntity<Boolean> assignWork(@RequestBody @Valid AssignWorkRequest request) {
 		return (service.assginWork(request)) ?  new ResponseEntity<Boolean>(true, HttpStatus.OK) : new ResponseEntity<Boolean>(false, HttpStatus.CONFLICT);
+	}
+
+	/**
+	 * Public work.
+	 *
+	 * @param workId the work id
+	 * @return the response entity
+	 */
+	@Operation(summary = "Mở ca làm việc cho phép đổi", security = @SecurityRequirement(name = "bearerAuth"))
+	@PutMapping("/public-work/{workId}")
+	public ResponseEntity<Void> publicWork(@PathVariable int workId) {
+		service.publicWork(workId);
+		return new ResponseEntity<Void>(HttpStatus.OK);
+	}
+	
+	/**
+	 * Gets the public work.
+	 *
+	 * @return the public work
+	 */
+	@Operation(summary = "Lấy các ca làm việc đã được mở", security = @SecurityRequirement(name = "bearerAuth"))
+	@GetMapping("/get-public-work")
+	public ResponseEntity<List<WorkStore>> getPublicWork() {
+		return new ResponseEntity<List<WorkStore>>(
+				service.getPublicWork(LocalDateTime.now(ZoneId.of("Asia/Ho_Chi_Minh"))), HttpStatus.OK);
 	}
 }

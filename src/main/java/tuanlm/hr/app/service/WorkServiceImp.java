@@ -150,4 +150,25 @@ public class WorkServiceImp implements WorkService {
 				LocalDate.parse(date).atStartOfDay(),
 				LocalDate.parse(date).atStartOfDay().plusDays(1));
 	}
+
+	/**
+	 * Gets the public work.
+	 *
+	 * @param datetime the datetime
+	 * @return the public work
+	 */
+	@Override
+	public List<WorkStore> getPublicWork(LocalDateTime datetime) {
+		return mapper.getPublicWork(datetime);
+	}
+
+	/**
+	 * Public work.
+	 *
+	 * @param workId the work id
+	 */
+	@Override
+	public void publicWork(int workId) {
+		mapper.publicWork(workId);
+	}
 }

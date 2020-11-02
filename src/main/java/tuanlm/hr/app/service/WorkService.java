@@ -1,5 +1,6 @@
 package tuanlm.hr.app.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import tuanlm.hr.app.models.model.Work;
@@ -61,6 +62,21 @@ public interface WorkService {
 	 * @return the work store
 	 */
 	List<WorkStore> getWorkEmployee(int employeeId);
+	
+	/**
+	 * Gets the public work.
+	 *
+	 * @param datetime the datetime
+	 * @return the public work
+	 */
+	List<WorkStore> getPublicWork(LocalDateTime datetime);
+	
+	/**
+	 * Public work.
+	 *
+	 * @param workId the work id
+	 */
+	void publicWork(int workId);
 	
 	/**
 	 * Shift work.
