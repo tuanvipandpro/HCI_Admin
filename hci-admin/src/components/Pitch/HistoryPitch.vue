@@ -42,11 +42,17 @@
             </el-table-column>
             <el-table-column
               label="Thời gian bắt đầu"
+              align="center"
               prop="startTime">
             </el-table-column>
             <el-table-column
               label="Thời gian kết thúc"
+              align="center"
               prop="endTime">
+            </el-table-column>
+            <el-table-column
+              label="Tổng tiền"
+              prop="totalPrice">
             </el-table-column>
           </el-table>
         </div>
@@ -69,65 +75,70 @@ export default {
         date: '2020-10-20',
         startTime: '6:00',
         endTime: '7:30',
-        name: 'Tom',
-        pitch: 'Sân 1',
-        address: 'No. 189, Grove St, Los Angeles',
-        addressPitch: 'PG, BD, VN',
-        phone: '0123456789'
+        name: 'Anh Dũng',
+        pitch: 'Sân Phúc Lộc',
+        address: 'Dĩ An, Bình Dương',
+        addressPitch: '442 Lê Văn Việt, Tăng Nhơn Phú A, Q9, TP.HCM',
+        phone: '0123456789',
+        totalPrice: '200.000 VNĐ'
       }, {
         date: '2020-10-20',
         startTime: '14:30',
         endTime: '15:30',
-        name: 'Tom',
-        pitch: 'Sân 2',
-        address: 'No. 189, Grove St, Los Angeles',
-        addressPitch: 'BB, BD, VN',
-        phone: '0123456789'
+        name: 'Minh Tuấn',
+        pitch: 'Sân Nam Lý',
+        address: 'An Phú, Thuận An, Bình Dương',
+        addressPitch: '5 Đường số 447, Tăng Nhơn Phú A, Q9, TP.HCM',
+        phone: '0123456789',
+        totalPrice: '100.000 VNĐ'
       }, {
         date: '2020-10-20',
         startTime: '15:00',
         endTime: '17:00',
-        name: 'Tom',
-        pitch: 'Sân 3',
-        address: 'No. 189, Grove St, Los Angeles',
-        addressPitch: 'BC, BD, VN',
-        phone: '0123456789'
+        name: 'Phương Đạt',
+        pitch: 'Sân Tiến Phát',
+        address: 'Q7, TP.HCM',
+        addressPitch: ' 8 Đường số 51, Hiệp Bình Chánh, Thủ Đức, TP.HCM',
+        phone: '0123456789',
+        totalPrice: '250.000 VNĐ'
       }, {
         date: '2020-10-20',
         startTime: '17:15',
         endTime: '18:45',
-        name: 'Tom',
-        pitch: 'Sân 1',
-        address: 'No. 189, Grove St, Los Angeles',
-        addressPitch: 'DT, BD, VN',
-        phone: '0123456789'
+        name: 'Thanh Tú',
+        pitch: 'Sân Tiến Phát',
+        address: 'Gò Vấp, TP.HCM',
+        addressPitch: '8 Đường số 51, Hiệp Bình Chánh, Thủ Đức, TP.HCM',
+        phone: '0123456789',
+        totalPrice: '200.000 VNĐ'
       }, {
         date: '2020-10-18',
         startTime: '18:00',
         endTime: '20:00',
-        name: 'Tom',
-        pitch: 'Sân 2',
-        address: 'No. 189, Grove St, Los Angeles',
-        addressPitch: 'TA, BD, VN',
-        phone: '0123456789'
+        name: 'Hoàng Tâm',
+        pitch: 'Sân Nam Lý',
+        address: 'Q9,TP.HCM',
+        addressPitch: '5 Đường số 447, Tăng Nhơn Phú A, Q9, TP.HCM',
+        phone: '0123456789',
+        totalPrice: '250.000 VNĐ'
       }, {
         date: '2020-10-20',
         startTime: '19:00',
         endTime: '20:00',
-        name: 'Tom',
-        pitch: 'Sân 3',
-        address: 'No. 189, Grove St, Los Angeles',
-        addressPitch: 'DA, BD, VN',
-        phone: '0123456789'
+        pitch: 'Sân Phúc Lộc',
+        address: 'Dĩ An, Bình Dương',
+        addressPitch: '442 Lê Văn Việt, Tăng Nhơn Phú A, Q9, TP.HCM',
+        phone: '0123456789',
+        totalPrice: '180.000 VNĐ'
       }, {
         date: '2020-10-19',
         startTime: '19:00',
         endTime: '20:30',
-        name: 'Tom',
-        pitch: 'Sân 2',
-        address: 'No. 189, Grove St, Los Angeles',
-        addressPitch: 'TDM, BD, VN',
-        phone: '0123456789'
+        pitch: 'Sân Phúc Lộc',
+        address: 'Q5, TP.HCM',
+        addressPitch: '442 Lê Văn Việt, Tăng Nhơn Phú A, Q9, TP.HCM',
+        phone: '0123456789',
+        totalPrice: '200.000 VNĐ'
       }],
       startTime: '',
       endTime: '',
