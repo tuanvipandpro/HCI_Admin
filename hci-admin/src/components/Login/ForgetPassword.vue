@@ -73,7 +73,6 @@ export default {
         if (valid) {
           const loader = this.getLoader()
           setTimeout(() => {
-            // Todo
             this.dialogFormVisible = true
             this.closeLoader(loader)
           }, 1000)

@@ -49,11 +49,13 @@ export default {
     checkLogin () {
       const accountList = [
         {username: 'leminhtuan', password: '1'},
-        {username: 'dunggla', password: '1'}
+        {username: 'dunggla', password: '1'},
+        {username: 'admin', password: '1'}
       ]
       if (accountList.some(account => account.username === this.formData.username && account.password === this.formData.password)) {
         sessionStorage.setItem('username', this.formData.username)
-        this.transitTo('Statistic', {username: this.formData.username})
+        let scrNm = (this.formData.username === 'admin') ? 'AdminHome' : 'Statistic'
+        this.transitTo(scrNm, {username: this.formData.username})
       } else {
         this.showMessage('Tài khoản hoặc mật khẩu không chính xác !', 'warning')
       }

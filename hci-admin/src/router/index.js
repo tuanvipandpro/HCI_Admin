@@ -12,6 +12,7 @@ import ManagePitch from '@/components/Pitch/ManagePitch'
 import HistoryPitch from '@/components/Pitch/HistoryPitch'
 import Profile from '@/components/ChangePassword/Profile'
 import Statistic from '@/components/Statistic/Statistic'
+import AdminHome from '@/components/Admin/AdminHome'
 
 Vue.use(Router)
 
@@ -66,6 +67,11 @@ export default new Router({
       path: '/forget',
       name: 'ForgetPassword',
       component: ForgetPassword
+    },
+    {
+      path: '/admin-home',
+      name: 'AdminHome',
+      component: AdminHome
     }
   ]
 })
