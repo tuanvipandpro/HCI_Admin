@@ -3,6 +3,7 @@ import Router from 'vue-router'
 
 // Vue Component
 import Login from '@/components/Login/Login'
+import ForgetPassword from '@/components/Login/ForgetPassword'
 import UserManagement from '@/components/UserManagement/UserManagement'
 import Notification from '@/components/Notification/Notification'
 import ChangePassword from '@/components/ChangePassword/ChangePassword'
@@ -60,6 +61,11 @@ export default new Router({
       path: '/statistic',
       name: 'Statistic',
       component: Statistic
+    },
+    {
+      path: '/forget',
+      name: 'ForgetPassword',
+      component: ForgetPassword
     }
   ]
 })

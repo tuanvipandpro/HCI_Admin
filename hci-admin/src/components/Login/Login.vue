@@ -12,6 +12,9 @@
                 <el-form-item>
                     <el-button type="primary" @click="handleForm">Đăng nhập</el-button>
                 </el-form-item>
+                <el-form-item style="margin-top: -3vh">
+                    <el-link :underline="false" type="primary" href="#/forget">Quên Mật Khẩu</el-link>
+                </el-form-item>
             </el-form>
         </el-card>
     </div>
@@ -112,8 +115,8 @@ export default {
     }
 
     #login-form {
-        margin-top: 25vh;
+        margin-top: 20vh;
         width: 22vw;
-        height: 45vh;
+        height: 50vh;
     }
 </style>
