@@ -12,20 +12,20 @@
                 <div slot="header" class="clearfix">
                   <span style="font-size: 20px; font-weight: bold;">Bộ lọc</span>
                 </div>
-                <el-date-picker v-model="month" type="month" placeholder="Chọn tháng"/>
+                <el-date-picker v-model="month" type="month" placeholder="Chọn tháng" @change="changeDate"/>
               </el-card>
           </div>
           <div class="chart-row">
               <el-card class="box-card" style="margin-left: 2%; margin-top: 1%; width: 46.5%;">
-                  <bar-chart :data="datas[0]" :options="options[0]" style="width: 400px; height: 230px"/>
+                  <bar-chart :data="datas[0]" :options="options[0]" style="width: 100%; height: 330px; "/>
               </el-card>
               <el-card class="box-card" style="margin-left: 2%; margin-top: 1%; width: 46.5%;">
-                  <pie-chart :data="datas[1]" :options="options[1]" style="width: 400px; height: 230px"/>
+                  <pie-chart :data="datas[1]" :options="options[1]" style="width: 100%; height: 330px; "/>
               </el-card>
           </div>
           <div>
-              <el-card class="box-card" style="margin-left: 2%; margin-top: 1%;">
-                  <line-chart :data="datas[2]" :options="options[2]" style="height: 300px"/>
+              <el-card class="box-card" style="margin-left: 2%; margin-top: 1%; width: 95%;">
+                  <line-chart :data="datas[2]" :options="options[2]" style="height: 330px; width: 100%"/>
               </el-card>
           </div>
       </el-col>
@@ -128,6 +128,15 @@ export default {
     this.checkAuthen()
   },
   methods: {
+    /**
+     * Change Date
+     */
+    changeDate () {
+      const loader = this.getLoader()
+      setTimeout(() => {
+        this.closeLoader(loader)
+      }, 300)
+    },
     /**
      * Show Loader
      */
