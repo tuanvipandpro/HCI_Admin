@@ -67,12 +67,15 @@ public interface WorkMapper {
 			+ "		W.note 						AS note, "
 			+ "		W.start 					AS start, "
 			+ "		W.\"end\"	 				AS end, "
-			+ "		W.present_time				AS presentTime "	
+			+ "		W.present_time				AS presentTime,"
+			+ "		S.name						AS storeNm "	
 			+ "FROM "
-			+ "		work AS W "
+			+ "		work AS W, "
+			+ "		store AS S "
 			+ "WHERE "
 			+ "		W.\"employeeId\" = #{employeeId} "
 			+ "		AND W.active = true "
+			+ "		AND S.id = W.id "
 			+ "<if test=\"from != null and to != null\"> "
 			+ "		AND W.start <![CDATA[>=]]> #{from} "
 			+ "</if> "
@@ -83,7 +86,7 @@ public interface WorkMapper {
 			+ "		LIMIT 10 "
 			+ "</if> "
 			+ "</script>")
-	List<Work> getTotalWorkByDate(int employeeId, LocalDateTime from, LocalDateTime to);
+	List<WorkStore> getTotalWorkByDate(int employeeId, LocalDateTime from, LocalDateTime to);
 	
 	/**
 	 * Gets the work by employee.

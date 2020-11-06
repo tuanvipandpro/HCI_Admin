@@ -35,9 +35,10 @@ public class OpenApiConfig {
 	public OpenAPI configOpenApi() {
 		return new OpenAPI()
 				.servers(Arrays.asList(
-						new Server().url("http://localhost:8084"), 
-						new Server().url("https://tuanlm-hr.herokuapp.com"),
-						new Server().url("http://34.230.45.99:8084")))
+						new Server().url("http://localhost:8084").description("Local Server"), 
+						new Server().url("https://tuanlm-hr.herokuapp.com").description("Heroku Server"),
+						new Server().url("http://34.230.45.99:8084").description("EC2 Server"),
+						new Server().url("http://hrapp-env.eba-qw5pkqu2.ap-southeast-1.elasticbeanstalk.com").description("EBS Server")))
 				.info(new Info()
 						.title("HR-App API")
 						.description("Api Document V1")
