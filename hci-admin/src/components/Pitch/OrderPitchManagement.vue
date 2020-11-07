@@ -1,11 +1,11 @@
 !<template>
-  <div id="new-pitch">
+  <div id="OrderPitchManagement">
     <el-row style="text-align: left">
       <el-col :span='5'>
-        <hci-menu :activeIndex='"1-2"' />
+        <hci-menu :activeIndex='"2-3"' />
       </el-col>
       <el-col :offset="5" :span="19">
-        <h1 style="text-align: center">Lịch sử đặt sân</h1>
+        <h1 style="text-align: center">Danh sách đặt sân</h1>
         <div style="float: right; margin-right: 10px">
           <el-date-picker
             v-model="dateSearch"
@@ -34,6 +34,7 @@
             </el-table-column>
             <el-table-column
               label="Sân"
+              align="center"
               width="100%"
               prop="pitch">
             </el-table-column>
@@ -45,12 +46,22 @@
             </el-table-column>
             <el-table-column
               label="Tổng tiền"
-              width="250%"
+              width="150%"
+              align="center"
               prop="totalPrice">
             </el-table-column>
             <el-table-column
-              label="Trạng thái"
-              prop="status">
+              label="Hủy sân"
+              align="center"
+              width="300%">
+              <template slot-scope="scope">
+                <el-button
+                  @click.native.prevent="deleteRow(scope.$index, subDataTable)"
+                  type="text"
+                  >
+                  Hủy
+                </el-button>
+              </template>
             </el-table-column>
           </el-table>
         </div>
@@ -206,6 +217,9 @@ export default {
           return false
         }
       })
+    },
+    deleteRow (index, rows) {
+      rows.splice(index, 1)
     },
     /**
      * Reset Form to empty

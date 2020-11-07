@@ -23,6 +23,7 @@
         </template>
         <el-menu-item index="2-1" @click="doNewPitch">Thêm mới sân</el-menu-item>
         <el-menu-item index="2-2" @click="managePitch">Quản lý sân</el-menu-item>
+        <el-menu-item index="2-3" @click="orderPitchManagement">Quản lý đặt sân</el-menu-item>
       </el-submenu>
       <!-- <el-menu-item index="3" @click="doNotification">
         <i class="el-icon-s-order"></i>
@@ -70,6 +71,12 @@ export default {
      */
     historyPitch () {
       this.transitTo('HistoryPitch', undefined)
+    },
+    /**
+     * Go to manage pitch pitch page 2-3
+     */
+    orderPitchManagement () {
+      this.transitTo('OrderPitchManagement', undefined)
     },
     /**
      * Go to new notification page 3

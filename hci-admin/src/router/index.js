@@ -11,6 +11,7 @@ import ManagePitch from '@/components/Pitch/ManagePitch'
 import HistoryPitch from '@/components/Pitch/HistoryPitch'
 import Profile from '@/components/ChangePassword/Profile'
 import Statistic from '@/components/Statistic/Statistic'
+import OrderPitchManagement from '@/components/Pitch/OrderPitchManagement'
 
 Vue.use(Router)
 
@@ -60,6 +61,11 @@ export default new Router({
       path: '/statistic',
       name: 'Statistic',
       component: Statistic
+    },
+    {
+      path: '/orderPitchManagement',
+      name: 'OrderPitchManagement',
+      component: OrderPitchManagement
     }
   ]
 })
