@@ -24,35 +24,33 @@
               <template slot-scope="props">
                 <p>* Thông tin người đặt: </p>
                 <p>&nbsp;&nbsp;&nbsp;&nbsp;- Tên người đặt: {{ props.row.name }}</p>
-                <p>&nbsp;&nbsp;&nbsp;&nbsp;- Địa chỉ: {{ props.row.address }}</p>
                 <p>&nbsp;&nbsp;&nbsp;&nbsp;- Số điện thoại: {{ props.row.phone }}</p>
               </template>
             </el-table-column>
             <el-table-column
               label="Ngày"
+              width="230%"
               prop="date">
             </el-table-column>
             <el-table-column
               label="Sân"
+              width="100%"
               prop="pitch">
             </el-table-column>
             <el-table-column
-              label="Địa chỉ"
-              prop="addressPitch">
-            </el-table-column>
-            <el-table-column
-              label="Thời gian bắt đầu"
+              label="Thời gian"
               align="center"
+              width="380%"
               prop="startTime">
             </el-table-column>
             <el-table-column
-              label="Thời gian kết thúc"
-              align="center"
-              prop="endTime">
+              label="Tổng tiền"
+              width="250%"
+              prop="totalPrice">
             </el-table-column>
             <el-table-column
-              label="Tổng tiền"
-              prop="totalPrice">
+              label="Trạng thái"
+              prop="status">
             </el-table-column>
           </el-table>
         </div>
@@ -72,82 +70,89 @@ export default {
     return {
       subDataTable: [],
       tableData: [{
-        date: '2020-10-20',
-        startTime: '6:00',
-        endTime: '7:30',
+        date: '2020-09-01',
+        startTime: '06:00 - 07:30',
+        // endTime: '7:30',
         name: 'Anh Dũng',
-        pitch: 'Sân Phúc Lộc',
+        pitch: 'Sân 5',
         address: 'Dĩ An, Bình Dương',
-        addressPitch: '442 Lê Văn Việt, Tăng Nhơn Phú A, Q9, TP.HCM',
-        phone: '0123456789',
-        totalPrice: '200.000 VNĐ'
+        // addressPitch: '442 Lê Văn Việt, Tăng Nhơn Phú A, Q9, TP.HCM',
+        phone: '0902348880',
+        totalPrice: '200.000 VNĐ',
+        status: 'Hoàn thành'
       }, {
-        date: '2020-10-20',
-        startTime: '14:30',
-        endTime: '15:30',
+        date: '2020-11-02',
+        startTime: '14:30 - 15:30',
+        // endTime: '15:30',
         name: 'Minh Tuấn',
-        pitch: 'Sân Nam Lý',
+        pitch: 'Sân 7',
         address: 'An Phú, Thuận An, Bình Dương',
-        addressPitch: '5 Đường số 447, Tăng Nhơn Phú A, Q9, TP.HCM',
-        phone: '0123456789',
-        totalPrice: '100.000 VNĐ'
+        // addressPitch: '5 Đường số 447, Tăng Nhơn Phú A, Q9, TP.HCM',
+        phone: '0984348981',
+        totalPrice: '100.000 VNĐ',
+        status: 'Hoàn thành'
       }, {
-        date: '2020-10-20',
-        startTime: '15:00',
-        endTime: '17:00',
+        date: '2020-11-20',
+        startTime: '15:00 - 17:00',
+        // endTime: '17:00',
         name: 'Phương Đạt',
-        pitch: 'Sân Tiến Phát',
+        pitch: 'Sân 5',
         address: 'Q7, TP.HCM',
-        addressPitch: ' 8 Đường số 51, Hiệp Bình Chánh, Thủ Đức, TP.HCM',
-        phone: '0123456789',
-        totalPrice: '250.000 VNĐ'
+        // addressPitch: ' 8 Đường số 51, Hiệp Bình Chánh, Thủ Đức, TP.HCM',
+        phone: '0347238681',
+        totalPrice: '250.000 VNĐ',
+        status: 'Hủy'
       }, {
-        date: '2020-10-20',
-        startTime: '17:15',
-        endTime: '18:45',
+        date: '2020-11-20',
+        startTime: '17:15 - 18:45',
+        // endTime: '18:45',
         name: 'Thanh Tú',
-        pitch: 'Sân Tiến Phát',
+        pitch: 'Sân 5',
         address: 'Gò Vấp, TP.HCM',
-        addressPitch: '8 Đường số 51, Hiệp Bình Chánh, Thủ Đức, TP.HCM',
-        phone: '0123456789',
-        totalPrice: '200.000 VNĐ'
+        // addressPitch: '8 Đường số 51, Hiệp Bình Chánh, Thủ Đức, TP.HCM',
+        phone: '0168276819',
+        totalPrice: '200.000 VNĐ',
+        status: 'Đang chờ'
       }, {
-        date: '2020-10-18',
-        startTime: '18:00',
-        endTime: '20:00',
+        date: '2020-11-18',
+        startTime: '18:00 - 20:00',
+        // endTime: '20:00',
         name: 'Hoàng Tâm',
-        pitch: 'Sân Nam Lý',
-        address: 'Q9,TP.HCM',
-        addressPitch: '5 Đường số 447, Tăng Nhơn Phú A, Q9, TP.HCM',
-        phone: '0123456789',
-        totalPrice: '250.000 VNĐ'
+        pitch: 'Sân 7',
+        address: 'Q9, TP.HCM',
+        // addressPitch: '5 Đường số 447, Tăng Nhơn Phú A, Q9, TP.HCM',
+        phone: '0212574119',
+        totalPrice: '250.000 VNĐ',
+        status: 'Đang chờ'
       }, {
-        date: '2020-10-20',
-        startTime: '19:00',
-        endTime: '20:00',
-        pitch: 'Sân Phúc Lộc',
+        date: '2020-11-20',
+        startTime: '19:00 - 20:00',
+        // endTime: '20:00',
+        pitch: 'Sân 5',
         address: 'Dĩ An, Bình Dương',
-        addressPitch: '442 Lê Văn Việt, Tăng Nhơn Phú A, Q9, TP.HCM',
-        phone: '0123456789',
-        totalPrice: '180.000 VNĐ'
+        // addressPitch: '442 Lê Văn Việt, Tăng Nhơn Phú A, Q9, TP.HCM',
+        phone: '034574119',
+        totalPrice: '180.000 VNĐ',
+        status: 'Hủy'
       }, {
-        date: '2020-10-19',
-        startTime: '19:00',
-        endTime: '20:30',
-        pitch: 'Sân Phúc Lộc',
+        date: '2020-11-19',
+        startTime: '19:00 - 20:30',
+        // endTime: '20:30',
+        pitch: 'Sân 5',
         address: 'Q5, TP.HCM',
-        addressPitch: '442 Lê Văn Việt, Tăng Nhơn Phú A, Q9, TP.HCM',
-        phone: '0123456789',
-        totalPrice: '200.000 VNĐ'
+        // addressPitch: '442 Lê Văn Việt, Tăng Nhơn Phú A, Q9, TP.HCM',
+        phone: '025474119',
+        totalPrice: '200.000 VNĐ',
+        status: 'Đang chờ'
       }],
       startTime: '',
       endTime: '',
       pickerOptions: {
-        disabledDate (time) {
-          let yesterday = new Date()
-          yesterday.setDate(yesterday.getDate() - 1)
-          return time.getTime() <= yesterday
-        }
+        // disabledDate (time) {
+        //   let yesterday = new Date()
+        //   yesterday.setDate(yesterday.getDate() - 1)
+        //   return time.getTime() <= yesterday
+        // }
       },
       dateSearch: '',
       value2: ''
@@ -159,9 +164,11 @@ export default {
       date = this.dateSearch
       if (date) {
         let day = date.getDate()
+        day = day < 10 ? '0' + day : day
         let month = date.getMonth()
+        month = month < 10 ? '0' + (month + 1) : (month + 1)
         let year = date.getFullYear()
-        this.subDataTable = this.tableData.filter(data => !this.dateSearch || data.date === year + '-' + (month + 1) + '-' + day)
+        this.subDataTable = this.tableData.filter(data => !this.dateSearch || data.date === year + '-' + month + '-' + day)
       } else {
         this.subDataTable = this.tableData
       }
