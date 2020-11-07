@@ -8,26 +8,19 @@
       class="el-menu-vertical-demo"
       style="min-height: 100vh"
     >
-      <el-submenu index="1">
-        <template slot="title">
+      <el-menu-item index="1" @click="doHome">
           <i class="el-icon-data-analysis"></i>
           <span>Trang Chủ</span>
-        </template>
-        <el-menu-item index="1-1" @click="doHome">Thống kê</el-menu-item>
-        <!-- <el-menu-item index="1-2" @click="historyPitch">Lịch sử</el-menu-item> -->
-      </el-submenu>
+      </el-menu-item>
       <el-submenu index="2">
-        <template slot="title">
-          <i class="el-icon-football"></i>
-          <span>Sân</span>
-        </template>
-        <el-menu-item index="2-1" @click="doNewPitch">Thêm mới sân</el-menu-item>
-        <el-menu-item index="2-2" @click="managePitch">Quản lý sân</el-menu-item>
+          <template slot="title">
+            <i class="el-icon-user"></i>
+            <span>Tài Khoản</span>
+          </template>
+          <el-menu-item index="2-1">Quản lý chủ sân</el-menu-item>
+          <el-menu-item index="2-2">Quản lý khách hàng</el-menu-item>
+          <el-menu-item index="2-3">Danh sách đen</el-menu-item>
       </el-submenu>
-      <!-- <el-menu-item index="3" @click="doNotification">
-        <i class="el-icon-s-order"></i>
-        <span>Thêm mới thông báo</span>
-      </el-menu-item> -->
       <el-submenu index="4">
         <template slot="title">
           <i class="el-icon-setting"></i>
@@ -53,36 +46,6 @@ export default {
       this.transitTo('AdminHome', undefined)
     },
     /**
-     * Go to new pitch page 2-1
-     */
-    doNewPitch () {
-      this.transitTo('NewPitch', undefined)
-    },
-    /**
-     * Go to manage pitch pitch page 2-2
-     */
-    managePitch () {
-      this.transitTo('ManagePitch', undefined)
-    },
-    /**
-     * Go to manage pitch pitch page 2-3
-     */
-    historyPitch () {
-      this.transitTo('HistoryPitch', undefined)
-    },
-    /**
-     * Go to new notification page 3
-     */
-    doNotification () {
-      this.transitTo('Notification', undefined)
-    },
-    /**
-     * Go to new change password page 4-0
-     */
-    doProfile () {
-      this.transitTo('Profile', undefined)
-    },
-    /**
      * Go to new change password page 4-1
      */
     doChangePassword () {
@@ -92,7 +55,7 @@ export default {
      * Logout 4-2
      */
     doLogout () {
-      this.$confirm('Bạn có muốn đăng xuất?', 'Warning', {
+      this.$confirm('Bạn có muốn đăng xuất?', 'Đăng xuất', {
         confirmButtonText: 'Đồng ý',
         cancelButtonText: 'Hủy Bỏ',
         type: 'warning'

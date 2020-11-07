@@ -71,37 +71,37 @@ export default {
           like: '4.5'
         },
         {
-          name: 'Minh Tuấn',
+          name: 'Anh Dũng',
           total: '35',
           time: '72:30:00',
           like: '4.5'
         },
         {
-          name: 'Minh Tuấn',
+          name: 'Phương Đạt',
           total: '35',
           time: '72:30:00',
           like: '4.5'
         },
         {
-          name: 'Minh Tuấn',
+          name: 'Thanh Tú',
           total: '35',
           time: '72:30:00',
           like: '4.5'
         },
         {
-          name: 'Minh Tuấn',
+          name: 'Công Phượng',
           total: '35',
           time: '72:30:00',
           like: '4.5'
         },
         {
-          name: 'Minh Tuấn',
+          name: 'Tiến Dũng',
           total: '35',
           time: '72:30:00',
           like: '4.5'
         },
         {
-          name: 'Minh Tuấn',
+          name: 'Quang Hải',
           total: '35',
           time: '72:30:00',
           like: '4.5'

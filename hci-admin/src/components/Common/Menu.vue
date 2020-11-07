@@ -100,7 +100,7 @@ export default {
      * Logout 4-2
      */
     doLogout () {
-      this.$confirm('Bạn có muốn đăng xuất?', 'Warning', {
+      this.$confirm('Bạn có muốn đăng xuất?', 'Đăng xuất', {
         confirmButtonText: 'Đồng ý',
         cancelButtonText: 'Hủy Bỏ',
         type: 'warning'

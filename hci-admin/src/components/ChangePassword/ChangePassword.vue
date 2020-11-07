@@ -3,7 +3,8 @@
     <el-row style="text-align: left">
       <!-- Menu -->
       <el-col :span='5'>
-        <hci-menu :activeIndex='"4-1"' />
+        <hci-admin-menu v-if="isAdmin" :activeIndex='"4-1"'/>
+        <hci-menu v-else :activeIndex='"4-1"'/>
       </el-col>
       <!-- Content -->
       <el-col :offset="5" :span="19">
@@ -34,10 +35,12 @@
 
 <script>
 import Menu from '../Common/Menu'
+import MenuAdmin from '../Common/MenuAdmin'
 
 export default {
   components: {
-    'hci-menu': Menu
+    'hci-menu': Menu,
+    'hci-admin-menu': MenuAdmin
   },
   data () {
     /**
@@ -53,6 +56,7 @@ export default {
       }
     }
     return {
+      isAdmin: false,
       forgetForm: {
         newPassword: '',
         confirmPassword: ''
@@ -70,6 +74,7 @@ export default {
   },
   mounted () {
     this.checkAuthen()
+    this.isAdmin = (sessionStorage.getItem('username') === 'admin')
   },
   methods: {
     /**
