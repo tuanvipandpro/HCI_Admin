@@ -13,6 +13,7 @@ import HistoryPitch from '@/components/Pitch/HistoryPitch'
 import Profile from '@/components/ChangePassword/Profile'
 import Statistic from '@/components/Statistic/Statistic'
 import AdminHome from '@/components/Admin/AdminHome'
+import OrderPitchManagement from '@/components/Pitch/OrderPitchManagement'
 
 Vue.use(Router)
 
@@ -72,6 +73,11 @@ export default new Router({
       path: '/admin-home',
       name: 'AdminHome',
       component: AdminHome
+    },
+    {
+      path: '/orderPitchManagement',
+      name: 'OrderPitchManagement',
+      component: OrderPitchManagement
     }
   ]
 })
