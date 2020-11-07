@@ -16,16 +16,30 @@
               </el-card>
           </div>
           <div class="chart-row">
+              <el-card class="box-card" style="margin-left: 2%; margin-top: 1%; width: 35%;">
+                  <line-chart :data="datas[2]" :options="options[2]" style="height: 330px; width: 100%"/>
+              </el-card>
+              <el-card class="box-card" style="margin-left: 2%; margin-top: 1%; width: 58%;">
+                <template>
+                  <el-table :data="tableData" stripe style="width: 100%;" height="300">
+                    <el-table-column fixed prop="name" label="Name"/>
+                    <el-table-column prop="total" label="Total"/>
+                    <el-table-column prop="time" label="Time"/>
+                    <el-table-column prop="like" label="Like">
+                        <template slot-scope="scope">
+                          {{scope.row.like}} <i class="el-icon-star-on"/>
+                        </template>
+                    </el-table-column>
+                  </el-table>
+                </template>
+              </el-card>
+          </div>
+          <div class="chart-row">
               <el-card class="box-card" style="margin-left: 2%; margin-top: 1%; width: 46.5%;">
                   <bar-chart :data="datas[0]" :options="options[0]" style="width: 100%; height: 330px; "/>
               </el-card>
               <el-card class="box-card" style="margin-left: 2%; margin-top: 1%; width: 46.5%;">
                   <pie-chart :data="datas[1]" :options="options[1]" style="width: 100%; height: 330px; "/>
-              </el-card>
-          </div>
-          <div>
-              <el-card class="box-card" style="margin-left: 2%; margin-top: 1%; width: 95%;">
-                  <line-chart :data="datas[2]" :options="options[2]" style="height: 330px; width: 100%"/>
               </el-card>
           </div>
       </el-col>
@@ -49,24 +63,68 @@ export default {
   data () {
     return {
       month: new Date(),
+      tableData: [
+        {
+          name: 'Minh Tuấn',
+          total: '35',
+          time: '72:30:00',
+          like: '4.5'
+        },
+        {
+          name: 'Minh Tuấn',
+          total: '35',
+          time: '72:30:00',
+          like: '4.5'
+        },
+        {
+          name: 'Minh Tuấn',
+          total: '35',
+          time: '72:30:00',
+          like: '4.5'
+        },
+        {
+          name: 'Minh Tuấn',
+          total: '35',
+          time: '72:30:00',
+          like: '4.5'
+        },
+        {
+          name: 'Minh Tuấn',
+          total: '35',
+          time: '72:30:00',
+          like: '4.5'
+        },
+        {
+          name: 'Minh Tuấn',
+          total: '35',
+          time: '72:30:00',
+          like: '4.5'
+        },
+        {
+          name: 'Minh Tuấn',
+          total: '35',
+          time: '72:30:00',
+          like: '4.5'
+        }
+      ],
       datas: [
         {
-          labels: ['Sân 1', 'Sân 2', 'Sân 3', 'Sân 4'],
+          labels: ['Sân 5', 'Sân 7', 'Sân 11'],
           datasets: [
             {
-              label: 'đơn vị (lượt đặt)',
-              backgroundColor: ['#3e95cd', '#8e5ea2', '#3cba9f', '#e8c3b9'],
-              data: [123, 124, 132, 121]
+              label: 'đơn vị (giờ)',
+              backgroundColor: ['#3e95cd', '#8e5ea2', '#3cba9f'],
+              data: [185, 92, 32]
             }
           ]
         },
         {
-          labels: ['Sân 1', 'Sân 2', 'Sân 3', 'Sân 4'],
+          labels: ['Sân 5', 'Sân 7', 'Sân 11'],
           datasets: [
             {
-              label: 'đơn vị (giờ)',
-              backgroundColor: ['#c45850', '#3e95cd', '#8e5ea2', '#e8c3b9'],
-              data: [5, 6, 7, 8]
+              label: 'đơn vị (%)',
+              backgroundColor: ['#c45850', '#3e95cd', '#8e5ea2'],
+              data: [58, 30, 12]
             }
           ]
         },
@@ -74,24 +132,19 @@ export default {
           labels: ['8h', '10h', '12h', '14h', '16h', '18h', '20h', '22h'],
           datasets: [
             {
-              label: 'Sân 1 (5)',
+              label: 'Sân 5',
               borderColor: '#c45850',
               data: [10, 5, 2, 4, 20, 38, 34, 10]
             },
             {
-              label: 'Sân 2 (5)',
+              label: 'Sân 7',
               borderColor: '#3cba9f',
               data: [8, 6, 3, 5, 22, 30, 38, 12]
             },
             {
-              label: 'Sân 3 (5)',
+              label: 'Sân 11',
               borderColor: '#3e95cd',
               data: [4, 8, 3, 7, 19, 36, 40, 15]
-            },
-            {
-              label: 'Sân 4 (7)',
-              borderColor: '#f39c12',
-              data: [7, 9, 4, 5, 15, 30, 31, 20]
             }
           ]
         }
@@ -100,7 +153,7 @@ export default {
         {
           title: {
             display: true,
-            text: 'Biểu đồ đặt sân tháng 10/2020'
+            text: 'Thống kê thời gian đặt sân tháng 11/2020'
           },
           responsive: true,
           maintainAspectRatio: false
@@ -108,7 +161,7 @@ export default {
         {
           title: {
             display: true,
-            text: 'Tỉ lệ đặt sân tháng 10/2020'
+            text: 'Tỉ lệ đặt sân tháng 11/2020'
           },
           responsive: true,
           maintainAspectRatio: false
@@ -116,7 +169,7 @@ export default {
         {
           title: {
             display: true,
-            text: 'Biểu đồ khung giờ được yêu thích 10/2020'
+            text: 'Biểu đồ khung giờ được yêu thích 11/2020'
           },
           responsive: true,
           maintainAspectRatio: false
