@@ -29,31 +29,31 @@
             </el-table-column>
             <el-table-column
               label="Ngày"
-              width="230%"
+              width="150%"
               prop="date">
             </el-table-column>
             <el-table-column
               label="Sân"
               align="center"
-              width="100%"
+              width="180%"
               prop="pitch">
             </el-table-column>
             <el-table-column
               label="Thời gian"
               align="center"
-              width="380%"
+              width="250%"
               prop="startTime">
             </el-table-column>
             <el-table-column
               label="Tổng tiền"
-              width="150%"
+              width="250%"
               align="center"
               prop="totalPrice">
             </el-table-column>
             <el-table-column
               label="Hủy sân"
               align="center"
-              width="300%">
+              width="200%">
               <template slot-scope="scope">
                 <el-button
                   @click.native.prevent="deleteRow(scope.$index, subDataTable)"
@@ -124,28 +124,30 @@ export default {
         phone: '0168276819',
         totalPrice: '200.000 VNĐ',
         status: 'Đặt thành công'
-      }, {
-        date: '2020-11-18',
-        startTime: '18:00 - 20:00',
-        // endTime: '20:00',
-        name: 'Hoàng Tâm',
-        pitch: 'Sân 7',
-        address: 'Q9, TP.HCM',
-        // addressPitch: '5 Đường số 447, Tăng Nhơn Phú A, Q9, TP.HCM',
-        phone: '0212574119',
-        totalPrice: '250.000 VNĐ',
-        status: 'Đặt thành công'
-      }, {
-        date: '2020-11-20',
-        startTime: '19:00 - 20:00',
-        // endTime: '20:00',
-        pitch: 'Sân 5',
-        address: 'Dĩ An, Bình Dương',
-        // addressPitch: '442 Lê Văn Việt, Tăng Nhơn Phú A, Q9, TP.HCM',
-        phone: '034574119',
-        totalPrice: '180.000 VNĐ',
-        status: 'Hủy'
-      }, {
+      },
+      //  {
+      //   date: '2020-11-18',
+      //   startTime: '18:00 - 20:00',
+      //   // endTime: '20:00',
+      //   name: 'Hoàng Tâm',
+      //   pitch: 'Sân 7',
+      //   address: 'Q9, TP.HCM',
+      //   // addressPitch: '5 Đường số 447, Tăng Nhơn Phú A, Q9, TP.HCM',
+      //   phone: '0212574119',
+      //   totalPrice: '250.000 VNĐ',
+      //   status: 'Đặt thành công'
+      // }, {
+      //   date: '2020-11-20',
+      //   startTime: '19:00 - 20:00',
+      //   // endTime: '20:00',
+      //   pitch: 'Sân 5',
+      //   address: 'Dĩ An, Bình Dương',
+      //   // addressPitch: '442 Lê Văn Việt, Tăng Nhơn Phú A, Q9, TP.HCM',
+      //   phone: '034574119',
+      //   totalPrice: '180.000 VNĐ',
+      //   status: 'Hủy'
+      // }, 
+      {
         date: '2020-11-19',
         startTime: '19:00 - 20:30',
         // endTime: '20:30',
