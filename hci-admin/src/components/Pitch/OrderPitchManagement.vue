@@ -146,7 +146,7 @@ export default {
       //   phone: '034574119',
       //   totalPrice: '180.000 VNĐ',
       //   status: 'Hủy'
-      // }, 
+      // },
       {
         date: '2020-11-19',
         startTime: '19:00 - 20:30',

@@ -23,10 +23,10 @@
                 <el-card class="box-card" style="margin-left: 2%; margin-top: 1%; width: 58%;">
                   <template>
                     <el-table :data="tableData" stripe style="width: 100%;" height="300">
-                      <el-table-column fixed prop="name" label="Name"/>
-                      <el-table-column prop="total" label="Total"/>
-                      <el-table-column prop="time" label="Time"/>
-                      <el-table-column prop="like" label="Like">
+                      <el-table-column fixed prop="name" label="Tên Sân"/>
+                      <el-table-column prop="total" label="Tổng lượt đặt"/>
+                      <el-table-column prop="time" label="Tổng giờ đặt"/>
+                      <el-table-column prop="like" label="Đánh giá">
                           <template slot-scope="scope">
                             {{scope.row.like}} <i class="el-icon-star-on"/>
                           </template>
@@ -67,61 +67,61 @@ export default {
       month: new Date(),
       tableData: [
         {
-          name: 'Minh Tuấn',
-          total: '35',
-          time: '72:30:00',
+          name: 'Sân Phúc Lộc',
+          total: '172',
+          time: '185:30:00',
+          like: '4.8'
+        },
+        {
+          name: 'Sân Hiệp Phú',
+          total: '192',
+          time: '200:00:00',
           like: '4.5'
         },
         {
-          name: 'Anh Dũng',
-          total: '35',
-          time: '72:30:00',
-          like: '4.5'
+          name: 'Sân Kaly',
+          total: '141',
+          time: '149:30:00',
+          like: '4.3'
         },
         {
-          name: 'Phương Đạt',
-          total: '35',
-          time: '72:30:00',
-          like: '4.5'
+          name: 'Sân Nam Lý',
+          total: '156',
+          time: '160:30:00',
+          like: '4.2'
         },
         {
-          name: 'Thanh Tú',
-          total: '35',
-          time: '72:30:00',
-          like: '4.5'
+          name: 'Sân Tiến Phát',
+          total: '192',
+          time: '200:30:00',
+          like: '4.1'
         },
         {
-          name: 'Công Phượng',
-          total: '35',
-          time: '72:30:00',
-          like: '4.5'
+          name: 'Sân Panda',
+          total: '148',
+          time: '150:30:00',
+          like: '4.0'
         },
         {
-          name: 'Tiến Dũng',
-          total: '35',
-          time: '72:30:00',
-          like: '4.5'
-        },
-        {
-          name: 'Quang Hải',
-          total: '35',
-          time: '72:30:00',
-          like: '4.5'
+          name: 'Sân Bình Thọ',
+          total: '136',
+          time: '139  :30:00',
+          like: '3.9'
         }
       ],
       datas: [
         {
-          labels: ['Sân Phúc Lộc', 'Sân Hiệp Phú', 'Sân Kaly', 'Sân Nam Lý', 'Tiến Phát'],
+          labels: ['Sân Phúc Lộc', 'Sân Hiệp Phú', 'Sân Kaly', 'Sân Nam Lý', 'Sân Tiến Phát', 'Sân Panda', 'Sân Bình Thọ'],
           datasets: [
             {
-              label: 'đơn vị (lượt đặt)',
-              backgroundColor: ['#3e95cd', '#3e95cd', '#3e95cd', '#3e95cd', '#3e95cd'],
-              data: [185, 92, 32, 56, 92]
+              label: 'lượt đặt',
+              backgroundColor: ['#3e95cd', '#3e95cd', '#3e95cd', '#3e95cd', '#3e95cd', '#3e95cd', '#3e95cd'],
+              data: [172, 192, 141, 156, 192, 148, 136]
             },
             {
-              label: 'đơn vị (lượt đặt)',
-              backgroundColor: ['#2c3e50', '#2c3e50', '#2c3e50', '#2c3e50', '#2c3e50'],
-              data: [185, 92, 32, 56, 92]
+              label: 'giờ đặt',
+              backgroundColor: ['#2c3e50', '#2c3e50', '#2c3e50', '#2c3e50', '#2c3e50', '#2c3e50', '#2c3e50'],
+              data: [185.5, 200, 149.5, 160.5, 200.5, 150.5, 139.5]
             }
           ]
         },
@@ -141,7 +141,7 @@ export default {
             {
               label: 'Sân 5',
               borderColor: '#c45850',
-              data: [10, 5, 2, 4, 20, 38, 34, 10]
+              data: [10, 8, 2, 4, 20, 38, 34, 10]
             },
             {
               label: 'Sân 7',
@@ -151,7 +151,7 @@ export default {
             {
               label: 'Sân 11',
               borderColor: '#3e95cd',
-              data: [4, 8, 3, 7, 19, 36, 40, 15]
+              data: [4, 15, 11, 7, 19, 36, 40, 15]
             }
           ]
         }

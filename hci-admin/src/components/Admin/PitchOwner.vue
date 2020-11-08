@@ -7,9 +7,52 @@
       </el-col>
       <!-- Content -->
       <el-col :offset="5" :span="19">
-          <div id="owner-container">
-              <h2>CBA</h2>
+        <div>
+          <div style="text-align: center"><h1>Quản lý chủ sân</h1></div>
+          <div>
+            <el-button icon="el-icon-circle-plus" style="margin-left: 1vw;" round @click="transitTo('CreatePitchOwner')">
+              Thêm mới chủ sân
+            </el-button>
           </div>
+          <div>
+            <el-table :data="tableDate">
+                <el-table-column prop="username" label="Tài khoản" align="center" fixed/>
+                <el-table-column prop="ownerName" label="Họ tên" align="center">
+                  <template slot-scope="scope">
+                    <el-popover trigger="hover" placement="left">
+                      <p>Họ Tên: {{ scope.row.ownerName }}</p>
+                      <p>Email: {{ scope.row.email }}</p>
+                      <p>Số điện thoại: {{ scope.row.phone }}</p>
+                      <div slot="reference" class="name-wrapper">
+                        <el-tag size="medium">{{ scope.row.ownerName }}</el-tag>
+                      </div>
+                    </el-popover>
+                  </template>
+                </el-table-column>
+                <el-table-column prop="pitchName" label="Tên Sân" align="center">
+                  <template slot-scope="scope">
+                    <el-popover trigger="hover" placement="left">
+                      <p>Tên Sân: {{ scope.row.pitchName }}</p>
+                      <!-- <p>Loại Sân: {{ scope.row.type }}</p> -->
+                      <p>Địa chỉ: {{ scope.row.address }}</p>
+                      <p>Thời gian hoạt động: 08:00 ~ 22:00</p>
+                      <div slot="reference" class="name-wrapper">
+                        <el-tag size="medium">{{ scope.row.pitchName }}</el-tag>
+                      </div>
+                    </el-popover>
+                  </template>
+                </el-table-column>
+                <el-table-column prop="address" label="Địa chỉ" align="center"/>
+                <!-- <el-table-column prop="statusString" label="Trạng thái" align="center"/> -->
+                <el-table-column label="Chức năng" align="center" fixed="right" >
+                    <template slot-scope="scope" >
+                        <el-button v-if="!scope.row.status" type="text" size="small" @click="updateStatus(scope)">Mở tài khoản</el-button>
+                        <el-button v-else type="text" size="small" @click="updateStatus(scope)">Đóng tài khoản</el-button>
+                    </template>
+                </el-table-column>
+            </el-table>
+          </div>
+        </div>
       </el-col>
     </el-row>
   </div>
@@ -23,12 +66,63 @@ export default {
     'hci-admin-menu': MenuAdmin
   },
   data () {
-    return {}
+    return {
+      tableDate: [
+        {
+          username: 'leminhtuan',
+          ownerName: 'Lê Minh Tuấn',
+          pitchName: 'Sân Phúc Lộc',
+          address: '55/83B Lê Văn Việt, Quận 9, TP.HCM',
+          type: '5-7-11',
+          status: true,
+          email: 'tuanvipandpro@gmail.com',
+          phone: '0123456789',
+          statusString: 'Đang hoạt động'
+        },
+        {
+          username: 'leminhtuan',
+          ownerName: 'Lê Minh Tuấn',
+          pitchName: 'Sân Phúc Lộc',
+          address: '55/83B Lê Văn Việt, Quận 9, TP.HCM',
+          type: '5-7-11',
+          status: true,
+          email: 'tuanvipandpro@gmail.com',
+          phone: '0123456789',
+          statusString: 'Đang hoạt động'
+        }
+      ]
+    }
   },
   mounted () {
     this.checkAuthen()
   },
   methods: {
+    /**
+     * Update Status
+     */
+    updateStatus (scope) {
+      let title = (scope.row.status)
+        ? 'Hủy tài khoản'
+        : 'Mở tài khoản'
+
+      let message = (scope.row.status)
+        ? 'Bạn có chắc chắn muốn dừng hoạt động của chủ sân này ?'
+        : 'Bạn có chắc chắn muốn mở lại của chủ sân này ?'
+
+      this.$confirm(message, title, {
+        confirmButtonText: 'Đồng ý',
+        cancelButtonText: 'Hủy Bỏ',
+        type: 'warning'
+      }).then(() => {
+        const loader = this.getLoader()
+        setTimeout(() => {
+          this.closeLoader(loader)
+          scope.row.status = !scope.row.status
+          // scope.row.statusString = (scope.row.status) ? 'Đang hoạt động' : 'Đã hủy'
+          this.showMessage('Thao tác thành công !', 'success')
+        }, 1000)
+      })
+    },
     /**
      * Show Loader
      */
@@ -81,3 +175,13 @@ export default {
   }
 }
 </script>
+<style>
+  #pitch-owner-footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    color: white;
+    text-align: center;
+  }
+</style>
