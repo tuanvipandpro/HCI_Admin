@@ -17,9 +17,9 @@
             <i class="el-icon-user"></i>
             <span>Tài Khoản</span>
           </template>
-          <el-menu-item index="2-1">Quản lý chủ sân</el-menu-item>
-          <el-menu-item index="2-2">Quản lý khách hàng</el-menu-item>
-          <el-menu-item index="2-3">Danh sách đen</el-menu-item>
+          <el-menu-item index="2-1" @click="doPitchOwner">Quản lý chủ sân</el-menu-item>
+          <el-menu-item index="2-2" @click="doUserManagement">Quản lý khách hàng</el-menu-item>
+          <el-menu-item index="2-3" @click="doBlackList">Danh sách đen</el-menu-item>
       </el-submenu>
       <el-submenu index="4">
         <template slot="title">
@@ -44,6 +44,24 @@ export default {
      */
     doHome () {
       this.transitTo('AdminHome', undefined)
+    },
+    /**
+     * Go to pitch owner page 2-1
+     */
+    doPitchOwner () {
+      this.transitTo('PitchOwner', undefined)
+    },
+    /**
+     * Go to pitch owner page 2-2
+     */
+    doUserManagement () {
+      this.transitTo('UserManagement', undefined)
+    },
+    /**
+     * Go to pitch owner page 2-3
+     */
+    doBlackList () {
+      this.transitTo('BlackList', undefined)
     },
     /**
      * Go to new change password page 4-1

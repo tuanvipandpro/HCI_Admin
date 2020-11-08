@@ -122,7 +122,7 @@ export default {
               label: 'đơn vị (lượt đặt)',
               backgroundColor: ['#2c3e50', '#2c3e50', '#2c3e50', '#2c3e50', '#2c3e50'],
               data: [185, 92, 32, 56, 92]
-            }            
+            }
           ]
         },
         {
