@@ -29,34 +29,48 @@
             </el-table-column>
             <el-table-column
               label="Ngày"
-              width="150%"
+              width="120%"
               prop="date">
             </el-table-column>
             <el-table-column
               label="Sân"
               align="center"
-              width="180%"
+              width="150%"
               prop="pitch">
             </el-table-column>
             <el-table-column
               label="Thời gian"
               align="center"
-              width="250%"
+              width="160%"
               prop="startTime">
             </el-table-column>
             <el-table-column
               label="Tổng tiền"
-              width="250%"
+              width="200%"
               align="center"
               prop="totalPrice">
             </el-table-column>
             <el-table-column
-              label="Hủy sân"
+              label="Trạng thái"
+              width="200%"
+              align="center"
+              prop="status">
+            </el-table-column>
+            <el-table-column
+              label="Xử lý"
               align="center"
               width="200%">
               <template slot-scope="scope">
                 <el-button
+                  @click.native.prevent="acceptRow(scope.$index, subDataTable)"
+                  :disabled="scope.row.status !== 'Chờ xét duyệt'"
+                  type="text"
+                  >
+                  Chấp nhận
+                </el-button>
+                <el-button
                   @click.native.prevent="deleteRow(scope.$index, subDataTable)"
+                  :disabled="scope.row.status !== 'Chờ xét duyệt'"
                   type="text"
                   >
                   Hủy
@@ -64,6 +78,18 @@
               </template>
             </el-table-column>
           </el-table>
+          <el-dialog title="Lý do hủy" :visible.sync="dialogFormVisible" :close-on-click-modal="false">
+            <el-form v-if="optionForm === 0" ref="reasonForm" status-icon :rules="rules" :model="formData">
+                <h4>Tips: Nhập lý do hủy sân</h4>
+                <el-form-item  prop="reason">
+                    <el-input v-model="formData.reason" placeholder="Lý do" type="textarea"/>
+                </el-form-item>
+                <el-divider/>
+                <el-form-item>
+                    <el-button type="primary" @click="removeOrder">Hủy</el-button>
+                </el-form-item>
+            </el-form>
+        </el-dialog>
         </div>
       </el-col>
     </el-row>
@@ -80,50 +106,51 @@ export default {
   data () {
     return {
       subDataTable: [],
+      formData: {
+        reason: ''
+      },
+      rules: {
+        reason: [{required: true, message: 'Vui lòng nhập lý do !', trigger: 'blur'}]
+      },
+      optionForm: 0,
+      dialogFormVisible: false,
+      indexDetele: -1,
       tableData: [{
         date: '2020-09-01',
         startTime: '06:00 - 07:30',
-        // endTime: '7:30',
         name: 'Anh Dũng',
         pitch: 'Sân 5',
         address: 'Dĩ An, Bình Dương',
-        // addressPitch: '442 Lê Văn Việt, Tăng Nhơn Phú A, Q9, TP.HCM',
         phone: '0902348880',
         totalPrice: '200.000 VNĐ',
-        status: 'Đặt thành công'
+        status: 'Chờ xét duyệt'
       }, {
         date: '2020-11-02',
         startTime: '14:30 - 15:30',
-        // endTime: '15:30',
         name: 'Minh Tuấn',
         pitch: 'Sân 7',
         address: 'An Phú, Thuận An, Bình Dương',
-        // addressPitch: '5 Đường số 447, Tăng Nhơn Phú A, Q9, TP.HCM',
         phone: '0984348981',
         totalPrice: '100.000 VNĐ',
-        status: 'Đặt thành công'
+        status: 'Chờ xét duyệt'
       }, {
         date: '2020-11-20',
-        startTime: '15:00 - 17:00',
-        // endTime: '17:00',
+        startTime: '15:30 - 17:00',
         name: 'Phương Đạt',
         pitch: 'Sân 5',
         address: 'Q7, TP.HCM',
-        // addressPitch: ' 8 Đường số 51, Hiệp Bình Chánh, Thủ Đức, TP.HCM',
         phone: '0347238681',
         totalPrice: '250.000 VNĐ',
-        status: 'Hủy'
+        status: 'Chờ xét duyệt'
       }, {
         date: '2020-11-20',
-        startTime: '17:15 - 18:45',
-        // endTime: '18:45',
+        startTime: '17:30 - 18:30',
         name: 'Thanh Tú',
         pitch: 'Sân 5',
         address: 'Gò Vấp, TP.HCM',
-        // addressPitch: '8 Đường số 51, Hiệp Bình Chánh, Thủ Đức, TP.HCM',
         phone: '0168276819',
         totalPrice: '200.000 VNĐ',
-        status: 'Đặt thành công'
+        status: 'Chờ xét duyệt'
       },
       //  {
       //   date: '2020-11-18',
@@ -150,22 +177,20 @@ export default {
       {
         date: '2020-11-19',
         startTime: '19:00 - 20:30',
-        // endTime: '20:30',
         pitch: 'Sân 5',
         address: 'Q5, TP.HCM',
-        // addressPitch: '442 Lê Văn Việt, Tăng Nhơn Phú A, Q9, TP.HCM',
         phone: '025474119',
         totalPrice: '200.000 VNĐ',
-        status: 'Đặt thành công'
+        status: 'Chờ xét duyệt'
       }],
       startTime: '',
       endTime: '',
       pickerOptions: {
-        // disabledDate (time) {
-        //   let yesterday = new Date()
-        //   yesterday.setDate(yesterday.getDate() - 1)
-        //   return time.getTime() <= yesterday
-        // }
+        disabledDate (time) {
+          let yesterday = new Date()
+          yesterday.setDate(yesterday.getDate() - 1)
+          return time.getTime() <= yesterday
+        }
       },
       dateSearch: '',
       value2: ''
@@ -220,8 +245,26 @@ export default {
         }
       })
     },
+    acceptRow (index, rows) {
+      rows[index].status = 'Đã duyệt'
+    },
     deleteRow (index, rows) {
-      rows.splice(index, 1)
+      this.dialogFormVisible = true
+      this.indexDetele = index
+    },
+    removeOrder () {
+      this.$refs['reasonForm'].validate((valid) => {
+        if (valid) {
+          const loader = this.getLoader()
+          setTimeout(() => {
+            this.dialogFormVisible = false
+            this.subDataTable[this.indexDetele].status = 'Đã hủy'
+            this.formData.reason = ''
+            this.indexDetele = -1
+            this.closeLoader(loader)
+          }, 1000)
+        } else return false
+      })
     },
     /**
      * Reset Form to empty

@@ -29,18 +29,18 @@
             </el-table-column>
             <el-table-column
               label="Ngày"
-              width="230%"
+              width="150%"
               prop="date">
             </el-table-column>
             <el-table-column
               label="Sân"
-              width="100%"
+              width="180%"
               prop="pitch">
             </el-table-column>
             <el-table-column
               label="Thời gian"
               align="center"
-              width="380%"
+              width="250%"
               prop="startTime">
             </el-table-column>
             <el-table-column
@@ -50,6 +50,7 @@
             </el-table-column>
             <el-table-column
               label="Trạng thái"
+              width="200%"
               prop="status">
             </el-table-column>
           </el-table>
@@ -72,75 +73,61 @@ export default {
       tableData: [{
         date: '2020-09-01',
         startTime: '06:00 - 07:30',
-        // endTime: '7:30',
         name: 'Anh Dũng',
         pitch: 'Sân 5',
         address: 'Dĩ An, Bình Dương',
-        // addressPitch: '442 Lê Văn Việt, Tăng Nhơn Phú A, Q9, TP.HCM',
         phone: '0902348880',
         totalPrice: '200.000 VNĐ',
         status: 'Đặt thành công'
       }, {
         date: '2020-11-02',
         startTime: '14:30 - 15:30',
-        // endTime: '15:30',
         name: 'Minh Tuấn',
         pitch: 'Sân 7',
         address: 'An Phú, Thuận An, Bình Dương',
-        // addressPitch: '5 Đường số 447, Tăng Nhơn Phú A, Q9, TP.HCM',
         phone: '0984348981',
         totalPrice: '100.000 VNĐ',
         status: 'Đặt thành công'
       }, {
-        date: '2020-11-20',
+        date: '2020-11-18',
         startTime: '15:00 - 17:00',
-        // endTime: '17:00',
         name: 'Phương Đạt',
         pitch: 'Sân 5',
         address: 'Q7, TP.HCM',
-        // addressPitch: ' 8 Đường số 51, Hiệp Bình Chánh, Thủ Đức, TP.HCM',
         phone: '0347238681',
         totalPrice: '250.000 VNĐ',
         status: 'Hủy'
       }, {
         date: '2020-11-20',
         startTime: '17:15 - 18:45',
-        // endTime: '18:45',
         name: 'Thanh Tú',
         pitch: 'Sân 5',
         address: 'Gò Vấp, TP.HCM',
-        // addressPitch: '8 Đường số 51, Hiệp Bình Chánh, Thủ Đức, TP.HCM',
         phone: '0168276819',
         totalPrice: '200.000 VNĐ',
         status: 'Đặt thành công'
       }, {
         date: '2020-11-18',
         startTime: '18:00 - 20:00',
-        // endTime: '20:00',
         name: 'Hoàng Tâm',
         pitch: 'Sân 7',
         address: 'Q9, TP.HCM',
-        // addressPitch: '5 Đường số 447, Tăng Nhơn Phú A, Q9, TP.HCM',
         phone: '0212574119',
         totalPrice: '250.000 VNĐ',
         status: 'Đặt thành công'
       }, {
-        date: '2020-11-20',
+        date: '2020-11-23',
         startTime: '19:00 - 20:00',
-        // endTime: '20:00',
         pitch: 'Sân 5',
         address: 'Dĩ An, Bình Dương',
-        // addressPitch: '442 Lê Văn Việt, Tăng Nhơn Phú A, Q9, TP.HCM',
         phone: '034574119',
         totalPrice: '180.000 VNĐ',
         status: 'Hủy'
       }, {
         date: '2020-11-19',
         startTime: '19:00 - 20:30',
-        // endTime: '20:30',
         pitch: 'Sân 5',
         address: 'Q5, TP.HCM',
-        // addressPitch: '442 Lê Văn Việt, Tăng Nhơn Phú A, Q9, TP.HCM',
         phone: '025474119',
         totalPrice: '200.000 VNĐ',
         status: 'Đặt thành công'
