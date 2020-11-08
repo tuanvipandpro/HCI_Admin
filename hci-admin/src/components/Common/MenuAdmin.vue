@@ -1,5 +1,5 @@
 !<template>
-  <div id="hci-menu">
+  <div id="hci-admin-menu">
     <el-menu
       :default-active="activeIndex"
       active-text-color="#ffd04b"
@@ -8,33 +8,24 @@
       class="el-menu-vertical-demo"
       style="min-height: 100vh"
     >
-      <el-submenu index="1">
-        <template slot="title">
+      <el-menu-item index="1" @click="doHome">
           <i class="el-icon-data-analysis"></i>
           <span>Trang Chủ</span>
-        </template>
-        <el-menu-item index="1-1" @click="doHome">Thống kê</el-menu-item>
-        <el-menu-item index="1-2" @click="historyPitch">Lịch sử</el-menu-item>
-      </el-submenu>
+      </el-menu-item>
       <el-submenu index="2">
-        <template slot="title">
-          <i class="el-icon-football"></i>
-          <span>Sân</span>
-        </template>
-        <el-menu-item index="2-1" @click="doNewPitch">Thêm mới sân</el-menu-item>
-        <el-menu-item index="2-2" @click="managePitch">Quản lý sân</el-menu-item>
-        <el-menu-item index="2-3" @click="orderPitchManagement">Quản lý đặt sân</el-menu-item>
+          <template slot="title">
+            <i class="el-icon-user"></i>
+            <span>Tài Khoản</span>
+          </template>
+          <el-menu-item index="2-1" @click="doPitchOwner">Quản lý chủ sân</el-menu-item>
+          <el-menu-item index="2-2" @click="doUserManagement">Quản lý khách hàng</el-menu-item>
+          <el-menu-item index="2-3" @click="doBlackList">Danh sách đen</el-menu-item>
       </el-submenu>
-      <!-- <el-menu-item index="3" @click="doNotification">
-        <i class="el-icon-s-order"></i>
-        <span>Thêm mới thông báo</span>
-      </el-menu-item> -->
       <el-submenu index="4">
         <template slot="title">
           <i class="el-icon-setting"></i>
           <span>Thông tin chung</span>
         </template>
-        <el-menu-item index="4-0" @click="doProfile">Hồ sơ</el-menu-item>
         <el-menu-item index="4-1" @click="doChangePassword">Đổi mặt khẩu</el-menu-item>
         <el-menu-item index="4-2" @click="doLogout">Đăng xuất</el-menu-item>
       </el-submenu>
@@ -52,43 +43,25 @@ export default {
      * Go to home page 1
      */
     doHome () {
-      this.transitTo('Statistic', undefined)
+      this.transitTo('AdminHome', undefined)
     },
     /**
-     * Go to new pitch page 2-1
+     * Go to pitch owner page 2-1
      */
-    doNewPitch () {
-      this.transitTo('NewPitch', undefined)
+    doPitchOwner () {
+      this.transitTo('PitchOwner', undefined)
     },
     /**
-     * Go to manage pitch pitch page 2-2
+     * Go to pitch owner page 2-2
      */
-    managePitch () {
-      this.transitTo('ManagePitch', undefined)
+    doUserManagement () {
+      this.transitTo('UserManagement', undefined)
     },
     /**
-     * Go to manage pitch pitch page 2-3
+     * Go to pitch owner page 2-3
      */
-    historyPitch () {
-      this.transitTo('HistoryPitch', undefined)
-    },
-    /**
-     * Go to manage pitch pitch page 2-3
-     */
-    orderPitchManagement () {
-      this.transitTo('OrderPitchManagement', undefined)
-    },
-    /**
-     * Go to new notification page 3
-     */
-    doNotification () {
-      this.transitTo('Notification', undefined)
-    },
-    /**
-     * Go to new change password page 4-0
-     */
-    doProfile () {
-      this.transitTo('Profile', undefined)
+    doBlackList () {
+      this.transitTo('BlackList', undefined)
     },
     /**
      * Go to new change password page 4-1
@@ -147,7 +120,7 @@ export default {
 }
 </script>
 <style>
-  #hci-menu{
+  #hci-admin-menu{
     position: fixed;
     left: 0;
     z-index: 1;

@@ -12,6 +12,9 @@
                 <el-form-item>
                     <el-button type="primary" @click="handleForm">Đăng nhập</el-button>
                 </el-form-item>
+                <el-form-item style="margin-top: -3vh">
+                    <el-link :underline="false" type="primary" href="#/forget">Quên Mật Khẩu</el-link>
+                </el-form-item>
             </el-form>
         </el-card>
     </div>
@@ -46,11 +49,13 @@ export default {
     checkLogin () {
       const accountList = [
         {username: 'leminhtuan', password: '1'},
-        {username: 'dunggla', password: '1'}
+        {username: 'dunggla', password: '1'},
+        {username: 'admin', password: '1'}
       ]
       if (accountList.some(account => account.username === this.formData.username && account.password === this.formData.password)) {
         sessionStorage.setItem('username', this.formData.username)
-        this.transitTo('Statistic', {username: this.formData.username})
+        let scrNm = (this.formData.username === 'admin') ? 'AdminHome' : 'Statistic'
+        this.transitTo(scrNm, {username: this.formData.username})
       } else {
         this.showMessage('Tài khoản hoặc mật khẩu không chính xác !', 'warning')
       }
@@ -112,8 +117,8 @@ export default {
     }
 
     #login-form {
-        margin-top: 25vh;
+        margin-top: 20vh;
         width: 22vw;
-        height: 45vh;
+        height: 50vh;
     }
 </style>

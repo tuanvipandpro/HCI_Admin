@@ -1,46 +1,48 @@
 !<template>
-  <div id="profile">
+  <div id="change-password">
     <el-row style="text-align: left">
       <!-- Menu -->
       <el-col :span='5'>
-        <hci-menu :activeIndex='"1-1"' />
+        <hci-menu :activeIndex='"1"' />
       </el-col>
       <!-- Content -->
       <el-col :offset="5" :span="19">
-          <div>
-              <el-card class="box-card" style="margin-left: 2%; margin-top: 1%; width: 95%;">
-                <div slot="header" class="clearfix">
-                  <span style="font-size: 20px; font-weight: bold;">Bộ lọc</span>
-                </div>
-                <el-date-picker v-model="month" type="month" placeholder="Chọn tháng" @change="changeDate"/>
-              </el-card>
-          </div>
-          <div class="chart-row">
-              <el-card class="box-card" style="margin-left: 2%; margin-top: 1%; width: 35%;">
-                  <line-chart :data="datas[2]" :options="options[2]" style="height: 330px; width: 100%"/>
-              </el-card>
-              <el-card class="box-card" style="margin-left: 2%; margin-top: 1%; width: 58%;">
-                <template>
-                  <el-table :data="tableData" stripe style="width: 100%;" height="300">
-                    <el-table-column fixed prop="name" label="Name"/>
-                    <el-table-column prop="total" label="Total"/>
-                    <el-table-column prop="time" label="Time"/>
-                    <el-table-column prop="like" label="Like">
-                        <template slot-scope="scope">
-                          {{scope.row.like}} <i class="el-icon-star-on"/>
-                        </template>
-                    </el-table-column>
-                  </el-table>
-                </template>
-              </el-card>
-          </div>
-          <div class="chart-row">
-              <el-card class="box-card" style="margin-left: 2%; margin-top: 1%; width: 46.5%;">
-                  <bar-chart :data="datas[0]" :options="options[0]" style="width: 100%; height: 330px; "/>
-              </el-card>
-              <el-card class="box-card" style="margin-left: 2%; margin-top: 1%; width: 46.5%;">
-                  <pie-chart :data="datas[1]" :options="options[1]" style="width: 100%; height: 330px; "/>
-              </el-card>
+          <div id="admin-home-container">
+            <div id="admin-filter">
+                <el-card class="box-card" style="margin-left: 2%; margin-top: 1%; width: 95%;">
+                  <div slot="header" class="clearfix">
+                    <span style="font-size: 20px; font-weight: bold;">Bộ lọc</span>
+                  </div>
+                  <el-date-picker v-model="month" type="month" placeholder="Chọn tháng" @change="changeDate"/>
+                </el-card>
+            </div>
+            <div class="chart-row">
+                <el-card class="box-card" style="margin-left: 2%; margin-top: 1%; width: 35%;">
+                    <line-chart :data="datas[2]" :options="options[2]" style="height: 330px; width: 100%"/>
+                </el-card>
+                <el-card class="box-card" style="margin-left: 2%; margin-top: 1%; width: 58%;">
+                  <template>
+                    <el-table :data="tableData" stripe style="width: 100%;" height="300">
+                      <el-table-column fixed prop="name" label="Name"/>
+                      <el-table-column prop="total" label="Total"/>
+                      <el-table-column prop="time" label="Time"/>
+                      <el-table-column prop="like" label="Like">
+                          <template slot-scope="scope">
+                            {{scope.row.like}} <i class="el-icon-star-on"/>
+                          </template>
+                      </el-table-column>
+                    </el-table>
+                  </template>
+                </el-card>
+            </div>
+            <div>
+                <el-card class="box-card" style="margin-left: 2%; margin-top: 1%; width: 95.5%;">
+                    <bar-chart :data="datas[0]" :options="options[0]" style="width: 100%; height: 330px; "/>
+                </el-card>
+                <!-- <el-card class="box-card" style="margin-left: 2%; margin-top: 1%; width: 46.5%;">
+                    <pie-chart :data="datas[1]" :options="options[1]" style="width: 100%; height: 330px; "/>
+                </el-card> -->
+            </div>
           </div>
       </el-col>
     </el-row>
@@ -48,7 +50,7 @@
 </template>
 
 <script>
-import Menu from '../Common/Menu'
+import Menu from '../Common/MenuAdmin'
 import LineChart from '../Common/Chart/LineChart'
 import BarChart from '../Common/Chart/BarChart'
 import PieChart from '../Common/Chart/PieChart'
@@ -109,12 +111,17 @@ export default {
       ],
       datas: [
         {
-          labels: ['Sân 5', 'Sân 7', 'Sân 11'],
+          labels: ['Sân Phúc Lộc', 'Sân Hiệp Phú', 'Sân Kaly', 'Sân Nam Lý', 'Tiến Phát'],
           datasets: [
             {
-              label: 'đơn vị (giờ)',
-              backgroundColor: ['#3e95cd', '#8e5ea2', '#3cba9f'],
-              data: [185, 92, 32]
+              label: 'đơn vị (lượt đặt)',
+              backgroundColor: ['#3e95cd', '#3e95cd', '#3e95cd', '#3e95cd', '#3e95cd'],
+              data: [185, 92, 32, 56, 92]
+            },
+            {
+              label: 'đơn vị (lượt đặt)',
+              backgroundColor: ['#2c3e50', '#2c3e50', '#2c3e50', '#2c3e50', '#2c3e50'],
+              data: [185, 92, 32, 56, 92]
             }
           ]
         },
@@ -182,15 +189,6 @@ export default {
   },
   methods: {
     /**
-     * Change Date
-     */
-    changeDate () {
-      const loader = this.getLoader()
-      setTimeout(() => {
-        this.closeLoader(loader)
-      }, 300)
-    },
-    /**
      * Show Loader
      */
     getLoader () {
@@ -242,7 +240,11 @@ export default {
   }
 }
 </script>
+
 <style>
+  #forget-form{
+    margin-left: 2% ;
+  }
   .chart-row{
     display: flex;
   }
