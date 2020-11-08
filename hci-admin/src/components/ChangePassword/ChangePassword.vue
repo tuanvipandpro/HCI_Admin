@@ -84,7 +84,7 @@ export default {
       this.formTemp = {...this.forgetForm}
       this.$refs['forgetForm'].validate((valid) => {
         if (valid) {
-          this.$confirm('Bạn có chắc chắn muốn thay đổi mật khẩu ?', 'Warning', {
+          this.$confirm('Bạn có chắc chắn muốn thay đổi mật khẩu ?', 'Đổi Mật Khẩu', {
             confirmButtonText: 'Đồng ý',
             cancelButtonText: 'Hủy bỏ',
             type: 'warning'

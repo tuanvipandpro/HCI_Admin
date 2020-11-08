@@ -19,7 +19,7 @@
           </template>
           <el-menu-item index="2-1" @click="doPitchOwner">Quản lý chủ sân</el-menu-item>
           <el-menu-item index="2-2" @click="doUserManagement">Quản lý khách hàng</el-menu-item>
-          <el-menu-item index="2-3" @click="doBlackList">Danh sách đen</el-menu-item>
+          <!-- <el-menu-item index="2-3" @click="doBlackList">Danh sách đen</el-menu-item> -->
       </el-submenu>
       <el-submenu index="4">
         <template slot="title">

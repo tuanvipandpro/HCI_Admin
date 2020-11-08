@@ -15,6 +15,7 @@ import Statistic from '@/components/Statistic/Statistic'
 import AdminHome from '@/components/Admin/AdminHome'
 import PitchOwner from '@/components/Admin/PitchOwner'
 import BlackList from '@/components/Admin/BlackList'
+import CreatePitchOwner from '@/components/Admin/CreatePitchOwner'
 import OrderPitchManagement from '@/components/Pitch/OrderPitchManagement'
 
 Vue.use(Router)
@@ -85,6 +86,11 @@ export default new Router({
       path: '/admin-black-list',
       name: 'BlackList',
       component: BlackList
+    },
+    {
+      path: '/admin-create-pitch-owner',
+      name: 'CreatePitchOwner',
+      component: CreatePitchOwner
     },
     {
       path: '/orderPitchManagement',
