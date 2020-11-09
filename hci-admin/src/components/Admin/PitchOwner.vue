@@ -42,7 +42,7 @@
                     </el-popover>
                   </template>
                 </el-table-column>
-                <el-table-column prop="address" label="Địa chỉ" align="center"/>
+                <!-- <el-table-column prop="address" label="Địa chỉ" align="center"/> -->
                 <!-- <el-table-column prop="statusString" label="Trạng thái" align="center"/> -->
                 <el-table-column label="Chức năng" align="center" fixed="right" >
                     <template slot-scope="scope" >
@@ -72,21 +72,54 @@ export default {
           username: 'leminhtuan',
           ownerName: 'Lê Minh Tuấn',
           pitchName: 'Sân Phúc Lộc',
-          address: '55/83B Lê Văn Việt, Quận 9, TP.HCM',
+          address: '442 Lê Văn Việt, Tăng Nhơn Phú A, Quận 9, TP.HCM',
           type: '5-7-11',
           status: true,
-          email: 'tuanvipandpro@gmail.com',
+          email: 'tuanlm@gmail.com',
           phone: '0123456789',
           statusString: 'Đang hoạt động'
         },
         {
-          username: 'leminhtuan',
-          ownerName: 'Lê Minh Tuấn',
-          pitchName: 'Sân Phúc Lộc',
+          username: 'datvtp',
+          ownerName: 'Văn Thành Phương Đạt',
+          pitchName: 'Sân Tiến Phát',
+          address: '387 Man Thiện, Tăng Nhơn Phú A, Quận 9, TP.HCM',
+          type: '5-7-11',
+          status: true,
+          email: 'datvtp@gmail.com',
+          phone: '0123456789',
+          statusString: 'Đang hoạt động'
+        },
+        {
+          username: 'tult',
+          ownerName: 'Lê Thanh Tú',
+          pitchName: 'Sân Hiệp Phú',
+          address: '451/2 Lê Văn Việt, Tăng Nhơn Phú A, Quận 9, TP.HCM',
+          type: '5-7-11',
+          status: true,
+          email: 'tult@gmail.com',
+          phone: '0123456789',
+          statusString: 'Đang hoạt động'
+        },
+        {
+          username: 'sondt',
+          ownerName: 'Đặng Hoàng Sơn',
+          pitchName: 'Sân Kaly',
+          address: '315 Hoàng Diệu 2, Linh Trung, Quận Thủ Đức, TP.HCM',
+          type: '5-7-11',
+          status: true,
+          email: 'sondt1@gmail.com',
+          phone: '0123456789',
+          statusString: 'Đang hoạt động'
+        },
+        {
+          username: 'dunggla',
+          ownerName: 'Giang Lưu Anh Dũng',
+          pitchName: 'Sân Nam Lý',
           address: '55/83B Lê Văn Việt, Quận 9, TP.HCM',
           type: '5-7-11',
           status: true,
-          email: 'tuanvipandpro@gmail.com',
+          email: 'dunggla@gmail.com',
           phone: '0123456789',
           statusString: 'Đang hoạt động'
         }

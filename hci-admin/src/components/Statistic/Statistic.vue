@@ -7,38 +7,50 @@
       </el-col>
       <!-- Content -->
       <el-col :offset="5" :span="19">
-          <div>
-              <el-card class="box-card" style="margin-left: 2%; margin-top: 1%; width: 95%;">
+          <div class="chart-row title-row">
+              <el-card class="box-card" style="margin-left: 2%; margin-top: 1%; width: 55%;" shadow="hover">
                 <div slot="header" class="clearfix">
-                  <span style="font-size: 20px; font-weight: bold;">Bộ lọc</span>
+                  <i class="el-icon-s-operation"></i>
+                  <span style="font-size: 20px; font-weight: bold; margin-left: 5px">Bộ lọc</span>
                 </div>
                 <el-date-picker v-model="month" type="month" placeholder="Chọn tháng" @change="changeDate"/>
               </el-card>
+              <el-card class="box-card" style="margin-left: 2%; margin-top: 1%; width: 38%;" shadow="hover">
+                <div slot="header" class="clearfix">
+                  <i class="el-icon-s-data"></i>
+                  <span style="font-size: 20px; font-weight: bold; margin-left: 5px">Đánh giá</span>
+                </div>
+                <div>
+                  <span style="font-size: 20px; font-weight: bold;">
+                    Điểm yêu thích: 4.8 <i class="el-icon-star-off"></i>
+                  </span>
+                </div>
+              </el-card>
           </div>
-          <div class="chart-row">
-              <el-card class="box-card" style="margin-left: 2%; margin-top: 1%; width: 35%;">
+          <div class="chart-row table-row">
+              <el-card class="box-card" style="margin-left: 2%; margin-top: 1%; width: 35%;" shadow="hover">
                   <line-chart :data="datas[2]" :options="options[2]" style="height: 330px; width: 100%"/>
               </el-card>
-              <el-card class="box-card" style="margin-left: 2%; margin-top: 1%; width: 58%;">
+              <el-card class="box-card" style="margin-left: 2%; margin-top: 1%; width: 58%;" shadow="hover">
+                <!-- <div slot="header" class="clearfix">
+                  <i class="el-icon-s-operation"></i>
+                  <span style="font-size: 18px; font-weight: bold; margin-left: 5px">Bộ lọc</span>
+                </div> -->
                 <template>
                   <el-table :data="tableData" stripe style="width: 100%;" height="300">
-                    <el-table-column fixed prop="name" label="Name"/>
-                    <el-table-column prop="total" label="Total"/>
-                    <el-table-column prop="time" label="Time"/>
-                    <el-table-column prop="like" label="Like">
-                        <template slot-scope="scope">
-                          {{scope.row.like}} <i class="el-icon-star-on"/>
-                        </template>
-                    </el-table-column>
+                    <el-table-column fixed prop="name" label="Tên"/>
+                    <el-table-column prop="total" label="Tổng lượt đặt"/>
+                    <el-table-column prop="time" label="Tổng giờ đặt"/>
+                    <el-table-column prop="like" label="Số lần hủy"/>
                   </el-table>
                 </template>
               </el-card>
           </div>
           <div class="chart-row">
-              <el-card class="box-card" style="margin-left: 2%; margin-top: 1%; width: 46.5%;">
+              <el-card class="box-card" style="margin-left: 2%; margin-top: 1%; width: 46.5%;" shadow="hover">
                   <bar-chart :data="datas[0]" :options="options[0]" style="width: 100%; height: 330px; "/>
               </el-card>
-              <el-card class="box-card" style="margin-left: 2%; margin-top: 1%; width: 46.5%;">
+              <el-card class="box-card" style="margin-left: 2%; margin-top: 1%; width: 46.5%;" shadow="hover">
                   <pie-chart :data="datas[1]" :options="options[1]" style="width: 100%; height: 330px; "/>
               </el-card>
           </div>
@@ -66,45 +78,45 @@ export default {
       tableData: [
         {
           name: 'Minh Tuấn',
-          total: '35',
-          time: '72:30:00',
-          like: '4.5'
+          total: '18',
+          time: '18:30:00',
+          like: '1'
         },
         {
           name: 'Anh Dũng',
-          total: '35',
-          time: '72:30:00',
-          like: '4.5'
+          total: '16',
+          time: '16:30:00',
+          like: '1'
         },
         {
           name: 'Phương Đạt',
-          total: '35',
-          time: '72:30:00',
-          like: '4.5'
+          total: '15',
+          time: '15:00:00',
+          like: '0'
         },
         {
           name: 'Thanh Tú',
-          total: '35',
-          time: '72:30:00',
-          like: '4.5'
+          total: '12',
+          time: '12:30:00',
+          like: '2'
         },
         {
           name: 'Công Phượng',
-          total: '35',
-          time: '72:30:00',
-          like: '4.5'
+          total: '8',
+          time: '8:30:00',
+          like: '0'
         },
         {
           name: 'Tiến Dũng',
-          total: '35',
-          time: '72:30:00',
-          like: '4.5'
+          total: '7',
+          time: '7:30:00',
+          like: '0'
         },
         {
           name: 'Quang Hải',
-          total: '35',
+          total: '6',
           time: '72:30:00',
-          like: '4.5'
+          like: '0'
         }
       ],
       datas: [

@@ -52,6 +52,13 @@
               label="Trạng thái"
               width="200%"
               prop="status">
+              <template slot-scope="scope">
+                <el-tag
+                  :type="scope.row.status === 'Đặt thành công' ? 'success' : 'danger'"
+                  disable-transitions>
+                    {{scope.row.status}}
+                </el-tag>
+              </template>
             </el-table-column>
           </el-table>
         </div>
