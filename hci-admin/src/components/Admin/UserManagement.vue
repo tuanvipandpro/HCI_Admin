@@ -35,13 +35,13 @@
               <el-button
                 size="mini"
                 style="background-color: #82FA58;"
-                :disabled="scope.row.status === 'Active'"
-                @click="handleClicked(scope.$index, scope.row, 'Active')">Active</el-button>
+                :disabled="scope.row.status === 'Kích hoạt'"
+                @click="handleClicked(scope.$index, scope.row, 'Kích hoạt')">Kích hoạt</el-button>
               <el-button
                 size="mini"
                 type="danger"
-                :disabled="scope.row.status === 'Inactive'"
-                @click="handleClicked(scope.$index, scope.row, 'Inactive')">Inactive</el-button>
+                :disabled="scope.row.status === 'Hủy'"
+                @click="handleClicked(scope.$index, scope.row, 'Hủy')">Hủy</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -68,167 +68,167 @@ export default {
     return {
       numOfPage: 0,
       currentPage: 1,
-      pageSize: 10,
+      pageSize: 7,
       subAccountData: [],
       searchList: [],
       accountData: [{
-        username: 'Tom@123',
-        fullname: 'Tom',
-        address: 'No. 100, Grove St, Los Angeles',
-        status: 'Active'
+        username: 'AnhDung1@gmail.com',
+        fullname: 'Anh Dũng',
+        address: 'Đông Hòa, Dĩ An, Bình Dương',
+        status: 'Kích hoạt'
       }, {
-        username: 'John@abc',
-        fullname: 'John',
-        address: 'No. 101, Grove St, Los Angeles',
-        status: 'Inactive'
+        username: 'MinhTuan1@gmail.com',
+        fullname: 'Minh Tuấn',
+        address: 'An Phú, Thuận An, Bình Dương',
+        status: 'Hủy'
       }, {
-        username: 'Morgan@xyz',
-        fullname: 'Morgan',
-        address: 'No. 102, Grove St, Los Angeles',
-        status: 'Inactive'
+        username: 'PhuongDat1@gmail.com',
+        fullname: 'Phương Đạt',
+        address: 'Quận 7, TP.HCM',
+        status: 'Hủy'
       }, {
-        username: 'Jessy@hihi',
-        fullname: 'Jessy',
-        address: 'No. 103, Grove St, Los Angeles',
-        status: 'Active'
+        username: 'ThanhTu1@gmail.com',
+        fullname: 'Thanh Tú',
+        address: 'Gò Vấp, TP.HCM',
+        status: 'Kích hoạt'
       }, {
-        username: 'Jerry@ccc',
-        fullname: 'Jerry',
-        address: 'No. 104, Grove St, Los Angeles',
-        status: 'Active'
+        username: 'GiangLuu1@gmail.com',
+        fullname: 'Giang Lưu',
+        address: 'Đông Hòa, Dĩ An, Bình Dương',
+        status: 'Kích hoạt'
       }, {
-        username: 'Suri@sri',
-        fullname: 'Suri',
-        address: 'No. 105, Grove St, Los Angeles',
-        status: 'Active'
+        username: 'VanThanh1@gmail.com',
+        fullname: 'Văn Thành',
+        address: 'Quận 7, TP.HCM',
+        status: 'Kích hoạt'
       }, {
-        username: 'Mama@ma',
-        fullname: 'Mama',
-        address: 'No. 106, Grove St, Los Angeles',
-        status: 'Inactive'
+        username: 'LeMinh1@gmail.com',
+        fullname: 'Lê Minh',
+        address: 'An Phú, Thuận An, Bình Dương',
+        status: 'Hủy'
       }, {
-        username: 'Mimi@mi',
-        fullname: 'Mimi',
-        address: 'No. 107, Grove St, Los Angeles',
-        status: 'Inactive'
+        username: 'AnhDung2@gmail.com',
+        fullname: 'Anh Dũng',
+        address: 'Đông Hòa, Dĩ An, Bình Dương',
+        status: 'Hủy'
       }, {
-        username: 'Chichi@chi',
-        fullname: 'Chichi',
-        address: 'No. 108, Grove St, Los Angeles',
-        status: 'Active'
+        username: 'MinhTuan2@gmail.com',
+        fullname: 'Minh Tuấn',
+        address: 'An Phú, Thuận An, Bình Dương',
+        status: 'Kích hoạt'
       }, {
-        username: 'Siro@sr',
-        fullname: 'Siro',
-        address: 'No. 109, Grove St, Los Angeles',
-        status: 'Active'
+        username: 'PhuongDat2@gmail.com',
+        fullname: 'Phương Đạt',
+        address: 'Quận 7, TP.HCM',
+        status: 'Kích hoạt'
       },
       {
-        username: 'Siro@sr',
-        fullname: 'Siro',
-        address: 'No. 110, Grove St, Los Angeles',
-        status: 'Active'
+        username: 'ThanhTu2@gmail.com',
+        fullname: 'Thanh Tú',
+        address: 'Gò Vấp, TP.HCM',
+        status: 'Kích hoạt'
       }, {
-        username: 'John@abc',
-        fullname: 'John',
-        address: 'No. 111, Grove St, Los Angeles',
-        status: 'Inactive'
+        username: 'GiangLuu2@gmail.com',
+        fullname: 'Giang Lưu',
+        address: 'Đông Hòa, Dĩ An, Bình Dương',
+        status: 'Hủy'
       }, {
-        username: 'Morgan@xyz',
-        fullname: 'Morgan',
-        address: 'No. 112, Grove St, Los Angeles',
-        status: 'Inactive'
+        username: 'VanThanh2@gmail.com',
+        fullname: 'Văn Thành',
+        address: 'Quận 7, TP.HCM',
+        status: 'Hủy'
       }, {
-        username: 'Jessy@hihi',
-        fullname: 'Jessy',
-        address: 'No. 113, Grove St, Los Angeles',
-        status: 'Active'
+        username: 'LeMinh2@gmail.com',
+        fullname: 'Lê Minh',
+        address: 'An Phú, Thuận An, Bình Dương',
+        status: 'Kích hoạt'
       }, {
-        username: 'Jerry@ccc',
-        fullname: 'Jerry',
-        address: 'No. 114, Grove St, Los Angeles',
-        status: 'Active'
+        username: 'AnhDung3@gmail.com',
+        fullname: 'Anh Dũng',
+        address: 'Đông Hòa, Dĩ An, Bình Dương',
+        status: 'Kích hoạt'
       }, {
-        username: 'Suri@sri',
-        fullname: 'Suri',
-        address: 'No. 115, Grove St, Los Angeles',
-        status: 'Active'
+        username: 'MinhTuan3@gmail.com',
+        fullname: 'Minh Tuấn',
+        address: 'An Phú, Thuận An, Bình Dương',
+        status: 'Kích hoạt'
       }, {
-        username: 'Mama@ma',
-        fullname: 'Mama',
-        address: 'No. 116, Grove St, Los Angeles',
-        status: 'Inactive'
+        username: 'PhuongDat3@gmail.com',
+        fullname: 'Phương Đạt',
+        address: 'Quận 7, TP.HCM',
+        status: 'Hủy'
       }, {
-        username: 'Mimi@mi',
-        fullname: 'Mimi',
-        address: 'No. 117, Grove St, Los Angeles',
-        status: 'Inactive'
+        username: 'ThanhTu3@gmail.com',
+        fullname: 'Thanh Tú',
+        address: 'Gò Vấp, TP.HCM',
+        status: 'Hủy'
       }, {
-        username: 'Chichi@chi',
-        fullname: 'Chichi',
-        address: 'No. 118, Grove St, Los Angeles',
-        status: 'Active'
+        username: 'GiangLuu3@gmail.com',
+        fullname: 'Giang Lưu',
+        address: 'Đông Hòa, Dĩ An, Bình Dương',
+        status: 'Kích hoạt'
       }, {
-        username: 'Siro@sr',
-        fullname: 'Siro',
-        address: 'No. 119, Grove St, Los Angeles',
-        status: 'Active'
+        username: 'AnhDung4@gmail.com',
+        fullname: 'Anh Dũng',
+        address: 'Đông Hòa, Dĩ An, Bình Dương',
+        status: 'Kích hoạt'
       },
       {
-        username: 'Siro@sr',
-        fullname: 'Siro',
-        address: 'No. 120, Grove St, Los Angeles',
-        status: 'Active'
+        username: 'PhuongDat4@gmail.com',
+        fullname: 'Phương Đạt',
+        address: 'Quận 7, TP.HCM',
+        status: 'Kích hoạt'
       }, {
-        username: 'John@abc',
-        fullname: 'John',
-        address: 'No. 121, Grove St, Los Angeles',
-        status: 'Inactive'
+        username: 'MinhTuan4@gmail.com',
+        fullname: 'Minh Tuấn',
+        address: 'An Phú, Thuận An, Bình Dương',
+        status: 'Hủy'
       }, {
-        username: 'Morgan@xyz',
-        fullname: 'Morgan',
-        address: 'No. 122, Grove St, Los Angeles',
-        status: 'Inactive'
+        username: 'AnhDung5@gmail.com',
+        fullname: 'Anh Dũng',
+        address: 'Đông Hòa, Dĩ An, Bình Dương',
+        status: 'Hủy'
       }, {
-        username: 'Jessy@hihi',
-        fullname: 'Jessy',
-        address: 'No. 123, Grove St, Los Angeles',
-        status: 'Active'
+        username: 'ThanhTu4@gmail.com',
+        fullname: 'Thanh Tú',
+        address: 'Gò Vấp, TP.HCM',
+        status: 'Kích hoạt'
       }, {
-        username: 'Jerry@ccc',
-        fullname: 'Jerry',
-        address: 'No. 124, Grove St, Los Angeles',
-        status: 'Active'
+        username: 'LeMinh3@gmail.com',
+        fullname: 'Lê Minh',
+        address: 'An Phú, Thuận An, Bình Dương',
+        status: 'Kích hoạt'
       }, {
-        username: 'Suri@sri',
-        fullname: 'Suri',
-        address: 'No. 125, Grove St, Los Angeles',
-        status: 'Active'
+        username: 'PhuongDat5@gmail.com',
+        fullname: 'Phương Đạt',
+        address: 'Quận 7, TP.HCM',
+        status: 'Kích hoạt'
       }, {
-        username: 'Mama@ma',
-        fullname: 'Mama',
-        address: 'No. 126, Grove St, Los Angeles',
-        status: 'Inactive'
+        username: 'AnhDung6@gmail.com',
+        fullname: 'Anh Dũng',
+        address: 'Đông Hòa, Dĩ An, Bình Dương',
+        status: 'Hủy'
       }, {
-        username: 'Mimi@mi',
-        fullname: 'Mimi',
-        address: 'No. 127, Grove St, Los Angeles',
-        status: 'Inactive'
+        username: 'MinhTuan5@gmail.com',
+        fullname: 'Minh Tuấn',
+        address: 'An Phú, Thuận An, Bình Dương',
+        status: 'Hủy'
       }, {
-        username: 'Chichi@chi',
-        fullname: 'Chichi',
-        address: 'No. 128, Grove St, Los Angeles',
-        status: 'Active'
+        username: 'AnhDung7@gmail.com',
+        fullname: 'Anh Dũng',
+        address: 'Đông Hòa, Dĩ An, Bình Dương',
+        status: 'Kích hoạt'
       }, {
-        username: 'Siro@sr',
-        fullname: 'Siro',
-        address: 'No. 129, Grove St, Los Angeles',
-        status: 'Active'
+        username: 'ThanhTu5@gmail.com',
+        fullname: 'Thanh Tú',
+        address: 'Gò Vấp, TP.HCM',
+        status: 'Kích hoạt'
       },
       {
-        username: 'Sirom@srm',
-        fullname: 'Sirom',
-        address: 'No. 130, Grove St, Los Angeles',
-        status: 'Active'
+        username: 'GiangLuu4@gmail.com',
+        fullname: 'Giang Lưu',
+        address: 'Đông Hòa, Dĩ An, Bình Dương',
+        status: 'Kích hoạt'
       }
       ],
       search: ''
@@ -271,17 +271,17 @@ export default {
       })
     },
     handleClicked (index, row, typeButton) {
-      this.$confirm('Do you want to ' + String(typeButton).toLowerCase() + ' ' + row.fullname + ' ?', 'Warning', {
+      this.$confirm('Bạn có muốn ' + String(typeButton).toLowerCase() + ' ' + row.fullname + ' ?', 'Cảnh báo', {
         confirmButtonText: 'Yes',
         cancelButtonText: 'No',
         type: 'warning'
       }).then(() => {
         row.status = typeButton
-        this.showMessage(typeButton + ' user Successful !!!', 'success')
+        this.showMessage(typeButton + ' người dùng thành công !!!', 'success')
       })
     },
     handleInactiveClicked (index, row) {
-      row.status = 'Inactive'
+      row.status = 'Hủy'
     },
     changePage () {
       let firstIndex = (this.currentPage - 1) * this.pageSize
