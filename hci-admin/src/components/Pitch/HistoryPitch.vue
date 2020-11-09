@@ -29,28 +29,27 @@
             </el-table-column>
             <el-table-column
               label="Ngày"
-              width="150%"
               prop="date">
             </el-table-column>
             <el-table-column
               label="Sân"
-              width="180%"
               prop="pitch">
+            </el-table-column>
+            <el-table-column
+              label="Tên người đặt"
+              prop="name">
             </el-table-column>
             <el-table-column
               label="Thời gian"
               align="center"
-              width="250%"
               prop="startTime">
             </el-table-column>
             <el-table-column
               label="Tổng tiền"
-              width="250%"
               prop="totalPrice">
             </el-table-column>
             <el-table-column
               label="Trạng thái"
-              width="200%"
               prop="status">
               <template slot-scope="scope">
                 <el-tag
@@ -125,6 +124,7 @@ export default {
       }, {
         date: '2020-11-23',
         startTime: '19:00 - 20:00',
+        name: 'Công Phượng',
         pitch: 'Sân 5',
         address: 'Dĩ An, Bình Dương',
         phone: '034574119',
@@ -134,6 +134,7 @@ export default {
         date: '2020-11-19',
         startTime: '19:00 - 20:30',
         pitch: 'Sân 5',
+        name: 'Tiến Dũng',
         address: 'Q5, TP.HCM',
         phone: '025474119',
         totalPrice: '200.000 VNĐ',

@@ -41,7 +41,7 @@
                 size="mini"
                 type="danger"
                 :disabled="scope.row.status === 'Hủy'"
-                @click="handleClicked(scope.$index, scope.row, 'Hủy')">Hủy</el-button>
+                @click="handleInactiveClicked(scope)">Hủy</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -57,6 +57,18 @@
         </el-pagination>
       </el-col>
     </el-row>
+          <el-dialog title="Lý do hủy" :visible.sync="dialogFormVisible" :close-on-click-modal="false">
+            <el-form>
+                <h4>Nhập lý do ban tài khoản này</h4>
+                <el-form-item  prop="reason">
+                    <el-input v-model="reason" placeholder="Lý do" type="textarea"/>
+                </el-form-item>
+                <el-divider/>
+                <el-form-item>
+                    <el-button type="primary" @click="disableAccount">Hủy</el-button>
+                </el-form-item>
+            </el-form>
+        </el-dialog>
   </div>
 </template>
 
@@ -66,6 +78,8 @@ import Menu from '../Common/MenuAdmin'
 export default {
   data () {
     return {
+      reason: '',
+      dialogFormVisible: false,
       numOfPage: 0,
       currentPage: 1,
       pageSize: 7,
@@ -231,6 +245,7 @@ export default {
         status: 'Kích hoạt'
       }
       ],
+      tempScope: '',
       search: ''
     }
   },
@@ -280,8 +295,14 @@ export default {
         this.showMessage(typeButton + ' người dùng thành công !!!', 'success')
       })
     },
-    handleInactiveClicked (index, row) {
-      row.status = 'Hủy'
+    handleInactiveClicked (scope) {
+      this.tempScope = scope
+      this.dialogFormVisible = true
+    },
+    disableAccount () {
+      this.tempScope.row.status = 'Hủy'
+      this.dialogFormVisible = false
+      this.reason = ''
     },
     changePage () {
       let firstIndex = (this.currentPage - 1) * this.pageSize

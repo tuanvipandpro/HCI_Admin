@@ -80,7 +80,7 @@
           </el-table>
           <el-dialog title="Lý do hủy" :visible.sync="dialogFormVisible" :close-on-click-modal="false">
             <el-form v-if="optionForm === 0" ref="reasonForm" status-icon :rules="rules" :model="formData">
-                <h4>Tips: Nhập lý do hủy sân</h4>
+                <h4>Tips: Nhập lý do hủy đặt sân</h4>
                 <el-form-item  prop="reason">
                     <el-input v-model="formData.reason" placeholder="Lý do" type="textarea"/>
                 </el-form-item>
