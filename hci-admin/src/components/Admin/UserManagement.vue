@@ -59,7 +59,7 @@
     </el-row>
           <el-dialog title="Lý do hủy" :visible.sync="dialogFormVisible" :close-on-click-modal="false">
             <el-form>
-                <h4>Nhập lý do ban tài khoản này</h4>
+                <h4>Nhập lý do hủy tài khoản này</h4>
                 <el-form-item  prop="reason">
                     <el-input v-model="reason" placeholder="Lý do" type="textarea"/>
                 </el-form-item>
