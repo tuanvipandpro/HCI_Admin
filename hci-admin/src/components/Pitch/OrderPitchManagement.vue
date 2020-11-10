@@ -29,37 +29,31 @@
             </el-table-column>
             <el-table-column
               label="Ngày"
-              width="120%"
               prop="date">
             </el-table-column>
             <el-table-column
               label="Sân"
               align="center"
-              width="150%"
               prop="pitch">
             </el-table-column>
             <el-table-column
               label="Thời gian"
               align="center"
-              width="160%"
               prop="startTime">
             </el-table-column>
             <el-table-column
               label="Tổng tiền"
-              width="200%"
               align="center"
               prop="totalPrice">
             </el-table-column>
             <el-table-column
               label="Trạng thái"
-              width="200%"
               align="center"
               prop="status">
             </el-table-column>
             <el-table-column
               label="Xử lý"
-              align="center"
-              width="200%">
+              align="center">
               <template slot-scope="scope">
                 <el-button
                   @click.native.prevent="acceptRow(scope.$index, subDataTable)"
