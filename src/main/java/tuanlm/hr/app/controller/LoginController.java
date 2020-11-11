@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import tuanlm.hr.app.models.request.GmailRequest;
 import tuanlm.hr.app.models.request.LoginRequest;
 import tuanlm.hr.app.models.response.LoginResponse;
 import tuanlm.hr.app.service.AccountService;
@@ -25,6 +27,7 @@ import tuanlm.hr.app.utils.AppConstants;
 @RestController
 @RequestMapping("/api/authenticate")
 @AllArgsConstructor
+@Slf4j
 public class LoginController {
 	
 	/** The authentication manager. */
@@ -42,7 +45,7 @@ public class LoginController {
 	@Operation(summary = "Api Login Admin (Web)")
 	@PostMapping("/login")
 	public ResponseEntity<LoginResponse> login(@RequestBody @Valid LoginRequest request) {
-		
+		// Check Login
 		SecurityContextHolder.getContext().setAuthentication(authenticationManager
 				.authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword())));
 		
@@ -60,10 +63,28 @@ public class LoginController {
 	@Operation(summary = "Api Login User (Mobile)")
 	@PostMapping("/login-for-mobile")	
 	public ResponseEntity<LoginResponse> loginForMobile(@RequestBody @Valid LoginRequest request) {
-		
+		// Check Login
 		SecurityContextHolder.getContext().setAuthentication(authenticationManager
 				.authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword())));
-
+		
 		return new ResponseEntity<LoginResponse>(accountService.getLoginResponse(request.getUsername(), AppConstants.LOGIN_MEMBER), HttpStatus.OK);
+	}
+	
+	/**
+	 * Login by gmail.
+	 *
+	 * @param request the request
+	 * @return the response entity
+	 */
+	@Operation(summary = "Api Login User By Gmail (Mobile)")
+	@PostMapping("/login-by-gmail")	
+	public ResponseEntity<LoginResponse> loginByGmail(@RequestBody @Valid GmailRequest request) {
+		try {
+			return new ResponseEntity<LoginResponse>(accountService.loginByEmail(request), HttpStatus.OK);
+		}
+		catch(Exception e) {
+			log.error(e.getMessage(), e);
+			return new ResponseEntity<LoginResponse>(HttpStatus.FORBIDDEN);
+		}
 	}
 }

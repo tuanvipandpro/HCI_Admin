@@ -36,6 +36,25 @@ public interface AccountMapper {
 			+ "		AND A.active = true ")
 	Account getAccountByUsername(String username);
 	
+	@Select(""
+			+ "SELECT "
+			+ "		A.Username 			AS username, "
+			+ "		A.Password 			AS password, "
+			+ "		A.\"employeeId\" 	AS employeeId, "
+			+ "		R.role 				AS role, "
+			+ "		A.active			AS active "
+			+ "FROM "
+			+ "		account 	AS A,"
+			+ "		role 		AS R,"
+			+ "		employee 	AS E "
+			+ "		"
+			+ "WHERE "
+			+ "		A.\"roleId\" = R.Id "
+			+ "		AND A.\"employeeId\" = E.id"
+			+ "		AND E.email = #{email} "
+			+ "		AND A.active = true ")
+	Account getAccountByEmail(String email);
+	
 	/**
 	 * Gets the all account.
 	 *

@@ -107,17 +107,23 @@ export default {
      */
     acceptWork (scope) {
       const row = scope.row
-      const loader = this.getLoader()
-      this._acceptWork(row).then(res => {
+      this.$confirm('Bạn có chắc chắn duyệt ca làm này ?', 'Xác nhận ?', {
+        confirmButtonText: 'Đồng ý',
+        cancelButtonText: 'Hủy bỏ',
+        type: 'warning'
+      }).then(() => {
+        const loader = this.getLoader()
+        this._acceptWork(row).then(res => {
         // Thông báo update thành công
-        this.closeLoader(loader)
-        this.rootData = this.rootData.filter(item => item.id !== row.id)
-        this.changePage()
-      })
-        .catch(e => {
           this.closeLoader(loader)
-          console.error(e)
+          this.rootData = this.rootData.filter(item => item.id !== row.id)
+          this.changePage()
         })
+          .catch(e => {
+            this.closeLoader(loader)
+            console.error(e)
+          })
+      })
     },
     /**
      * Handle when change page

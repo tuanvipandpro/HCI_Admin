@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import tuanlm.hr.app.mapper.AccountMapper;
 import tuanlm.hr.app.models.model.Account;
+import tuanlm.hr.app.models.request.GmailRequest;
 import tuanlm.hr.app.models.request.InsertAccountRequest;
 import tuanlm.hr.app.models.response.LoginResponse;
 import tuanlm.hr.app.utils.AppConstants;
@@ -74,10 +75,10 @@ public class AccountService implements UserDetailsService, AccountsService  {
 		}
 		else if (mode == AppConstants.LOGIN_ADMIN){
 			return (!account.getRole().equals("ROLE_ADMIN")) ? null : 
-				new LoginResponse(account.getEmployeeId(), JwtUtils.getJwt(account.getUsername()), true);
+				new LoginResponse(account.getEmployeeId(), JwtUtils.getJwt(account.getUsername()), true, account.getUsername());
 		}
 		else {
-			return new LoginResponse(account.getEmployeeId(), JwtUtils.getJwt(account.getUsername()), false);
+			return new LoginResponse(account.getEmployeeId(), JwtUtils.getJwt(account.getUsername()), false, account.getUsername());
 		}
 	}
 
@@ -121,5 +122,19 @@ public class AccountService implements UserDetailsService, AccountsService  {
 	@Override
 	public void changePassword(String username, String password) {
 		mapper.changePassword(username, encoder.encode(password));
+	}
+
+	/**
+	 * Login by email.
+	 *
+	 * @param request the request
+	 * @return the account
+	 */
+	@Override
+	public LoginResponse loginByEmail(GmailRequest request) {
+		Account account = Optional.of(mapper.getAccountByEmail(request.getEmail()))
+				.orElseThrow(() -> new UsernameNotFoundException(request.getEmail() + " is not exist !"));
+		
+		return new LoginResponse(account.getEmployeeId(), JwtUtils.getJwt(account.getUsername()), false, account.getUsername());
 	}
 }
