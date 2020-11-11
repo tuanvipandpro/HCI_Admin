@@ -72,18 +72,18 @@
               </template>
             </el-table-column>
           </el-table>
-          <el-dialog title="Xác nhận" :visible.sync="dialogAcceptFormVisible" :close-on-click-modal="false" class="aaaa">
+          <el-dialog title="Xác nhận" :visible.sync="dialogAcceptFormVisible" :close-on-click-modal="false" >
             <el-form v-if="optionForm === 0" ref="acceptForm" status-icon>
                 <el-form-item>
-                  <div>
+                  <div style="width: 60%" class="accept-dropdown">
                     Chọn sân:
-                      <el-select v-model="selectPitch" slot="prepend" placeholder="Select">
-                        <el-option label="Sân A" value="1"></el-option>
-                        <el-option label="Sân B" value="2"></el-option>
-                        <el-option label="Sân C" value="3"></el-option>
+                      <el-select v-model="selectPitch" slot="prepend" placeholder="Select" style="width: 60%">
+                        <el-option label="Sân 01" value="1"></el-option>
+                        <el-option label="Sân 02" value="2"></el-option>
+                        <el-option label="Sân 03" value="3"></el-option>
                       </el-select>
                   </div>
-                  <div style="margin-top: 10px">
+                  <div style="margin-top: 2vh">
                     <el-button type="primary" @click="acceptOrder">Xác nhận</el-button>
                     <el-button type="primary" @click="closeAcceptForm">Hủy</el-button>
                   </div>
@@ -242,9 +242,11 @@ export default {
       this.indexAccept = index
     },
     acceptOrder () {
+      const loader = this.getLoader()
       this.subDataTable[this.indexAccept].status = 'Đã duyệt'
       this.dialogAcceptFormVisible = false
       this.indexAccept = -1
+      this.closeLoader(loader)
     },
     closeAcceptForm () {
       this.dialogAcceptFormVisible = false
@@ -329,12 +331,6 @@ export default {
 
 <style>
   .el-dialog__body {
-    padding-top: 0;
-  }
-  .el-select .el-input {
-    width: 110px;
-  }
-  .input-with-select .el-input-group__prepend {
-    background-color: #fff;
+    padding-top: 1vh;
   }
 </style>
