@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import tuanlm.hr.app.mapper.WorkMapper;
 import tuanlm.hr.app.mapper.WorkRequestMapper;
 import tuanlm.hr.app.models.model.WorkRequest;
+import tuanlm.hr.app.models.request.AssignWorkRequest;
 
 @Service
 @AllArgsConstructor
@@ -48,4 +49,13 @@ public class WorkRequestServiceImp implements WorkRequestService {
 				request.getStoreId());
 	}
 
+	/**
+	 * Register work request.
+	 *
+	 * @param request the request
+	 */
+	@Override
+	public void registerWorkRequest(AssignWorkRequest request) {
+		// TODO Auto-generated method stub
+	}
 }
