@@ -8,7 +8,7 @@
       </el-col>
       <!-- Content -->
       <el-col :offset="5" :span="19">
-        <div id="forget-form">
+        <div style="margin-left: 2%">
           <el-form
             ref="forgetForm"
             status-icon
@@ -159,9 +159,3 @@ export default {
   }
 }
 </script>
-
-<style>
-  #forget-form{
-    margin-left: 2% ;
-  }
-</style>
