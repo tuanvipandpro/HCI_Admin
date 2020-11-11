@@ -72,17 +72,34 @@
               </template>
             </el-table-column>
           </el-table>
-          <el-dialog title="Lý do hủy" :visible.sync="dialogFormVisible" :close-on-click-modal="false">
-            <el-form v-if="optionForm === 0" ref="reasonForm" status-icon :rules="rules" :model="formData">
-                <h4>Tips: Nhập lý do hủy đặt sân</h4>
-                <el-form-item  prop="reason">
-                    <el-input v-model="formData.reason" placeholder="Lý do" type="textarea"/>
-                </el-form-item>
-                <el-divider/>
+          <el-dialog title="Xác nhận" :visible.sync="dialogAcceptFormVisible" :close-on-click-modal="false" class="aaaa">
+            <el-form v-if="optionForm === 0" ref="acceptForm" status-icon>
                 <el-form-item>
-                    <el-button type="primary" @click="removeOrder">Hủy</el-button>
+                  <div>
+                    Chọn sân:
+                      <el-select v-model="selectPitch" slot="prepend" placeholder="Select">
+                        <el-option label="Sân A" value="1"></el-option>
+                        <el-option label="Sân B" value="2"></el-option>
+                        <el-option label="Sân C" value="3"></el-option>
+                      </el-select>
+                  </div>
+                  <div style="margin-top: 10px">
+                    <el-button type="primary" @click="acceptOrder">Xác nhận</el-button>
+                    <el-button type="primary" @click="closeAcceptForm">Hủy</el-button>
+                  </div>
                 </el-form-item>
             </el-form>
+        </el-dialog>
+        <el-dialog title="Lý do hủy" :visible.sync="dialogRemoveFormVisible" :close-on-click-modal="false">
+          <el-form v-if="optionForm === 0" ref="reasonForm" status-icon :rules="rules" :model="formData">
+              <h4>Tips: Nhập lý do hủy đặt sân</h4>
+              <el-form-item  prop="reason">
+                  <el-input v-model="formData.reason" placeholder="Lý do" type="textarea"/>
+              </el-form-item>
+              <el-form-item>
+                  <el-button type="primary" @click="removeOrder">Xác nhận</el-button>
+              </el-form-item>
+          </el-form>
         </el-dialog>
         </div>
       </el-col>
@@ -107,10 +124,13 @@ export default {
         reason: [{required: true, message: 'Vui lòng nhập lý do !', trigger: 'blur'}]
       },
       optionForm: 0,
-      dialogFormVisible: false,
+      dialogRemoveFormVisible: false,
+      dialogAcceptFormVisible: false,
+      indexAccept: -1,
       indexDetele: -1,
+      selectPitch: null,
       tableData: [{
-        date: '2020-09-01',
+        date: '2020-12-01',
         startTime: '06:00 - 07:30',
         name: 'Anh Dũng',
         pitch: 'Sân 5',
@@ -119,7 +139,7 @@ export default {
         totalPrice: '200.000 VNĐ',
         status: 'Chờ xét duyệt'
       }, {
-        date: '2020-11-02',
+        date: '2020-11-20',
         startTime: '14:30 - 15:30',
         name: 'Minh Tuấn',
         pitch: 'Sân 7',
@@ -146,28 +166,6 @@ export default {
         totalPrice: '200.000 VNĐ',
         status: 'Chờ xét duyệt'
       },
-      //  {
-      //   date: '2020-11-18',
-      //   startTime: '18:00 - 20:00',
-      //   // endTime: '20:00',
-      //   name: 'Hoàng Tâm',
-      //   pitch: 'Sân 7',
-      //   address: 'Q9, TP.HCM',
-      //   // addressPitch: '5 Đường số 447, Tăng Nhơn Phú A, Q9, TP.HCM',
-      //   phone: '0212574119',
-      //   totalPrice: '250.000 VNĐ',
-      //   status: 'Đặt thành công'
-      // }, {
-      //   date: '2020-11-20',
-      //   startTime: '19:00 - 20:00',
-      //   // endTime: '20:00',
-      //   pitch: 'Sân 5',
-      //   address: 'Dĩ An, Bình Dương',
-      //   // addressPitch: '442 Lê Văn Việt, Tăng Nhơn Phú A, Q9, TP.HCM',
-      //   phone: '034574119',
-      //   totalPrice: '180.000 VNĐ',
-      //   status: 'Hủy'
-      // },
       {
         date: '2020-11-19',
         startTime: '19:00 - 20:30',
@@ -240,10 +238,20 @@ export default {
       })
     },
     acceptRow (index, rows) {
-      rows[index].status = 'Đã duyệt'
+      this.dialogAcceptFormVisible = true
+      this.indexAccept = index
+    },
+    acceptOrder () {
+      this.subDataTable[this.indexAccept].status = 'Đã duyệt'
+      this.dialogAcceptFormVisible = false
+      this.indexAccept = -1
+    },
+    closeAcceptForm () {
+      this.dialogAcceptFormVisible = false
+      this.indexAccept = -1
     },
     deleteRow (index, rows) {
-      this.dialogFormVisible = true
+      this.dialogRemoveFormVisible = true
       this.indexDetele = index
     },
     removeOrder () {
@@ -251,7 +259,7 @@ export default {
         if (valid) {
           const loader = this.getLoader()
           setTimeout(() => {
-            this.dialogFormVisible = false
+            this.dialogRemoveFormVisible = false
             this.subDataTable[this.indexDetele].status = 'Đã hủy'
             this.formData.reason = ''
             this.indexDetele = -1
@@ -320,5 +328,13 @@ export default {
 </script>
 
 <style>
-
+  .el-dialog__body {
+    padding-top: 0;
+  }
+  .el-select .el-input {
+    width: 110px;
+  }
+  .input-with-select .el-input-group__prepend {
+    background-color: #fff;
+  }
 </style>
