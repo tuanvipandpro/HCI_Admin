@@ -10,6 +10,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import tuanlm.hr.app.models.model.WorkRequest;
+import tuanlm.hr.app.models.model.WorkRequestShort;
 
 /**
  * The Interface WorkRequestMapper.
@@ -47,6 +48,32 @@ public interface WorkRequestMapper {
 			+ "		CAST((CAST(WR.date AS varchar) || ' ' || S.start) AS timestamp) "
 			+ "")
 	List<WorkRequest> getAllWorkRequest(LocalDateTime now);
+	
+	/**
+	 * Gets the work request employee by store and date.
+	 *
+	 * @param employeeId the employee id
+	 * @param storeId the store id
+	 * @param date the date
+	 * @return the work request employee by store and date
+	 */
+	@Select(""
+			+ "SELECT "
+			+ "		id 						AS id, "
+			+ "		\"employeeId\"			AS employeeId, "
+			+ "		\"shiftId\"				AS shiftId, "
+			+ "		\"storeId\"				AS storeId, "
+			+ "		date 					AS date, "
+			+ "		accept					AS isAccept, "
+			+ "		updatePerson			AS updatePerson "
+			+ "FROM "
+			+ "		work_request "
+			+ "WHERE "
+			+ "		\"employeeId\" = #{employeeId} "
+			+ "		AND store_id = #{storeId} "
+			+ "		AND date = #{date}"
+			+ "")	
+	List<WorkRequestShort> getWorkRequestEmployeeByStoreAndDate(int employeeId, int storeId, LocalDate date);
 	
 	/**
 	 * Accept work request.

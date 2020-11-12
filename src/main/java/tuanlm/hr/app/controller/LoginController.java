@@ -1,9 +1,8 @@
 package tuanlm.hr.app.controller;
 
-import java.io.FileInputStream;
-
 import javax.validation.Valid;
 
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -48,7 +47,7 @@ public class LoginController {
 		try {
 			FirebaseApp.initializeApp(new FirebaseOptions.Builder()
 					.setCredentials(
-							 GoogleCredentials.fromStream(new FileInputStream("hr-app-d0ca5-firebase-adminsdk-93t1x-f2f181a541.json"))
+							 GoogleCredentials.fromStream(new ClassPathResource("hr-app-d0ca5-firebase-adminsdk-93t1x-f2f181a541.json").getInputStream())
 					)
 					.setDatabaseUrl("https://authengg-a25b9.firebaseio.com")
 					.build());	

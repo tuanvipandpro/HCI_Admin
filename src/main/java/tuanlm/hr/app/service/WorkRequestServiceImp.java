@@ -16,6 +16,7 @@ import tuanlm.hr.app.mapper.WorkRequestMapper;
 import tuanlm.hr.app.models.model.Shift;
 import tuanlm.hr.app.models.model.WorkAvailable;
 import tuanlm.hr.app.models.model.WorkRequest;
+import tuanlm.hr.app.models.model.WorkRequestShort;
 import tuanlm.hr.app.models.model.WorkStore;
 import tuanlm.hr.app.models.request.RegisterWorkRequest;
 
@@ -81,6 +82,8 @@ public class WorkRequestServiceImp implements WorkRequestService {
 	public List<WorkAvailable> getWorkAvailableByStoreAndDate(int employeeId, int storeId, String date) {
 		List<Shift> shifts = shiftMapper.getShiftListByStoreId(storeId);
 		
+		LocalDate dateParse = LocalDate.parse(date);
+		
 		if (shifts == null) return null;
 		
 		List<WorkStore> workStores = workMapper.getWorkByDate(
@@ -88,28 +91,23 @@ public class WorkRequestServiceImp implements WorkRequestService {
 				LocalDate.parse(date).atStartOfDay(), 
 				LocalDate.parse(date).atStartOfDay().plusDays(1));
 		
-		List<WorkAvailable> responseList = null;
-		
-		if (workStores == null) System.err.println("workStores NULL");
-		
-		if (workStores != null && workStores.size() > 0) {
-			System.out.println("THIS");
-			responseList = filterWorkAvailableList(shifts, workStores, date);
+		if (workStores != null && workStores.size() > 0) {		
+			List<WorkRequestShort> list = mapper.getWorkRequestEmployeeByStoreAndDate(employeeId, storeId, dateParse);
+			return filterWorkAvailableList(shifts, workStores, dateParse, list);
 		} 
 		else {
-			System.out.println("THAT");
-			responseList = new ArrayList<WorkAvailable>();
+			List<WorkAvailable> responseList = new ArrayList<WorkAvailable>();
 			for (Shift s : shifts) {
 				responseList.add(new WorkAvailable(
 						s.getStoreId(), 
 						s.getStoreNm(), 
 						s.getId(), 
 						s.getName(), 
-						workMapper.countWorkByShiftAndDate(s.getId(), LocalDate.parse(date), LocalDate.parse(date).plusDays(1)) >= s.getMax()));
+						workMapper.countWorkByShiftAndDate(s.getId(), dateParse, dateParse.plusDays(1)) >= s.getMax()));
 			}
+			
+			return responseList;
 		}
-		
-		return responseList;
 	}
 	
 	/**
@@ -119,11 +117,17 @@ public class WorkRequestServiceImp implements WorkRequestService {
 	 * @param workStores the work stores
 	 * @return the list
 	 */
-	private List<WorkAvailable> filterWorkAvailableList(List<Shift> shifts, List<WorkStore> workStores, String date) {
+	private List<WorkAvailable> filterWorkAvailableList(
+			List<Shift> shifts, 
+			List<WorkStore> workStores, 
+			LocalDate date, 
+			List<WorkRequestShort> list) {
+		
 		List<WorkAvailable> responseList = new ArrayList<WorkAvailable>();
 		
 		List<Integer> shiftIdList = shifts.stream().map(shift -> shift.getId()).collect(Collectors.toList());
 		
+		// Check If employee has work at this shift
 		workStores.forEach(workStore -> {
 			if (shiftIdList.contains(workStore.getShiftId())) {
 				
@@ -140,11 +144,17 @@ public class WorkRequestServiceImp implements WorkRequestService {
 						shift.getName(), 
 						workMapper.countWorkByShiftAndDate(
 								workStore.getShiftId(), 
-								LocalDate.parse(date), 
-								LocalDate.parse(date).plusDays(1)) >= shift.getMax()));
+								date, 
+								date.plusDays(1)) >= shift.getMax()));
 			}
 		});
 		
-		return responseList;
+		// Check if employee is requested this shift
+		if (list == null) return responseList;
+		else {
+			List<Integer> workRQShortShiftId = list.stream().map(w -> w.getShiftId()).collect(Collectors.toList());
+			return responseList.stream().filter(w -> !workRQShortShiftId.contains(w.getShiftId())).collect(Collectors.toList());
+		}
+		
 	}
 }
