@@ -48,7 +48,7 @@ public class LoginController {
 		try {
 			FirebaseApp.initializeApp(new FirebaseOptions.Builder()
 					.setCredentials(
-							 GoogleCredentials.fromStream(new FileInputStream("authengg-a25b9-firebase-adminsdk-90sa0-40ed64a706.json"))
+							 GoogleCredentials.fromStream(new FileInputStream("hr-app-d0ca5-firebase-adminsdk-93t1x-f2f181a541.json"))
 					)
 					.setDatabaseUrl("https://authengg-a25b9.firebaseio.com")
 					.build());	
