@@ -3,6 +3,10 @@ package tuanlm.hr.app.controller;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,8 +22,9 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.AllArgsConstructor;
+import tuanlm.hr.app.models.model.WorkAvailable;
 import tuanlm.hr.app.models.model.WorkRequest;
-import tuanlm.hr.app.models.request.AssignWorkRequest;
+import tuanlm.hr.app.models.request.RegisterWorkRequest;
 import tuanlm.hr.app.service.WorkRequestService;
 
 @RestController
@@ -44,6 +49,22 @@ public class WorkRequestController {
 	}
 	
 	/**
+	 * Gets the work available by date and store.
+	 *
+	 * @param storeId the store id
+	 * @param date the date
+	 * @return the work available by date and store
+	 */
+	@Operation(summary = "Lấy tất cả ca làm có thể đăng ký (chưa xong, bố đang code)", security = @SecurityRequirement(name = "bearerAuth"))
+	@GetMapping("get-available-work/{employeeId}")
+	public ResponseEntity<List<WorkAvailable>> getWorkAvailableByDateAndStore(
+			@PathVariable int employeeId, 
+			@RequestParam @NotNull int storeId, 
+			@RequestParam @NotBlank String date) {
+		return new ResponseEntity<List<WorkAvailable>>(service.getWorkAvailableByStoreAndDate(employeeId, storeId, date) , HttpStatus.OK);
+	}
+	
+	/**
 	 * Accept work request.
 	 *
 	 * @param id the id
@@ -63,9 +84,9 @@ public class WorkRequestController {
 	 * @param request the request
 	 * @return the response entity
 	 */
-	@Operation(summary = "Đăng ký ca làm (chưa xong, gọi ngu t chửi chết mẹ tụi m) ", security = @SecurityRequirement(name = "bearerAuth"))
+	@Operation(summary = "Đăng ký ca làm (User)", security = @SecurityRequirement(name = "bearerAuth"))
 	@PostMapping("/create-work-request")	
-	public ResponseEntity<Void> requestWorkRequest(@RequestBody AssignWorkRequest request) {
+	public ResponseEntity<Void> requestWorkRequest(@RequestBody @Valid RegisterWorkRequest request) {
 		service.registerWorkRequest(request);
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}

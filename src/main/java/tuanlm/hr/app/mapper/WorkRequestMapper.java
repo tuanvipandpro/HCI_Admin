@@ -1,8 +1,10 @@
 package tuanlm.hr.app.mapper;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -57,4 +59,19 @@ public interface WorkRequestMapper {
 			+ "WHERE id = #{id} "
 			+ "")
 	void acceptWorkRequest(int id);
+	
+	/**
+	 * Creates the work request.
+	 *
+	 * @param employeeId the employee id
+	 * @param shiftId the shift id
+	 * @param date the date
+	 * @param updatePerson the update person
+	 * @param storeId the store id
+	 */
+	@Insert(""
+			+ "INSERT INTO work_request (\"employeeId\", \"shiftId\", date, accept, update_person, store_id) "
+			+ "VALUES (#{employeeId}, #{shiftId}, #{date}, false, #{updatePerson}, #{storeId}) "
+			+ "")
+	void createWorkRequest(int employeeId, int shiftId, LocalDate date, Integer updatePerson, int storeId);
 }
