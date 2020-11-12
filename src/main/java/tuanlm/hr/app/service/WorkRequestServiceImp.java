@@ -87,8 +87,27 @@ public class WorkRequestServiceImp implements WorkRequestService {
 				employeeId, 
 				LocalDate.parse(date).atStartOfDay(), 
 				LocalDate.parse(date).atStartOfDay().plusDays(1));
-
-		List<WorkAvailable> responseList = filterWorkAvailableList(shifts, workStores);
+		
+		List<WorkAvailable> responseList = null;
+		
+		if (workStores == null) System.err.println("workStores NULL");
+		
+		if (workStores != null && workStores.size() > 0) {
+			System.out.println("THIS");
+			responseList = filterWorkAvailableList(shifts, workStores, date);
+		} 
+		else {
+			System.out.println("THAT");
+			responseList = new ArrayList<WorkAvailable>();
+			for (Shift s : shifts) {
+				responseList.add(new WorkAvailable(
+						s.getStoreId(), 
+						s.getStoreNm(), 
+						s.getId(), 
+						s.getName(), 
+						workMapper.countWorkByShiftAndDate(s.getId(), LocalDate.parse(date), LocalDate.parse(date).plusDays(1)) >= s.getMax()));
+			}
+		}
 		
 		return responseList;
 	}
@@ -100,26 +119,29 @@ public class WorkRequestServiceImp implements WorkRequestService {
 	 * @param workStores the work stores
 	 * @return the list
 	 */
-	private List<WorkAvailable> filterWorkAvailableList(List<Shift> shifts, List<WorkStore> workStores) {
+	private List<WorkAvailable> filterWorkAvailableList(List<Shift> shifts, List<WorkStore> workStores, String date) {
 		List<WorkAvailable> responseList = new ArrayList<WorkAvailable>();
 		
 		List<Integer> shiftIdList = shifts.stream().map(shift -> shift.getId()).collect(Collectors.toList());
 		
 		workStores.forEach(workStore -> {
-			if (!shiftIdList.contains(workStore.getShiftId())) {
+			if (shiftIdList.contains(workStore.getShiftId())) {
 				
-				String shiftNm = null;
+				Shift shift = null;
 				
 				for (Shift s : shifts) {
-					if (s.getId() == workStore.getShiftId()) shiftNm = s.getName();
+					if (s.getId() == workStore.getShiftId()) shift = s;
 				}
 				
 				responseList.add(new WorkAvailable(
 						workStore.getStoreId(), 
 						workStore.getStoreNm(), 
 						workStore.getShiftId(), 
-						shiftNm, 
-						false));
+						shift.getName(), 
+						workMapper.countWorkByShiftAndDate(
+								workStore.getShiftId(), 
+								LocalDate.parse(date), 
+								LocalDate.parse(date).plusDays(1)) >= shift.getMax()));
 			}
 		});
 		

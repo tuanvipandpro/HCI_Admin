@@ -1,5 +1,7 @@
 package tuanlm.hr.app.controller;
 
+import java.io.FileInputStream;
+
 import javax.validation.Valid;
 
 import org.springframework.http.HttpStatus;
@@ -11,6 +13,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.google.auth.oauth2.GoogleCredentials;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.FirebaseOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseToken;
 
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
@@ -35,6 +43,21 @@ public class LoginController {
 	
 	/** The account service. */
 	private AccountService accountService;
+	
+	static {
+		try {
+			FirebaseApp.initializeApp(new FirebaseOptions.Builder()
+					.setCredentials(
+							 GoogleCredentials.fromStream(new FileInputStream("authengg-a25b9-firebase-adminsdk-90sa0-40ed64a706.json"))
+					)
+					.setDatabaseUrl("https://authengg-a25b9.firebaseio.com")
+					.build());	
+		}
+		catch (Exception e) {
+			System.err.println(e.getMessage());
+			e.printStackTrace();
+		}
+	}
 	
 	/**
 	 * Login.
@@ -80,7 +103,9 @@ public class LoginController {
 	@PostMapping("/login-by-gmail")	
 	public ResponseEntity<LoginResponse> loginByGmail(@RequestBody @Valid GmailRequest request) {
 		try {
-			return new ResponseEntity<LoginResponse>(accountService.loginByEmail(request), HttpStatus.OK);
+			FirebaseToken decodedToken = FirebaseAuth.getInstance().verifyIdToken(request.getIdToken());
+			
+			return new ResponseEntity<LoginResponse>(accountService.loginByEmail(decodedToken.getEmail()), HttpStatus.OK);
 		}
 		catch(Exception e) {
 			log.error(e.getMessage(), e);

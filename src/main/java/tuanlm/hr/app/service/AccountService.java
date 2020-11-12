@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 
 import tuanlm.hr.app.mapper.AccountMapper;
 import tuanlm.hr.app.models.model.Account;
-import tuanlm.hr.app.models.request.GmailRequest;
 import tuanlm.hr.app.models.request.InsertAccountRequest;
 import tuanlm.hr.app.models.response.LoginResponse;
 import tuanlm.hr.app.utils.AppConstants;
@@ -131,9 +130,9 @@ public class AccountService implements UserDetailsService, AccountsService  {
 	 * @return the account
 	 */
 	@Override
-	public LoginResponse loginByEmail(GmailRequest request) {
-		Account account = Optional.of(mapper.getAccountByEmail(request.getEmail()))
-				.orElseThrow(() -> new UsernameNotFoundException(request.getEmail() + " is not exist !"));
+	public LoginResponse loginByEmail(String email) {
+		Account account = Optional.of(mapper.getAccountByEmail(email))
+				.orElseThrow(() -> new UsernameNotFoundException(email + " is not exist !"));
 		
 		return new LoginResponse(account.getEmployeeId(), JwtUtils.getJwt(account.getUsername()), false, account.getUsername());
 	}

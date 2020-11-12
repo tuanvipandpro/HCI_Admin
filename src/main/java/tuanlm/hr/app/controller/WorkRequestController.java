@@ -55,7 +55,7 @@ public class WorkRequestController {
 	 * @param date the date
 	 * @return the work available by date and store
 	 */
-	@Operation(summary = "Lấy tất cả ca làm có thể đăng ký (chưa xong, bố đang code)", security = @SecurityRequirement(name = "bearerAuth"))
+	@Operation(summary = "Lấy tất cả ca làm có thể đăng ký", security = @SecurityRequirement(name = "bearerAuth"))
 	@GetMapping("get-available-work/{employeeId}")
 	public ResponseEntity<List<WorkAvailable>> getWorkAvailableByDateAndStore(
 			@PathVariable int employeeId, 

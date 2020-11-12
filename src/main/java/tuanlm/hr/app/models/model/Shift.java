@@ -29,4 +29,7 @@ public class Shift {
 	
 	/** The store id. */
 	private int storeId;
+	
+	/** The store nm. */
+	private String storeNm;
 }

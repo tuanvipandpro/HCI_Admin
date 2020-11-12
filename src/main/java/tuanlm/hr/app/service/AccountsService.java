@@ -3,7 +3,6 @@ package tuanlm.hr.app.service;
 import java.util.List;
 
 import tuanlm.hr.app.models.model.Account;
-import tuanlm.hr.app.models.request.GmailRequest;
 import tuanlm.hr.app.models.request.InsertAccountRequest;
 import tuanlm.hr.app.models.response.LoginResponse;
 
@@ -15,10 +14,10 @@ public interface AccountsService {
 	/**
 	 * Gets the account by email.
 	 *
-	 * @param request the request
+	 * @param email the email
 	 * @return the account by email
 	 */
-	LoginResponse loginByEmail(GmailRequest request);
+	LoginResponse loginByEmail(String email);
 	
 	/**
 	 * Gets the accounts.

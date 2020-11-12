@@ -1,5 +1,6 @@
 package tuanlm.hr.app.mapper;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -268,6 +269,27 @@ public interface WorkMapper {
 			+ "		W.id "
 			+ "")
 	List<WorkManagement> getWorkMaganement();
+	
+	/**
+	 * Count work by shift and date.
+	 *
+	 * @param shiftId the shift id
+	 * @param start the start
+	 * @param end the end
+	 * @return the int
+	 */
+	@Select(""
+			+ "SELECT "
+			+ "		COUNT(*) "
+			+ "FROM "
+			+ "		work "
+			+ "WHERE "
+			+ "		\"shiftId\" = #{shiftId} "
+			+ "		AND active = true "
+			+ "		AND start >= #{start} "
+			+ "		AND \"end\" = #{end} "
+			+ "")
+	int countWorkByShiftAndDate(int shiftId, LocalDate start, LocalDate end);
 	
 	/**
 	 * Present work.
