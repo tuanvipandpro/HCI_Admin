@@ -74,10 +74,10 @@ public class AccountService implements UserDetailsService, AccountsService  {
 		}
 		else if (mode == AppConstants.LOGIN_ADMIN){
 			return (!account.getRole().equals("ROLE_ADMIN")) ? null : 
-				new LoginResponse(account.getEmployeeId(), JwtUtils.getJwt(account.getUsername()), true);
+				new LoginResponse(account.getEmployeeId(), JwtUtils.getJwt(account.getUsername()), true, account.getUsername());
 		}
 		else {
-			return new LoginResponse(account.getEmployeeId(), JwtUtils.getJwt(account.getUsername()), false);
+			return new LoginResponse(account.getEmployeeId(), JwtUtils.getJwt(account.getUsername()), false, account.getUsername());
 		}
 	}
 
@@ -121,5 +121,19 @@ public class AccountService implements UserDetailsService, AccountsService  {
 	@Override
 	public void changePassword(String username, String password) {
 		mapper.changePassword(username, encoder.encode(password));
+	}
+
+	/**
+	 * Login by email.
+	 *
+	 * @param request the request
+	 * @return the account
+	 */
+	@Override
+	public LoginResponse loginByEmail(String email) {
+		Account account = Optional.of(mapper.getAccountByEmail(email))
+				.orElseThrow(() -> new UsernameNotFoundException(email + " is not exist !"));
+		
+		return new LoginResponse(account.getEmployeeId(), JwtUtils.getJwt(account.getUsername()), false, account.getUsername());
 	}
 }

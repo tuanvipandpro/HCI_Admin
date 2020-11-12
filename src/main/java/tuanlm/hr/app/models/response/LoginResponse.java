@@ -17,4 +17,7 @@ public class LoginResponse {
 	
 	/** The is admin. */
 	private boolean isAdmin;
+	
+	/** The username. */
+	private String username;
 }

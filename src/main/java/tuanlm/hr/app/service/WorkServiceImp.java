@@ -48,11 +48,14 @@ public class WorkServiceImp implements WorkService {
 	@Override
 	public TotalWorkReponse getTotalWorkByDate(int employeeId, String from, String to) {
 		Duration totalTime = Duration.ZERO;
-		List<Work> works = mapper.getTotalWorkByDate(employeeId, LocalDate.parse(from).atStartOfDay(), LocalDate.parse(to).atStartOfDay().plusDays(1));
+		List<WorkStore> works = mapper.getTotalWorkByDate(employeeId, LocalDate.parse(from).atStartOfDay(), LocalDate.parse(to).atStartOfDay().plusDays(1));
 		
-		for (Work work : works) {
+		for (WorkStore work : works) {
+			System.out.println("Test");
 			if (work.isPresent()) {
-				totalTime = totalTime.plus(Duration.between(work.getStart(), work.getEnd()));
+				totalTime = totalTime.plus(Duration.between(
+						LocalDateTime.parse(work.getStart(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")), 
+						LocalDateTime.parse(work.getEnd(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))));
 			}
 		}
 		return new TotalWorkReponse(DateTimeUtils.formatDurationToTimeString(totalTime), works);

@@ -4,11 +4,20 @@ import java.util.List;
 
 import tuanlm.hr.app.models.model.Account;
 import tuanlm.hr.app.models.request.InsertAccountRequest;
+import tuanlm.hr.app.models.response.LoginResponse;
 
 /**
  * The Interface AccountsService.
  */
 public interface AccountsService {
+	
+	/**
+	 * Gets the account by email.
+	 *
+	 * @param email the email
+	 * @return the account by email
+	 */
+	LoginResponse loginByEmail(String email);
 	
 	/**
 	 * Gets the accounts.

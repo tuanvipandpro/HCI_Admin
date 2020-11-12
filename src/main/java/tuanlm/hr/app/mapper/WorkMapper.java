@@ -1,5 +1,6 @@
 package tuanlm.hr.app.mapper;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -67,12 +68,15 @@ public interface WorkMapper {
 			+ "		W.note 						AS note, "
 			+ "		W.start 					AS start, "
 			+ "		W.\"end\"	 				AS end, "
-			+ "		W.present_time				AS presentTime "	
+			+ "		W.present_time				AS presentTime,"
+			+ "		S.name						AS storeNm "	
 			+ "FROM "
-			+ "		work AS W "
+			+ "		work AS W, "
+			+ "		store AS S "
 			+ "WHERE "
 			+ "		W.\"employeeId\" = #{employeeId} "
 			+ "		AND W.active = true "
+			+ "		AND S.id = W.id "
 			+ "<if test=\"from != null and to != null\"> "
 			+ "		AND W.start <![CDATA[>=]]> #{from} "
 			+ "</if> "
@@ -83,7 +87,7 @@ public interface WorkMapper {
 			+ "		LIMIT 10 "
 			+ "</if> "
 			+ "</script>")
-	List<Work> getTotalWorkByDate(int employeeId, LocalDateTime from, LocalDateTime to);
+	List<WorkStore> getTotalWorkByDate(int employeeId, LocalDateTime from, LocalDateTime to);
 	
 	/**
 	 * Gets the work by employee.
@@ -265,6 +269,27 @@ public interface WorkMapper {
 			+ "		W.id "
 			+ "")
 	List<WorkManagement> getWorkMaganement();
+	
+	/**
+	 * Count work by shift and date.
+	 *
+	 * @param shiftId the shift id
+	 * @param start the start
+	 * @param end the end
+	 * @return the int
+	 */
+	@Select(""
+			+ "SELECT "
+			+ "		COUNT(*) "
+			+ "FROM "
+			+ "		work "
+			+ "WHERE "
+			+ "		\"shiftId\" = #{shiftId} "
+			+ "		AND active = true "
+			+ "		AND start >= #{start} "
+			+ "		AND \"end\" = #{end} "
+			+ "")
+	int countWorkByShiftAndDate(int shiftId, LocalDate start, LocalDate end);
 	
 	/**
 	 * Present work.
