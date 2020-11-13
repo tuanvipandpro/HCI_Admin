@@ -81,8 +81,8 @@ public class WorkRequestServiceImp implements WorkRequestService {
 	@Override
 	public List<WorkAvailable> getWorkAvailableByStoreAndDate(int employeeId, int storeId, String date) {
 		List<Shift> shifts = shiftMapper.getShiftListByStoreId(storeId);
-		
 		LocalDate dateParse = LocalDate.parse(date);
+		List<WorkAvailable> responseList = new ArrayList<WorkAvailable>();
 		
 		if (shifts == null) return null;
 		
@@ -91,12 +91,10 @@ public class WorkRequestServiceImp implements WorkRequestService {
 				LocalDate.parse(date).atStartOfDay(), 
 				LocalDate.parse(date).atStartOfDay().plusDays(1));
 		
-		if (workStores != null && workStores.size() > 0) {		
-			List<WorkRequestShort> list = mapper.getWorkRequestEmployeeByStoreAndDate(employeeId, storeId, dateParse);
-			return filterWorkAvailableList(shifts, workStores, dateParse, list);
+		if (workStores != null && workStores.size() > 0) {			
+			responseList =  filterWorkAvailableList(shifts, workStores, dateParse);
 		} 
 		else {
-			List<WorkAvailable> responseList = new ArrayList<WorkAvailable>();
 			for (Shift s : shifts) {
 				responseList.add(new WorkAvailable(
 						s.getStoreId(), 
@@ -105,8 +103,15 @@ public class WorkRequestServiceImp implements WorkRequestService {
 						s.getName(), 
 						workMapper.countWorkByShiftAndDate(s.getId(), dateParse, dateParse.plusDays(1)) >= s.getMax()));
 			}
-			
-			return responseList;
+		}
+		
+		List<WorkRequestShort> list = mapper.getWorkRequestEmployeeByStoreAndDate(employeeId, storeId, dateParse);
+		
+		// Check if employee is requested this shift
+		if (list == null) return responseList;
+		else {
+			List<Integer> workRQShortShiftId = list.stream().map(w -> w.getShiftId()).collect(Collectors.toList());
+			return responseList.stream().filter(w -> !workRQShortShiftId.contains(w.getShiftId())).collect(Collectors.toList());
 		}
 	}
 	
@@ -120,8 +125,7 @@ public class WorkRequestServiceImp implements WorkRequestService {
 	private List<WorkAvailable> filterWorkAvailableList(
 			List<Shift> shifts, 
 			List<WorkStore> workStores, 
-			LocalDate date, 
-			List<WorkRequestShort> list) {
+			LocalDate date) {
 		
 		List<WorkAvailable> responseList = new ArrayList<WorkAvailable>();
 		
@@ -149,12 +153,6 @@ public class WorkRequestServiceImp implements WorkRequestService {
 			}
 		});
 		
-		// Check if employee is requested this shift
-		if (list == null) return responseList;
-		else {
-			List<Integer> workRQShortShiftId = list.stream().map(w -> w.getShiftId()).collect(Collectors.toList());
-			return responseList.stream().filter(w -> !workRQShortShiftId.contains(w.getShiftId())).collect(Collectors.toList());
-		}
-		
+		return responseList;
 	}
 }

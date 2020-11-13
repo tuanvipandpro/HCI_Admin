@@ -30,5 +30,5 @@ public class WorkRequestShort {
 	private boolean isAccept;
 	
 	/** The update person. */
-	private Integer updatePerson;
+	private int updatePerson;
 }
