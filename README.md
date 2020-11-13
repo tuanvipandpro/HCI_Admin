@@ -1,3 +1,1 @@
-HCI_Admin
-
-Admin Dashboard --> HCI Project
+hr-app

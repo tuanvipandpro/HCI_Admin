@@ -1,0 +1,54 @@
+Hệ thống chấm công và phân công cho các quán part-time.
+
+*System : 
+
+Gồm 2 phần :
+- Admin Web : hỗ trợ admin trong các công việc, phân công, thống kê, quản lý, ...
+- Mobile App : hỗ trợ nhân viên trong việc điểm danh, xem lịch làm việc, tổng hợp giờ làm việc, ...
+==========================================================================================================================================
+
+Chi tiết chức năng:
+
+* Nhân viên - Sử dụng App
+
+- Điểm danh(Done): Nhân viên trong tiệm có thể sử dụng app điện thoại để điểm danh thông qua QR code
+B1: Chọn mục "Điểm danh" để quét QR code để thực hiện thao tác điểm danh
+B2: Thông tin về nhân viên, thời gian quét, cửa hàng sẽ được gửi tới BE
+B3: BE xác nhận thông tin và ghi nhận thông tin điểm danh
+B4: BE response ==> App, cập nhật thông tin điểm danh
+
+- Đăng ký công việc***: Trước mỗi tuần làm việc, nhân viên sẽ đăng ký các ca làm việc mình rảnh và đợi admin xét duyệt
+B1: Chọn "Đăng ký lịch làm việc" 
+B2: Nhân viên chọn những ca phù hợp với thời gian rảnh
+B3: Chọn "Đăng ký" để gửi tới admin
+
+- Xem lịch làm việc (Done): Nhân viên có thể xem các ca làm việc tiếp theo của mình
+B1: Chọn "Lịch làm việc".
+B2: App lấy dữ liệu từ hệ thống và show ra các ca làm việc cho nhân viên
+
+- Tổng hợp giờ công(Done) : Nhân viên có thể xem thời gian mình làm việc trong tuần/tháng này
+B1: Chọn "Tổng hợp"
+B2: App lấy dữ liệu từ hệ thống và show ra 
+	+ Tổng giờ công
+	+ Lương
+	+ Các ca làm việc đã làm
+
+- Đổi ca làm việc(Done): Nhân viên có thể request đổi ca làm việc với điều kiện là được một nhân viên khác đồng ý.
+B1: Chọn "Lịch làm việc".
+B2: Chọn vào ca làm việc mình muốn đổi ==> Click "Đổi ca"
+B3: Thông tin về ca làm việc sẽ được public lên hệ thống
+==> Khi có nhân viên khác đồng ý đổi ca, hệ thống sẽ update lại thông tin về ca làm việc
+==> Trong trường hợp không có nhân viên nào đồng ý đổi ca thì phải bắt buộc đi làm
+==> Trong trường hợp có sự cố đột xuất, báo lại admin để admin ghi nhận vào hệ thống
+
+* Quán lý (admin) - Sử dụng Web
+
+- Phân công ca làm việc cho nhân viên
+	+ Dựa trên các ca làm việc được đăng ký bởi các nhân viên
+	+ Sau khi phân công công việc, các nhân viên sẽ nhận được thông báo thông qua App
+
+- Quản lý các nhân viên làm việc trong quán 
+	+ Quản lý CRUD các tài khoản nhân viên
+	+ Quản lý các thông tin cá nhân của nhân viên
+
+- Quán lý CRUD các thông báo chung lên hệ thống (R)
