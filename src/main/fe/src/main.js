@@ -11,10 +11,12 @@ import Axios from 'axios'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import locale from 'element-ui/lib/locale/lang/en'
+import '@fortawesome/fontawesome-free/css/all.css'
+import '@fortawesome/fontawesome-free/js/all.js'
 
 Axios.defaults.baseURL = ''
 // Axios.defaults.baseURL = 'http://localhost:8084'
-// Axios.defaults.baseURL = 'https://tuanlm-hr.herokuapp.com'
+// Axios.defaults.baseURL = 'http://34.230.45.99:8084'
 
 Vue.use(ElementUI, { locale })
 Vue.config.productionTip = false

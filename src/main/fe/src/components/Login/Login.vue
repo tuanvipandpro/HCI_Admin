@@ -12,6 +12,11 @@
                 <el-form-item>
                     <el-button type="primary" @click="handleForm">Đăng nhập</el-button>
                 </el-form-item>
+                <el-form-item>
+                    <el-button type="danger" @click="googleLogin">
+                        <i class="fab fa-google" style="margin-right: 5px"/>Google
+                    </el-button>
+                </el-form-item>
             </el-form>
         </el-card>
     </div>
@@ -19,6 +24,9 @@
 
 <script>
 import { mapState, mapMutations, mapActions } from 'vuex'
+import firebase from 'firebase/app'
+import 'firebase/auth'
+
 export default {
   data () {
     return {
@@ -26,7 +34,8 @@ export default {
         username: '',
         password: ''
       },
-      loader: {}
+      loader: {},
+      GGProvider: {}
     }
   },
   computed: {
@@ -34,19 +43,56 @@ export default {
       '_formData'
     ])
   },
+  mounted () {
+    const firebaseConfig = {
+      apiKey: 'AIzaSyAnr_BazeYYEvj5PLtwqXRZWBhNzBL4wuk',
+      authDomain: 'hr-app-d0ca5.firebaseapp.com',
+      databaseURL: 'https://hr-app-d0ca5.firebaseio.com',
+      projectId: 'hr-app-d0ca5',
+      storageBucket: 'hr-app-d0ca5.appspot.com',
+      messagingSenderId: '543795805536',
+      appId: '1:543795805536:web:334cd7c57e9bfb77d53205',
+      measurementId: 'G-8L6D7PEBYB'
+    }
+
+    if (!firebase.apps.length) firebase.initializeApp(firebaseConfig)
+    this.GGProvider = new firebase.auth.GoogleAuthProvider()
+  },
   methods: {
     ...mapMutations('login', [
       '_setFormData'
     ]),
     ...mapActions('login', [
-      '_checkLogin'
+      '_checkLogin', '_googleLogin'
     ]),
+    /**
+     * Check Login By Gmail
+     */
+    async googleLogin () {
+      try {
+        const result = await firebase.auth().signInWithPopup(this.GGProvider)
+        const idToken = await firebase.auth().currentUser.getIdToken(true)
+
+        const res = await this._googleLogin({idToken: idToken, email: result.email})
+
+        sessionStorage.setItem('username', res.data.username)
+        sessionStorage.setItem('employeeId', res.data.employeeId)
+        sessionStorage.setItem('token', 'Bearer ' + res.data.token)
+
+        this.transitTo('UserManagement', {username: this.formData.username})
+      } catch (e) {
+        if (e.toString().includes('Request failed with status code 401')) {
+          this.showMessage('Tài khoản của bạn không đủ quyền để đăng nhập vào trang này !', 'warning')
+        } else {
+          this.showMessage('Tài khoản hoặc mật khẩu không chính xác !', 'warning')
+        }
+      }
+    },
     /**
      * Handle Login Form
      */
     handleForm () {
       this.loader = this.getLoader()
-
       this.checkLogin()
     },
     /**
@@ -132,8 +178,8 @@ export default {
     }
 
     #login-form {
-        margin-top: 25vh;
-        width: 22vw;
-        height: 45vh;
+        margin-top: 12%;
+        width: 25%;
+        height: 52%;
     }
 </style>

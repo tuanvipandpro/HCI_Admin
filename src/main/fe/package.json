@@ -11,10 +11,12 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.15.1",
     "axios": "^0.20.0",
     "chart.js": "^2.9.3",
     "chartjs": "^0.3.24",
     "element-ui": "^2.13.2",
+    "firebase": "^8.0.1",
     "moment": "^2.29.1",
     "vue": "^2.5.2",
     "vue-chartjs": "^3.5.1",
