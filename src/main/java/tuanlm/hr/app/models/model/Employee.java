@@ -27,6 +27,9 @@ public class Employee {
 	/** The store id. */
 	private int storeId;
 	
+	/** The store nm. */
+	private String storeNm;
+	
 	/** The bank number. */
 	private String bankNumber;
 	

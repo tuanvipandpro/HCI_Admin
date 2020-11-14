@@ -76,7 +76,7 @@ public interface WorkMapper {
 			+ "WHERE "
 			+ "		W.\"employeeId\" = #{employeeId} "
 			+ "		AND W.active = true "
-			+ "		AND S.id = W.id "
+			+ "		AND S.id = W.\"storeId\" "
 			+ "<if test=\"from != null and to != null\"> "
 			+ "		AND W.start <![CDATA[>=]]> #{from} "
 			+ "</if> "

@@ -36,7 +36,8 @@ public class OpenApiConfig {
 		return new OpenAPI()
 				.servers(Arrays.asList(
 						new Server().url("http://localhost:8084").description("Local Server"), 
-						new Server().url("http://34.230.45.99:8084").description("EC2 Server")
+						new Server().url("http://34.230.45.99:8084").description("EC2 Server"),
+						new Server().url("http://hrapp-env.eba-iymav73r.us-east-2.elasticbeanstalk.com").description("EB Server")
 				))
 				.info(new Info()
 						.title("HR-App API")

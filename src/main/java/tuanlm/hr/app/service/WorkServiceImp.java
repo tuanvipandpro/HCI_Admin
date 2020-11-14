@@ -51,7 +51,6 @@ public class WorkServiceImp implements WorkService {
 		List<WorkStore> works = mapper.getTotalWorkByDate(employeeId, LocalDate.parse(from).atStartOfDay(), LocalDate.parse(to).atStartOfDay().plusDays(1));
 		
 		for (WorkStore work : works) {
-			System.out.println("Test");
 			if (work.isPresent()) {
 				totalTime = totalTime.plus(Duration.between(
 						LocalDateTime.parse(work.getStart(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")), 
